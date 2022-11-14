@@ -1,7 +1,6 @@
 import { getLuminance, transparentize } from "polished";
 import styled from "styled-components";
 import { color } from "styled-system";
-import { GTTheme } from "../../gt/design/interface";
 import flex from "../../utils/flex";
 import hovers from "../../utils/hovers";
 import shadows from "../../utils/shadows";
@@ -9,7 +8,7 @@ import {
   IBoxContainer,
   IBoxWrapper,
   IHandleColorContrastReceive,
-  IHandleColorContrastReturn,
+  IHandleColorContrastReturn
 } from "./interface";
 
 const BoxGroup = styled.div`
