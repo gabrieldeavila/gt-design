@@ -1,7 +1,11 @@
 {
   "name": "@gabrieldeavila/gt-design",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/YOUR_REPOSITORY_NAME"
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrieldeavila/gt-design.git"
   },
   "version": "0.0.1",
   "description": "A minimalistic design system for React",
