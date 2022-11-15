@@ -19,8 +19,10 @@ const simple = css`
     ${(props) => transparentize(0.85, props.theme.btnShadow)} 0px 0px 0px 1px;
 `;
 
-export default {
+const shadows = {
   basic,
   glow,
   simple,
 };
+
+export default shadows;

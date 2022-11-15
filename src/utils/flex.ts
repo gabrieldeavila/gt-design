@@ -34,7 +34,7 @@ const column = css`
   flex-direction: column;
 `;
 
-export default {
+const flex = {
   alignCenter,
   alignCenterCol,
   justifyBetween,
@@ -42,3 +42,5 @@ export default {
   wrapGap,
   column
 };
+
+export default flex; 

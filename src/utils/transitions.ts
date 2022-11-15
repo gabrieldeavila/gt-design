@@ -10,8 +10,10 @@ const linear = css`
   transition: all ${basicTransitionSecs}s linear;
 `;
 
-export default {
+const transitions = {
   basic,
   linear,
   basicTransitionSecs,
 };
+
+export default transitions;

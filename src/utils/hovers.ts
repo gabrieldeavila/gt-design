@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css } from "styled-components";
 
 const scaleTransYOpacity = css`
   &:hover {
@@ -7,6 +7,8 @@ const scaleTransYOpacity = css`
   }
 `;
 
-export default {
-  scaleTransYOpacity
+const hovers = {
+  scaleTransYOpacity,
 };
+
+export default hovers;

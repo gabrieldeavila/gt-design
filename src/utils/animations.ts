@@ -98,9 +98,11 @@ const upLabel = css`
   }
 `;
 
-export default {
+const animations = {
   easeOpenClose,
   easeOpacity,
   easeShow,
   upLabel,
 };
+
+export default animations;
