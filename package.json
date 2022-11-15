@@ -1,5 +1,5 @@
 {
-  "name": "@gabrieldeavila/gt-design",
+  "name": "@geavila/gt-design",
   "publishConfig": {
     "access": "public"
   },
@@ -7,8 +7,9 @@
     "type": "git",
     "url": "git+https://github.com/gabrieldeavila/gt-design.git"
   },
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "A minimalistic design system for React",
+  "homepage": "https://github.com/gabrieldeavila/gt-design",
   "scripts": {
     "rollup": "rollup -c",
     "test": "jest",

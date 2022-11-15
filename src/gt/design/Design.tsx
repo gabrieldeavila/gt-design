@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { ThemeProvider } from "styled-components";
-import GTContainer from "../container";
+import GTContainer from "../Container/Container";
 import { IGTDesign } from "./interface";
 
 const defaultTheme = {

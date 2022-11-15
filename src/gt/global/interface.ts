@@ -1,4 +1,4 @@
-import { GTTheme } from "../design/interface";
+import { GTTheme } from "../Design/interface";
 
 export interface IGLobalStyle {
   theme: GTTheme;

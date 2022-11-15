@@ -1,4 +1,4 @@
-import { GTTheme } from "../../gt/design/interface";
+import { GTTheme } from "../../gt/Design/interface";
 
 export interface IBoxWrapper {
   width?: number | string;

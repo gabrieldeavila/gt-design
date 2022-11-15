@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
-import GTBasic from "../../gt/template/basic";
+import GTBasic from "../../gt/template/Basic";
 import MotionBox from "../Motion/motionBox";
 
 import Box from "./Box";
@@ -31,7 +31,7 @@ function BoxStory() {
           "#00ffff",
           "#ff00ff",
         ].map((bg) => (
-          <MotionBox bg={bg} key={bg}  />
+          <MotionBox bg={bg} key={bg} />
         ))}
       </Box.Column>
     </GTBasic>

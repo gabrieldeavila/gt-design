@@ -1,9 +1,9 @@
 import { useAnimation, useInView } from "framer-motion";
 import React, { useEffect, useMemo, useRef } from "react";
-import Motion from ".";
+import Motion from "./Motion";
 import randomNumber from "../../utils/randomNumber";
 import Box from "../Box/Box";
-import Text from "../Text";
+import Text from "../Text/Text";
 import { IMotionBox } from "./interface";
 
 function MotionBox({ bg, label }: IMotionBox) {

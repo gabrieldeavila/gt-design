@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import GTProvider from "../../context/gt";
-import GTDesign from "../design";
-import GlobalStyle from "../global/style";
+import GTDesign from "../Design/Design";
+import GlobalStyle from "../Global/style";
 
 const darkThemeStyle = {
  primary: "#080808",
