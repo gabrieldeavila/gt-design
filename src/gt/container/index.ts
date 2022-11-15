@@ -1,1 +1,1 @@
-export { default as GTContainer } from "./Container";
+export { default } from "./Container";

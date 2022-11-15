@@ -1,1 +1,3 @@
-export { default as Motion } from "./Motion";
+export { default } from "./Motion";
+
+export { default as MotionBox } from "./motionBox";

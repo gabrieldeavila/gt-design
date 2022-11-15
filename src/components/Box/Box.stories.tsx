@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
-import GTBasic from "../../gt/template/Basic";
+import GTBasic from "../../gt/Template/Basic";
 import MotionBox from "../Motion/motionBox";
 
 import Box from "./Box";

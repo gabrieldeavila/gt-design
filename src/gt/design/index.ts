@@ -1,1 +1,1 @@
-export { default as GTDesign } from "./Design";
+export { default } from "./Design";

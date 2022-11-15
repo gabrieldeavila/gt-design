@@ -8,7 +8,7 @@ import {
   IBoxContainer,
   IBoxWrapper,
   IHandleColorContrastReceive,
-  IHandleColorContrastReturn
+  IHandleColorContrastReturn,
 } from "./interface";
 
 const BoxGroup = styled.div`
@@ -57,7 +57,7 @@ const BoxContainer = styled.div<IBoxContainer>`
 
   /* add contrast to children */
   & > * {
-    color: ${handleColorContrast}
+    color: ${handleColorContrast};
   }
 `;
 
@@ -73,9 +73,11 @@ const BoxColumn = styled.div`
   }
 `;
 
-export default {
+const Box = {
   Group: BoxGroup,
   Wrapper: BoxWrapper,
   Container: BoxContainer,
   Column: BoxColumn,
 };
+
+export default Box;

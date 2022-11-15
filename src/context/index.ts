@@ -1,1 +1,2 @@
-export { default as GTContext } from "./gt";
+export { useGTContext } from "./gt";
+export { default as GTProvider } from "./gt";

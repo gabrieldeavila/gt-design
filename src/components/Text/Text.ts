@@ -48,4 +48,6 @@ const Btn = styled.button`
   border-radius: 0.25rem;
 `;
 
-export default { P, H1, H1Contrast, Btn };
+const Text = { P, H1, H1Contrast, Btn };
+
+export default Text;

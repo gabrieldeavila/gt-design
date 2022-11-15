@@ -12,7 +12,9 @@ const MotionContainer = styled(motion.div)`
   position: absolute;
 `;
 
-export default {
+const Motion = {
   Wrapper: MotionWrapper,
   Container: MotionContainer,
 };
+
+export default Motion;

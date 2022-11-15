@@ -1,1 +1,1 @@
-export { default as GTBasic } from "./Basic";
+export { default } from "./Basic";
