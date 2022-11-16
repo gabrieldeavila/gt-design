@@ -51,9 +51,7 @@ const BoxContainer = styled.div<IBoxContainer>`
   backdrop-filter: blur(15px);
   cursor: pointer;
   height: -webkit-fill-available;
-  &:hover {
-    ${hovers.scaleTransYOpacity}
-  }
+  ${hovers.scaleTransYOpacity}
 
   /* add contrast to children */
   & > * {

@@ -21,7 +21,13 @@ export default [
         sourcemap: true,
       },
     ],
-    external: ['react', 'react-dom'],
+    external: [
+      'react',
+      'react-dom',
+      'styled-reset',
+      'styled-components',
+      'polished',
+    ],
     plugins: [
       resolve(),
       commonjs(),
