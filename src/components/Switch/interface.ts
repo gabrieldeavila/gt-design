@@ -1,3 +1,5 @@
 export interface ISwitch {
-  fixed?: boolean;
+  fixed?: boolean | undefined;
+  placeX?: string | undefined;
+  placeY?: string | undefined;
 }

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { color } from "styled-system";
+import { color, space } from "styled-system";
 
 const GTContainer = styled.div`
   ${color}
@@ -10,6 +10,9 @@ const GTContainer = styled.div`
   );
 
   min-height: 100vh;
+  padding: 1rem;
+
+  ${space}
 `;
 
 export default GTContainer;

@@ -23,8 +23,9 @@ const SwitchLabel = styled.label<ISwitch>`
   user-select: none;
   cursor: pointer;
 
-  ${flex.alignCenter}
+  ${flex.alignCenter} /* disable typescript */
 
+  ${({ fixed }): any => fixed && fixedIcon}
 `;
 
 const SwitchSlider = styled.span`

@@ -1,10 +1,11 @@
-import { PropTypes } from "prop-types";
-import React, { memo, useCallback, useContext } from "react";
+import PropTypes from "prop-types";
+import React, { memo, useCallback } from "react";
+// @ts-ignore
 import * as Icon from "react-feather";
-import Switch from "./Switch";
 import { useGTContext } from "../../context/gt";
+import Switch from "./Switch";
 
-function GTSwitchThemes({
+function GTDarkSwitch({
   fixed,
   placeX,
   placeY,
@@ -16,7 +17,7 @@ function GTSwitchThemes({
   const { darkTheme, setDarkTheme } = useGTContext();
 
   const handleTheme = useCallback(() => {
-    setDarkTheme((prev: { prev: boolean }) => {
+    setDarkTheme((prev: boolean) => {
       if (!prev) {
         localStorage.setItem("darkTheme", "1");
       } else {
@@ -56,18 +57,18 @@ function GTSwitchThemes({
   );
 }
 
-export default memo(GTSwitchThemes);
+export default memo(GTDarkSwitch);
 
 // add default proptype
-GTSwitchThemes.propTypes = {
+GTDarkSwitch.propTypes = {
   fixed: PropTypes.bool,
   placeX: PropTypes.oneOf([null, "top", "bottom"]),
   placeY: PropTypes.oneOf([null, "left", "right"]),
 };
 
 // add default props
-GTSwitchThemes.defaultProps = {
+GTDarkSwitch.defaultProps = {
   fixed: false,
-  placeX: null,
-  placeY: null,
+  placeX: "bottom",
+  placeY: "right",
 };

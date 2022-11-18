@@ -1,10 +1,11 @@
 import React, { useMemo, useState } from "react";
+import DarkSwitch from "../../components/Switch/DarkSwitch";
 import GTProvider from "../../context/gt";
 import GTDesign from "../Design/Design";
 import GlobalStyle from "../Global/style";
 
 const darkThemeStyle = {
- primary: "#080808",
+  primary: "#080808",
   secondary: "#242124",
   contrast: "#fffafa",
   backgroundHover: "#696969",
@@ -24,13 +25,15 @@ function GTBasic({ children }: { children: React.ReactNode }) {
     localStorage.getItem("darkTheme") === "1"
   );
 
-  const theme = useMemo(() => darkTheme && darkThemeStyle, []);
+  const theme = useMemo(() => darkTheme && darkThemeStyle, [darkTheme]);
 
   return (
     <GTProvider darkTheme={darkTheme} setDarkTheme={setDarkTheme}>
       <GTDesign theme={theme}>
         <GlobalStyle />
         {children}
+
+        <DarkSwitch fixed />
       </GTDesign>
     </GTProvider>
   );
