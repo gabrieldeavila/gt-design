@@ -27,6 +27,9 @@ export default [
       'styled-reset',
       'styled-components',
       'polished',
+      'react-feather',
+      'framer-motion',
+      'prop-types'
     ],
     plugins: [
       resolve(),
