@@ -1,4 +1,5 @@
 /* eslint-disable operator-linebreak */
+import _ from "lodash";
 import { useCallback } from "react";
 import useInputValidation from "./useInputValidation";
 
@@ -121,9 +122,15 @@ function useValidateText(
       const { isAllValidChars, invalidAllMessageChars } =
         validateMinAndMaxChars(invalidAllMessageWords, isAllValidWords, value);
 
+      let msg = "";
+
+      if(!_.isBoolean(invalidAllMessageChars)) {
+        msg = invalidAllMessageChars;
+      }
+
       return {
         isAllValid: isAllValidChars,
-        invalidAllMessage: invalidAllMessageChars,
+        invalidAllMessage: msg,
       };
     },
     [validateMinAndMaxWords, validateMinAndMaxChars]

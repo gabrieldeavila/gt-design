@@ -1,15 +1,22 @@
 /* eslint-disable operator-linebreak */
 import PropTypes from 'prop-types';
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import * as Icon from 'react-feather';
 import useInputValues from '../../../hooks/pageState/useInputValues';
-import useValidateEmail from '../../../hooks/validation/useValidateEmail';
+import useValidatePassword from '../../../hooks/validation/useValidatePassword';
 import useValidateState from '../../../hooks/validation/useValidateState';
 import Input from '../Input';
 import { IGTInput } from './interface';
 
-const defaultValidationObj = ['required'];
+const defaultValidationObj = [
+    'eightLong',
+    'oneSpecial',
+    'oneLowercase',
+    'oneNumber',
+    'oneUppercase'
+];
 
-function GTInputEmail({ name, label, validations, defaultValidation, onChange }: IGTInput) {
+function GTInputPassword({ name, label, defaultValidation, validations, onChange }: IGTInput) {
     const inputValidations = useMemo(() => {
         if (defaultValidation) {
             return [...defaultValidationObj, ...validations];
@@ -23,32 +30,45 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange }:
     const { labelIsUp, value, handleInputChange, handleInputBlur, handleInputFocus } =
         useInputValues(name);
 
-    const { validateEmail } = useValidateEmail();
-    const [isValidEmail, setIsValidEmail] = useState(true);
+    const { validatePassword } = useValidatePassword();
+    const [isValidPassword, setIsValidPassword] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const type = useMemo(() => (showPassword ? 'text' : 'password'), [showPassword]);
 
     useEffect(() => {
         if (!value) return;
 
-        const { isValid, invalidMessage } = validateEmail(value, inputValidations);
+        const { isValid, invalidMessage } = validatePassword(value, inputValidations);
 
-        setIsValidEmail(isValid);
+        setIsValidPassword(isValid);
         setErrorMessage(invalidMessage);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const handleShowPassword = useCallback(() => {
+        setShowPassword((prevState) => !prevState);
+    }, []);
+
+    const handleBlur = useCallback(() => {
+        handleInputBlur();
+    }, [handleInputBlur]);
+
     const handleChange = useCallback(
         (e: any) => {
-            const { value: emailVal } = e.target;
-            const { isValid } = validateEmail(emailVal, inputValidations);
+            const { value: pswVal } = e.target;
+            const { isValid, invalidMessage } = validatePassword(pswVal, inputValidations);
 
-            validateState(isValid, emailVal);
-            setIsValidEmail(isValid);
-            handleInputChange(emailVal);
+            validateState(isValid, pswVal);
+            setIsValidPassword(isValid);
+            setErrorMessage(invalidMessage);
+            handleInputChange(pswVal);
 
             onChange(e);
         },
-        [validateEmail, inputValidations, validateState, handleInputChange, onChange]
+        [handleInputChange, inputValidations, onChange, validatePassword, validateState]
     );
 
     return (
@@ -57,22 +77,28 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange }:
                 {label}
             </Input.Label>
             <Input.Field
-                type="email"
+                type={type}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 value={value}
-                onBlur={handleInputBlur}
                 onFocus={handleInputFocus}
                 id={name}
                 name={name}
             />
-            {!isValidEmail && <Input.Error>{errorMessage}</Input.Error>}
+
+            {showPassword ? (
+                <Icon.Eye onClick={handleShowPassword} />
+            ) : (
+                <Icon.EyeOff onClick={handleShowPassword} />
+            )}
+            {!isValidPassword && <Input.Error>{errorMessage}</Input.Error>}
         </Input.Container>
     );
 }
 
-export default GTInputEmail;
+export default GTInputPassword;
 
-GTInputEmail.propTypes = {
+GTInputPassword.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     validations: PropTypes.arrayOf(PropTypes.string),
@@ -80,7 +106,7 @@ GTInputEmail.propTypes = {
     onChange: PropTypes.func
 };
 
-GTInputEmail.defaultProps = {
+GTInputPassword.defaultProps = {
     validations: defaultValidationObj,
     defaultValidation: true,
     onChange: () => { }
