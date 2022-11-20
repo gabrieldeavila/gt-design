@@ -1,5 +1,5 @@
-import React, { createContext, memo, useContext, useMemo } from "react";
 import PropTypes from "prop-types";
+import React, { createContext, useContext, useMemo } from "react";
 import { IGTContext } from "./interface";
 
 // create default values for context
