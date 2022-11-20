@@ -2,13 +2,14 @@
 /* eslint-disable no-confusing-arrow */
 import { transparentize } from "polished";
 import styled from "styled-components";
-import { color, flexbox, space } from "styled-system";
+import { color, flexbox, space, SpaceProps } from "styled-system";
 import animations from "../../utils/animations";
 import flex from "../../utils/flex";
 import shadows from "../../utils/shadows";
 import transitions from "../../utils/transitions";
+import { INavbarOptions, INavbarWrapper } from "./interface";
 
-const NavbarWrapper = styled.nav`
+const NavbarWrapper = styled.nav<INavbarWrapper>`
   min-height: 3rem;
   position: fixed;
   width: -webkit-fill-available;
@@ -20,7 +21,7 @@ const NavbarWrapper = styled.nav`
   ${space}
   ${flexbox}
   backdrop-filter: blur(10px);
-  animation: ${(props: { show: true }) =>
+  animation: ${(props: { show: boolean }) =>
     props.show
       ? "show 0.2s ease-in-out forwards"
       : "showReverse 0.2s ease-in-out forwards"};
@@ -45,11 +46,12 @@ const NavbarContainer = styled.div`
   ${space}
   ${flexbox}
 `;
-const NavbarOptions = styled.div`
+
+const NavbarOptions = styled.div<INavbarOptions>`
   display: flex;
   gap: 1rem;
   height: fit-content;
-  top: ${(props: { top: number }) => props.top || 0}px;
+  top: ${(props) => props.top || 0}px;
   ${space}
 `;
 

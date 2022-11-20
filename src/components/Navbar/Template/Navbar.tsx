@@ -3,12 +3,13 @@ import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import * as Icon from "react-feather";
 import Navbar from "../Navbar";
 import Symbol from "../../Symbol/Symbol";
-import SymbolPopup from "../../examples/popup/index";
-import useIsMobile from "../../hooks/helpers/useIsMobile";
+import useIsMobile from "../../../hooks/helpers/useIsMobile";
+import SymbolPopup from "../../Popup/Template/BasicPopup";
+import { IGTNavbarOption, IGTNavbarOptions } from "../interface";
 
 function GTNavbar({ showModal }: { showModal: boolean }) {
   // if is showing modal, add padding to the wrapper
-  const wrapperStyle = showModal && 14;
+  const wrapperStyle = showModal ? 14 : 0;
   const oldScroll = useRef(0);
 
   // when scrolls down, hide the navbar, when scrolls up, show the navbar
@@ -78,7 +79,8 @@ GTNavbar.propTypes = {
 GTNavbar.defaultProps = {
   showModal: false,
 };
-const GTNavbarOptions = memo(({ children }) => {
+
+const GTNavbarOptionsTemp = ({ children }: IGTNavbarOptions) => {
   const isMobile = useIsMobile();
   const [windowHeight, setWindowHeight] = useState(100);
   const componentRef = useRef<HTMLDivElement>(null!);
@@ -100,13 +102,15 @@ const GTNavbarOptions = memo(({ children }) => {
       {children}
     </Navbar.Options>
   );
-});
+};
 
-GTNavbarOptions.propTypes = {
+GTNavbarOptionsTemp.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const GTNavbarOption = memo(({ name, icon, children }) => {
+const GTNavbarOptions = memo(GTNavbarOptionsTemp)
+
+const GTNavbarOptionTemp = ({ name, icon, children }: IGTNavbarOption) => {
   const [open, setOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
@@ -141,14 +145,16 @@ const GTNavbarOption = memo(({ name, icon, children }) => {
       </Navbar.Option>
     </Navbar.OptionWrapper>
   );
-});
+};
 
-GTNavbarOption.propTypes = {
+GTNavbarOptionTemp.propTypes = {
   children: PropTypes.node.isRequired,
   icon: PropTypes.node,
   name: PropTypes.string.isRequired,
 };
 
-GTNavbarOption.defaultProps = {
+GTNavbarOptionTemp.defaultProps = {
   icon: null,
 };
+
+const GTNavbarOption = memo(GTNavbarOptionTemp)
