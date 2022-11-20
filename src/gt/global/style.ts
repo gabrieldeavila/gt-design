@@ -3,9 +3,19 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import transitions from "../../utils/transitions";
 import { IGLobalStyle } from "./interface";
+import Kanit from "../../assets/fonts/Kanit-Regular.ttf"
 
 const GlobalStyle = createGlobalStyle`
   ${reset} 
+
+  /* TO DO: improve, so user uses his desired font */
+  @font-face {
+    font-family: 'Kanit';
+    src: url(${Kanit}) format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: auto;
+  }
 
   * {
     color: ${({ theme }: IGLobalStyle) => theme.contrast};
@@ -14,29 +24,29 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'Kanit', sans-serif;
-     background: ${({ theme }: IGLobalStyle) => theme.secondary};
-
-  /* width */
-  &::-webkit-scrollbar {
-    width: 0.5rem;
-  }
-
-  /* Track */
-  &::-webkit-scrollbar-track {
     background: ${({ theme }: IGLobalStyle) => theme.secondary};
-  }
 
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background: ${({ theme }: IGLobalStyle) => theme.contrast};
-    border-radius: 0.25rem;
-  }
+    /* width */
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+    }
 
-  /* Handle on hover */
-  &::-webkit-scrollbar-thumb:hover {
-    background: ${({ theme }: IGLobalStyle) =>
-      transparentize(0.5, theme.contrast)};
-  } 
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: ${({ theme }: IGLobalStyle) => theme.secondary};
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: ${({ theme }: IGLobalStyle) => theme.contrast};
+      border-radius: 0.25rem;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: ${({ theme }: IGLobalStyle) =>
+        transparentize(0.5, theme.contrast)};
+    } 
     }
 `;
 
