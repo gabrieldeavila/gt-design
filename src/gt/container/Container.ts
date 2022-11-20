@@ -10,7 +10,6 @@ const GTContainer = styled.div`
   );
 
   min-height: 100vh;
-  padding: 1rem;
 
   ${space}
 `;
