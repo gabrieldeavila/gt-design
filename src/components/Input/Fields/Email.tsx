@@ -31,7 +31,7 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange }:
         if (!value) return;
 
         const { isValid, invalidMessage } = validateEmail(value, inputValidations);
-
+        console.log(isValid, invalidMessage);
         setIsValidEmail(isValid);
         setErrorMessage(invalidMessage);
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -40,10 +40,11 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange }:
     const handleChange = useCallback(
         (e: any) => {
             const { value: emailVal } = e.target;
-            const { isValid } = validateEmail(emailVal, inputValidations);
+            const { isValid, invalidMessage } = validateEmail(emailVal, inputValidations);
 
             validateState(isValid, emailVal);
             setIsValidEmail(isValid);
+            setErrorMessage(invalidMessage);
             handleInputChange(emailVal);
 
             onChange(e);
