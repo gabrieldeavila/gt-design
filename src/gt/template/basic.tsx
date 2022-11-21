@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import DarkSwitch from "../../components/Switch/DarkSwitch";
+import DarkSwitch from "../../components/Switch/Template/DarkSwitch";
 import GTProvider from "../../context/gt";
 import GTDesign from "../Design/Design";
 import GlobalStyle from "../Global/style";

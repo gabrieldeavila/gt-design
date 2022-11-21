@@ -46,10 +46,12 @@ const PopupWrapperComp = ({
 
 const PopupWrapper = memo(PopupWrapperComp);
 
-export default {
+const Popup = {
     Wrapper: PopupWrapper,
     Container: PopupContainer
-};
+}
+
+export default Popup;
 
 PopupWrapperComp.propTypes = {
     open: PropTypes.bool,

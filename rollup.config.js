@@ -29,7 +29,8 @@ export default [
       'polished',
       'react-feather',
       'framer-motion',
-      'prop-types'
+      'prop-types',
+      'lodash'
     ],
     plugins: [
       resolve(),

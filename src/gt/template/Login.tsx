@@ -6,11 +6,10 @@ import GTInput from '../../components/Input/GTInput';
 import Input from '../../components/Input/Input';
 import Login from '../../components/Login/Login';
 import Space from '../../components/Space/Space';
-import DarkSwitch from '../../components/Switch/DarkSwitch';
 import GTPageStateProvider, { useGTPageStateContext } from '../../context/pageState';
 import { ILogin } from './interface';
 
-function LoginEx() {
+function GTLogin() {
     const [pageState, setPageState] = useState({});
     const [errors, setErrors] = useState<string[]>([]);
     const [isCreate, setIsCreate] = useState(true);
@@ -38,7 +37,7 @@ function LoginEx() {
     );
 }
 
-export default LoginEx;
+export default GTLogin;
 
 function LoginCreate({ setIsCreate, canSave, loginRef }: ILogin) {
     return (

@@ -2,8 +2,8 @@ import PropTypes from "prop-types";
 import React, { memo, useCallback } from "react";
 // @ts-ignore
 import * as Icon from "react-feather";
-import { useGTContext } from "../../context/gt";
-import Switch from "./Switch";
+import { useGTContext } from "../../../context/gt";
+import Switch from "../Switch";
 
 function GTDarkSwitch({
   fixed,

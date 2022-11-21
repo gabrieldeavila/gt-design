@@ -81,13 +81,24 @@
     "@types/feather-icons": "^4.29.0",
     "framer-motion": "^7.6.6",
     "polished": "^4.2.2",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-feather": "^2.0.10",
     "styled-components": "^5.3.6",
     "styled-reset": "^4.4.2",
-    "styled-system": "^5.1.5",
-    "prop-types": "^15.8.1"
+    "styled-system": "^5.1.5"
   },
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "react",
+    "design",
+    "react-component",
+    "gt-design",
+    "gt",
+    "design-system"
+  ],
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
 }

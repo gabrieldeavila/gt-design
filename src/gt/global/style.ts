@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import transitions from "../../utils/transitions";
 import { IGLobalStyle } from "./interface";
-import Kanit from "../../assets/fonts/Kanit-Regular.ttf"
+// import Kanit from "../../assets/fonts/Kanit-Regular.ttf"
 
 const GlobalStyle = createGlobalStyle`
   ${reset} 
@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
   /* TO DO: improve, so user uses his desired font */
   @font-face {
     font-family: 'Kanit';
-    src: url(${Kanit}) format('truetype');
+    /* src: url(${Kanit}) format('truetype'); */
     font-weight: 300;
     font-style: normal;
     font-display: auto;
