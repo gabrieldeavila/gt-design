@@ -9,13 +9,6 @@ const GlobalStyle = createGlobalStyle`
   ${reset} 
 
   /* TO DO: improve, so user uses his desired font */
-  @font-face {
-    font-family: 'Kanit';
-    /* src: url(${Kanit}) format('truetype'); */
-    font-weight: 300;
-    font-style: normal;
-    font-display: auto;
-  }
 
   * {
     color: ${({ theme }: IGLobalStyle) => theme.contrast};

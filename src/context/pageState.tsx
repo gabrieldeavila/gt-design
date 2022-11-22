@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { IGTPageState } from './interface';
+import "../translate/index";
 
 // create default values for context
 const defaultValues = {

@@ -1,6 +1,7 @@
 /* eslint-disable operator-linebreak */
 import PropTypes from 'prop-types';
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import useInputValues from '../../../hooks/pageState/useInputValues';
 import useValidateEmail from '../../../hooks/validation/useValidateEmail';
 import useValidateState from '../../../hooks/validation/useValidateState';
@@ -10,6 +11,8 @@ import { IGTInput } from './interface';
 const defaultValidationObj = ['required'];
 
 function GTInputEmail({ name, label, validations, defaultValidation, onChange }: IGTInput) {
+    const { t, i18n } = useTranslation();
+
     const inputValidations = useMemo(() => {
         if (defaultValidation) {
             return [...defaultValidationObj, ...validations];
@@ -66,6 +69,7 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange }:
                 id={name}
                 name={name}
             />
+            {t("play.play")}
             {!isValidEmail && <Input.Error>{errorMessage}</Input.Error>}
         </Input.Container>
     );

@@ -87,7 +87,12 @@
     "react-feather": "^2.0.10",
     "styled-components": "^5.3.6",
     "styled-reset": "^4.4.2",
-    "styled-system": "^5.1.5"
+    "styled-system": "^5.1.5",
+    "i18next": "^22.0.6",
+    "i18next-browser-languagedetector": "^7.0.1",
+    "i18next-http-backend": "^2.0.1",
+    "lodash": "^4.17.21",
+    "react-i18next": "^12.0.0"
   },
   "types": "dist/index.d.ts",
   "keywords": [
@@ -97,8 +102,5 @@
     "gt-design",
     "gt",
     "design-system"
-  ],
-  "dependencies": {
-    "lodash": "^4.17.21"
-  }
+  ]
 }
