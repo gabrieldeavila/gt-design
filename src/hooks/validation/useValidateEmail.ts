@@ -4,7 +4,7 @@ import useInputValidation from "./useInputValidation";
 const options = {
   required: {
     regex: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-    message: "Please enter a valid email address.",
+    message: "REQUIRED",
   },
 };
 

@@ -11,7 +11,7 @@ import { IGTInput } from './interface';
 const defaultValidationObj = ['required'];
 
 function GTInputEmail({ name, label, validations, defaultValidation, onChange }: IGTInput) {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const inputValidations = useMemo(() => {
         if (defaultValidation) {
@@ -34,7 +34,7 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange }:
         if (!value) return;
 
         const { isValid, invalidMessage } = validateEmail(value, inputValidations);
-        console.log(isValid, invalidMessage);
+
         setIsValidEmail(isValid);
         setErrorMessage(invalidMessage);
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -69,8 +69,7 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange }:
                 id={name}
                 name={name}
             />
-            {t("play.play")}
-            {!isValidEmail && <Input.Error>{errorMessage}</Input.Error>}
+            {!isValidEmail && <Input.Error>{t(`EMAIL.${errorMessage}`)}</Input.Error>}
         </Input.Container>
     );
 }

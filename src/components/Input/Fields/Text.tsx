@@ -1,6 +1,7 @@
 /* eslint-disable operator-linebreak */
 import PropTypes from 'prop-types';
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import useInputValues from '../../../hooks/pageState/useInputValues';
 import useValidateState from '../../../hooks/validation/useValidateState';
 import useValidateText from '../../../hooks/validation/useValidateText';
@@ -19,6 +20,8 @@ function GTInputText({
     maxChars,
     onChange
 }: IGTInputText) {
+    const { t } = useTranslation();
+
     const inputValidations = useMemo(() => {
         if (defaultValidation) {
             return [...defaultValidationObj, ...validations];
@@ -81,7 +84,7 @@ function GTInputText({
                 id={name}
                 name={name}
             />
-            {!isValidText && <Input.Error>{errorMessage}</Input.Error>}
+            {!isValidText && <Input.Error>{t(`TEXT.${errorMessage}`)}</Input.Error>}
         </Input.Container>
     );
 }

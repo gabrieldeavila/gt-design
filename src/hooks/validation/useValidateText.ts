@@ -6,23 +6,23 @@ import useInputValidation from "./useInputValidation";
 const options = {
   required: {
     regex: /^.{1,}$/,
-    message: "This field is required.",
+    message: "REQUIRED",
   },
   noInitialSpace: {
     regex: /^[^\s]/,
-    message: "This field cannot start with a space.",
+    message: "NO_INITIAL_SPACE",
   },
   noEndingSpaces: {
     regex: /[^\s]$/,
-    message: "This field cannot end with a space.",
+    message: "NO_TRAILING_SPACE",
   },
   noSpaces: {
     regex: /^[^\s]+$/,
-    message: "This field cannot have spaces.",
+    message: "NO_SPACES",
   },
   userName: {
     regex: /^[a-zA-Z0-9]+$/,
-    message: "This field can only have letters and numbers.",
+    message: "USERNAME",
   },
 };
 
@@ -103,7 +103,7 @@ function useValidateText(
 
       const currChars = value.length;
 
-      // ifc isInvalidChars is true, then it will have a message
+      // if isInvalidChars is true, then it will have a message
       const isInvalidMessage =
         !isAllValidChars &&
         `This field must have between ${minCharsNumber} and ${maxCharsNumber} characters. You have ${currChars} characters.`;
