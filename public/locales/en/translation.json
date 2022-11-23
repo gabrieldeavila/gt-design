@@ -1,7 +1,13 @@
 {
-  "play": {
-    "play": "Play",
-    "quizz": "Quizz",
-    "quizzes": "Quizzes"
+  "EMAIL": {
+    "REQUIRED": "Please enter your email address."
+  },
+
+  "TEXT": {
+    "REQUIRED": "Please enter your text.",
+    "NO_INITIAL_SPACE": "This field cannot start with a space.",
+    "NO_TRAILING_SPACE": "This field cannot end with a space.",
+    "NO_SPACES": "This field cannot contain spaces.",
+    "USERNAME": "This field can only have letters and numbers."
   }
 }
