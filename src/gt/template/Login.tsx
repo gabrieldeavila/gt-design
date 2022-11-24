@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button, Text } from '../../components';
 import GTInput from '../../components/Input/GTInput';
 import Input from '../../components/Input/Input';
@@ -40,12 +41,14 @@ function GTLogin() {
 export default GTLogin;
 
 function LoginCreate({ setIsCreate, canSave, loginRef }: ILogin) {
+    const { t } = useTranslation();
+
     return (
         <Login.BoxMain ref={loginRef}>
             <Login.BoxWrapper>
                 <Space.Flex>
-                    <Text.H1>Create a new account</Text.H1>
-                    <Text.P>Join the TIZ community and start sharing your ideas.</Text.P>
+                    <Text.H1>{t("TEMPLATE.LOGIN.CREATE_TITLE")}</Text.H1>
+                    <Text.P>{t("TEMPLATE.LOGIN.CREATE_SUBTITLE")}</Text.P>
                 </Space.Flex>
                 <Space.FullSpace>
                     <Input.Wrapper>
@@ -55,32 +58,32 @@ function LoginCreate({ setIsCreate, canSave, loginRef }: ILogin) {
                             minWords="2"
                             maxWords="5"
                             name="name"
-                            label="Your Name"
+                            label={t("TEMPLATE.LOGIN.NAME_LABEL")}
                         />
 
                         <GTInput.Text
                             defaultValidation
                             validations={['noSpaces']}
                             name="nickname"
-                            label="Nickname"
+                            label={t("TEMPLATE.LOGIN.NICKNAME_LABEL")}
                         />
 
-                        <GTInput.Email name="email" label="Email" />
+                        <GTInput.Email name="email" label={t("TEMPLATE.LOGIN.EMAIL_LABEL")} />
 
-                        <GTInput.Password name="password" label="Password" />
+                        <GTInput.Password name="password" label={t("TEMPLATE.LOGIN.PASSWORD_LABEL")} />
                     </Input.Wrapper>
                 </Space.FullSpace>
                 <Space.Flex>
                     <Text.P sm>
-                        By creating your Tiz account, you agree to our Terms, Data Policy and Cookies Policy.
+                        {t("TEMPLATE.LOGIN.DATA_POLICY")}
                     </Text.P>
                     <Space.FullSpace>
-                        <Button.NormalShadow disabled={!canSave}>Create your Tiz account</Button.NormalShadow>
+                        <Button.NormalShadow disabled={!canSave}>{t("TEMPLATE.LOGIN.CREATE_BUTTON")}</Button.NormalShadow>
                     </Space.FullSpace>
 
                     <Space.Center>
                         <Text.Btn onClick={() => setIsCreate(false)}>
-                            Already have an account?
+                            {t("TEMPLATE.LOGIN.ALREADY_HAVE_ACCOUNT")}
                         </Text.Btn>
                     </Space.Center>
                 </Space.Flex>
@@ -102,6 +105,8 @@ LoginCreate.defaultProps = {
 
 const signInFields = ['password', 'nickname'];
 function LoginSignIn({ canSave, setIsCreate, loginRef }: ILogin) {
+    const { t } = useTranslation();
+
     const { setErrors, pageState } = useGTPageStateContext();
 
     useEffect(() => {
@@ -119,8 +124,8 @@ function LoginSignIn({ canSave, setIsCreate, loginRef }: ILogin) {
         <Login.BoxMain ref={loginRef}>
             <Login.BoxWrapper>
                 <Space.Flex>
-                    <Text.H1>Sign in to Tiz</Text.H1>
-                    <Text.P>It's nice to have you back</Text.P>
+                    <Text.H1>{t("TEMPLATE.LOGIN.SIGN_IN_TITLE")}</Text.H1>
+                    <Text.P>{t("TEMPLATE.LOGIN.SIGN_IN_SUBTITLE")}</Text.P>
                 </Space.Flex>
                 <Space.FullSpace>
                     <Input.Wrapper>
@@ -128,22 +133,22 @@ function LoginSignIn({ canSave, setIsCreate, loginRef }: ILogin) {
                             defaultValidation
                             validations={['noSpaces']}
                             name="nickname"
-                            label="Nickname"
+                            label={t("TEMPLATE.LOGIN.NICKNAME_LABEL")}
                         />
 
-                        <GTInput.Password name="password" label="Password" />
+                        <GTInput.Password name="password" label={t("TEMPLATE.LOGIN.PASSWORD_LABEL")} />
                     </Input.Wrapper>
                 </Space.FullSpace>
                 <Space.Flex>
                     <Space.FullSpace>
                         <Button.NormalShadow onClick={handleSignIn} disabled={!canSave}>
-                            Sign In
+                            {t("TEMPLATE.LOGIN.SIGN_IN_BUTTON")}
                         </Button.NormalShadow>
                     </Space.FullSpace>
 
                     <Space.Center>
                         <Text.Btn onClick={() => setIsCreate(true)}>
-                            Don't have an account?
+                            {t("TEMPLATE.LOGIN.DONT_HAVE_ACCOUNT")}
                         </Text.Btn>
                     </Space.Center>
                 </Space.Flex>

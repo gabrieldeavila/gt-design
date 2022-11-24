@@ -7,6 +7,32 @@
     "NO_INITIAL_SPACE": "Este campo não pode começar com um espaço.",
     "NO_TRAILING_SPACE": "Este campo não pode terminar com um espaço.",
     "NO_SPACES": "Este campo não pode conter espaços.",
-    "USERNAME": "Este campo deve conter apenas letras minúsculas, números, hífens e sublinhados."
+    "USERNAME": "Este campo deve conter apenas letras minúsculas, números, hífens e sublinhados.",
+    "MAX_WORDS_BETWEEN": "Por favor, insira entre {{MIN}} e {{MAX}} palavras.",
+    "MAX_CHARS": "Este campo deve ter entre {{MIN}} e {{MAX}} caracteres. Você tem {{CURR}} caracteres."
+  },
+  "PASSWORD": {
+    "EIGHT_LONG": "Esta senha deve ter pelo menos 8 caracteres.",
+    "ONE_NUMBER": "Esta senha deve conter pelo menos um número.",
+    "ONE_SPECIAL": "Esta senha deve conter pelo menos um caractere especial.",
+    "ONE_UPPERCASE": "Esta senha deve conter pelo menos uma letra maiúscula.",
+    "ONE_LOWERCASE": "Esta senha deve conter pelo menos uma letra minúscula."
+  },
+  "TEMPLATE": {
+    "LOGIN": {
+      "CREATE_TITLE": "Criar uma nova conta",
+      "CREATE_SUBTITLE": "Junte-se a nós",
+      "NAME_LABEL": "Nome",
+      "EMAIL_LABEL": "E-mail",
+      "PASSWORD_LABEL": "Senha",
+      "NICKNAME_LABEL": "Apelido",
+      "DATA_POLICY": "Ao criar uma conta, você concorda com nossos termos, nossa política de dados e nossa política de cookies.",
+      "CREATE_BUTTON": "Criar conta",
+      "ALREADY_HAVE_ACCOUNT": "Já tem uma conta?",
+      "SIGN_IN_TITLE": "Faça login",
+      "SIGN_IN_SUBTITLE": "Bem-vindo de volta",
+      "SIGN_IN_BUTTON": "Entrar",
+      "DONT_HAVE_ACCOUNT": "Não tem uma conta?"
+    }
   }
 }

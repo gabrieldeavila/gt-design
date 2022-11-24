@@ -8,6 +8,32 @@
     "NO_INITIAL_SPACE": "This field cannot start with a space.",
     "NO_TRAILING_SPACE": "This field cannot end with a space.",
     "NO_SPACES": "This field cannot contain spaces.",
-    "USERNAME": "This field can only have letters and numbers."
+    "USERNAME": "This field can only have letters and numbers.",
+    "MAX_WORDS_BETWEEN": "This field must have between {{MIN}} and {{MAX}} words.",
+    "MAX_CHARS": "This field must have between {{MIN}} and {{MAX}} characters. You have {{CURR}} characters"
+  },
+  "PASSWORD": {
+    "EIGHT_LONG": "Password must be at least 8 characters long.",
+    "ONE_NUMBER": "Password must contain at least one number.",
+    "ONE_SPECIAL": "Password must contain at least one special character.",
+    "ONE_UPPERCASE": "Password must contain at least one uppercase letter.",
+    "ONE_LOWERCASE": "Password must contain at least one lowercase letter."
+  },
+  "TEMPLATE": {
+    "LOGIN": {
+      "CREATE_TITLE": "Create an account",
+      "CREATE_SUBTITLE": "It's free and always will be.",
+      "NAME_LABEL": "Name",
+      "EMAIL_LABEL": "Email",
+      "PASSWORD_LABEL": "Password",
+      "NICKNAME_LABEL": "Nickname",
+      "DATA_POLICY": "By clicking Sign Up, you agree to our Terms, Data Policy and Cookies Policy.",
+      "CREATE_BUTTON": "Create an account",
+      "ALREADY_HAVE_ACCOUNT": "Already have an account?",
+      "SIGN_IN_TITLE": "Sign in",
+      "SIGN_IN_SUBTITLE": "Welcome back!",
+      "SIGN_IN_BUTTON": "Let's go!",
+      "DONT_HAVE_ACCOUNT": "Don't have an account?"
+    }
   }
 }

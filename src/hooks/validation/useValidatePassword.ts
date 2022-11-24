@@ -4,23 +4,23 @@ import useInputValidation from "./useInputValidation";
 const options = {
   eightLong: {
     regex: /^.{8,}$/,
-    message: "Password must be at least 8 characters long.",
+    message: "EIGHT_LONG",
   },
   oneNumber: {
     regex: /\d/,
-    message: "Password must contain at least one number.",
+    message: "ONE_NUMBER",
   },
   oneSpecial: {
     regex: /[@$!%*?&]/,
-    message: "Password must contain at least one special character.",
+    message: "ONE_SPECIAL",
   },
   oneUppercase: {
     regex: /[A-Z]/,
-    message: "Password must contain at least one uppercase letter.",
+    message: "ONE_UPPERCASE",
   },
   oneLowercase: {
     regex: /[a-z]/,
-    message: "Password must contain at least one lowercase letter.",
+    message: "ONE_LOWERCASE",
   },
 };
 

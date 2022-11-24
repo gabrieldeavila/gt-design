@@ -22,6 +22,8 @@ function GTInputText({
 }: IGTInputText) {
     const { t } = useTranslation();
 
+    const [errors, setErrors] = useState({});
+
     const inputValidations = useMemo(() => {
         if (defaultValidation) {
             return [...defaultValidationObj, ...validations];
@@ -58,11 +60,12 @@ function GTInputText({
         (e: any) => {
             const { value: iVal } = e.target;
             const { isValid, invalidMessage } = validateText(iVal, inputValidations);
-            const { isAllValid, invalidAllMessage } = validateMinAndMax(invalidMessage, isValid, iVal);
+            const { isAllValid, invalidAllMessage, errorsVars } = validateMinAndMax(invalidMessage, isValid, iVal);
 
             validateState(isAllValid, iVal);
             setErrorMessage(invalidAllMessage);
             setIsValidText(isAllValid);
+            setErrors(errorsVars)
             handleInputChange(iVal);
 
             onChange(e);
@@ -84,7 +87,7 @@ function GTInputText({
                 id={name}
                 name={name}
             />
-            {!isValidText && <Input.Error>{t(`TEXT.${errorMessage}`)}</Input.Error>}
+            {!isValidText && <Input.Error>{t(`TEXT.${errorMessage}`, errors)}</Input.Error>}
         </Input.Container>
     );
 }

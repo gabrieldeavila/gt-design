@@ -2,6 +2,7 @@
 import PropTypes from 'prop-types';
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import * as Icon from 'react-feather';
+import { useTranslation } from 'react-i18next';
 import useInputValues from '../../../hooks/pageState/useInputValues';
 import useValidatePassword from '../../../hooks/validation/useValidatePassword';
 import useValidateState from '../../../hooks/validation/useValidateState';
@@ -17,6 +18,8 @@ const defaultValidationObj = [
 ];
 
 function GTInputPassword({ name, label, defaultValidation, validations, onChange }: IGTInput) {
+    const { t } = useTranslation()
+
     const inputValidations = useMemo(() => {
         if (defaultValidation) {
             return [...defaultValidationObj, ...validations];
@@ -91,7 +94,8 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
             ) : (
                 <Icon.EyeOff onClick={handleShowPassword} />
             )}
-            {!isValidPassword && <Input.Error>{errorMessage}</Input.Error>}
+
+            {!isValidPassword && <Input.Error>{t(`PASSWORD.${errorMessage}`)}</Input.Error>}
         </Input.Container>
     );
 }

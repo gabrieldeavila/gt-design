@@ -58,6 +58,7 @@ function useValidateText(
         return {
           isAllValidWords: isValid,
           invalidAllMessageWords: invalidMessage,
+          errorsVarsWords: {},
         };
       }
 
@@ -68,13 +69,13 @@ function useValidateText(
         isValid && words.length >= minWords && words.length <= maxWords;
 
       // isInvalidWords is true, then it will have a message
-      const isInvalidMessage =
-        !isAllValidWords &&
-        `This field must have between ${minWords} and ${maxWords} words.`;
+      const isInvalidMessage = !isAllValidWords && "MAX_WORDS_BETWEEN";
+
+      const errorsVarsWords = { MAX: maxWords, MIN: minWords };
 
       const invalidAllMessageWords = isInvalidMessage;
 
-      return { isAllValidWords, invalidAllMessageWords };
+      return { isAllValidWords, invalidAllMessageWords, errorsVarsWords };
     },
     [maxWords, minWords]
   );
@@ -104,33 +105,41 @@ function useValidateText(
       const currChars = value.length;
 
       // if isInvalidChars is true, then it will have a message
-      const isInvalidMessage =
-        !isAllValidChars &&
-        `This field must have between ${minCharsNumber} and ${maxCharsNumber} characters. You have ${currChars} characters.`;
+      const isInvalidMessage = !isAllValidChars && "MAX_CHARS";
+
+      const errorsVarsChars = {
+        MAX: maxCharsNumber,
+        MIN: minCharsNumber,
+        CURR: currChars,
+      };
+
       const invalidAllMessageChars = isInvalidMessage;
 
-      return { isAllValidChars, invalidAllMessageChars };
+      return { isAllValidChars, invalidAllMessageChars, errorsVarsChars };
     },
     [maxChars, minChars]
   );
 
   const validateMinAndMax = useCallback(
     (invalidMessage: string, isValid: boolean, value: string) => {
-      const { isAllValidWords, invalidAllMessageWords } =
+      const { isAllValidWords, invalidAllMessageWords, errorsVarsWords } =
         validateMinAndMaxWords(invalidMessage, isValid, value);
 
-      const { isAllValidChars, invalidAllMessageChars } =
+      const { isAllValidChars, invalidAllMessageChars, errorsVarsChars } =
         validateMinAndMaxChars(invalidAllMessageWords, isAllValidWords, value);
 
       let msg = "";
 
-      if(!_.isBoolean(invalidAllMessageChars)) {
+      if (!_.isBoolean(invalidAllMessageChars)) {
         msg = invalidAllMessageChars;
       }
+
+      const errorsVars = errorsVarsChars || errorsVarsWords;
 
       return {
         isAllValid: isAllValidChars,
         invalidAllMessage: msg,
+        errorsVars,
       };
     },
     [validateMinAndMaxWords, validateMinAndMaxChars]
