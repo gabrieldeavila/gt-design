@@ -25,6 +25,7 @@
       "NAME_LABEL": "Nome",
       "EMAIL_LABEL": "E-mail",
       "PASSWORD_LABEL": "Senha",
+      "CONFIRM_PASSWORD_LABEL": "Confirmar Senha",
       "NICKNAME_LABEL": "Apelido",
       "DATA_POLICY": "Ao criar uma conta, você concorda com nossos termos, nossa política de dados e nossa política de cookies.",
       "CREATE_BUTTON": "Criar conta",

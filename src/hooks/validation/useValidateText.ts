@@ -27,10 +27,10 @@ const options = {
 };
 
 function useValidateText(
-  minWords: number | string,
-  maxWords: number | string,
-  minChars: number | string,
-  maxChars: number | string
+  minWords?: number | string,
+  maxWords?: number | string,
+  minChars?: number | string,
+  maxChars?: number | string
 ) {
   const { optionsValidation } = useInputValidation();
 
@@ -50,16 +50,23 @@ function useValidateText(
 
   const validateMinAndMaxWords = useCallback(
     (invalidMessage: string, isValid: boolean, value: string) => {
+      const prevValues = {
+        isAllValidWords: isValid,
+        invalidAllMessageWords: invalidMessage,
+        errorsVarsWords: {},
+      };
+
+      // if is maxWords and minWords are not defined, return the current state
+      if (!maxWords || !minWords) {
+        return prevValues;
+      }
+
       // if maxWords is not bigger than minWords, then it is not a valid range
       const shouldValidateWords = maxWords > minWords;
 
       // and if the value is already not valid, then we don't need to search for errors
       if (!shouldValidateWords || !isValid) {
-        return {
-          isAllValidWords: isValid,
-          invalidAllMessageWords: invalidMessage,
-          errorsVarsWords: {},
-        };
+        return prevValues;
       }
 
       // get words from a string, more than one space is considered as one space
@@ -81,7 +88,11 @@ function useValidateText(
   );
 
   const validateMinAndMaxChars = useCallback(
-    (invalidMessage: string | boolean, isValid: boolean, value: string) => {
+    (
+      invalidMessage: string | boolean,
+      isValid: boolean,
+      value: string
+    ) => {
       // always makes sure that maxChars and minChars are numbers
       const maxCharsNumber = Number(maxChars);
       const minCharsNumber = Number(minChars);
@@ -131,7 +142,7 @@ function useValidateText(
       let msg = "";
 
       if (!_.isBoolean(invalidAllMessageChars)) {
-        msg = invalidAllMessageChars;
+        msg = invalidAllMessageChars || "";
       }
 
       const errorsVars = errorsVarsChars || errorsVarsWords;

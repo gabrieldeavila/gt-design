@@ -1,13 +1,14 @@
 /* eslint-disable operator-linebreak */
 import PropTypes from 'prop-types';
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import * as Icon from 'react-feather';
 import { useTranslation } from 'react-i18next';
+import { useGTPageStateContext } from '../../../context/pageState';
 import useInputValues from '../../../hooks/pageState/useInputValues';
 import useValidatePassword from '../../../hooks/validation/useValidatePassword';
 import useValidateState from '../../../hooks/validation/useValidateState';
 import Input from '../Input';
-import { IGTInput } from './interface';
+import { IGTInputPassword } from './interface';
 
 const defaultValidationObj = [
     'eightLong',
@@ -17,8 +18,10 @@ const defaultValidationObj = [
     'oneUppercase'
 ];
 
-function GTInputPassword({ name, label, defaultValidation, validations, onChange }: IGTInput) {
+function GTInputPassword({ name, label, defaultValidation, validations, onChange, sameAs }: IGTInputPassword) {
     const { t } = useTranslation()
+
+    const { pageState } = useGTPageStateContext();
 
     const inputValidations = useMemo(() => {
         if (defaultValidation) {
@@ -62,7 +65,7 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
     const handleChange = useCallback(
         (e: any) => {
             const { value: pswVal } = e.target;
-            const { isValid, invalidMessage } = validatePassword(pswVal, inputValidations);
+            const { isValid, invalidMessage } = validatePassword(pswVal, inputValidations, sameAs);
 
             validateState(isValid, pswVal);
             setIsValidPassword(isValid);
@@ -73,6 +76,21 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
         },
         [handleInputChange, inputValidations, onChange, validatePassword, validateState]
     );
+
+    const sameAsValue = useMemo(() => {
+        if (!sameAs) return '';
+
+        return pageState[sameAs] || "";
+    }, [pageState])
+
+    useEffect(() => {
+        if (!value || !sameAs) return;
+
+        const e = { target: { value } };
+
+        handleChange(e)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [sameAsValue]);
 
     return (
         <Input.Container>
@@ -107,11 +125,13 @@ GTInputPassword.propTypes = {
     label: PropTypes.string.isRequired,
     validations: PropTypes.arrayOf(PropTypes.string),
     defaultValidation: PropTypes.bool,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    sameAs: PropTypes.string
 };
 
 GTInputPassword.defaultProps = {
     validations: defaultValidationObj,
     defaultValidation: true,
-    onChange: () => { }
+    onChange: () => { },
+    sameAs: ''
 };

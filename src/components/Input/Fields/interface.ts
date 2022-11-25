@@ -7,8 +7,12 @@ export interface IGTInput {
 }
 
 export interface IGTInputText extends IGTInput {
-  minWords: number | string;
-  maxWords: number | string;
-  minChars: number | string;
-  maxChars: number | string;
+  minWords?: number | string;
+  maxWords?: number | string;
+  minChars?: number | string;
+  maxChars?: number | string;
+}
+
+export interface IGTInputPassword extends IGTInput {
+  sameAs?: string;
 }

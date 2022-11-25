@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { useGTPageStateContext } from "../../context/pageState";
 import useInputValidation from "./useInputValidation";
 
 const options = {
@@ -26,19 +27,26 @@ const options = {
 
 function useValidatePassword() {
   const { optionsValidation } = useInputValidation();
+  const { pageState } = useGTPageStateContext();
 
   const validatePassword = useCallback(
-    (value: string, validations: string[]) => {
-      const { isValid, invalidMessage } = optionsValidation(
+    (value: string, validations: string[], sameAs?: string) => {
+      let { isValid, invalidMessage } = optionsValidation(
         validations,
         options,
         value,
         "password"
       );
 
+      if (sameAs && isValid) {
+        isValid = value === pageState[sameAs];
+
+        invalidMessage = isValid ? "" : "PASSWORDS_NOT_MATCH";
+      }
+
       return { isValid, invalidMessage };
     },
-    [optionsValidation]
+    [optionsValidation, pageState]
   );
 
   return { validatePassword };

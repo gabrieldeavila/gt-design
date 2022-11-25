@@ -26,6 +26,7 @@
       "NAME_LABEL": "Name",
       "EMAIL_LABEL": "Email",
       "PASSWORD_LABEL": "Password",
+      "CONFIRM_PASSWORD_LABEL": "Confirm Password",
       "NICKNAME_LABEL": "Nickname",
       "DATA_POLICY": "By clicking Sign Up, you agree to our Terms, Data Policy and Cookies Policy.",
       "CREATE_BUTTON": "Create an account",

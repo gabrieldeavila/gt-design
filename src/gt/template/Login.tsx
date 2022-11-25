@@ -71,6 +71,8 @@ function LoginCreate({ setIsCreate, canSave, loginRef }: ILogin) {
                         <GTInput.Email name="email" label={t("TEMPLATE.LOGIN.EMAIL_LABEL")} />
 
                         <GTInput.Password name="password" label={t("TEMPLATE.LOGIN.PASSWORD_LABEL")} />
+
+                        <GTInput.Password sameAs="password" name="confirm_password" label={t("TEMPLATE.LOGIN.CONFIRM_PASSWORD_LABEL")} />
                     </Input.Wrapper>
                 </Space.FullSpace>
                 <Space.Flex>
