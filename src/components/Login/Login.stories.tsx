@@ -1,14 +1,18 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import React from "react";
+import React, { useCallback } from "react";
 import GTBasic from "../../gt/Template/Basic";
 import LoginEx from "../../gt/Template/Login";
 import MotionBox from "../Motion/motionBox";
 
 
 function LoginStory() {
+    const onPasswordForgot = useCallback(() => {
+        console.log("onPasswordForgot");
+    }, []);
+
     return (
         <GTBasic>
-            <LoginEx />
+            <LoginEx onPasswordForgot={onPasswordForgot} />
         </GTBasic>
     );
 }

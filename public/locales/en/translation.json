@@ -34,7 +34,8 @@
       "SIGN_IN_TITLE": "Sign in",
       "SIGN_IN_SUBTITLE": "Welcome back!",
       "SIGN_IN_BUTTON": "Let's go!",
-      "DONT_HAVE_ACCOUNT": "Don't have an account?"
+      "DONT_HAVE_ACCOUNT": "Don't have an account?",
+      "FORGOT_PASSWORD": "Forgot password?"
     }
   }
 }

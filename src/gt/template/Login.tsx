@@ -10,7 +10,7 @@ import Space from '../../components/Space/Space';
 import GTPageStateProvider, { useGTPageStateContext } from '../../context/pageState';
 import { ILogin } from './interface';
 
-function GTLogin() {
+function GTLogin({ onPasswordForgot }: { onPasswordForgot: () => void }) {
     const [pageState, setPageState] = useState({});
     const [errors, setErrors] = useState<string[]>([]);
     const [isCreate, setIsCreate] = useState(true);
@@ -29,9 +29,9 @@ function GTLogin() {
                 <Login.BoxPrimary height={heightRef.current?.clientHeight || 0} />
 
                 {isCreate ? (
-                    <LoginCreate loginRef={heightRef} setIsCreate={setIsCreate} canSave={canSave} />
+                    <LoginCreate onPasswordForgot={onPasswordForgot} loginRef={heightRef} setIsCreate={setIsCreate} canSave={canSave} />
                 ) : (
-                    <LoginSignIn loginRef={heightRef} setIsCreate={setIsCreate} canSave={canSave} />
+                    <LoginSignIn onPasswordForgot={onPasswordForgot} loginRef={heightRef} setIsCreate={setIsCreate} canSave={canSave} />
                 )}
             </Login.Wrapper>
         </GTPageStateProvider>
@@ -106,7 +106,7 @@ LoginCreate.defaultProps = {
 };
 
 const signInFields = ['password', 'nickname'];
-function LoginSignIn({ canSave, setIsCreate, loginRef }: ILogin) {
+function LoginSignIn({ canSave, setIsCreate, loginRef, onPasswordForgot }: ILogin) {
     const { t } = useTranslation();
 
     const { setErrors, pageState } = useGTPageStateContext();
@@ -148,11 +148,12 @@ function LoginSignIn({ canSave, setIsCreate, loginRef }: ILogin) {
                         </Button.NormalShadow>
                     </Space.FullSpace>
 
-                    <Space.Center>
+                    <Space.Between>
                         <Text.Btn onClick={() => setIsCreate(true)}>
                             {t("TEMPLATE.LOGIN.DONT_HAVE_ACCOUNT")}
                         </Text.Btn>
-                    </Space.Center>
+                        <Text.Btn onClick={onPasswordForgot}>{t("TEMPLATE.LOGIN.FORGOT_PASSWORD")}</Text.Btn>
+                    </Space.Between>
                 </Space.Flex>
             </Login.BoxWrapper>
         </Login.BoxMain>

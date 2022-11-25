@@ -48,10 +48,18 @@ const Center = styled.div`
   ${space}
 `;
 
+const Between = styled.div`
+  ${flex.spaceBetween}
+
+  ${customHeight};
+  ${space}
+`;
+
 export default {
   Flex,
   FlexCenter,
   FlexCenterRow,
   FullSpace,
   Center,
+  Between
 };

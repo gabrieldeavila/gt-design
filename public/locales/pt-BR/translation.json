@@ -33,7 +33,8 @@
       "SIGN_IN_TITLE": "Faça login",
       "SIGN_IN_SUBTITLE": "Bem-vindo de volta",
       "SIGN_IN_BUTTON": "Entrar",
-      "DONT_HAVE_ACCOUNT": "Não tem uma conta?"
+      "DONT_HAVE_ACCOUNT": "Não tem uma conta?",
+      "FORGOT_PASSWORD": "Esqueceu sua senha?"
     }
   }
 }

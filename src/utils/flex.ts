@@ -34,10 +34,16 @@ const column = css`
   flex-direction: column;
 `;
 
+const spaceBetween = css`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const flex = {
   alignCenter,
   alignCenterCol,
   justifyBetween,
+  spaceBetween,
   justifyEvenly,
   wrapGap,
   column
