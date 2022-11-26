@@ -2,6 +2,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 import { transparentize } from "polished";
 import styled from "styled-components";
+import { scrolls } from "../../utils";
 import flex from "../../utils/flex";
 import shadows from "../../utils/shadows";
 import Switch from "../Switch";
@@ -54,6 +55,8 @@ const LoginBoxMain = styled.main`
   position: absolute;
   top: 15%;
   left: 60%;
+  padding: 1rem 0.5rem;
+  height: calc(100% - 15%);
   width: 30vw;
   background: ${(props) => transparentize(0.4, props.theme.primary)};
   backdrop-filter: blur(1rem);
@@ -90,13 +93,17 @@ const LoginBoxMain = styled.main`
 `;
 
 const LoginBoxWrapper = styled.div`
-  height: 100%;
+  height: -webkit-fill-available;
   width: 100%;
-  padding: 3rem;
+  padding: 0 3rem;
   ${flex.column}
   ${flex.alignCenter}
   ${flex.wrapGap}
   justify-content: space-evenly;
+  flex-direction: row;
+  overflow: auto;
+
+  ${scrolls.default}
 
   /* when it's mobile */
   @media (max-width: 1000px) {

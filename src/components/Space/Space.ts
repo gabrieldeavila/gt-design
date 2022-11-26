@@ -34,7 +34,7 @@ const FullSpace = styled.div<SpaceProps>`
 
   > * {
     width: 100%;
-    height: 100%;
+    height: -webkit-fill-available;
   }
 
   ${customHeight};
