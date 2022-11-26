@@ -1,6 +1,7 @@
 /* eslint-disable operator-linebreak */
 import styled, { css } from "styled-components";
 import { space, fontSize } from "styled-system";
+import { transitions } from "../../utils";
 
 const P = styled.p`
   color: ${(props) => props.theme.contrast};
@@ -11,6 +12,7 @@ const P = styled.p`
     sm &&
     css`
       font-size: 0.75rem;
+      font-weight: 100;
     `}
 
   ${space}
@@ -46,6 +48,28 @@ const Btn = styled.button`
   height: fit-content;
   color: ${(props) => props.theme.textBtn};
   border-radius: 0.25rem;
+  position: relative;
+  font-size: 0.7rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 99%;
+    top: 1rem;
+    height: 2px;
+    visibility: hidden;
+    background: ${(props) => props.theme.textBtn};
+    ${transitions.basic}
+  }
+
+  /* adiciona animação no after */
+  &:hover {
+    &::after {
+      visibility: visible;
+      right: 0px;
+    }
+  }
 `;
 
 const Text = { P, H1, H1Contrast, Btn };

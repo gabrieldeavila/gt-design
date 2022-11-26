@@ -6,7 +6,7 @@ import flex from "../../utils/flex";
 
 const InputWrapper = styled.div`
   ${flex.wrapGap}
-  gap: 2rem;
+  gap: 1.75rem;
 `;
 
 const InputContainer = styled.div`

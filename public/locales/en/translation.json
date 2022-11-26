@@ -17,7 +17,9 @@
     "ONE_NUMBER": "Password must contain at least one number.",
     "ONE_SPECIAL": "Password must contain at least one special character.",
     "ONE_UPPERCASE": "Password must contain at least one uppercase letter.",
-    "ONE_LOWERCASE": "Password must contain at least one lowercase letter."
+    "ONE_LOWERCASE": "Password must contain at least one lowercase letter.",
+    "PASSWORDS_NOT_MATCH": "Passwords do not match."
+
   },
   "TEMPLATE": {
     "LOGIN": {

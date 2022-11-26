@@ -41,10 +41,6 @@ const LoginBoxPrimary = styled.div<ILoginBoxPrimary>`
   left: 0;
   right: 0;
 
-  @media (max-width: 1500px) {
-    height: ${(props) => props.height - props.height * 0.3}px;
-  }
-
   /* if is mobile, doesnt care about the height */
   @media (max-width: 1000px) {
     height: auto;
@@ -53,25 +49,21 @@ const LoginBoxPrimary = styled.div<ILoginBoxPrimary>`
 
 const LoginBoxMain = styled.main`
   position: absolute;
-  top: 15%;
+  height: 75%;
+  top: 5%;
   left: 60%;
-  padding: 1.5rem 0.5rem;
-  height: calc(100% - 15%);
+  padding: 1.5rem;
   width: 30vw;
   background: ${(props) => transparentize(0.4, props.theme.primary)};
   backdrop-filter: blur(1rem);
   border-radius: 0.25rem;
   ${shadows.glow}
   ${flex.alignCenter}
-  gap: 2.5rem;
-
-  @media (max-width: 1700px) {
-    top: 5%;
-  }
 
   @media (max-width: 1000px) {
-    width: 100%;
-    min-height: 100vh;
+    width: calc(100% - 3rem);
+    height: fit-content;
+    min-height: calc(100vh - 3rem);
     left: 0;
     right: 0;
     top: 0;
@@ -93,23 +85,25 @@ const LoginBoxMain = styled.main`
 `;
 
 const LoginBoxWrapper = styled.div`
-  height: -webkit-fill-available;
   width: 100%;
-  padding: 0 1.5rem;
+  justify-content: space-evenly;
+  flex-direction: row;
+  height: -webkit-fill-available;
+  padding: 0.5rem;
+
   ${flex.column}
   ${flex.alignCenter}
   ${flex.wrapGap}
-  justify-content: space-evenly;
+
+  gap: 2rem;
   flex-direction: row;
-  margin: 0 auto;
-
-  /* only show scroll on mouse hover */
-  ${scrolls.default}
-
+  overflow: auto;
   /* when it's mobile */
   @media (max-width: 1000px) {
-    padding-top: 6rem;
+    padding-bottom: 3rem;
   }
+
+  ${scrolls.default}
 `;
 
 export default {

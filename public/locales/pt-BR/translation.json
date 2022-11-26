@@ -16,7 +16,8 @@
     "ONE_NUMBER": "Esta senha deve conter pelo menos um número.",
     "ONE_SPECIAL": "Esta senha deve conter pelo menos um caractere especial.",
     "ONE_UPPERCASE": "Esta senha deve conter pelo menos uma letra maiúscula.",
-    "ONE_LOWERCASE": "Esta senha deve conter pelo menos uma letra minúscula."
+    "ONE_LOWERCASE": "Esta senha deve conter pelo menos uma letra minúscula.",
+    "PASSWORDS_NOT_MATCH": "As senhas não coincidem."
   },
   "TEMPLATE": {
     "LOGIN": {
