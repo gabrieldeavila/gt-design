@@ -55,7 +55,7 @@ const LoginBoxMain = styled.main`
   position: absolute;
   top: 15%;
   left: 60%;
-  padding: 1rem 0.5rem;
+  padding: 1.5rem 0.5rem;
   height: calc(100% - 15%);
   width: 30vw;
   background: ${(props) => transparentize(0.4, props.theme.primary)};
@@ -95,14 +95,15 @@ const LoginBoxMain = styled.main`
 const LoginBoxWrapper = styled.div`
   height: -webkit-fill-available;
   width: 100%;
-  padding: 0 3rem;
+  padding: 0 1.5rem;
   ${flex.column}
   ${flex.alignCenter}
   ${flex.wrapGap}
   justify-content: space-evenly;
   flex-direction: row;
-  overflow: auto;
+  margin: 0 auto;
 
+  /* only show scroll on mouse hover */
   ${scrolls.default}
 
   /* when it's mobile */
