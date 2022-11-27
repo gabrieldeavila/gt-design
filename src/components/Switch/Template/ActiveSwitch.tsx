@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import React, { useCallback, useId, useMemo, useState } from "react";
-import { GTBasic } from "../../../gt";
 import Switch from "../Switch";
 
 function GTActiveSwitch({ isInitialChecked }: { isInitialChecked?: boolean; }) {
@@ -14,21 +13,19 @@ function GTActiveSwitch({ isInitialChecked }: { isInitialChecked?: boolean; }) {
   }, []);
 
   return (
-    <GTBasic>
-      <Switch.Label
-        htmlFor={labelId}
-      >
-        <Switch.Input
-          mode="active"
-          id={labelId}
-          checked={checked}
-          onChange={handleSwitch}
-          type="checkbox"
-        />
+    <Switch.Label
+      htmlFor={labelId}
+    >
+      <Switch.Input
+        mode="active"
+        id={labelId}
+        checked={checked}
+        onChange={handleSwitch}
+        type="checkbox"
+      />
 
-        <Switch.Slider />
-      </Switch.Label>
-    </GTBasic>
+      <Switch.Slider />
+    </Switch.Label>
   );
 }
 
