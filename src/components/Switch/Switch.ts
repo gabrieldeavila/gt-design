@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { animations, transforms } from "../../utils";
 import flex from "../../utils/flex";
 import transitions from "../../utils/transitions";
-import { ISwitch } from "./interface";
+import { ISwitch, ISwitchInput } from "./interface";
 
 const fixedIcon = css`
   position: fixed;
@@ -24,6 +24,8 @@ const SwitchSlider = styled.span`
   width: 1rem;
   z-index: 150;
   border-radius: 50%;
+  box-shadow: 41px 41px 56px ${(props) => props.theme.primary},
+    -41px -41px 56px ${(props) => props.theme.primary};
   background: ${(props) => props.theme.primary};
   width: 1rem;
   height: 1rem;
@@ -49,25 +51,46 @@ const SwitchLabel = styled.label<ISwitch>`
   padding: 0.5rem;
   border-radius: 1.75rem;
   background: ${(props) => transparentize(0.5, props.theme.contrast)};
+  background: linear-gradient(
+    145deg,
+    ${(props) => props.theme.contrast},
+    ${(props) => transparentize(0.5, props.theme.contrast)}
+  );
+
   position: relative;
   user-select: none;
   cursor: pointer;
 
-  ${flex.alignCenter} /* disable typescript */
+  ${flex.alignCenter}
 
-  ${({ fixed }): any => fixed && fixedIcon}
+  ${({ fixed }): any => (fixed ?? false) && fixedIcon}
 
   &:active ${SwitchSlider} {
     ${transforms.press}
   }
 `;
 
-const SwitchInput = styled.input`
+const sliderActive = css`
+  & ~ ${SwitchSlider} {
+    filter: contrast(0.1);
+  }
+
+  &:checked ~ ${SwitchSlider} {
+    background: ${(props) => props.theme.switchOn};
+    filter: contrast(1);
+    box-shadow: 0px 0px 7px ${(props) => props.theme.switchOn},
+      -0px -0px 31px ${(props) => props.theme.switchOn};
+  }
+`;
+
+const SwitchInput = styled.input<ISwitchInput>`
   display: none;
 
   &:checked ~ ${SwitchSlider} {
     left: 58%;
   }
+
+  ${({ mode }) => mode === "active" && sliderActive};
 `;
 
 const SwitchIconWrapper = styled.div`
@@ -89,9 +112,11 @@ const SwitchIconWrapper = styled.div`
   ${animations.shake}
 `;
 
-export default {
+const Switch = {
   Label: SwitchLabel,
   Input: SwitchInput,
   Slider: SwitchSlider,
   IconWrapper: SwitchIconWrapper,
 };
+
+export default Switch;

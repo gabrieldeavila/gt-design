@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
-import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 import { Box, MotionBox } from "../components";
 import { GTBasic } from "../gt";
 
-function BoxStory() {
+export default {
+  title: "GTDesign/Box",
+};
+
+const Template = function BoxStory() {
   return (
     <GTBasic>
       <Box.Column>
@@ -35,13 +38,6 @@ function BoxStory() {
       </Box.Column>
     </GTBasic>
   );
-}
-
-export default {
-  title: "GTDesign/Box",
-  component: BoxStory,
-} as ComponentMeta<typeof BoxStory>;
-
-const Template: ComponentStory<typeof BoxStory> = (args) => <BoxStory />;
+};
 
 export const GTBox = Template.bind({});

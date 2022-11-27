@@ -17,6 +17,7 @@ export interface GTTheme {
   textBtn?: string;
   containerMain?: string;
   containerSecondary?: string;
+  switchOn?: string;
 }
 
 // IGTDesign

@@ -23,6 +23,7 @@ const defaultTheme = {
   textBtn: "#89cff0",
   containerMain: "#f0f8ff",
   containerSecondary: "#f0fff0",
+  switchOn: "#76ff7a"
 };
 
 function GTDesign({ theme, children }: IGTDesign) {

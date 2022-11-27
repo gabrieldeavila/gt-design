@@ -3,3 +3,7 @@ export interface ISwitch {
   placeX?: string | undefined;
   placeY?: string | undefined;
 }
+
+export interface ISwitchInput {
+  mode?: string;
+}
