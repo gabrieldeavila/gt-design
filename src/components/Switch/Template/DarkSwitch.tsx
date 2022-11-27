@@ -1,32 +1,31 @@
-import PropTypes from "prop-types";
-import React, { memo, useCallback } from "react";
-// @ts-ignore
-import * as Icon from "react-feather";
-import { useGTContext } from "../../../context/gt";
-import Switch from "../Switch";
+import PropTypes from 'prop-types'
+import React, { memo, useCallback } from 'react'
+import * as Icon from 'react-feather'
+import { useGTContext } from '../../../context/gt'
+import Switch from '../Switch'
 
 function GTDarkSwitch({
   fixed,
   placeX,
-  placeY,
+  placeY
 }: {
-  fixed: boolean;
-  placeX: string;
-  placeY: string;
+  fixed: boolean
+  placeX: string
+  placeY: string
 }) {
-  const { darkTheme, setDarkTheme } = useGTContext();
+  const { darkTheme, setDarkTheme } = useGTContext()
 
   const handleTheme = useCallback(() => {
     setDarkTheme((prev: boolean) => {
       if (!prev) {
-        localStorage.setItem("darkTheme", "1");
+        localStorage.setItem('darkTheme', '1')
       } else {
-        localStorage.removeItem("darkTheme");
+        localStorage.removeItem('darkTheme')
       }
 
-      return !prev;
-    });
-  }, [setDarkTheme]);
+      return !prev
+    })
+  }, [setDarkTheme])
 
   return (
     <Switch.Label
@@ -42,11 +41,13 @@ function GTDarkSwitch({
         type="checkbox"
       />
       <Switch.Slider>
-        {!darkTheme ? (
-          <Icon.Sun className="sun" />
-        ) : (
-          <Icon.Moon className="moon" />
-        )}
+        {!darkTheme
+          ? (
+            <Icon.Sun className="sun" />
+          )
+          : (
+            <Icon.Moon className="moon" />
+          )}
       </Switch.Slider>
 
       <Switch.IconWrapper>
@@ -54,21 +55,21 @@ function GTDarkSwitch({
         <Icon.Moon />
       </Switch.IconWrapper>
     </Switch.Label>
-  );
+  )
 }
 
-export default memo(GTDarkSwitch);
+export default memo(GTDarkSwitch)
 
 // add default proptype
 GTDarkSwitch.propTypes = {
   fixed: PropTypes.bool,
-  placeX: PropTypes.oneOf([null, "top", "bottom"]),
-  placeY: PropTypes.oneOf([null, "left", "right"]),
-};
+  placeX: PropTypes.oneOf([null, 'top', 'bottom']),
+  placeY: PropTypes.oneOf([null, 'left', 'right'])
+}
 
 // add default props
 GTDarkSwitch.defaultProps = {
   fixed: false,
-  placeX: "bottom",
-  placeY: "right",
-};
+  placeX: 'bottom',
+  placeY: 'right'
+}

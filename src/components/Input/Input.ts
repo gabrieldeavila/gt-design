@@ -1,12 +1,11 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-confusing-arrow */
 import styled from "styled-components";
-import { transforms } from "../../utils";
 import animations from "../../utils/animations";
 import flex from "../../utils/flex";
 
 const InputWrapper = styled.div`
-  ${flex.wrapGap}
+  ${flex.wrapGap} 
   gap: 1.75rem;
 `;
 

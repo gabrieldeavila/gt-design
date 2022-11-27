@@ -1,7 +1,7 @@
 /* eslint-disable operator-linebreak */
 import styled, { css } from "styled-components";
 import { space, fontSize } from "styled-system";
-import { animations, transforms, transitions } from "../../utils";
+import { animations, transforms } from "../../utils";
 
 const P = styled.p`
   color: ${(props) => props.theme.contrast};
