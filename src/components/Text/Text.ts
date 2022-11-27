@@ -1,7 +1,7 @@
 /* eslint-disable operator-linebreak */
 import styled, { css } from "styled-components";
 import { space, fontSize } from "styled-system";
-import { animations, transitions } from "../../utils";
+import { animations, transforms, transitions } from "../../utils";
 
 const P = styled.p`
   color: ${(props) => props.theme.contrast};
@@ -53,6 +53,7 @@ const Btn = styled.button`
 
   &::after {
     content: "";
+    border-radius: 0.25rem;
     position: absolute;
     top: 1rem;
     height: 2px;
@@ -66,7 +67,11 @@ const Btn = styled.button`
       animation: underline 0.5s ease-in-out forwards;
     }
   }
-  
+
+  &:active {
+    ${transforms.press}
+  }
+
   ${animations.underline}
 `;
 

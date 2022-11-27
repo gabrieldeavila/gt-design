@@ -122,12 +122,27 @@ const underline = css`
   }
 `;
 
+const shake = css`
+  @keyframes shake {
+    0% {
+      transform: translate(1px, 1px) rotate(0deg);
+    }
+    50% {
+      transform: translate(-1px, -2px) rotate(-1deg);
+    }
+    100% {
+      transform: translate(1px, 1px) rotate(0deg);
+    }
+  }
+`;
+
 const animations = {
   easeOpenClose,
   easeOpacity,
   easeShow,
   upLabel,
   underline,
+  shake
 };
 
 export default animations;

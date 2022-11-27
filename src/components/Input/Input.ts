@@ -1,6 +1,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-confusing-arrow */
 import styled from "styled-components";
+import { transforms } from "../../utils";
 import animations from "../../utils/animations";
 import flex from "../../utils/flex";
 
@@ -23,6 +24,10 @@ const InputContainer = styled.div`
     right: 0.5rem;
     stroke: ${(props) => props.theme.contrast};
     position: absolute;
+
+    &:active {
+      transform: scale(0.65);
+    }
   }
 `;
 

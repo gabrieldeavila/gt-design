@@ -1,5 +1,6 @@
 import { transparentize } from "polished";
 import styled, { css } from "styled-components";
+import { animations, transforms } from "../../utils";
 import flex from "../../utils/flex";
 import transitions from "../../utils/transitions";
 import { ISwitch } from "./interface";
@@ -11,27 +12,10 @@ const fixedIcon = css`
   ${({ placeY }) => [placeY]} : 1.5rem;
 `;
 
-const SwitchLabel = styled.label<ISwitch>`
-  margin-top: 1rem;
-  width: 4rem;
-  height: 1.25rem;
-  z-index: 1;
-  padding: 0.5rem;
-  border-radius: 1.75rem;
-  background: ${(props) => transparentize(0.5, props.theme.contrast)};
-  position: relative;
-  user-select: none;
-  cursor: pointer;
-
-  ${flex.alignCenter} /* disable typescript */
-
-  ${({ fixed }): any => fixed && fixedIcon}
-`;
-
 const SwitchSlider = styled.span`
   position: absolute;
   padding: 0.5rem;
-  top: 0.1rem;
+  top: 0.14rem;
   left: 0.1rem;
   bottom: 0;
   display: block;
@@ -57,11 +41,32 @@ const SwitchSlider = styled.span`
   }
 `;
 
+const SwitchLabel = styled.label<ISwitch>`
+  margin-top: 1rem;
+  width: 4rem;
+  height: 1.25rem;
+  z-index: 1;
+  padding: 0.5rem;
+  border-radius: 1.75rem;
+  background: ${(props) => transparentize(0.5, props.theme.contrast)};
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+
+  ${flex.alignCenter} /* disable typescript */
+
+  ${({ fixed }): any => fixed && fixedIcon}
+
+  &:active ${SwitchSlider} {
+    ${transforms.press}
+  }
+`;
+
 const SwitchInput = styled.input`
   display: none;
 
   &:checked ~ ${SwitchSlider} {
-    left: 57%;
+    left: 58%;
   }
 `;
 
@@ -75,7 +80,13 @@ const SwitchIconWrapper = styled.div`
 
   & > svg {
     stroke: ${(props) => props.theme.primary};
+
+    &:active {
+      animation: shake 0.5s linear infinite;
+    }
   }
+
+  ${animations.shake}
 `;
 
 export default {
