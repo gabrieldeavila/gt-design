@@ -1,9 +1,8 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
-import GTBasic from "../../gt/Template/Basic";
-import MotionBox from "../Motion/motionBox";
-
-import Box from "./Box";
+import { Box, MotionBox } from "../components";
+import { GTBasic } from "../gt";
 
 function BoxStory() {
   return (
