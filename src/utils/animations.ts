@@ -98,11 +98,36 @@ const upLabel = css`
   }
 `;
 
+const underline = css`
+  @keyframes underline {
+    0% {
+      right: 100%;
+      left: 0;
+    }
+    100% {
+      left: 0;
+      right: 0%;
+    }
+  }
+
+  @keyframes underlineFill {
+    0% {
+      left: 0;
+      right: 0%;
+    }
+    100% {
+      right: 0%;
+      left: 100%;
+    }
+  }
+`;
+
 const animations = {
   easeOpenClose,
   easeOpacity,
   easeShow,
   upLabel,
+  underline,
 };
 
 export default animations;

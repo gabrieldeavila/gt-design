@@ -1,7 +1,7 @@
 /* eslint-disable operator-linebreak */
 import styled, { css } from "styled-components";
 import { space, fontSize } from "styled-system";
-import { transitions } from "../../utils";
+import { animations, transitions } from "../../utils";
 
 const P = styled.p`
   color: ${(props) => props.theme.contrast};
@@ -54,22 +54,20 @@ const Btn = styled.button`
   &::after {
     content: "";
     position: absolute;
-    left: 0;
-    right: 99%;
     top: 1rem;
     height: 2px;
-    visibility: hidden;
     background: ${(props) => props.theme.textBtn};
-    ${transitions.basic}
+    animation: underlineFill 0.5s ease-in-out forwards;
   }
 
   /* adiciona animação no after */
   &:hover {
     &::after {
-      visibility: visible;
-      right: 0px;
+      animation: underline 0.5s ease-in-out forwards;
     }
   }
+  
+  ${animations.underline}
 `;
 
 const Text = { P, H1, H1Contrast, Btn };
