@@ -15,6 +15,13 @@ const Template = function SwitchStory() {
     { value: "B", label: "Bananas are great 🍌" },
     { value: "C", label: "Cucumbers are not great 🥒" },
     { value: "A", label: "Apples are great 🍎" },
+    { value: "D", label: "Durians are not great 🍌" },
+    { value: "E", label: "Eggplants are not great 🍆" },
+    { value: "F", label: "Figs are not great 🥝" },
+    { value: "G", label: "Grapes are not great 🍇" },
+    { value: "H", label: "Honeydew melons are not great 🍈" },
+    { value: "I", label: "Ice cream is not great 🍦" },
+    { value: "J", label: "Jicama is not great 🥕" },
   ];
 
   return (

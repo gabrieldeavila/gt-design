@@ -33,3 +33,7 @@ export interface ISelectOptions {
 export interface ISelectOption {
   option: SelectionOptions;
 }
+
+export interface ISelectContext {
+  value: string;
+}

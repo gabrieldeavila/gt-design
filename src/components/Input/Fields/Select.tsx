@@ -7,9 +7,11 @@ import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateEmail from "../../../hooks/validation/useValidateEmail";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import Input, { Select } from "../Input";
-import { IGTInputSelect, ISelectOption, ISelectOptions } from "./interface";
+import { IGTInputSelect, ISelectContext, ISelectOption, ISelectOptions } from "./interface";
 
 const defaultValidationObj = ["required"];
+
+const SelectContext = React.createContext<ISelectContext>({});
 
 function GTInputSelect({ name, label, validations, defaultValidation, onChange, options }: IGTInputSelect): JSX.Element {
   const { t } = useTranslation();
@@ -64,30 +66,32 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
   }, []);
 
   return (
-    <Input.Container onFocus={handleShowOptions} onBlur={handleShowOptions} isUp={showOptions}>
-      <Input.Label up={labelIsUp} htmlFor={name}>
-        {label}
-      </Input.Label>
-      <Input.Field
-        type="text"
-        onChange={handleChange}
-        value={value}
-        onBlur={handleInputBlur}
-        onFocus={handleInputFocus}
-        id={name}
-        name={name}
-        autoComplete="off"
-        isLabel
-      />
+    <SelectContext.Provider value={{ value }}>
+      <Input.Container onFocus={handleShowOptions} onBlur={handleShowOptions} isUp={showOptions}>
+        <Input.Label up={labelIsUp} htmlFor={name}>
+          {label}
+        </Input.Label>
+        <Input.Field
+          type="text"
+          onChange={handleChange}
+          value={value}
+          onBlur={handleInputBlur}
+          onFocus={handleInputFocus}
+          id={name}
+          name={name}
+          autoComplete="off"
+          isLabel
+        />
 
-      <ChevronDown />
+        <ChevronDown />
 
-      {!isValidEmail && <Input.Error>{t(`EMAIL.${errorMessage}`)}</Input.Error>}
+        {!isValidEmail && <Input.Error>{t(`EMAIL.${errorMessage}`)}</Input.Error>}
 
-      {/* {showOptions && */}
+        {/* {showOptions && */}
         <SelectOptions options={options} />
-      {/* } */}
-    </Input.Container>
+        {/* } */}
+      </Input.Container>
+    </SelectContext.Provider>
   );
 }
 
@@ -109,14 +113,29 @@ GTInputSelect.defaultProps = {
 };
 
 const SelectOptions = ({ options }: ISelectOptions) => {
+  const { value } = React.useContext<ISelectContext>(SelectContext);
+
+  const [selectedOption, setSelectedOption] = useState(options[0]);
+
+  const filteredOptions = useMemo(() => {
+    console.log("yep, i should be called");
+    return options.filter((option) => option.value !== value);
+  }, [options, value]);
+
+  useEffect(() => {
+    console.log(value);
+  }, [value]);
+
   return (
-    <Select.Options>
-      {
-        options.map((option) =>
-          <SelectOption option={option} key={option.value} />
-        )
-      }
-    </Select.Options>
+    <Select.OptionsWrapper>
+      <Select.OptionsContainer>
+        {
+          options.map((option) =>
+            <SelectOption option={option} key={option.value} />
+          )
+        }
+      </Select.OptionsContainer>
+    </Select.OptionsWrapper>
   );
 };
 

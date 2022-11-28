@@ -6,7 +6,7 @@ import { IGTDesign } from "./interface";
 
 const defaultTheme = {
   primary: "#ffffff",
-  secondary: "#fefefa",
+  secondary: "#f8f8ff",
   contrast: "#000000",
   backgroundHover: "#f5f5f5",
   backgroundMobileNav: "#f2f3f4",

@@ -1,6 +1,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-confusing-arrow */
 import styled, { css } from "styled-components";
+import { hovers, scrolls } from "../../utils";
 import animations from "../../utils/animations";
 import flex from "../../utils/flex";
 import { IInputContainer, IInputField } from "./interface";
@@ -86,7 +87,7 @@ const Input = {
 
 export default Input;
 
-const SelectOptions = styled.div`
+const SelectOptionsWrapper = styled.div`
   position: absolute;
   top: 100%;
   left: 0;
@@ -98,10 +99,36 @@ const SelectOptions = styled.div`
   margin-top: 0.25rem;
 `;
 
-const SelectValue = styled.div``;
+const SelectOptionsContainer = styled.div`
+  max-height: 10rem;
+  overflow: auto;
+  padding-right: 0.5rem;
+  ${scrolls.default}
+  ${flex.wrapGap}
+  gap: 0.5rem;
+`;
+
+const SelectValue = styled.div`
+  width: -webkit-fill-available;
+  max-width: 100%;
+  font-size: 0.75rem;
+  padding: 1rem;
+  background: ${(props) => props.theme.secondary};
+  text-align: justify;
+  user-select: none;
+  cursor: pointer;
+  border-radius: 0.25rem;
+
+  ${hovers.scaleTransYOpacity}
+
+  &:active {
+    transform: scale(0.9);
+  }
+`;
 
 const Select = {
-  Options: SelectOptions,
+  OptionsWrapper: SelectOptionsWrapper,
+  OptionsContainer: SelectOptionsContainer,
   Value: SelectValue,
 };
 
