@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css } from "styled-components";
 
 const alignCenter = css`
   display: flex;
@@ -49,4 +49,4 @@ const flex = {
   column
 };
 
-export default flex; 
+export default flex;

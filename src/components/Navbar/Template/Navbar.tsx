@@ -83,6 +83,7 @@ GTNavbar.defaultProps = {
 const GTNavbarOptionsTemp = ({ children }: IGTNavbarOptions) => {
   const isMobile = useIsMobile();
   const [windowHeight, setWindowHeight] = useState(100);
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const componentRef = useRef<HTMLDivElement>(null!);
 
   useEffect(() => {
@@ -108,7 +109,7 @@ GTNavbarOptionsTemp.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const GTNavbarOptions = memo(GTNavbarOptionsTemp)
+const GTNavbarOptions = memo(GTNavbarOptionsTemp);
 
 const GTNavbarOptionTemp = ({ name, icon, children }: IGTNavbarOption) => {
   const [open, setOpen] = useState(false);
@@ -157,4 +158,4 @@ GTNavbarOptionTemp.defaultProps = {
   icon: null,
 };
 
-const GTNavbarOption = memo(GTNavbarOptionTemp)
+const GTNavbarOption = memo(GTNavbarOptionTemp);

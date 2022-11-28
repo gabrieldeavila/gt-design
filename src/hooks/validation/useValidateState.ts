@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { useCallback, useEffect } from "react";
 import { useGTPageStateContext } from "../../context/pageState";
 
@@ -9,7 +10,7 @@ function useValidateState(name: string, inputValidations: string[]) {
 
     setPageState((prevState) => {
       // if already has a value, keep it
-      const prevVal = prevState[name] || "";
+      const prevVal = prevState[name] ?? "";
       inputVal = prevVal;
 
       // add a key to the obj

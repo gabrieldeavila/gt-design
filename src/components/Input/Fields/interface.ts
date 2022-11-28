@@ -16,3 +16,20 @@ export interface IGTInputText extends IGTInput {
 export interface IGTInputPassword extends IGTInput {
   sameAs?: string;
 }
+
+interface SelectionOptions {
+  value: string;
+  label: string;
+}
+
+export interface IGTInputSelect extends IGTInput {
+  options: SelectionOptions[];
+}
+
+export interface ISelectOptions {
+  options: SelectionOptions[];
+}
+
+export interface ISelectOption {
+  option: SelectionOptions;
+}

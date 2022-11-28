@@ -1,25 +1,25 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-confusing-arrow */
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import animations from "../../utils/animations";
 import flex from "../../utils/flex";
+import { IInputContainer, IInputField } from "./interface";
 
 const InputWrapper = styled.div`
-  ${flex.wrapGap} 
+  ${flex.wrapGap}
   gap: 1.75rem;
 `;
 
-const InputContainer = styled.div`
+const InputContainer = styled.div<IInputContainer>`
   ${flex.column}
   gap: 0.5rem;
-  width: 100%;
+  width: -webkit-fill-available;
   position: relative;
 
   svg {
     user-select: none;
     cursor: pointer;
     top: 30%;
-    transform: scale(0.75);
     right: 0.5rem;
     stroke: ${(props) => props.theme.contrast};
     position: absolute;
@@ -27,10 +27,21 @@ const InputContainer = styled.div`
     &:active {
       transform: scale(0.65);
     }
+
+    ${({ isUp }) => css`
+      transform: ${isUp ?? false
+        ? "scale(0.75) rotate(180deg)"
+        : "scale(0.75) rotate(0deg)"};
+    `}
   }
 `;
 
-const InputField = styled.input`
+const InputGroup = styled.div`
+  ${flex.wrapGap}
+  flex-direction: row;
+`;
+
+const InputField = styled.input<IInputField>`
   width: -webkit-fill-available;
   height: 2.5rem;
   outline: none;
@@ -66,6 +77,7 @@ const InputError = styled.span`
 
 const Input = {
   Wrapper: InputWrapper,
+  Group: InputGroup,
   Container: InputContainer,
   Field: InputField,
   Label: InputLabel,
@@ -73,3 +85,24 @@ const Input = {
 };
 
 export default Input;
+
+const SelectOptions = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background: ${(props) => props.theme.primary};
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+`;
+
+const SelectValue = styled.div``;
+
+const Select = {
+  Options: SelectOptions,
+  Value: SelectValue,
+};
+
+export { Select };

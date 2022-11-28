@@ -88,7 +88,7 @@ const upLabel = css`
 
   @keyframes upReverse {
     0% {
-      top: 0%;
+      top: 20%;
       font-size: 0.5rem;
     }
     100% {

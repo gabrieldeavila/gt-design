@@ -57,7 +57,6 @@ const LoginBoxMain = styled.main`
   background: ${(props) => transparentize(0.4, props.theme.primary)};
   backdrop-filter: blur(1rem);
   border-radius: 0.25rem;
-  ${shadows.glow}
   ${flex.alignCenter}
 
   @media (max-width: 1000px) {
@@ -67,6 +66,10 @@ const LoginBoxMain = styled.main`
     left: 0;
     right: 0;
     top: 0;
+  }
+
+  &:hover {
+    ${shadows.glow}
   }
 
   transform: rotateY(180deg);

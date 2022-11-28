@@ -2,6 +2,7 @@
 /* eslint-disable operator-linebreak */
 import styled, { css } from "styled-components";
 import { flexbox, space } from "styled-system";
+import { transforms } from "../../utils";
 import flex from "../../utils/flex";
 import hovers from "../../utils/hovers";
 import shadows from "../../utils/shadows";
@@ -33,6 +34,10 @@ const resetBtn = css`
 
   /* only has hover if it's not disabled */
   ${({ disabled }) => !disabled && hovers.scaleTransYOpacity}
+
+  &:active {
+    ${({ disabled }) => !disabled && transforms.press}
+  }
 `;
 
 const ButtonWrapper = styled.div`
@@ -41,8 +46,7 @@ const ButtonWrapper = styled.div`
 `;
 
 const btnOptions = css<IButton>`
-  ${({ fitContent }) =>
-    fitContent && "width: fit-content"}
+  ${({ fitContent }) => (fitContent ?? false) && "width: fit-content"}
 `;
 
 const ButtonNormal = styled.button`

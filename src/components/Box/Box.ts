@@ -17,7 +17,7 @@ const BoxGroup = styled.div`
 `;
 
 const BoxWrapper = styled.div<IBoxWrapper>`
-  width: ${(props) => props.width || "100"}%;
+  width: ${(props) => props.width ?? "100"}%;
 
   /* when it's mobile, width is 100% */
   @media (max-width: 768px) {
@@ -47,7 +47,7 @@ const BoxContainer = styled.div<IBoxContainer>`
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
   ${color};
   background-color: ${({ bg, theme }) =>
-    transparentize(0.45, bg || theme.primary)};
+    transparentize(0.45, bg ?? theme.primary)};
   backdrop-filter: blur(15px);
   cursor: pointer;
   height: -webkit-fill-available;
@@ -65,6 +65,7 @@ const BoxColumn = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-auto-rows: 0.5rem;
   grid-gap: 0.5rem;
+  padding: 1rem;
 
   ${BoxContainer} {
     margin: 0.25rem;

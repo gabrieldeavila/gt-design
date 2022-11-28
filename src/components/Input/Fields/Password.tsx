@@ -114,7 +114,8 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
           )
         : (
             <Icon.EyeOff onClick={handleShowPassword} />
-          )}
+          )
+      }
 
       {!isValidPassword && <Input.Error>{t(`PASSWORD.${errorMessage}`)}</Input.Error>}
     </Input.Container>
