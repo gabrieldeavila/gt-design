@@ -12,6 +12,7 @@ export default {
 
 const Template = function SwitchStory() {
   const options = [
+    { value: "PCC", label: "PRODUCTS_DO_YOU_REMEMBER_THE_BUG_NOW" },
     { value: "B", label: "Bananas are great 🍌" },
     { value: "C", label: "Cucumbers are not great 🥒" },
     { value: "A", label: "Apples are great 🍎" },
@@ -22,6 +23,10 @@ const Template = function SwitchStory() {
     { value: "H", label: "Honeydew melons are not great 🍈" },
     { value: "I", label: "Ice cream is not great 🍦" },
     { value: "J", label: "Jicama is not great 🥕" },
+    { value: "Ç", label: "Junin Caçalha Suíça" },
+    { value: "EÇA", label: "Eça de Queiroz 🥝" },
+    { value: "PV", label: "PRODUCTS VENDAS SUPER VENDAS" },
+    { value: "PC", label: "PRODUCTS VENDAS" },
   ];
 
   return (

@@ -35,5 +35,5 @@ export interface ISelectOption {
 }
 
 export interface ISelectContext {
-  value: string;
+  searchTerm?: string;
 }

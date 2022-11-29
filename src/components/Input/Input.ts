@@ -49,6 +49,7 @@ const InputField = styled.input<IInputField>`
   border-radius: 0.25rem;
   padding: 0 0.5rem;
   padding-top: 1rem;
+  padding-right: 2.5rem;
   border: none;
   background: ${(props) => props.theme.primary};
   color: ${(props) => props.theme.contrast};

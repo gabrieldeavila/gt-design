@@ -2,10 +2,8 @@
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { ChevronDown } from "react-feather";
-import { useTranslation } from "react-i18next";
 import useInputValues from "../../../hooks/pageState/useInputValues";
-import useValidateEmail from "../../../hooks/validation/useValidateEmail";
-import useValidateState from "../../../hooks/validation/useValidateState";
+import wordFilter from "../../../utils/wordFilter";
 import Input, { Select } from "../Input";
 import { IGTInputSelect, ISelectContext, ISelectOption, ISelectOptions } from "./interface";
 
@@ -14,48 +12,18 @@ const defaultValidationObj = ["required"];
 const SelectContext = React.createContext<ISelectContext>({});
 
 function GTInputSelect({ name, label, validations, defaultValidation, onChange, options }: IGTInputSelect): JSX.Element {
-  const { t } = useTranslation();
-
-  const inputValidations = useMemo(() => {
-    if (defaultValidation) {
-      return [...defaultValidationObj, ...validations];
-    }
-
-    return validations;
-  }, [defaultValidation, validations]);
-
-  const { validateState } = useValidateState(name, inputValidations);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const { labelIsUp, value, handleInputChange, handleInputBlur, handleInputFocus } =
     useInputValues(name);
 
-  const { validateEmail } = useValidateEmail();
-  const [isValidEmail, setIsValidEmail] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
-
-  useEffect(() => {
-    if (value.length === 0) return;
-
-    const { isValid, invalidMessage } = validateEmail(value, inputValidations);
-
-    setIsValidEmail(isValid);
-    setErrorMessage(invalidMessage);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const handleChange = useCallback(
     (e: any) => {
-      const { value: emailVal } = e.target;
-      const { isValid, invalidMessage } = validateEmail(emailVal, inputValidations);
-
-      validateState(isValid, emailVal);
-      setIsValidEmail(isValid);
-      setErrorMessage(invalidMessage);
-      handleInputChange(emailVal);
-
-      onChange(e);
+      const { value: val } = e.target;
+      setSearchTerm(val);
+      handleInputChange(val);
     },
-    [validateEmail, inputValidations, validateState, handleInputChange, onChange]
+    [handleInputChange]
   );
 
   const [showOptions, setShowOptions] = useState(false);
@@ -66,7 +34,7 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
   }, []);
 
   return (
-    <SelectContext.Provider value={{ value }}>
+    <SelectContext.Provider value={{ searchTerm }}>
       <Input.Container onFocus={handleShowOptions} onBlur={handleShowOptions} isUp={showOptions}>
         <Input.Label up={labelIsUp} htmlFor={name}>
           {label}
@@ -84,12 +52,7 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
         />
 
         <ChevronDown />
-
-        {!isValidEmail && <Input.Error>{t(`EMAIL.${errorMessage}`)}</Input.Error>}
-
-        {/* {showOptions && */}
         <SelectOptions options={options} />
-        {/* } */}
       </Input.Container>
     </SelectContext.Provider>
   );
@@ -113,24 +76,21 @@ GTInputSelect.defaultProps = {
 };
 
 const SelectOptions = ({ options }: ISelectOptions) => {
-  const { value } = React.useContext<ISelectContext>(SelectContext);
+  const { searchTerm } = React.useContext<ISelectContext>(SelectContext);
 
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  // const [selectedOption, setSelectedOption] = useState(options[0]);
 
-  const filteredOptions = useMemo(() => {
-    console.log("yep, i should be called");
-    return options.filter((option) => option.value !== value);
-  }, [options, value]);
+  const filteredOptions = useMemo(() => wordFilter(options, searchTerm ?? ""), [options, searchTerm]);
 
   useEffect(() => {
-    console.log(value);
-  }, [value]);
+    console.log(searchTerm);
+  }, [searchTerm]);
 
   return (
     <Select.OptionsWrapper>
       <Select.OptionsContainer>
         {
-          options.map((option) =>
+          filteredOptions.map((option) =>
             <SelectOption option={option} key={option.value} />
           )
         }
