@@ -116,6 +116,8 @@ const SelectValue = styled.div`
   padding: 1rem;
   background: ${(props) => props.theme.secondary};
   text-align: justify;
+  text-overflow: hidden;
+  overflow: hidden;
   user-select: none;
   cursor: pointer;
   border-radius: 0.25rem;
