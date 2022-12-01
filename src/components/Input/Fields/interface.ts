@@ -17,7 +17,7 @@ export interface IGTInputPassword extends IGTInput {
   sameAs?: string;
 }
 
-interface SelectionOptions {
+export interface SelectionOptions {
   value: string;
   label: string;
 }
@@ -36,4 +36,5 @@ export interface ISelectOption {
 
 export interface ISelectContext {
   searchTerm?: string;
+  handleSelect?: (option: SelectionOptions) => void;
 }

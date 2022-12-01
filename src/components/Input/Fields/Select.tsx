@@ -1,11 +1,11 @@
 /* eslint-disable operator-linebreak */
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { ChevronDown } from "react-feather";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import wordFilter from "../../../utils/wordFilter";
 import Input, { Select } from "../Input";
-import { IGTInputSelect, ISelectContext, ISelectOption, ISelectOptions } from "./interface";
+import { IGTInputSelect, ISelectContext, ISelectOption, ISelectOptions, SelectionOptions } from "./interface";
 
 const defaultValidationObj = ["required"];
 
@@ -33,8 +33,12 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
     setShowOptions((prev) => !prev);
   }, []);
 
+  const handleSelect = useCallback((option: SelectionOptions) => {
+    console.log("heheheh", option);
+  }, []);
+
   return (
-    <SelectContext.Provider value={{ searchTerm }}>
+    <SelectContext.Provider value={{ searchTerm, handleSelect }}>
       <Input.Container onFocus={handleShowOptions} onBlur={handleShowOptions} isUp={showOptions}>
         <Input.Label up={labelIsUp} htmlFor={name}>
           {label}
@@ -82,10 +86,6 @@ const SelectOptions = ({ options }: ISelectOptions) => {
 
   const filteredOptions = useMemo(() => wordFilter(options, searchTerm ?? ""), [options, searchTerm]);
 
-  useEffect(() => {
-    console.log(searchTerm);
-  }, [searchTerm]);
-
   return (
     <Select.OptionsWrapper>
       <Select.OptionsContainer>
@@ -100,7 +100,13 @@ const SelectOptions = ({ options }: ISelectOptions) => {
 };
 
 const SelectOption = ({ option }: ISelectOption) => {
+  const { handleSelect } = React.useContext<ISelectContext>(SelectContext);
+
+  const onSelect = useCallback(() => {
+    handleSelect?.(option);
+  }, [handleSelect, option]);
+
   return (
-    <Select.Value>{option.label}</Select.Value>
+    <Select.Value onClick={onSelect}>{option.label}</Select.Value>
   );
 };
