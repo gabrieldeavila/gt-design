@@ -1,10 +1,11 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-confusing-arrow */
+import { transparentize } from "polished";
 import styled, { css } from "styled-components";
 import { hovers, scrolls } from "../../utils";
 import animations from "../../utils/animations";
 import flex from "../../utils/flex";
-import { IInputContainer, IInputField } from "./interface";
+import { IInputContainer, IInputField, ISelectValue } from "./interface";
 
 const InputWrapper = styled.div`
   ${flex.wrapGap}
@@ -109,7 +110,7 @@ const SelectOptionsContainer = styled.div`
   gap: 0.5rem;
 `;
 
-const SelectValue = styled.div`
+const SelectValue = styled.div<ISelectValue>`
   width: -webkit-fill-available;
   max-width: 100%;
   font-size: 0.75rem;
@@ -127,6 +128,12 @@ const SelectValue = styled.div`
   &:active {
     transform: scale(0.9);
   }
+
+  ${({ isSelected, theme }) => css`
+    background: ${isSelected
+      ? theme.secondary
+      : transparentize(0.7, theme.secondary)};
+  `}
 `;
 
 const Select = {

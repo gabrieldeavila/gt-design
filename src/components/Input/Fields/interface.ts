@@ -37,4 +37,6 @@ export interface ISelectOption {
 export interface ISelectContext {
   searchTerm?: string;
   handleSelect?: (option: SelectionOptions) => void;
+  selected?: SelectionOptions;
+  setSelected?: React.Dispatch<React.SetStateAction<SelectionOptions>>;
 }

@@ -27,6 +27,7 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
   );
 
   const [showOptions, setShowOptions] = useState(false);
+  const [selected, setSelected] = useState<SelectionOptions>(options[0]);
 
   const handleShowOptions = useCallback(() => {
     console.log();
@@ -35,10 +36,11 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
 
   const handleSelect = useCallback((option: SelectionOptions) => {
     console.log("heheheh", option);
+    setSelected(option);
   }, []);
 
   return (
-    <SelectContext.Provider value={{ searchTerm, handleSelect }}>
+    <SelectContext.Provider value={{ searchTerm, handleSelect, selected, setSelected }}>
       <Input.Container onFocus={handleShowOptions} onBlur={handleShowOptions} isUp={showOptions}>
         <Input.Label up={labelIsUp} htmlFor={name}>
           {label}
@@ -100,13 +102,15 @@ const SelectOptions = ({ options }: ISelectOptions) => {
 };
 
 const SelectOption = ({ option }: ISelectOption) => {
-  const { handleSelect } = React.useContext<ISelectContext>(SelectContext);
+  const { handleSelect, selected } = React.useContext<ISelectContext>(SelectContext);
+
+  const isSelected = useMemo(() => selected?.value === option.value, [selected, option]);
 
   const onSelect = useCallback(() => {
     handleSelect?.(option);
   }, [handleSelect, option]);
 
   return (
-    <Select.Value onClick={onSelect}>{option.label}</Select.Value>
+    <Select.Value isSelected={isSelected} onClick={onSelect}>{option.label}</Select.Value>
   );
 };
