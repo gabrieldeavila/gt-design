@@ -1,8 +1,10 @@
 /* eslint-disable operator-linebreak */
 import PropTypes from "prop-types";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { ChevronDown } from "react-feather";
+import useOnClickOutside from "../../../hooks/helpers/useOnClickOutside";
 import useInputValues from "../../../hooks/pageState/useInputValues";
+import useValidateState from "../../../hooks/validation/useValidateState";
 import wordFilter from "../../../utils/wordFilter";
 import Input, { Select } from "../Input";
 import { IGTInputSelect, ISelectContext, ISelectOption, ISelectOptions, SelectionOptions } from "./interface";
@@ -14,7 +16,7 @@ const SelectContext = React.createContext<ISelectContext>({});
 function GTInputSelect({ name, label, validations, defaultValidation, onChange, options }: IGTInputSelect): JSX.Element {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { labelIsUp, value, handleInputChange, handleInputBlur, handleInputFocus } =
+  const { labelIsUp, value, setValue, handleInputChange, handleInputBlur, handleInputFocus } =
     useInputValues(name);
 
   const handleChange = useCallback(
@@ -26,39 +28,76 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
     [handleInputChange]
   );
 
+  const { validateState } = useValidateState(name, []);
+
   const [showOptions, setShowOptions] = useState(false);
-  const [selected, setSelected] = useState<SelectionOptions>(options[0]);
+  const [selected, setSelected] = useState<string | number>("");
+
+  const selectedLabel = useMemo(() => {
+    const selectedOption = options.find((option) => option.value === selected);
+    if (selectedOption != null) {
+      return selectedOption.label;
+    }
+    return "";
+  }, [options, selected]);
 
   const handleShowOptions = useCallback(() => {
-    console.log();
-    setShowOptions((prev) => !prev);
+    setShowOptions(true);
   }, []);
 
   const handleSelect = useCallback((option: SelectionOptions) => {
-    console.log("heheheh", option);
-    setSelected(option);
-  }, []);
+    validateState(true, option.value);
+    setSelected(option.value);
+  }, [validateState]);
+
+  const handleChevClick = useCallback(() => {
+    setShowOptions(!showOptions);
+  }, [showOptions]);
+
+  const [isFocused, setIsFocused] = useState(false);
+
+  const selectValue = useMemo(() => isFocused ? value : selectedLabel, [isFocused, selectedLabel, value]);
+
+  const handleSelectFocus = useCallback((e: React.FormEvent) => {
+    setIsFocused(true);
+    handleInputFocus();
+  }, [handleInputFocus]);
+
+  const handleSelectBlur = useCallback((e: React.FormEvent) => {
+    setIsFocused(false);
+    setValue(selectedLabel);
+    handleInputBlur();
+  }, [handleInputBlur, selectedLabel, setValue]);
+
+  const ref = useRef(null);
+
+  useOnClickOutside(ref, null, () => setShowOptions(false));
 
   return (
     <SelectContext.Provider value={{ searchTerm, handleSelect, selected, setSelected }}>
-      <Input.Container onFocus={handleShowOptions} onBlur={handleShowOptions} isUp={showOptions}>
+      <Input.Container ref={ref} onFocus={handleShowOptions} isUp={showOptions}>
         <Input.Label up={labelIsUp} htmlFor={name}>
           {label}
         </Input.Label>
         <Input.Field
           type="text"
           onChange={handleChange}
-          value={value}
-          onBlur={handleInputBlur}
-          onFocus={handleInputFocus}
+          value={selectValue}
+          onBlur={handleSelectBlur}
+          onFocus={handleSelectFocus}
           id={name}
           name={name}
           autoComplete="off"
           isLabel
         />
 
-        <ChevronDown />
-        <SelectOptions options={options} />
+        <ChevronDown onClick={handleChevClick} />
+
+        {
+          showOptions && (
+            <SelectOptions options={options} />
+          )
+        }
       </Input.Container>
     </SelectContext.Provider>
   );
@@ -84,8 +123,6 @@ GTInputSelect.defaultProps = {
 const SelectOptions = ({ options }: ISelectOptions) => {
   const { searchTerm } = React.useContext<ISelectContext>(SelectContext);
 
-  // const [selectedOption, setSelectedOption] = useState(options[0]);
-
   const filteredOptions = useMemo(() => wordFilter(options, searchTerm ?? ""), [options, searchTerm]);
 
   return (
@@ -96,6 +133,15 @@ const SelectOptions = ({ options }: ISelectOptions) => {
             <SelectOption option={option} key={option.value} />
           )
         }
+
+        {
+          filteredOptions.length === 0 && (
+            <Select.NotFound>
+              No options found 😖
+            </Select.NotFound>
+          )
+        }
+
       </Select.OptionsContainer>
     </Select.OptionsWrapper>
   );
@@ -104,7 +150,7 @@ const SelectOptions = ({ options }: ISelectOptions) => {
 const SelectOption = ({ option }: ISelectOption) => {
   const { handleSelect, selected } = React.useContext<ISelectContext>(SelectContext);
 
-  const isSelected = useMemo(() => selected?.value === option.value, [selected, option]);
+  const isSelected = useMemo(() => selected === option.value, [selected, option]);
 
   const onSelect = useCallback(() => {
     handleSelect?.(option);

@@ -40,7 +40,7 @@ function useValidateState(name: string, inputValidations: string[]) {
   }, []);
 
   const validateState = useCallback(
-    (isValid: boolean, value: string) => {
+    (isValid: boolean, value: string | number) => {
       setPageState((prevState) => ({
         ...prevState,
         [name]: value,

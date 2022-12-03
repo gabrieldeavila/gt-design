@@ -1,6 +1,6 @@
 interface IWord {
   label: string;
-  value: string;
+  value: string | number;
 }
 
 /**

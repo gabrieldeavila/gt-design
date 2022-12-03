@@ -46,9 +46,10 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
   const type = useMemo(() => (showPassword ? "text" : "password"), [showPassword]);
 
   useEffect(() => {
-    if (value.length === 0) return;
+    const chars = value.toString();
+    if (chars.length === 0) return;
 
-    const { isValid, invalidMessage } = validatePassword(value, inputValidations);
+    const { isValid, invalidMessage } = validatePassword(chars, inputValidations);
 
     setIsValidPassword(isValid);
     setErrorMessage(invalidMessage);
@@ -110,10 +111,10 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
 
       {showPassword
         ? (
-            <Icon.Eye onClick={handleShowPassword} />
+          <Icon.Eye onClick={handleShowPassword} />
           )
         : (
-            <Icon.EyeOff onClick={handleShowPassword} />
+          <Icon.EyeOff onClick={handleShowPassword} />
           )
       }
 

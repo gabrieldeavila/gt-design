@@ -31,9 +31,10 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange }:
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    if (value.length === 0) return;
+    const chars = value.toString();
+    if (chars.length === 0) return;
 
-    const { isValid, invalidMessage } = validateEmail(value, inputValidations);
+    const { isValid, invalidMessage } = validateEmail(chars, inputValidations);
 
     setIsValidEmail(isValid);
     setErrorMessage(invalidMessage);

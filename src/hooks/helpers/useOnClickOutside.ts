@@ -1,23 +1,21 @@
-/* eslint-disable implicit-arrow-linebreak */
 import { useEffect, useCallback } from "react";
 
 function useOnClickOutside(
   ref: React.RefObject<HTMLElement>,
-  avoidComponents: React.RefObject<HTMLElement>[],
+  avoidComponents: Array<React.RefObject<HTMLElement>> | null,
   handler: (event: MouseEvent | TouchEvent) => void
 ) {
   const listener = useCallback(
     (event: any) => {
-      if (!ref.current || ref.current.contains(event.target)) {
+      if (ref.current == null || ref.current.contains(event.target)) {
         return;
       }
 
       if (
-        avoidComponents.some(
-          (avoidComponent) =>
-            avoidComponent.current &&
-            avoidComponent.current.contains(event.target)
-        )
+        avoidComponents?.some((avoidComponent) =>
+          avoidComponent.current?.contains(event.target)
+        ) ??
+        false
       ) {
         return;
       }

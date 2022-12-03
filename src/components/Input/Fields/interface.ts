@@ -18,7 +18,7 @@ export interface IGTInputPassword extends IGTInput {
 }
 
 export interface SelectionOptions {
-  value: string;
+  value: string | number;
   label: string;
 }
 
@@ -37,6 +37,6 @@ export interface ISelectOption {
 export interface ISelectContext {
   searchTerm?: string;
   handleSelect?: (option: SelectionOptions) => void;
-  selected?: SelectionOptions;
-  setSelected?: React.Dispatch<React.SetStateAction<SelectionOptions>>;
+  selected?: string | number;
+  setSelected?: React.Dispatch<React.SetStateAction<string | number>>;
 }

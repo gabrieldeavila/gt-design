@@ -117,7 +117,7 @@ const SelectValue = styled.div<ISelectValue>`
   padding: 1rem;
   background: ${(props) => props.theme.secondary};
   text-align: justify;
-  text-overflow: hidden;
+  text-overflow: ellipsis;
   overflow: hidden;
   user-select: none;
   cursor: pointer;
@@ -136,10 +136,24 @@ const SelectValue = styled.div<ISelectValue>`
   `}
 `;
 
+const SelectNotFound = styled.div`
+  width: -webkit-fill-available;
+  max-width: 100%;
+  font-size: 0.75rem;
+  padding: 1rem 0;
+  text-align: justify;
+  text-overflow: hidden;
+  overflow: hidden;
+  user-select: none;
+  cursor: pointer;
+  border-radius: 0.25rem;
+`;
+
 const Select = {
   OptionsWrapper: SelectOptionsWrapper,
   OptionsContainer: SelectOptionsContainer,
   Value: SelectValue,
+  NotFound: SelectNotFound,
 };
 
 export { Select };

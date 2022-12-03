@@ -49,9 +49,10 @@ function GTInputText({
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    if (value.length === 0) return;
+    const chars = value.toString();
+    if (chars.length === 0) return;
 
-    const { isValid, invalidMessage } = validateText(value, inputValidations);
+    const { isValid, invalidMessage } = validateText(chars, inputValidations);
 
     setIsValidText(isValid);
     setErrorMessage(invalidMessage);
