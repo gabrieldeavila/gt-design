@@ -19,6 +19,33 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
   const { labelIsUp, value, setValue, handleInputChange, handleInputBlur, handleInputFocus } =
     useInputValues(name);
 
+  const { validateState } = useValidateState(name, []);
+
+  const [showOptions, setShowOptions] = useState(false);
+  const [selected, setSelected] = useState<string | number>("");
+
+  const [isFocused, setIsFocused] = useState(false);
+
+  const selectedLabel = useMemo(() => {
+    const selectedOption = options.find((option) => option.value === selected);
+
+    if (selectedOption != null) {
+      return selectedOption.label;
+    }
+
+    return "";
+  }, [options, selected]);
+
+  // value shown in input
+  const selectValue = useMemo(() => {
+    const val = isFocused ? value : selectedLabel;
+    // console.log(isFocused, value, selectedLabel);
+    handleInputChange(val.toString());
+
+    return val;
+  }, [handleInputChange, isFocused, selectedLabel, value]);
+
+  // change the value of the input
   const handleChange = useCallback(
     (e: any) => {
       const { value: val } = e.target;
@@ -27,19 +54,6 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
     },
     [handleInputChange]
   );
-
-  const { validateState } = useValidateState(name, []);
-
-  const [showOptions, setShowOptions] = useState(false);
-  const [selected, setSelected] = useState<string | number>("");
-
-  const selectedLabel = useMemo(() => {
-    const selectedOption = options.find((option) => option.value === selected);
-    if (selectedOption != null) {
-      return selectedOption.label;
-    }
-    return "";
-  }, [options, selected]);
 
   const handleShowOptions = useCallback(() => {
     setShowOptions(true);
@@ -51,12 +65,8 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
   }, [validateState]);
 
   const handleChevClick = useCallback(() => {
-    setShowOptions(!showOptions);
-  }, [showOptions]);
-
-  const [isFocused, setIsFocused] = useState(false);
-
-  const selectValue = useMemo(() => isFocused ? value : selectedLabel, [isFocused, selectedLabel, value]);
+    setShowOptions((prev) => !prev);
+  }, []);
 
   const handleSelectFocus = useCallback((e: React.FormEvent) => {
     setIsFocused(true);
@@ -64,10 +74,10 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
   }, [handleInputFocus]);
 
   const handleSelectBlur = useCallback((e: React.FormEvent) => {
+    setSearchTerm("");
     setIsFocused(false);
-    setValue(selectedLabel);
     handleInputBlur();
-  }, [handleInputBlur, selectedLabel, setValue]);
+  }, [handleInputBlur]);
 
   const ref = useRef(null);
 
@@ -82,7 +92,8 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
         <Input.Field
           type="text"
           onChange={handleChange}
-          value={selectValue}
+          value={searchTerm}
+          placeholder={selectedLabel}
           onBlur={handleSelectBlur}
           onFocus={handleSelectFocus}
           id={name}
@@ -153,6 +164,7 @@ const SelectOption = ({ option }: ISelectOption) => {
   const isSelected = useMemo(() => selected === option.value, [selected, option]);
 
   const onSelect = useCallback(() => {
+    console.log("mano q pasa");
     handleSelect?.(option);
   }, [handleSelect, option]);
 

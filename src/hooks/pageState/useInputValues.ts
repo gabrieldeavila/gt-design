@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import _ from "lodash";
 import { useCallback, useState } from "react";
 import { useGTPageStateContext } from "../../context/pageState";
@@ -18,6 +19,7 @@ function useInputValues(name: string) {
     }
   }, [value]);
 
+  // if has value, label is up
   const handleInputChange = useCallback(
     (val: string) => {
       if (!_.isEmpty(val) && _.isEmpty(value)) {

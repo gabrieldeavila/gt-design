@@ -64,7 +64,6 @@ function wordFilter(words: IWord[], word: string): IWord[] {
     // returns the ordered words
     return normalizedA.length - normalizedB.length;
   });
-  console.log(filteredWords, orderedWords);
 
   // returns the ordered words
   return orderedWords;
