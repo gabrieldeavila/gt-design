@@ -16,15 +16,13 @@ const SelectContext = React.createContext<ISelectContext>({});
 function GTInputSelect({ name, label, validations, defaultValidation, onChange, options }: IGTInputSelect): JSX.Element {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { labelIsUp, value, setValue, handleInputChange, handleInputBlur, handleInputFocus } =
+  const { labelIsUp, handleInputChange, handleInputBlur, handleInputFocus } =
     useInputValues(name);
 
   const { validateState } = useValidateState(name, []);
 
   const [showOptions, setShowOptions] = useState(false);
   const [selected, setSelected] = useState<string | number>("");
-
-  const [isFocused, setIsFocused] = useState(false);
 
   const selectedLabel = useMemo(() => {
     const selectedOption = options.find((option) => option.value === selected);
@@ -36,52 +34,50 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
     return "";
   }, [options, selected]);
 
-  // value shown in input
-  const selectValue = useMemo(() => {
-    const val = isFocused ? value : selectedLabel;
-    // console.log(isFocused, value, selectedLabel);
-    handleInputChange(val.toString());
-
-    return val;
-  }, [handleInputChange, isFocused, selectedLabel, value]);
-
   // change the value of the input
   const handleChange = useCallback(
     (e: any) => {
       const { value: val } = e.target;
       setSearchTerm(val);
-      handleInputChange(val);
+
+      handleInputChange(selectedLabel ?? val);
     },
-    [handleInputChange]
+    [handleInputChange, selectedLabel]
   );
 
   const handleShowOptions = useCallback(() => {
     setShowOptions(true);
   }, []);
 
+  const handleCloseSelect = useCallback(() => {
+    setSearchTerm("");
+    setShowOptions(false);
+  }, []);
+
   const handleSelect = useCallback((option: SelectionOptions) => {
     validateState(true, option.value);
+    setSearchTerm(option.label);
+    handleInputChange(option.label);
     setSelected(option.value);
-  }, [validateState]);
+
+    handleCloseSelect();
+  }, [handleCloseSelect, handleInputChange, validateState]);
 
   const handleChevClick = useCallback(() => {
     setShowOptions((prev) => !prev);
   }, []);
 
   const handleSelectFocus = useCallback((e: React.FormEvent) => {
-    setIsFocused(true);
     handleInputFocus();
   }, [handleInputFocus]);
 
   const handleSelectBlur = useCallback((e: React.FormEvent) => {
-    setSearchTerm("");
-    setIsFocused(false);
     handleInputBlur();
   }, [handleInputBlur]);
 
   const ref = useRef(null);
 
-  useOnClickOutside(ref, null, () => setShowOptions(false));
+  useOnClickOutside(ref, null, handleCloseSelect);
 
   return (
     <SelectContext.Provider value={{ searchTerm, handleSelect, selected, setSelected }}>
