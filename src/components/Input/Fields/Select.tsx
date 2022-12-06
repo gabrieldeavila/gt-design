@@ -23,7 +23,8 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
 
   const [showOptions, setShowOptions] = useState(false);
   const [selected, setSelected] = useState<string | number>("");
-  const [preSelected, setPreSelected] = useState<string | number>("");
+  // uses the index of the options array to keep track of the selected option
+  const [preSelected, setPreSelected] = useState<number>(0);
 
   const selectedLabel = useMemo(() => {
     const selectedOption = options.find((option) => option.value === selected);
@@ -129,18 +130,60 @@ GTInputSelect.defaultProps = {
 };
 
 const SelectOptions = ({ options }: ISelectOptions) => {
-  const { searchTerm } = React.useContext<ISelectContext>(SelectContext);
+  const { searchTerm, setPreSelected } = React.useContext<ISelectContext>(SelectContext);
 
   const filteredOptions = useMemo(() => wordFilter(options, searchTerm ?? ""), [options, searchTerm]);
 
   const selectRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    // gets the pressed key
+    const handleKey = (e: KeyboardEvent) => {
+      setPreSelected?.((prev) => {
+        let newValue = prev;
+
+        // if the key is down arrow
+        if (e.key === "ArrowDown") {
+          newValue += 1;
+        }
+
+        // if the key is up arrow
+        if (e.key === "ArrowUp") {
+          newValue -= 1;
+        }
+
+        // if value is greater than the length of the options array
+        if (newValue > filteredOptions.length - 1) {
+          newValue = 0;
+        }
+
+        // if value is less than 0
+        if (newValue < 0) {
+          newValue = filteredOptions.length - 1;
+        }
+
+        // if the key is enter
+        if (e.key === "Enter") {
+          // NEED TO ADD THE SELECTED OPTION
+        }
+
+        return newValue;
+      });
+    };
+
+    window.addEventListener("keydown", handleKey);
+
+    return () => {
+      window.removeEventListener("keydown", handleKey);
+    };
+  }, [setPreSelected]);
+
   return (
     <Select.OptionsWrapper>
       <Select.OptionsContainer ref={selectRef}>
         {
-          filteredOptions.map((option) =>
-            <SelectOption selectRef={selectRef} option={option} key={option.value} />
+          filteredOptions.map((option, index) =>
+            <SelectOption selectRef={selectRef} index={index} option={option} key={option.value} />
           )
         }
 
@@ -157,15 +200,19 @@ const SelectOptions = ({ options }: ISelectOptions) => {
   );
 };
 
-const SelectOption = ({ selectRef, option }: ISelectOption) => {
-  const { handleSelect, selected } = React.useContext<ISelectContext>(SelectContext);
+const SelectOption = ({ selectRef, option, index }: ISelectOption) => {
+  const { handleSelect, selected, preSelected } = React.useContext<ISelectContext>(SelectContext);
 
   const optionRef = useRef<HTMLDivElement>(null);
 
   const isSelected = useMemo(() => selected === option.value, [selected, option]);
 
+  const isPreSelected = useMemo(() => preSelected === index, [preSelected, index]);
+
+  console.log(isPreSelected, index, preSelected);
+
   useEffect(() => {
-    if (isSelected) {
+    if (isSelected || isPreSelected) {
       // use the selectRef to scroll to the optionRef
       selectRef.current?.scrollTo({
         left: 0,
@@ -173,13 +220,13 @@ const SelectOption = ({ selectRef, option }: ISelectOption) => {
         behavior: "smooth"
       });
     }
-  }, [isSelected, selectRef]);
+  }, [isSelected, selectRef, isPreSelected]);
 
   const onSelect = useCallback(() => {
     handleSelect?.(option);
   }, [handleSelect, option]);
 
   return (
-    <Select.Value ref={optionRef} isSelected={isSelected} onClick={onSelect}>{option.label}</Select.Value>
+    <Select.Value ref={optionRef} isPreSelected={isPreSelected} isSelected={isSelected} onClick={onSelect}>{option.label}</Select.Value>
   );
 };

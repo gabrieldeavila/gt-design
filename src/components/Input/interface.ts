@@ -10,5 +10,6 @@ export interface IInputContainer {
 
 export interface ISelectValue {
   isSelected: boolean;
+  isPreSelected: boolean;
   theme: GTTheme;
 }

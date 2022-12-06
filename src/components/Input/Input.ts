@@ -1,6 +1,6 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-confusing-arrow */
-import { transparentize } from "polished";
+import { lighten, transparentize } from "polished";
 import styled, { css } from "styled-components";
 import { hovers, scrolls } from "../../utils";
 import animations from "../../utils/animations";
@@ -129,9 +129,11 @@ const SelectValue = styled.div<ISelectValue>`
     transform: scale(0.9);
   }
 
-  ${({ isSelected, theme }) => css`
+  ${({ isSelected, isPreSelected, theme }) => css`
     background: ${isSelected
       ? theme.secondary
+      : isPreSelected
+      ? lighten(0.1, theme.primary)
       : transparentize(0.7, theme.secondary)};
   `}
 `;
