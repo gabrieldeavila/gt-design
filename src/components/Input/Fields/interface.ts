@@ -32,6 +32,7 @@ export interface ISelectOptions {
 
 export interface ISelectOption {
   option: SelectionOptions;
+  selectRef: React.RefObject<HTMLDivElement>;
 }
 
 export interface ISelectContext {
@@ -39,4 +40,6 @@ export interface ISelectContext {
   handleSelect?: (option: SelectionOptions) => void;
   selected?: string | number;
   setSelected?: React.Dispatch<React.SetStateAction<string | number>>;
+  preSelected?: string | number;
+  setPreSelected?: React.Dispatch<React.SetStateAction<string | number>>;
 }

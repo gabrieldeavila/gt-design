@@ -1,6 +1,6 @@
 /* eslint-disable operator-linebreak */
 import PropTypes from "prop-types";
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDown } from "react-feather";
 import useOnClickOutside from "../../../hooks/helpers/useOnClickOutside";
 import useInputValues from "../../../hooks/pageState/useInputValues";
@@ -23,6 +23,7 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
 
   const [showOptions, setShowOptions] = useState(false);
   const [selected, setSelected] = useState<string | number>("");
+  const [preSelected, setPreSelected] = useState<string | number>("");
 
   const selectedLabel = useMemo(() => {
     const selectedOption = options.find((option) => option.value === selected);
@@ -80,7 +81,7 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
   useOnClickOutside(ref, null, handleCloseSelect);
 
   return (
-    <SelectContext.Provider value={{ searchTerm, handleSelect, selected, setSelected }}>
+    <SelectContext.Provider value={{ searchTerm, handleSelect, selected, setSelected, preSelected, setPreSelected }}>
       <Input.Container ref={ref} onFocus={handleShowOptions} isUp={showOptions}>
         <Input.Label up={labelIsUp} htmlFor={name}>
           {label}
@@ -132,12 +133,14 @@ const SelectOptions = ({ options }: ISelectOptions) => {
 
   const filteredOptions = useMemo(() => wordFilter(options, searchTerm ?? ""), [options, searchTerm]);
 
+  const selectRef = useRef<HTMLDivElement>(null);
+
   return (
     <Select.OptionsWrapper>
-      <Select.OptionsContainer>
+      <Select.OptionsContainer ref={selectRef}>
         {
           filteredOptions.map((option) =>
-            <SelectOption option={option} key={option.value} />
+            <SelectOption selectRef={selectRef} option={option} key={option.value} />
           )
         }
 
@@ -154,17 +157,29 @@ const SelectOptions = ({ options }: ISelectOptions) => {
   );
 };
 
-const SelectOption = ({ option }: ISelectOption) => {
+const SelectOption = ({ selectRef, option }: ISelectOption) => {
   const { handleSelect, selected } = React.useContext<ISelectContext>(SelectContext);
+
+  const optionRef = useRef<HTMLDivElement>(null);
 
   const isSelected = useMemo(() => selected === option.value, [selected, option]);
 
+  useEffect(() => {
+    if (isSelected) {
+      // use the selectRef to scroll to the optionRef
+      selectRef.current?.scrollTo({
+        left: 0,
+        top: (optionRef.current?.offsetTop ?? 0) - 70,
+        behavior: "smooth"
+      });
+    }
+  }, [isSelected, selectRef]);
+
   const onSelect = useCallback(() => {
-    console.log("mano q pasa");
     handleSelect?.(option);
   }, [handleSelect, option]);
 
   return (
-    <Select.Value isSelected={isSelected} onClick={onSelect}>{option.label}</Select.Value>
+    <Select.Value ref={optionRef} isSelected={isSelected} onClick={onSelect}>{option.label}</Select.Value>
   );
 };
