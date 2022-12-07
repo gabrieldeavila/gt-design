@@ -14,6 +14,7 @@ export interface GTTheme {
   loginBackground1?: string;
   loginBackground2?: string;
   loginBackground3?: string;
+  preSelectColor?: string;
   textBtn?: string;
   containerMain?: string;
   containerSecondary?: string;

@@ -18,6 +18,7 @@ const darkThemeStyle = {
   textBtn: "#77b5fe",
   containerMain: "#36454f",
   containerSecondary: "#242124",
+  preSelectColor: "#414a4c",
 };
 
 function GTBasic({ children }: { children: React.ReactNode }) {

@@ -16,6 +16,7 @@ const defaultTheme = {
   errorColor: "#ba160c",
   loginBoxPrimary: "#f0ffff",
   glowShadow: "#39ff14",
+  preSelectColor: "#f5f5f5",
   pageBackground: "#f0f8ff",
   loginBackground1: "rgba(125, 197, 193, 1)",
   loginBackground2: "rgba(167, 123, 243, 1)",

@@ -38,7 +38,7 @@ export interface ISelectOption {
 
 export interface ISelectContext {
   searchTerm?: string;
-  handleSelect?: (option: SelectionOptions) => void;
+  handleSelect?: (option: SelectionOptions, index: number) => void;
   selected?: string | number;
   setSelected?: React.Dispatch<React.SetStateAction<string | number>>;
   preSelected: number;

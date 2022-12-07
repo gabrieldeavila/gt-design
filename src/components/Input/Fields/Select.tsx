@@ -11,7 +11,7 @@ import { IGTInputSelect, ISelectContext, ISelectOption, ISelectOptions, Selectio
 
 const defaultValidationObj = ["required"];
 
-const SelectContext = React.createContext<ISelectContext>({});
+const SelectContext = React.createContext<ISelectContext>({ preSelected: 0 });
 
 function GTInputSelect({ name, label, validations, defaultValidation, onChange, options }: IGTInputSelect): JSX.Element {
   const [searchTerm, setSearchTerm] = useState("");
@@ -21,11 +21,22 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
 
   const { validateState } = useValidateState(name, []);
 
+  // it is used to point the preSelected option
+  const selectedIndexRef = useRef<number>(0);
+
+  // it is used to focus/blur the input when the chevron is clicked
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // if the menu is open or not
   const [showOptions, setShowOptions] = useState(false);
+
+  // the selected options
   const [selected, setSelected] = useState<string | number>("");
-  // uses the index of the options array to keep track of the selected option
+
+  // uses the index of the options array to keep track of the option that can be selected
   const [preSelected, setPreSelected] = useState<number>(0);
 
+  // the selected option label
   const selectedLabel = useMemo(() => {
     const selectedOption = options.find((option) => option.value === selected);
 
@@ -53,20 +64,33 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
 
   const handleCloseSelect = useCallback(() => {
     setSearchTerm("");
+    setPreSelected(selectedIndexRef.current);
     setShowOptions(false);
   }, []);
 
-  const handleSelect = useCallback((option: SelectionOptions) => {
+  // update the select value
+  const handleSelect = useCallback((option: SelectionOptions, selectedIndex: number) => {
     validateState(true, option.value);
     setSearchTerm(option.label);
     handleInputChange(option.label);
     setSelected(option.value);
 
+    selectedIndexRef.current = selectedIndex;
     handleCloseSelect();
   }, [handleCloseSelect, handleInputChange, validateState]);
 
   const handleChevClick = useCallback(() => {
-    setShowOptions((prev) => !prev);
+    setShowOptions((prev) => {
+      // adds or removes the focus from the input
+      if (!prev) {
+        inputRef.current?.focus();
+      } else {
+        setSearchTerm("");
+        inputRef.current?.blur();
+      }
+
+      return !prev;
+    });
   }, []);
 
   const handleSelectFocus = useCallback((e: React.FormEvent) => {
@@ -77,7 +101,28 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
     handleInputBlur();
   }, [handleInputBlur]);
 
-  const ref = useRef(null);
+  const handleKey = useCallback(() => {
+    // if it is not showing the options, open it
+    const hasFocus = (ref.current?.contains(document.activeElement)) ?? false;
+    if (!showOptions && hasFocus) {
+      // discover if ref has focus
+      setShowOptions(true);
+    }
+  }, [showOptions]);
+
+  // checks if the user press the key down or up
+  useEffect(() => {
+    handleKey();
+
+    document.addEventListener("keydown", handleKey);
+
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const ref = useRef<HTMLDivElement>(null);
 
   useOnClickOutside(ref, null, handleCloseSelect);
 
@@ -88,6 +133,7 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
           {label}
         </Input.Label>
         <Input.Field
+          ref={inputRef}
           type="text"
           onChange={handleChange}
           value={searchTerm}
@@ -130,7 +176,7 @@ GTInputSelect.defaultProps = {
 };
 
 const SelectOptions = ({ options }: ISelectOptions) => {
-  const { searchTerm, setPreSelected } = React.useContext<ISelectContext>(SelectContext);
+  const { searchTerm, preSelected, setPreSelected, handleSelect } = React.useContext<ISelectContext>(SelectContext);
 
   const filteredOptions = useMemo(() => wordFilter(options, searchTerm ?? ""), [options, searchTerm]);
 
@@ -164,7 +210,10 @@ const SelectOptions = ({ options }: ISelectOptions) => {
 
         // if the key is enter
         if (e.key === "Enter") {
-          // NEED TO ADD THE SELECTED OPTION
+          // get the selected option
+          const selectedOption = filteredOptions[newValue];
+          // sets the selected option
+          handleSelect?.(selectedOption, newValue);
         }
 
         return newValue;
@@ -176,7 +225,20 @@ const SelectOptions = ({ options }: ISelectOptions) => {
     return () => {
       window.removeEventListener("keydown", handleKey);
     };
-  }, [setPreSelected]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filteredOptions, setPreSelected]);
+
+  const oldPreSelected = useRef<number | null>(null);
+
+  useEffect(() => {
+    // when the filtered options change, set the preselected to 0
+    if (oldPreSelected.current !== null && oldPreSelected.current !== preSelected) {
+      setPreSelected?.(0);
+    } else {
+      oldPreSelected.current = preSelected;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filteredOptions, setPreSelected]);
 
   return (
     <Select.OptionsWrapper>
@@ -201,18 +263,18 @@ const SelectOptions = ({ options }: ISelectOptions) => {
 };
 
 const SelectOption = ({ selectRef, option, index }: ISelectOption) => {
-  const { handleSelect, selected, preSelected } = React.useContext<ISelectContext>(SelectContext);
+  const { handleSelect, selected, preSelected, setPreSelected } = React.useContext<ISelectContext>(SelectContext);
 
   const optionRef = useRef<HTMLDivElement>(null);
+
+  const dontScrollToSelected = useRef<boolean>(false);
 
   const isSelected = useMemo(() => selected === option.value, [selected, option]);
 
   const isPreSelected = useMemo(() => preSelected === index, [preSelected, index]);
 
-  console.log(isPreSelected, index, preSelected);
-
   useEffect(() => {
-    if (isSelected || isPreSelected) {
+    if ((isSelected || isPreSelected) && !dontScrollToSelected.current) {
       // use the selectRef to scroll to the optionRef
       selectRef.current?.scrollTo({
         left: 0,
@@ -222,9 +284,31 @@ const SelectOption = ({ selectRef, option, index }: ISelectOption) => {
     }
   }, [isSelected, selectRef, isPreSelected]);
 
+  const handleMouseOver = useCallback(() => {
+    // we dont want to scroll to the selected option, because the user is hovering
+    // therefore, the animation is not smooth
+    dontScrollToSelected.current = true;
+    setPreSelected?.(index);
+  }, [index, setPreSelected]);
+
+  // useEffect to detect hover on this component
+  useEffect(() => {
+    optionRef.current?.addEventListener("mouseover", handleMouseOver);
+    const curr = selectRef.current;
+
+    return () => {
+      curr?.removeEventListener("mouseover", handleMouseOver);
+      dontScrollToSelected.current = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setPreSelected]);
+
   const onSelect = useCallback(() => {
-    handleSelect?.(option);
-  }, [handleSelect, option]);
+    // we want to scroll to the selected option
+    dontScrollToSelected.current = false;
+
+    handleSelect?.(option, index);
+  }, [handleSelect, index, option]);
 
   return (
     <Select.Value ref={optionRef} isPreSelected={isPreSelected} isSelected={isSelected} onClick={onSelect}>{option.label}</Select.Value>

@@ -1,6 +1,6 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-confusing-arrow */
-import { lighten, transparentize } from "polished";
+import { transparentize } from "polished";
 import styled, { css } from "styled-components";
 import { hovers, scrolls } from "../../utils";
 import animations from "../../utils/animations";
@@ -117,7 +117,7 @@ const SelectValue = styled.div<ISelectValue>`
   padding: 1rem;
   background: ${(props) => props.theme.secondary};
   text-align: justify;
-  text-overflow: ellipsis;
+  word-break: break-word;
   overflow: hidden;
   user-select: none;
   cursor: pointer;
@@ -133,7 +133,7 @@ const SelectValue = styled.div<ISelectValue>`
     background: ${isSelected
       ? theme.secondary
       : isPreSelected
-      ? lighten(0.1, theme.primary)
+      ? theme.preSelectColor
       : transparentize(0.7, theme.secondary)};
   `}
 `;
