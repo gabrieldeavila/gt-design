@@ -12,6 +12,7 @@
     "MAX_CHARS": "Este campo deve ter entre {{MIN}} e {{MAX}} caracteres. Você tem {{CURR}} caracteres."
   },
   "PASSWORD": {
+    "REQUIRED": "Este campo é obrigatório.",
     "EIGHT_LONG": "Esta senha deve ter pelo menos 8 caracteres.",
     "ONE_NUMBER": "Esta senha deve conter pelo menos um número.",
     "ONE_SPECIAL": "Esta senha deve conter pelo menos um caractere especial.",

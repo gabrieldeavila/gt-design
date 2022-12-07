@@ -3,6 +3,10 @@ import { useGTPageStateContext } from "../../context/pageState";
 import useInputValidation from "./useInputValidation";
 
 const options = {
+  required: {
+    regex: /.+/,
+    message: "REQUIRED",
+  },
   eightLong: {
     regex: /^.{8,}$/,
     message: "EIGHT_LONG",
@@ -38,6 +42,7 @@ function useValidatePassword() {
         "password"
       );
 
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (sameAs && isValid) {
         isValid = value === pageState[sameAs];
 

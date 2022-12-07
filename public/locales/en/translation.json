@@ -13,13 +13,13 @@
     "MAX_CHARS": "This field must have between {{MIN}} and {{MAX}} characters. You have {{CURR}} characters"
   },
   "PASSWORD": {
+    "REQUIRED": "Please enter your password.",
     "EIGHT_LONG": "Password must be at least 8 characters long.",
     "ONE_NUMBER": "Password must contain at least one number.",
     "ONE_SPECIAL": "Password must contain at least one special character.",
     "ONE_UPPERCASE": "Password must contain at least one uppercase letter.",
     "ONE_LOWERCASE": "Password must contain at least one lowercase letter.",
     "PASSWORDS_NOT_MATCH": "Passwords do not match."
-
   },
   "TEMPLATE": {
     "LOGIN": {

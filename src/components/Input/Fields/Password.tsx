@@ -12,6 +12,7 @@ import Input from "../Input";
 import { IGTInputPassword } from "./interface";
 
 const defaultValidationObj = [
+  "required",
   "eightLong",
   "oneSpecial",
   "oneLowercase",
@@ -22,8 +23,10 @@ const defaultValidationObj = [
 function GTInputPassword({ name, label, defaultValidation, validations, onChange, sameAs }: IGTInputPassword) {
   const { t } = useTranslation();
 
+  // state to keep track of all the inputs
   const { pageState } = useGTPageStateContext();
 
+  // validations that are passed to the input
   const inputValidations = useMemo(() => {
     if (defaultValidation) {
       return [...defaultValidationObj, ...validations];
@@ -32,11 +35,14 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
     return validations;
   }, [defaultValidation, validations]);
 
+  // validates if the input is or not valid
   const { validateState } = useValidateState(name, inputValidations);
 
+  // shows the label up or down
   const { labelIsUp, value, handleInputChange, handleInputBlur, handleInputFocus } =
     useInputValues(name);
 
+  // password validation
   const { validatePassword } = useValidatePassword();
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
