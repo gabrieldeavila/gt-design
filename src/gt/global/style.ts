@@ -29,6 +29,11 @@ const GlobalStyle = createGlobalStyle`
 
     ${scrolls.default}
   }
+
+  ::selection {
+    background: ${({ theme }: IGLobalStyle) => theme.contrast};
+    color: ${({ theme }: IGLobalStyle) => theme.primary};
+  }
 `;
 
 export default GlobalStyle;
