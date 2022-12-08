@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateEmail from "../../../hooks/validation/useValidateEmail";
 import useValidateState from "../../../hooks/validation/useValidateState";
+import TeaserTip from "../../Tooltip/Template/Teasers";
 import Input from "../Input";
 import { IGTInput } from "./interface";
 
@@ -70,7 +71,10 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange }:
         id={name}
         name={name}
       />
+
       {!isValidEmail && <Input.Error>{t(`EMAIL.${errorMessage}`)}</Input.Error>}
+
+      <TeaserTip />
     </Input.Container>
   );
 }

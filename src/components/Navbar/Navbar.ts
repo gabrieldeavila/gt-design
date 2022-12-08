@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-confusing-arrow */
 import { transparentize } from "polished";
 import styled from "styled-components";
-import { color, flexbox, space, SpaceProps } from "styled-system";
+import { color, flexbox, space } from "styled-system";
 import animations from "../../utils/animations";
 import flex from "../../utils/flex";
 import shadows from "../../utils/shadows";
@@ -51,7 +52,7 @@ const NavbarOptions = styled.div<INavbarOptions>`
   display: flex;
   gap: 1rem;
   height: fit-content;
-  top: ${(props) => props.top || 0}px;
+  top: ${(props) => props.top ?? 0}px;
   ${space}
 `;
 
