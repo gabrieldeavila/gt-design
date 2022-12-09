@@ -37,13 +37,26 @@ const i18nextStoryDecorator = (Story, context) => {
   }, [locale]);
 
   return (
-    // here catches the suspense from components not yet ready (still loading translations)
-    // alternative set useSuspense false on i18next.options.react when initializing i18next
-    <Suspense fallback={<div>loading translations...</div>}>
-      <I18nextProvider i18n={i18n}>
+    <>
+      {/* adds default font */}
+      <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,600&display=swap"
+        rel="stylesheet"
+      ></link>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,600&display=swap"
+        rel="stylesheet"
+      ></link>
+
+      {/* here catches the suspense from components not yet ready (still loading
+      translations)
+      alternative set useSuspense false on
+      i18next.options.react when initializing i18next */}
+      <Suspense fallback={<div>loading translations...</div>}>
         <Story />
-      </I18nextProvider>
-    </Suspense>
+        <I18nextProvider i18n={i18n}></I18nextProvider>
+      </Suspense>
+    </>
   );
 };
 
@@ -52,7 +65,7 @@ export const decorators = [i18nextStoryDecorator];
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
-  layout: 'fullscreen',
+  layout: "fullscreen",
   controls: {
     matchers: {
       color: /(background|color)$/i,
