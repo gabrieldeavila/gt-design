@@ -18,7 +18,7 @@ const InputContainer = styled.div<IInputContainer>`
   width: -webkit-fill-available;
   position: relative;
 
-  svg {
+  svg:not(.svg-no-active) {
     user-select: none;
     cursor: pointer;
     top: 30%;

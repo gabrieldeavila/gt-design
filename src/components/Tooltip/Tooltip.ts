@@ -1,36 +1,44 @@
 import { transparentize } from "polished";
-import styled from "styled-components";
-import { shadows } from "../../utils";
+import styled, { css } from "styled-components";
+import { flex, shadows } from "../../utils";
 
 const TooltipWrapper = styled.div`
   position: absolute;
-  top: -100%;
+  top: -${({ top }: { top: number }) => top + 6.9}px;
+  left: 25%;
   width: 10rem;
-  height: 10rem;
+  height: fit-content;
   background: ${({ theme }) => theme.primary};
   padding: 0.5rem;
   ${shadows.simple}
   z-index: 1;
   border-radius: 0.25rem;
 
-  .svg-polygon {
-    position: absolute;
-    stroke: ${({ theme }) => transparentize(0.5, theme.btnShadow)};
-    transform: rotate(180deg) scale(0.2);
-    top: 67%;
-  }
-
   .svg-polygon-container {
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+
     &:before {
       content: "";
       position: absolute;
-      width: 14.5%;
-      left: 51.2%;
+      width: 100%;
       top: 91%;
       z-index: 1;
       height: 1rem;
-      background: ${({ theme }) => theme.primary};
+      /* background: ${({ theme }) => theme.primary}; */
     }
+  }
+
+  .svg-polygon {
+    position: absolute;
+    stroke: ${({ theme }) => transparentize(0.5, theme.btnShadow)};
+    transform: rotate(180deg);
+    bottom: -10%;
   }
 
   .polygon-path {
@@ -38,11 +46,26 @@ const TooltipWrapper = styled.div`
   }
 `;
 
-const TooltipContainer = styled.div``;
+const TooltipContainer = styled.div`
+  ${flex.wrapGap}
+  gap: 0.5rem;
+`;
 
-const TooltipTitle = styled.h2``;
+const position = css`
+  z-index: 1;
+  position: relative;
+`;
 
-const TooltipText = styled.p``;
+const TooltipTitle = styled.h2`
+  ${position}
+  font-size: 14px;
+`;
+
+const TooltipText = styled.p`
+  ${position}
+  font-size: 12px;
+  font-weight: 100;
+`;
 
 const Tooltip = {
   Wrapper: TooltipWrapper,

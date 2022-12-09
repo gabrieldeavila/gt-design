@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useRef } from "react";
 import Polygon from "../../SVG/Polygon";
 import Tooltip from "../Tooltip";
 
 function TeaserTip() {
+  const teaserRef = useRef<HTMLDivElement>(null);
+
+  console.log(teaserRef.current?.getBoundingClientRect());
+
   return (
-    <Tooltip.Wrapper>
+    <Tooltip.Wrapper ref={teaserRef} top={teaserRef.current?.getBoundingClientRect()?.height}>
       <Polygon />
       <Tooltip.Container>
 
