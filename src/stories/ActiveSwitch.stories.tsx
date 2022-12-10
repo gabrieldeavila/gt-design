@@ -1,6 +1,7 @@
 import React from "react";
 import { GTActiveSwitch } from "../components/Switch";
 import { GTBasic } from "../gt";
+import { DEVONLY } from "../gt/Container/Container";
 
 export default {
   title: "GTDesign/Switch",
@@ -12,7 +13,9 @@ export default {
 const Template = function SwitchStory() {
   return (
     <GTBasic>
-      <GTActiveSwitch />
+      <DEVONLY>
+        <GTActiveSwitch />
+      </DEVONLY>
     </GTBasic>
   );
 };

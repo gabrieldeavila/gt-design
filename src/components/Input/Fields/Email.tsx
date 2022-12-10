@@ -74,7 +74,7 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange }:
 
       {!isValidEmail && <Input.Error>{t(`EMAIL.${errorMessage}`)}</Input.Error>}
 
-      <TeaserTip />
+      <TeaserTip title="uga buga" text="Lorem Ipsum dsaodsja Lorem Ipsum dsaodsjaLorem Ipsum dsaodsjaLorem Ipsum dsaodsjaLorem Ipsum dsaodsjaLorem Ipsum dsaodsjaLorem Ipsum dsaodsjaLorem Ipsum dsaodsja"/>
     </Input.Container>
   );
 }

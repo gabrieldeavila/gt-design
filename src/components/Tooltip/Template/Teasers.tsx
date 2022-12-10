@@ -1,22 +1,27 @@
 import React, { useRef } from "react";
-import Polygon from "../../SVG/Polygon";
+import { ITeaserTip } from "../interface";
 import Tooltip from "../Tooltip";
 
-function TeaserTip() {
+function TeaserTip({ title, text }: ITeaserTip) {
   const teaserRef = useRef<HTMLDivElement>(null);
 
-  console.log(teaserRef.current?.getBoundingClientRect());
+  const { height = 1 } = teaserRef.current?.getBoundingClientRect() || {};
 
   return (
-    <Tooltip.Wrapper ref={teaserRef} top={teaserRef.current?.getBoundingClientRect()?.height}>
-      <Polygon />
+    <Tooltip.Wrapper ref={teaserRef} top={height}>
       <Tooltip.Container>
+        {
+          (title != null) &&
+          <Tooltip.Title> {title}</Tooltip.Title>
+        }
 
-        <Tooltip.Title> Teaser</Tooltip.Title>
-        <Tooltip.Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-          facilisi. Sed euismod, nisl vel tincidunt lacinia, nunc est
-        </Tooltip.Text>
+        {
+          (text != null) &&
+          <Tooltip.Text>
+            {text}
+          </Tooltip.Text>
+        }
+
       </Tooltip.Container>
     </Tooltip.Wrapper >
   );
