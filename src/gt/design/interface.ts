@@ -18,6 +18,7 @@ export interface GTTheme {
   textBtn?: string;
   containerMain?: string;
   containerSecondary?: string;
+  outline?: string;
   switchOn?: string;
 }
 

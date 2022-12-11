@@ -77,7 +77,7 @@ const TooltipTitle = styled.h3`
 const TooltipText = styled.p`
   ${position}
   font-size: 12px;
-  font-weight: 100;
+  font-weight: 200;
 `;
 
 const Tooltip = {

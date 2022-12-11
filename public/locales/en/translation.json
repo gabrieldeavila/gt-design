@@ -21,6 +21,9 @@
     "ONE_LOWERCASE": "Password must contain at least one lowercase letter.",
     "PASSWORDS_NOT_MATCH": "Passwords do not match."
   },
+  "SELECT": {
+    "NOT_FOUND": "No results found 😪"
+  },
   "TEMPLATE": {
     "LOGIN": {
       "CREATE_TITLE": "Create an account",

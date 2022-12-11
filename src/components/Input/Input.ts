@@ -2,7 +2,7 @@
 /* eslint-disable no-confusing-arrow */
 import { transparentize } from "polished";
 import styled, { css } from "styled-components";
-import { hovers, scrolls } from "../../utils";
+import { hovers, scrolls, shadows } from "../../utils";
 import animations from "../../utils/animations";
 import flex from "../../utils/flex";
 import { IInputContainer, IInputField, ISelectValue } from "./interface";
@@ -17,6 +17,31 @@ const InputContainer = styled.div<IInputContainer>`
   gap: 0.5rem;
   width: -webkit-fill-available;
   position: relative;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+
+  &:focus-within {
+    outline: 2px solid ${(props) => props.theme.outline};
+    outline-offset: 0.25rem;
+  }
+
+  &:focus-within::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 0 0.25rem
+      ${(props) => transparentize(1, props.theme.outline)};
+  }
+
+  &:focus-within::after {
+    box-shadow: 0 0 0 0.25rem
+      ${(props) => transparentize(0.5, props.theme.outline)};
+  }
 
   svg:not(.svg-no-active) {
     user-select: none;
@@ -99,6 +124,7 @@ const SelectOptionsWrapper = styled.div`
   border-radius: 0.25rem;
   padding: 0.5rem;
   margin-top: 0.25rem;
+  ${shadows.basic}
 `;
 
 const SelectOptionsContainer = styled.div`

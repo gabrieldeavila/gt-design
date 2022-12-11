@@ -21,7 +21,7 @@ const darkThemeStyle = {
   preSelectColor: "#414a4c",
 };
 
-function GTBasic({ children }: { children: React.ReactNode }) {
+function GTBasic({ children }: { children: React.ReactNode; }) {
   const [darkTheme, setDarkTheme] = useState(
     localStorage.getItem("darkTheme") === "1"
   );

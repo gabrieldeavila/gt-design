@@ -3,7 +3,6 @@ import reset from "styled-reset";
 import { scrolls } from "../../utils";
 import transitions from "../../utils/transitions";
 import { IGLobalStyle } from "./interface";
-// import Kanit from "../../assets/fonts/Kanit-Regular.ttf"
 
 const GlobalStyle = createGlobalStyle`
   ${reset} 

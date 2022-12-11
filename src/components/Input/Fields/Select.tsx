@@ -1,4 +1,5 @@
 /* eslint-disable operator-linebreak */
+import { t } from "i18next";
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDown } from "react-feather";
@@ -237,7 +238,7 @@ const SelectOptions = ({ options }: ISelectOptions) => {
   const oldPreSelected = useRef<number | null>(null);
 
   useEffect(() => {
-    // when the filtered options change, set the preselected to 0
+    // when the filtered options changes, it sets the preselected to 0
     if (oldPreSelected.current !== null && oldPreSelected.current !== preSelected) {
       setPreSelected?.(0);
     } else {
@@ -258,7 +259,7 @@ const SelectOptions = ({ options }: ISelectOptions) => {
         {
           filteredOptions.length === 0 && (
             <Select.NotFound>
-              No options found 😖
+              {t("SELECT.NOT_FOUND")}
             </Select.NotFound>
           )
         }

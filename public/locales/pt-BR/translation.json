@@ -20,6 +20,9 @@
     "ONE_LOWERCASE": "Esta senha deve conter pelo menos uma letra minúscula.",
     "PASSWORDS_NOT_MATCH": "As senhas não coincidem."
   },
+  "SELECT": {
+    "NOT_FOUND": "Nenhum item encontrado 😪"
+  },
   "TEMPLATE": {
     "LOGIN": {
       "CREATE_TITLE": "Criar uma nova conta",

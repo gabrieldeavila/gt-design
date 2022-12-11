@@ -24,6 +24,7 @@ const defaultTheme = {
   textBtn: "#89cff0",
   containerMain: "#f0f8ff",
   containerSecondary: "#f0fff0",
+  outline: "#80daeb",
   switchOn: "#76ff7a"
 };
 

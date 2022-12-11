@@ -19,10 +19,17 @@ const simple = css`
     ${(props) => transparentize(0.85, props.theme.btnShadow)} 0px 0px 0px 1px;
 `;
 
+const outline = css`
+  box-shadow: ${(props) => transparentize(0.98, props.theme.btnShadow)} 0px 1px
+      3px 0px,
+    ${(props) => transparentize(0.85, props.theme.btnShadow)} 0px 0px 0px 1px;
+`;
+
 const shadows = {
   basic,
   glow,
   simple,
+  outline
 };
 
 export default shadows;
