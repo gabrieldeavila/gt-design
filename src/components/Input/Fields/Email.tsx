@@ -1,6 +1,6 @@
 /* eslint-disable operator-linebreak */
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateEmail from "../../../hooks/validation/useValidateEmail";
@@ -57,8 +57,10 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange }:
     [validateEmail, inputValidations, validateState, handleInputChange, onChange]
   );
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
   return (
-    <Input.Container>
+    <Input.Container ref={containerRef}>
       <Input.Label up={labelIsUp} htmlFor={name}>
         {label}
       </Input.Label>
@@ -74,7 +76,7 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange }:
 
       {!isValidEmail && <Input.Error>{t(`EMAIL.${errorMessage}`)}</Input.Error>}
 
-      <TeaserTip title="uga buga" text="Lorem Ipsum dsaodsja Lorem Ipsum dsaodsjaLorem Ipsum dsaodsjaLorem Ipsum dsaodsjaLorem Ipsum dsaodsjaLorem Ipsum dsaodsjaLorem Ipsum dsaodsjaLorem Ipsum dsaodsja"/>
+      <TeaserTip parentRef={containerRef} title="Email"/>
     </Input.Container>
   );
 }

@@ -136,13 +136,38 @@ const shake = css`
   }
 `;
 
+const simple = css`
+  @keyframes simpleShow {
+    0% {
+      opacity: 0;
+      transform: translateY(-0.25rem);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes simpleShowReverse {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-0.25rem);
+    }
+  }
+`;
+
 const animations = {
   easeOpenClose,
   easeOpacity,
   easeShow,
   upLabel,
   underline,
-  shake
+  shake,
+  simple
 };
 
 export default animations;

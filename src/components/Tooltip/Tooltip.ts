@@ -1,12 +1,13 @@
 import styled, { css } from "styled-components";
-import { flex, shadows } from "../../utils";
+import { animations, flex, shadows } from "../../utils";
+import { ITooltipWrapper } from "./interface";
 
-const TooltipWrapper = styled.div`
+const TooltipWrapper = styled.div<ITooltipWrapper>`
   position: absolute;
-  top: -${({ top }: { top: number }) => top + 6.9}px;
-  left: 25%;
+  top: -${({ top }) => top + 6.9}px;
+  left: ${({ left }) => left}px;
   min-width: 1rem;
-  max-width: 10rem;
+  max-width: 7rem;
   height: fit-content;
   background: ${({ theme }) => theme.primary};
   padding: 0.5rem;
@@ -16,6 +17,17 @@ const TooltipWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  ${({ show }) =>
+    show
+      ? css`
+          animation: simpleShow 0.2s ease-in-out forwards;
+        `
+      : css`
+          animation: simpleShowReverse 0.2s ease-in-out forwards;
+        `}
+
+  ${animations.simple}
 `;
 
 const TooltipContainer = styled.div`
@@ -42,18 +54,21 @@ const TooltipContainer = styled.div`
     top: 100%;
     transform: translateX(-40%) translatey(-100%);
     background: ${({ theme }) => theme.primary};
-    border: 5px solid ${({ theme }) => theme.primary}};
+    border: 5px solid ${({ theme }) => theme.primary};
   }
 `;
 
 const position = css`
   z-index: 1;
   position: relative;
+
+  text-align: center;
 `;
 
-const TooltipTitle = styled.h2`
+const TooltipTitle = styled.h3`
   ${position}
-  font-size: 14px;
+  font-size: 0.75rem;
+  font-weight: 400;
 `;
 
 const TooltipText = styled.p`
