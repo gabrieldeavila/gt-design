@@ -4,6 +4,8 @@ export interface IGTInput {
   validations: string[];
   defaultValidation: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  title?: string;
+  text?: string;
 }
 
 export interface IGTInputText extends IGTInput {

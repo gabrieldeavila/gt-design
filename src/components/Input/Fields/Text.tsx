@@ -2,11 +2,12 @@
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable operator-linebreak */
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import useValidateText from "../../../hooks/validation/useValidateText";
+import GTTooltip from "../../Tooltip/Tooltip";
 import Input from "../Input";
 import { IGTInputText } from "./interface";
 
@@ -20,7 +21,9 @@ function GTInputText({
   maxWords,
   minChars,
   maxChars,
-  onChange
+  onChange,
+  text,
+  title
 }: IGTInputText) {
   const { t } = useTranslation();
 
@@ -76,10 +79,12 @@ function GTInputText({
     [onChange, validateText, inputValidations, validateMinAndMax, validateState, handleInputChange]
   );
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
   return (
-    <Input.Container>
+    <Input.Container ref={containerRef}>
       <Input.Label up={labelIsUp} htmlFor={name}>
-        {label}
+        {t(label)}
       </Input.Label>
       <Input.Field
         type="text"
@@ -90,7 +95,10 @@ function GTInputText({
         id={name}
         name={name}
       />
+
       {!isValidText && <Input.Error>{t(`TEXT.${errorMessage}`, errors)}</Input.Error>}
+
+      <GTTooltip parentRef={containerRef} title={title} text={text} />
     </Input.Container>
   );
 }

@@ -2,10 +2,12 @@
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDown } from "react-feather";
+import { useTranslation } from "react-i18next";
 import useOnClickOutside from "../../../hooks/helpers/useOnClickOutside";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import wordFilter from "../../../utils/wordFilter";
+import GTTooltip from "../../Tooltip/Tooltip";
 import Input, { Select } from "../Input";
 import { IGTInputSelect, ISelectContext, ISelectOption, ISelectOptions, SelectionOptions } from "./interface";
 
@@ -13,7 +15,9 @@ const defaultValidationObj = ["required"];
 
 const SelectContext = React.createContext<ISelectContext>({ preSelected: 0 });
 
-function GTInputSelect({ name, label, validations, defaultValidation, onChange, options }: IGTInputSelect): JSX.Element {
+function GTInputSelect({ name, label, options, text, title }: IGTInputSelect): JSX.Element {
+  const { t } = useTranslation();
+
   const [searchTerm, setSearchTerm] = useState("");
 
   const { labelIsUp, handleInputChange, handleInputBlur, handleInputFocus } =
@@ -130,7 +134,7 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
     <SelectContext.Provider value={{ searchTerm, handleSelect, selected, setSelected, preSelected, setPreSelected }}>
       <Input.Container ref={ref} onFocus={handleShowOptions} isUp={showOptions}>
         <Input.Label up={labelIsUp} htmlFor={name}>
-          {label}
+          {t(label)}
         </Input.Label>
         <Input.Field
           ref={inputRef}
@@ -153,6 +157,8 @@ function GTInputSelect({ name, label, validations, defaultValidation, onChange, 
             <SelectOptions options={options} />
           )
         }
+        <GTTooltip parentRef={ref} title={title} text={text} />
+
       </Input.Container>
     </SelectContext.Provider>
   );

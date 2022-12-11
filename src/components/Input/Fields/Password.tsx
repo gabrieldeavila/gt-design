@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable operator-linebreak */
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContext } from "../../../context/pageState";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidatePassword from "../../../hooks/validation/useValidatePassword";
 import useValidateState from "../../../hooks/validation/useValidateState";
+import GTTooltip from "../../Tooltip/Tooltip";
 import Input from "../Input";
 import { IGTInputPassword } from "./interface";
 
@@ -20,7 +21,7 @@ const defaultValidationObj = [
   "oneUppercase"
 ];
 
-function GTInputPassword({ name, label, defaultValidation, validations, onChange, sameAs }: IGTInputPassword) {
+function GTInputPassword({ name, label, defaultValidation, validations, onChange, sameAs, title, text }: IGTInputPassword) {
   const { t } = useTranslation();
 
   // state to keep track of all the inputs
@@ -100,10 +101,12 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sameAsValue]);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
   return (
-    <Input.Container>
+    <Input.Container ref={containerRef}>
       <Input.Label up={labelIsUp} htmlFor={name}>
-        {label}
+        {t(label)}
       </Input.Label>
       <Input.Field
         type={type}
@@ -125,6 +128,8 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
       }
 
       {!isValidPassword && <Input.Error>{t(`PASSWORD.${errorMessage}`)}</Input.Error>}
+
+      <GTTooltip parentRef={containerRef} title={title} text={text} />
     </Input.Container>
   );
 }

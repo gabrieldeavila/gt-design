@@ -4,7 +4,7 @@ import { ITooltipWrapper } from "./interface";
 
 const TooltipWrapper = styled.div<ITooltipWrapper>`
   position: absolute;
-  top: -${({ top }) => top + 6.9}px;
+  top: -${({ top }) => top + 10}px;
   left: ${({ left }) => left}px;
   min-width: 1rem;
   max-width: 7rem;
@@ -17,15 +17,17 @@ const TooltipWrapper = styled.div<ITooltipWrapper>`
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0;
 
-  ${({ show }) =>
-    show
+  ${({ show, isFirstRender }) =>
+    !isFirstRender &&
+    (show
       ? css`
           animation: simpleShow 0.2s ease-in-out forwards;
         `
       : css`
           animation: simpleShowReverse 0.2s ease-in-out forwards;
-        `}
+        `)}
 
   ${animations.simple}
 `;
@@ -34,6 +36,7 @@ const TooltipContainer = styled.div`
   ${flex.wrapGap}
   gap: 0.5rem;
   flex-direction: column;
+  user-select: none;
 
   &:before {
     content: "";

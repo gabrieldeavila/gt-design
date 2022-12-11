@@ -39,5 +39,9 @@
       "DONT_HAVE_ACCOUNT": "Don't have an account?",
       "FORGOT_PASSWORD": "Forgot password?"
     }
+  },
+  "EXAMPLE": {
+    "TITLE": "Example",
+    "TEXT": "This is an example of a text with locales!"
   }
 }

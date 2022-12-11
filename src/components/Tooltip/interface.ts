@@ -1,6 +1,6 @@
 import { GTTheme } from "../../gt/Design/interface";
 
-export interface ITeaserTip {
+export interface IGTTooltip {
   parentRef: React.RefObject<HTMLElement>;
   title?: string;
   text?: string;
@@ -11,4 +11,5 @@ export interface ITooltipWrapper {
   left: number;
   theme: GTTheme;
   show: boolean;
+  isFirstRender: boolean;
 }

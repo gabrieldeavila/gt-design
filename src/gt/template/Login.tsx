@@ -60,21 +60,21 @@ function LoginCreate({ setIsCreate, canSave, loginRef }: ILogin) {
               minWords="2"
               maxWords="5"
               name="name"
-              label={t("TEMPLATE.LOGIN.NAME_LABEL")}
+              label="TEMPLATE.LOGIN.NAME_LABEL"
             />
 
             <GTInput.Text
               defaultValidation
               validations={["noSpaces"]}
               name="nickname"
-              label={t("TEMPLATE.LOGIN.NICKNAME_LABEL")}
+              label="TEMPLATE.LOGIN.NICKNAME_LABEL"
             />
 
-            <GTInput.Email name="email" label={t("TEMPLATE.LOGIN.EMAIL_LABEL")} />
+            <GTInput.Email name="email" label="TEMPLATE.LOGIN.EMAIL_LABEL" />
 
-            <GTInput.Password name="password" label={t("TEMPLATE.LOGIN.PASSWORD_LABEL")} />
+            <GTInput.Password name="password" label="TEMPLATE.LOGIN.PASSWORD_LABEL" />
 
-            <GTInput.Password sameAs="password" name="confirm_password" label={t("TEMPLATE.LOGIN.CONFIRM_PASSWORD_LABEL")} />
+            <GTInput.Password sameAs="password" name="confirm_password" label="TEMPLATE.LOGIN.CONFIRM_PASSWORD_LABEL" />
           </Input.Wrapper>
         </Space.FullSpace>
         <Space.Flex>
@@ -137,10 +137,10 @@ function LoginSignIn({ canSave, setIsCreate, loginRef, onPasswordForgot }: ILogi
               defaultValidation
               validations={["noSpaces"]}
               name="nickname"
-              label={t("TEMPLATE.LOGIN.NICKNAME_LABEL")}
+              label="TEMPLATE.LOGIN.NICKNAME_LABEL"
             />
 
-            <GTInput.Password name="password" label={t("TEMPLATE.LOGIN.PASSWORD_LABEL")} />
+            <GTInput.Password name="password" label="TEMPLATE.LOGIN.PASSWORD_LABEL" />
           </Input.Wrapper>
         </Space.FullSpace>
         <Space.Flex>

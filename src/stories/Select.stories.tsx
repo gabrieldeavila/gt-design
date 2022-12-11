@@ -33,7 +33,7 @@ const Template = function SwitchStory() {
     <GTBasic>
       <DEVONLY>
         <Input.Group>
-          <GTInput.Select label="Ma label" name="Ma name" options={options} />
+          <GTInput.Select label="Select" name="select" options={options} />
         </Input.Group>
       </DEVONLY>
     </GTBasic>

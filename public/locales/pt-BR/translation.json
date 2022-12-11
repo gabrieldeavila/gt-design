@@ -38,5 +38,9 @@
       "DONT_HAVE_ACCOUNT": "Não tem uma conta?",
       "FORGOT_PASSWORD": "Esqueceu sua senha?"
     }
+  },
+  "EXAMPLE": {
+    "TITLE": "Título!",
+    "TEXT": "Você também pode usar títulos com localidades"
   }
 }

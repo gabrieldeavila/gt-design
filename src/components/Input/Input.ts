@@ -52,7 +52,7 @@ const InputField = styled.input<IInputField>`
   padding-top: 1rem;
   padding-right: 2.5rem;
   border: none;
-  background: ${(props) => props.theme.primary};
+  background: ${(props) => transparentize(0.2, props.theme.primary)};
   color: ${(props) => props.theme.contrast};
   font-family: "Kanit", sans-serif;
 `;

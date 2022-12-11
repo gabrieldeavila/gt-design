@@ -5,13 +5,13 @@ import { useTranslation } from "react-i18next";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateEmail from "../../../hooks/validation/useValidateEmail";
 import useValidateState from "../../../hooks/validation/useValidateState";
-import TeaserTip from "../../Tooltip/Template/Teasers";
+import GTTooltip from "../../Tooltip/Tooltip";
 import Input from "../Input";
 import { IGTInput } from "./interface";
 
 const defaultValidationObj = ["required"];
 
-function GTInputEmail({ name, label, validations, defaultValidation, onChange }: IGTInput): JSX.Element {
+function GTInputEmail({ name, label, validations, defaultValidation, onChange, text, title }: IGTInput): JSX.Element {
   const { t } = useTranslation();
 
   const inputValidations = useMemo(() => {
@@ -62,7 +62,7 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange }:
   return (
     <Input.Container ref={containerRef}>
       <Input.Label up={labelIsUp} htmlFor={name}>
-        {label}
+        {t(label)}
       </Input.Label>
       <Input.Field
         type="email"
@@ -76,7 +76,7 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange }:
 
       {!isValidEmail && <Input.Error>{t(`EMAIL.${errorMessage}`)}</Input.Error>}
 
-      <TeaserTip parentRef={containerRef} title="Email"/>
+      <GTTooltip parentRef={containerRef} title={title} text={text}/>
     </Input.Container>
   );
 }
