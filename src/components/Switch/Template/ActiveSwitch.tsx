@@ -15,6 +15,8 @@ function GTActiveSwitch({ isInitialChecked }: { isInitialChecked?: boolean; }) {
   return (
     <Switch.Label
       htmlFor={labelId}
+      mode="active"
+      checked={checked}
     >
       <Switch.Input
         mode="active"

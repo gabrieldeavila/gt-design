@@ -43,6 +43,15 @@ const SwitchSlider = styled.span`
   }
 `;
 
+const activeLabel = css<ISwitch>`
+  /* if slider is checked, add custom background to the label */
+  filter: contrast();
+  background: ${({ checked, theme }) =>
+    checked ?? false
+      ? transparentize(0.1, theme.contrast)
+      : transparentize(0.5, theme.contrast)};
+`;
+
 const SwitchLabel = styled.label<ISwitch>`
   margin-top: 1rem;
   width: 4rem;
@@ -50,7 +59,6 @@ const SwitchLabel = styled.label<ISwitch>`
   z-index: 1;
   padding: 0.5rem;
   border-radius: 1.75rem;
-  background: ${(props) => transparentize(0.5, props.theme.contrast)};
   background: linear-gradient(
     145deg,
     ${(props) => props.theme.contrast},
@@ -65,12 +73,14 @@ const SwitchLabel = styled.label<ISwitch>`
 
   ${({ fixed }): any => (fixed ?? false) && fixedIcon}
 
+  ${({ mode }) => mode === "active" && activeLabel}
+
   &:active ${SwitchSlider} {
     ${transforms.press}
   }
 `;
 
-const sliderActive = css`
+const activeSlider = css`
   & ~ ${SwitchSlider} {
     filter: contrast(0.1);
   }
@@ -90,7 +100,7 @@ const SwitchInput = styled.input<ISwitchInput>`
     left: 58%;
   }
 
-  ${({ mode }) => mode === "active" && sliderActive};
+  ${({ mode }) => mode === "active" && activeSlider};
 `;
 
 const SwitchIconWrapper = styled.div`
