@@ -33,7 +33,7 @@ function GTDesign({ theme, children }: IGTDesign) {
 
   return (
     <ThemeProvider theme={themeStyle}>
-      <GTContainer>{children}</GTContainer>
+      <GTContainer.Default>{children}</GTContainer.Default>
     </ThemeProvider>
   );
 }

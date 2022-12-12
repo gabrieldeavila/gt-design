@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { color, space } from "styled-system";
 import { flex } from "../../utils";
 
-const GTContainer = styled.div`
+const Default = styled.div`
   ${color}
   background: linear-gradient(
     180deg,
@@ -14,6 +14,10 @@ const GTContainer = styled.div`
 
   ${space}
 `;
+
+const GTContainer = {
+  Default,
+};
 
 export default GTContainer;
 

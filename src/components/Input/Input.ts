@@ -11,11 +11,23 @@ const InputWrapper = styled.div`
   ${flex.wrapGap}
   gap: 1.75rem;
 `;
+const getRowWidth = ({ row }: IInputContainer) => {
+  let cssSrc = "";
+
+  if (row == null) cssSrc = "-webkit-fill-available";
+  else cssSrc = `${row * 5}rem`;
+
+  return css`
+    width: ${cssSrc};
+  `;
+};
 
 const InputContainer = styled.div<IInputContainer>`
+  ${getRowWidth}
+  flex-grow: 1;
+
   ${flex.column}
   gap: 0.5rem;
-  width: -webkit-fill-available;
   position: relative;
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -23,7 +35,7 @@ const InputContainer = styled.div<IInputContainer>`
 
   &:focus-within {
     outline: 2px solid ${(props) => props.theme.outline};
-    outline-offset: 0.25rem;
+    outline-offset: 0.15rem;
   }
 
   &:focus-within::after {
@@ -34,7 +46,7 @@ const InputContainer = styled.div<IInputContainer>`
     right: 0;
     bottom: 0;
     border-radius: 0.25rem;
-    box-shadow: 0 0 0 0.25rem
+    box-shadow: 0 0 0 0.15rem
       ${(props) => transparentize(1, props.theme.outline)};
   }
 
@@ -65,6 +77,7 @@ const InputContainer = styled.div<IInputContainer>`
 
 const InputGroup = styled.div`
   ${flex.wrapGap}
+  gap: 1.75rem;
   flex-direction: row;
 `;
 
@@ -100,7 +113,7 @@ const InputError = styled.span`
   font-size: 0.65rem;
   color: ${(props) => props.theme.errorColor};
   top: 100%;
-  margin-top: 0.25rem;
+  margin-top: 0.35rem;
 `;
 
 const Input = {

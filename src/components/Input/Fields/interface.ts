@@ -6,6 +6,7 @@ export interface IGTInput {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   title?: string;
   text?: string;
+  row?: number;
 }
 
 export interface IGTInputText extends IGTInput {

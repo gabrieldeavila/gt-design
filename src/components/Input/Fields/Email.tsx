@@ -11,7 +11,7 @@ import { IGTInput } from "./interface";
 
 const defaultValidationObj = ["required"];
 
-function GTInputEmail({ name, label, validations, defaultValidation, onChange, text, title }: IGTInput): JSX.Element {
+function GTInputEmail({ name, label, validations, defaultValidation, onChange, text, title, row }: IGTInput): JSX.Element {
   const { t } = useTranslation();
 
   const inputValidations = useMemo(() => {
@@ -60,7 +60,7 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange, t
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <Input.Container ref={containerRef}>
+    <Input.Container row={row} ref={containerRef}>
       <Input.Label up={labelIsUp} htmlFor={name}>
         {t(label)}
       </Input.Label>

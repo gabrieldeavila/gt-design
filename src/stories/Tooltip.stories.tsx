@@ -1,7 +1,6 @@
 import React from "react";
-import { GTInput, Input } from "../components";
+import { GTInput, Input, Space } from "../components";
 import { GTBasic } from "../gt";
-import { DEVONLY } from "../gt/Container/Container";
 
 export default {
   title: "GTDesign/Tooltip",
@@ -18,10 +17,11 @@ const Template = function TooltipStory() {
 
   return (
     <GTBasic>
-      <DEVONLY>
+      <Space.Horizontal>
         <Input.Group>
-          <GTInput.Select title="wow such charm 🐲" text="what" label="Select" name="select" options={options} />
+          <GTInput.Select row={4} title="wow such charm 🐲" text="what" label="Select" name="select" options={options} />
           <GTInput.Text
+            row={4}
             text="change"
             defaultValidation
             validations={["noSpaces"]}
@@ -29,11 +29,12 @@ const Template = function TooltipStory() {
             label="TEMPLATE.LOGIN.NICKNAME_LABEL"
           />
 
-          <GTInput.Email text="Email" name="email" label="TEMPLATE.LOGIN.EMAIL_LABEL" />
+          <GTInput.Email row={4} text="Email" name="email" label="TEMPLATE.LOGIN.EMAIL_LABEL" />
 
-          <GTInput.Password text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="password" label="TEMPLATE.LOGIN.PASSWORD_LABEL" />
+          <GTInput.Password row={8} text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="password" label="TEMPLATE.LOGIN.PASSWORD_LABEL" />
         </Input.Group>
-      </DEVONLY>
+      </Space.Horizontal>
+
     </GTBasic>
   );
 };

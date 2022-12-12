@@ -23,7 +23,8 @@ function GTInputText({
   maxChars,
   onChange,
   text,
-  title
+  title,
+  row
 }: IGTInputText) {
   const { t } = useTranslation();
 
@@ -82,7 +83,7 @@ function GTInputText({
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <Input.Container ref={containerRef}>
+    <Input.Container row={row} ref={containerRef}>
       <Input.Label up={labelIsUp} htmlFor={name}>
         {t(label)}
       </Input.Label>

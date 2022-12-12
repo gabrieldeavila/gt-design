@@ -55,11 +55,16 @@ const Between = styled.div`
   ${space}
 `;
 
+const Horizontal = styled.div`
+  padding: 2rem;
+`;
+
 export default {
   Flex,
   FlexCenter,
   FlexCenterRow,
   FullSpace,
   Center,
-  Between
+  Between,
+  Horizontal,
 };

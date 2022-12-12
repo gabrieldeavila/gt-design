@@ -21,7 +21,7 @@ const defaultValidationObj = [
   "oneUppercase"
 ];
 
-function GTInputPassword({ name, label, defaultValidation, validations, onChange, sameAs, title, text }: IGTInputPassword) {
+function GTInputPassword({ name, label, defaultValidation, validations, onChange, sameAs, title, text, row }: IGTInputPassword) {
   const { t } = useTranslation();
 
   // state to keep track of all the inputs
@@ -104,7 +104,7 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <Input.Container ref={containerRef}>
+    <Input.Container row={row} ref={containerRef}>
       <Input.Label up={labelIsUp} htmlFor={name}>
         {t(label)}
       </Input.Label>

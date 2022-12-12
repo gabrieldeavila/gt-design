@@ -5,6 +5,15 @@ function useOnClickOutside(
   avoidComponents: Array<React.RefObject<HTMLElement>> | null,
   handler: (event: MouseEvent | TouchEvent) => void
 ) {
+  const tabListener = useCallback(
+    (event: any) => {
+      if (event.key === "Tab") {
+        handler(event);
+      }
+    },
+    [handler]
+  );
+
   const listener = useCallback(
     (event: any) => {
       if (ref.current == null || ref.current.contains(event.target)) {
@@ -28,11 +37,14 @@ function useOnClickOutside(
   useEffect(() => {
     document.addEventListener("mousedown", listener);
     document.addEventListener("touchstart", listener);
+    document.addEventListener("keydown", tabListener);
+
     return () => {
       document.removeEventListener("mousedown", listener);
       document.removeEventListener("touchstart", listener);
+      document.removeEventListener("keydown", tabListener);
     };
-  }, [ref, handler, avoidComponents, listener]);
+  }, [ref, handler, avoidComponents, listener, tabListener]);
 }
 
 export default useOnClickOutside;

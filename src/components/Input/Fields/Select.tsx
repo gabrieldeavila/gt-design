@@ -16,7 +16,7 @@ const defaultValidationObj = ["required"];
 
 const SelectContext = React.createContext<ISelectContext>({ preSelected: 0 });
 
-function GTInputSelect({ name, label, options, text, title }: IGTInputSelect): JSX.Element {
+function GTInputSelect({ name, label, options, text, title, row }: IGTInputSelect): JSX.Element {
   const { t } = useTranslation();
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -133,7 +133,7 @@ function GTInputSelect({ name, label, options, text, title }: IGTInputSelect): J
 
   return (
     <SelectContext.Provider value={{ searchTerm, handleSelect, selected, setSelected, preSelected, setPreSelected }}>
-      <Input.Container ref={ref} onFocus={handleShowOptions} isUp={showOptions}>
+      <Input.Container row={row} ref={ref} onFocus={handleShowOptions} isUp={showOptions}>
         <Input.Label up={labelIsUp} htmlFor={name}>
           {t(label)}
         </Input.Label>

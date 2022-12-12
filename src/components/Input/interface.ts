@@ -6,6 +6,7 @@ export interface IInputField {
 
 export interface IInputContainer {
   isUp?: boolean;
+  row?: number;
 }
 
 export interface ISelectValue {
