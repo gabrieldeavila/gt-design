@@ -12,4 +12,9 @@ export interface ITooltipWrapper {
   theme: GTTheme;
   show: boolean;
   isFirstRender: boolean;
+  isAboveParent: boolean;
+}
+
+export interface ITooltipContainer {
+  isAboveParent: boolean;
 }

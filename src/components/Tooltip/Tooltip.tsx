@@ -7,18 +7,50 @@ import Tooltip from "./style";
 function GTTooltip({ title, text, parentRef }: IGTTooltip) {
   const { t } = useTranslation();
 
+  // ref to the tooltip element
   const tooltipRef = useRef<HTMLDivElement>(null);
 
-  const { height = 1, width: tooltipWidth = 1 } = (tooltipRef.current?.getBoundingClientRect()) ?? {};
+  // info about the tooltip element
+  const { height = 1, width: tooltipWidth = 1, top = 1, } = (tooltipRef.current?.getBoundingClientRect()) ?? {};
 
-  const { width = 1 } = parentRef?.current?.getBoundingClientRect() ?? {};
+  // width of the parent element
+  const { width = 1, height: parentHeight = 1 } = parentRef?.current?.getBoundingClientRect() ?? {};
 
+  const prevAboveParent = useRef<boolean>(false);
+
+  // if the tooltip should be shown above the parent element 🤷‍♂️
+  const isAboveParent = useMemo(() => {
+    if (prevAboveParent.current) {
+      return false;
+    }
+
+    const isAbove = top > 0 || top < -height;
+
+    if (!isAbove) {
+      prevAboveParent.current = true;
+    }
+
+    return isAbove;
+  }, [height, top]);
+
+  const tooltipTop = useMemo(() => {
+    if (isAboveParent) {
+      return height;
+    } else {
+      return parentHeight;
+    }
+  }, [height, isAboveParent, parentHeight]);
+
+  // find the left position of the tooltip
   const left = width / 2 - tooltipWidth / 2;
 
+  // if the tooltip should be shown
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
 
+  // ref to set if it's the first render
   const firstShowSet = useRef<boolean>(false);
 
+  // memo to force the tooltip to NOT be shown on the first render
   const isFirst = useMemo(() => {
     if (firstShowSet.current) {
       return false;
@@ -29,6 +61,7 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showTooltip]);
 
+  // if the mouse is not over the parent
   const leavedParent = useRef<boolean>(false);
 
   useEffect(() => {
@@ -82,11 +115,12 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
     };
   }, []);
 
+  // if there's no title or text, don't render the tooltip
   if (!title && !text) return null;
 
   return (
-    <Tooltip.Wrapper ref={tooltipRef} isFirstRender={isFirst} left={left} top={height} show={showTooltip}>
-      <Tooltip.Container>
+    <Tooltip.Wrapper ref={tooltipRef} isAboveParent={isAboveParent} isFirstRender={isFirst} left={left} top={tooltipTop} show={true}>
+      <Tooltip.Container isAboveParent={isAboveParent}>
         {
           (title != null) &&
           <Tooltip.Title> {t(title)} </Tooltip.Title>

@@ -1,10 +1,20 @@
 import styled, { css } from "styled-components";
 import { animations, flex, shadows } from "../../utils";
-import { ITooltipWrapper } from "./interface";
+import { ITooltipContainer, ITooltipWrapper } from "./interface";
+
+const getSize = (top: number, isAboveParent: boolean) => {
+  top += 10;
+
+  if (isAboveParent) {
+    return -top;
+  }
+
+  return top;
+};
 
 const TooltipWrapper = styled.div<ITooltipWrapper>`
   position: absolute;
-  top: -${({ top }) => top + 10}px;
+  top: ${({ top, isAboveParent }) => getSize(top, isAboveParent)}px;
   left: ${({ left }) => left}px;
   min-width: 1rem;
   max-width: 7rem;
@@ -32,7 +42,7 @@ const TooltipWrapper = styled.div<ITooltipWrapper>`
   ${animations.simple}
 `;
 
-const TooltipContainer = styled.div`
+const TooltipContainer = styled.div<ITooltipContainer>`
   ${flex.wrapGap}
   gap: 0.5rem;
   flex-direction: column;
@@ -42,7 +52,7 @@ const TooltipContainer = styled.div`
     content: "";
     position: absolute;
     left: 50%;
-    top: 100%;
+    top: ${({ isAboveParent }) => (isAboveParent ? "100%" : "0")};
     transform: translateX(-40%) translatey(-50%) rotate(45deg);
     background: ${({ theme }) => theme.primary};
     border: 5px solid ${({ theme }) => theme.primary};
@@ -54,7 +64,7 @@ const TooltipContainer = styled.div`
     position: absolute;
     left: 45%;
     right: 0;
-    top: 100%;
+    top: ${({ isAboveParent }) => (isAboveParent ? "100%" : "10px")};
     transform: translateX(-40%) translatey(-100%);
     background: ${({ theme }) => theme.primary};
     border: 5px solid ${({ theme }) => theme.primary};
