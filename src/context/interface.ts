@@ -14,4 +14,5 @@ export interface IGTPageState {
   pageState: IPageStateValues;
   setPageState: React.Dispatch<React.SetStateAction<IPageStateValues>>;
   children?: React.ReactNode;
+  isLoading?: boolean;
 }

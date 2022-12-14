@@ -4,6 +4,7 @@
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useGTPageStateContext } from "../../../context/pageState";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import useValidateText from "../../../hooks/validation/useValidateText";
@@ -81,6 +82,16 @@ function GTInputText({
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const { isLoading } = useGTPageStateContext();
+
+  useEffect(() => {
+    console.log(isLoading);
+  }, [isLoading]);
+
+  if (isLoading ?? false) {
+    return <Input.Container row={row} ref={containerRef} isLoading />;
+  }
 
   return (
     <Input.Container row={row} ref={containerRef}>

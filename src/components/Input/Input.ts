@@ -22,6 +22,31 @@ const getRowWidth = ({ row }: IInputContainer) => {
   `;
 };
 
+const loadingInput = css`
+  /* add some skeleton stuff */
+  background: ${(props) => props.theme.primary};
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0,
+      rgba(255, 255, 255, 0.2) 20%,
+      rgba(255, 255, 255, 0.5) 60%,
+      rgba(255, 255, 255, 0)
+    );
+    animation: skeleton 1.5s infinite;
+    ${animations.skeleton}
+  }
+`;
+
 const InputContainer = styled.div<IInputContainer>`
   ${getRowWidth}
   flex-grow: 1;
@@ -73,6 +98,8 @@ const InputContainer = styled.div<IInputContainer>`
         : "scale(0.75) rotate(0deg)"};
     `}
   }
+
+  ${({ isLoading }) => (isLoading ?? false) && loadingInput}
 `;
 
 const InputGroup = styled.div`

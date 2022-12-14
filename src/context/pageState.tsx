@@ -22,7 +22,7 @@ export function useGTPageStateContext() {
   return context;
 }
 
-function GTPageStateProvider({ errors, setErrors, pageState, setPageState, children }: IGTPageState) {
+function GTPageStateProvider({ errors, setErrors, pageState, setPageState, children, isLoading }: IGTPageState) {
   const [canSave, setCanSave] = useState(false);
 
   const values = useMemo(
@@ -32,9 +32,10 @@ function GTPageStateProvider({ errors, setErrors, pageState, setPageState, child
       canSave,
       setCanSave,
       errors,
-      setErrors
+      setErrors,
+      isLoading,
     }),
-    [canSave, errors, pageState, setErrors, setPageState]
+    [canSave, errors, isLoading, pageState, setErrors, setPageState]
   );
 
   return <GTPageStateContext.Provider value={values}>{children}</GTPageStateContext.Provider>;

@@ -7,6 +7,7 @@ export interface IInputField {
 export interface IInputContainer {
   isUp?: boolean;
   row?: number;
+  isLoading?: boolean;
 }
 
 export interface ISelectValue {

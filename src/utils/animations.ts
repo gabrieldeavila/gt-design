@@ -160,6 +160,14 @@ const simple = css`
   }
 `;
 
+const skeleton = css`
+  @keyframes skeleton {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+`;
+
 const animations = {
   easeOpenClose,
   easeOpacity,
@@ -167,7 +175,8 @@ const animations = {
   upLabel,
   underline,
   shake,
-  simple
+  simple,
+  skeleton,
 };
 
 export default animations;

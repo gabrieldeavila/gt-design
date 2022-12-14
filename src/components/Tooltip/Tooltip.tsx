@@ -119,7 +119,7 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
   if (!title && !text) return null;
 
   return (
-    <Tooltip.Wrapper ref={tooltipRef} isAboveParent={isAboveParent} isFirstRender={isFirst} left={left} top={tooltipTop} show={true}>
+    <Tooltip.Wrapper ref={tooltipRef} isAboveParent={isAboveParent} isFirstRender={isFirst} left={left} top={tooltipTop} show={showTooltip}>
       <Tooltip.Container isAboveParent={isAboveParent}>
         {
           (title != null) &&
