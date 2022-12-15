@@ -103,6 +103,12 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
 
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const { isLoading } = useGTPageStateContext();
+
+  if (isLoading ?? false) {
+    return <Input.Container row={row} isLoading />;
+  }
+
   return (
     <Input.Container row={row} ref={containerRef}>
       <Input.Label up={labelIsUp} htmlFor={name}>

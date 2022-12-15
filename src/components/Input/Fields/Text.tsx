@@ -85,12 +85,8 @@ function GTInputText({
 
   const { isLoading } = useGTPageStateContext();
 
-  useEffect(() => {
-    console.log(isLoading);
-  }, [isLoading]);
-
   if (isLoading ?? false) {
-    return <Input.Container row={row} ref={containerRef} isLoading />;
+    return <Input.Container row={row} isLoading />;
   }
 
   return (

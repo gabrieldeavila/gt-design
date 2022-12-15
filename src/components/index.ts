@@ -24,8 +24,6 @@ export { GTNavbar } from "./Navbar";
 
 export { GTNavbarMobile } from "./Navbar";
 
-export { default as Skeletons } from "./Skeletons";
-
 export { default as Popup } from "./Popup";
 
 export { default as Space } from "./Space";

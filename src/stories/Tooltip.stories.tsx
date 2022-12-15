@@ -18,7 +18,6 @@ const Template = function TooltipStory() {
 
   const [pageState, setPageState] = useState({});
   const [errors, setErrors] = useState<string[]>([]);
-  const [isLoading] = useState<boolean>(true);
 
   return (
     <GTBasic>
@@ -27,7 +26,6 @@ const Template = function TooltipStory() {
         setPageState={setPageState}
         errors={errors}
         setErrors={setErrors}
-        isLoading={isLoading}
       >
         <Space.Horizontal>
           <Input.Group>
@@ -41,7 +39,7 @@ const Template = function TooltipStory() {
               label="TEMPLATE.LOGIN.NICKNAME_LABEL"
             />
 
-            <GTInput.Email row={4} text="Email" name="email" label="TEMPLATE.LOGIN.EMAIL_LABEL" />
+            <GTInput.Email row={8} text="Email" name="email" label="TEMPLATE.LOGIN.EMAIL_LABEL" />
 
             <GTInput.Password row={8} text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="password" label="TEMPLATE.LOGIN.PASSWORD_LABEL" />
           </Input.Group>

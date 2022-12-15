@@ -23,9 +23,9 @@ const getRowWidth = ({ row }: IInputContainer) => {
 };
 
 const loadingInput = css`
-  /* add some skeleton stuff */
-  background: ${(props) => props.theme.primary};
+  background: ${({ theme }) => theme.primary};
   overflow: hidden;
+  min-height: 3.5rem;
 
   &::after {
     content: "";
@@ -34,15 +34,15 @@ const loadingInput = css`
     right: 0;
     bottom: 0;
     left: 0;
-    transform: translateX(-100%);
+    transform: translateX(-80%);
     background-image: linear-gradient(
       90deg,
-      rgba(255, 255, 255, 0) 0,
-      rgba(255, 255, 255, 0.2) 20%,
-      rgba(255, 255, 255, 0.5) 60%,
-      rgba(255, 255, 255, 0)
+      ${({ theme }) => transparentize(1, theme.secondary)} 0,
+      ${({ theme }) => transparentize(0.2, theme.secondary)} 20%,
+      ${({ theme }) => transparentize(0.8, theme.secondary)} 60%,
+      ${({ theme }) => transparentize(1, theme.secondary)}
     );
-    animation: skeleton 1.5s infinite;
+    animation: skeleton 1s linear infinite;
     ${animations.skeleton}
   }
 `;

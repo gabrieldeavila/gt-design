@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ChevronDown } from "react-feather";
 import { useTranslation } from "react-i18next";
+import { useGTPageStateContext } from "../../../context/pageState";
 import useOnClickOutside from "../../../hooks/helpers/useOnClickOutside";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateState from "../../../hooks/validation/useValidateState";
@@ -130,6 +131,12 @@ function GTInputSelect({ name, label, options, text, title, row }: IGTInputSelec
   const ref = useRef<HTMLDivElement>(null);
 
   useOnClickOutside(ref, null, handleCloseSelect);
+
+  const { isLoading } = useGTPageStateContext();
+
+  if (isLoading ?? false) {
+    return <Input.Container row={row} isLoading />;
+  }
 
   return (
     <SelectContext.Provider value={{ searchTerm, handleSelect, selected, setSelected, preSelected, setPreSelected }}>

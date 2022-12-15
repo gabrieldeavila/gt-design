@@ -2,6 +2,7 @@
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useGTPageStateContext } from "../../../context/pageState";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateEmail from "../../../hooks/validation/useValidateEmail";
 import useValidateState from "../../../hooks/validation/useValidateState";
@@ -58,6 +59,12 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange, t
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const { isLoading } = useGTPageStateContext();
+
+  if (isLoading ?? false) {
+    return <Input.Container row={row} isLoading />;
+  }
 
   return (
     <Input.Container row={row} ref={containerRef}>
