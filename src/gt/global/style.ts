@@ -23,6 +23,12 @@ const GlobalStyle = createGlobalStyle`
     background: ${({ theme }: IGLobalStyle) => theme.contrast};
     color: ${({ theme }: IGLobalStyle) => theme.primary};
   }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 export default GlobalStyle;

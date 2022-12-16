@@ -29,9 +29,9 @@ const Template = function TooltipStory() {
       >
         <Space.Horizontal>
           <Input.Group>
-            <GTInput.Select row={4} title="wow such charm 🐲" text="what" label="Select" name="select" options={options} />
+            <GTInput.Select row={2} title="wow such charm 🐲" text="what" label="Select" name="select" options={options} />
             <GTInput.Text
-              row={4}
+              row={2}
               text="change"
               defaultValidation
               validations={["noSpaces"]}
@@ -39,9 +39,14 @@ const Template = function TooltipStory() {
               label="TEMPLATE.LOGIN.NICKNAME_LABEL"
             />
 
-            <GTInput.Email row={8} text="Email" name="email" label="TEMPLATE.LOGIN.EMAIL_LABEL" />
+            <GTInput.Email row={2} text="Email" name="email" label="TEMPLATE.LOGIN.EMAIL_LABEL" />
 
-            <GTInput.Password row={8} text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="password" label="TEMPLATE.LOGIN.PASSWORD_LABEL" />
+            <GTInput.Password row={5} text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="password" label="TEMPLATE.LOGIN.PASSWORD_LABEL" />
+
+            <GTInput.Number row={5} text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="NUMBER" label="És uno numero!" />
+            <GTInput.Number row={5} text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="NUMBER" label="És uno numero!" />
+            <GTInput.Number row={5} text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="NUMBER" label="És uno numero!" />
+            <GTInput.Number row={5} text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="NUMBER" label="És uno numero!" />
           </Input.Group>
         </Space.Horizontal>
       </GTPageStateProvider>

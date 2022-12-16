@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GTInput, Input, Space } from "../components";
 import GTPageStateProvider from "../context/pageState";
 import { GTBasic } from "../gt";
 
 export default {
   title: "GTDesign/Skeletons",
-  parameters: {
-    layout: "centered",
+  args: {
+    isLoading: true,
   },
   argTypes: {
     isLoading: {
-      // create checkbox
-      control: {
-        type: "boolean",
-        defaultValue: true,
-      }
+      control: "boolean",
+      default: false
+    },
+  },
+
+  // add description to the isloading arg
+  parameters: {
+    docs: {
+      description: {
+        component: "Skeleton components that show when the page is loading. You only need to pass if it is loading or not. The rest is handled by the context.",
+      },
     },
   },
 };
@@ -30,6 +36,10 @@ const Template = function Skeleton({ isLoading }: { isLoading: boolean; }) {
 
   const [pageState, setPageState] = useState({});
   const [errors, setErrors] = useState<string[]>([]);
+
+  useEffect(() => {
+    console.log(isLoading);
+  }, [isLoading]);
 
   return (
     <GTBasic>
