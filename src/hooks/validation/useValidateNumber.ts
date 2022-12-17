@@ -8,7 +8,7 @@ const options = {
   },
 };
 
-function useValidateNumber() {
+function useValidateNumber(min?: number | string, max?: number | string) {
   const { optionsValidation } = useInputValidation();
 
   const validateNumber = useCallback(
@@ -20,9 +20,24 @@ function useValidateNumber() {
         "number"
       );
 
-      return { isValid, invalidMessage };
+      if (min != null && value < min) {
+        return {
+          isValid: false,
+          invalidMessage: "MIN",
+          errorsVar: { MIN: min },
+        };
+      }
+
+      if (max != null && value > max) {
+        return {
+          isValid: false,
+          invalidMessage: "MAX",
+          errorsVar: { MAX: max },
+        };
+      }
+      return { isValid, invalidMessage, errorsVar: {} };
     },
-    [optionsValidation]
+    [max, min, optionsValidation]
   );
 
   return { validateNumber };

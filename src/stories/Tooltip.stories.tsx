@@ -43,10 +43,7 @@ const Template = function TooltipStory() {
 
             <GTInput.Password row={5} text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="password" label="TEMPLATE.LOGIN.PASSWORD_LABEL" />
 
-            <GTInput.Number row={5} text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="NUMBER" label="És uno numero!" />
-            <GTInput.Number row={5} text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="NUMBER" label="És uno numero!" />
-            <GTInput.Number row={5} text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="NUMBER" label="És uno numero!" />
-            <GTInput.Number row={5} text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="NUMBER" label="És uno numero!" />
+            <GTInput.Number min={1} max={5.2} row={5} text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="NUMBER" label="És uno numero!" />
           </Input.Group>
         </Space.Horizontal>
       </GTPageStateProvider>

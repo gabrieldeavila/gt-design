@@ -24,6 +24,11 @@
   "SELECT": {
     "NOT_FOUND": "No results found 😪"
   },
+  "NUMBER": {
+    "REQUIRED": "Please enter a valid number.",
+    "MIN": "This field must be greater than {{MIN}}.",
+    "MAX": "This field must be less than {{MAX}}."
+  },
   "TEMPLATE": {
     "LOGIN": {
       "CREATE_TITLE": "Create an account",

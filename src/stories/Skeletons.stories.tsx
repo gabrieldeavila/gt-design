@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { GTInput, Input, Space } from "../components";
 import GTPageStateProvider from "../context/pageState";
 import { GTBasic } from "../gt";
@@ -36,10 +36,6 @@ const Template = function Skeleton({ isLoading }: { isLoading: boolean; }) {
 
   const [pageState, setPageState] = useState({});
   const [errors, setErrors] = useState<string[]>([]);
-
-  useEffect(() => {
-    console.log(isLoading);
-  }, [isLoading]);
 
   return (
     <GTBasic>

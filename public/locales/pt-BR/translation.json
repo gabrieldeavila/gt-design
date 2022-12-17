@@ -23,6 +23,12 @@
   "SELECT": {
     "NOT_FOUND": "Nenhum item encontrado 😪"
   },
+  "NUMBER": {
+      "REQUIRED": "Este campo é obrigatório.",
+      "MIN": "Este campo deve ser maior ou igual a {{MIN}}.",
+      "MAX": "Este campo deve ser menor ou igual a {{MAX}}.",
+      "BETWEEN": "Este campo deve estar entre {{MIN}} e {{MAX}}."
+  },
   "TEMPLATE": {
     "LOGIN": {
       "CREATE_TITLE": "Criar uma nova conta",

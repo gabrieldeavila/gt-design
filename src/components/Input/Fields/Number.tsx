@@ -10,7 +10,7 @@ import useValidateNumber from "../../../hooks/validation/useValidateNumber";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import GTTooltip from "../../Tooltip/Tooltip";
 import Input from "../Input";
-import { IGTInput } from "./interface";
+import { IGTInputNumber } from "./interface";
 
 const defaultValidationObj = ["required"];
 
@@ -22,8 +22,10 @@ function GTInputNumber({
   onChange,
   text,
   title,
-  row
-}: IGTInput) {
+  row,
+  min,
+  max,
+}: IGTInputNumber) {
   const { t } = useTranslation();
 
   const inputValidations = useMemo(() => {
@@ -39,9 +41,10 @@ function GTInputNumber({
   const { labelIsUp, value, handleInputChange, handleInputBlur, handleInputFocus } =
     useInputValues(name);
 
-  const { validateNumber } = useValidateNumber();
+  const { validateNumber } = useValidateNumber(min, max);
   const [isValidNumber, setIsValidNumber] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     const chars = value.toString();
@@ -57,11 +60,12 @@ function GTInputNumber({
   const handleChange = useCallback(
     (e: any) => {
       const { value: iVal } = e.target;
-      const { isValid, invalidMessage } = validateNumber(iVal, inputValidations);
-
+      const { isValid, invalidMessage, errorsVar } = validateNumber(iVal, inputValidations);
+      console.log(errorsVar);
       validateState(isValid, iVal);
       setIsValidNumber(isValid);
       setErrorMessage(invalidMessage);
+      setErrors(errorsVar);
       handleInputChange(iVal);
 
       onChange(e);
@@ -93,7 +97,7 @@ function GTInputNumber({
         autoComplete="off"
       />
 
-      {!isValidNumber && <Input.Error>{t(`NUMBER.${errorMessage}`)}</Input.Error>}
+      {!isValidNumber && <Input.Error>{t(`NUMBER.${errorMessage}`, errors)}</Input.Error>}
 
       <GTTooltip parentRef={containerRef} title={title} text={text} />
     </Input.Container>

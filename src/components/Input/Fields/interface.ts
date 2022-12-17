@@ -7,6 +7,7 @@ export interface IGTInput {
   title?: string;
   text?: string;
   row?: number;
+  disabled?: boolean;
 }
 
 export interface IGTInputText extends IGTInput {
@@ -14,6 +15,11 @@ export interface IGTInputText extends IGTInput {
   maxWords?: number | string;
   minChars?: number | string;
   maxChars?: number | string;
+}
+
+export interface IGTInputNumber extends IGTInput {
+  min?: number | string;
+  max?: number | string;
 }
 
 export interface IGTInputPassword extends IGTInput {

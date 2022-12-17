@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable operator-linebreak */
 import _ from "lodash";
 import { useCallback } from "react";
@@ -145,7 +146,7 @@ function useValidateText(
         msg = invalidAllMessageChars || "";
       }
 
-      const errorsVars = errorsVarsChars || errorsVarsWords;
+      const errorsVars = errorsVarsChars ?? errorsVarsWords;
 
       return {
         isAllValid: isAllValidChars,
