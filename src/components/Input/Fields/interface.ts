@@ -22,6 +22,23 @@ export interface IGTInputNumber extends IGTInput {
   max?: number | string;
 }
 
+export interface INumericMask {
+  suffix: string;
+  prefix: string;
+  thousandsSeparatorSymbol: string;
+  decimalSymbol: string;
+  decimalLimit: number;
+  integerLimit: number;
+  allowNegative: boolean;
+  allowLeadingZeroes: boolean;
+  type: "numeric_mask"
+}
+
+export interface IGTInputNumericMask extends IGTInput {
+  mask: INumericMask;
+  min?: number | string;
+  max?: number | string;
+}
 export interface IGTInputPassword extends IGTInput {
   sameAs?: string;
 }

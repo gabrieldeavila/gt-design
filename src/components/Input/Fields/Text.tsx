@@ -29,8 +29,6 @@ function GTInputText({
 }: IGTInputText) {
   const { t } = useTranslation();
 
-  const [errors, setErrors] = useState({});
-
   const inputValidations = useMemo(() => {
     if (defaultValidation) {
       return [...defaultValidationObj, ...validations];
@@ -52,6 +50,7 @@ function GTInputText({
   );
   const [isValidText, setIsValidText] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [localeErrorsParams, setLocaleErrorsParams] = useState({});
 
   useEffect(() => {
     const chars = value.toString();
@@ -73,7 +72,7 @@ function GTInputText({
       validateState(isAllValid, iVal);
       setErrorMessage(invalidAllMessage);
       setIsValidText(isAllValid);
-      setErrors(errorsVars);
+      setLocaleErrorsParams(errorsVars);
       handleInputChange(iVal);
 
       onChange(e);
@@ -104,7 +103,7 @@ function GTInputText({
         name={name}
       />
 
-      {!isValidText && <Input.Error>{t(`TEXT.${errorMessage}`, errors)}</Input.Error>}
+      {!isValidText && <Input.Error>{t(`TEXT.${errorMessage}`, localeErrorsParams)}</Input.Error>}
 
       <GTTooltip parentRef={containerRef} title={title} text={text} />
     </Input.Container>

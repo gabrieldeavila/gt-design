@@ -1,10 +1,23 @@
 import React, { useState } from "react";
 import { GTInput, Input, Space } from "../components";
+import { INumericMask } from "../components/Input/Fields/interface";
 import GTPageStateProvider from "../context/pageState";
 import { GTBasic } from "../gt";
 
 export default {
   title: "GTDesign/Tooltip",
+};
+
+const numericMask: INumericMask = {
+  suffix: "",
+  prefix: "R$ ",
+  thousandsSeparatorSymbol: ".",
+  decimalSymbol: ",",
+  decimalLimit: 2,
+  integerLimit: 7,
+  allowNegative: false,
+  allowLeadingZeroes: false,
+  type: "numeric_mask"
 };
 
 const Template = function TooltipStory() {
@@ -44,6 +57,8 @@ const Template = function TooltipStory() {
             <GTInput.Password row={5} text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="password" label="TEMPLATE.LOGIN.PASSWORD_LABEL" />
 
             <GTInput.Number min={1} max={5.2} row={5} text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="NUMBER" label="És uno numero!" />
+
+            <GTInput.NumericMask name="price" label="Lá máscarada!" mask={numericMask} />
           </Input.Group>
         </Space.Horizontal>
       </GTPageStateProvider>

@@ -6,15 +6,16 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContext } from "../../../context/pageState";
 import useInputValues from "../../../hooks/pageState/useInputValues";
+import useMask from "../../../hooks/pageState/useMask";
 import useValidateNumber from "../../../hooks/validation/useValidateNumber";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import GTTooltip from "../../Tooltip/Tooltip";
 import Input from "../Input";
-import { IGTInputNumber } from "./interface";
+import { IGTInputNumericMask } from "./interface";
 
 const defaultValidationObj = ["required"];
 
-function GTInputNumber({
+function GTInputNumericMask({
   name,
   label,
   validations,
@@ -25,7 +26,8 @@ function GTInputNumber({
   row,
   min,
   max,
-}: IGTInputNumber) {
+  mask
+}: IGTInputNumericMask) {
   const { t } = useTranslation();
 
   const inputValidations = useMemo(() => {
@@ -40,6 +42,8 @@ function GTInputNumber({
 
   const { labelIsUp, value, handleInputChange, handleInputBlur, handleInputFocus } =
     useInputValues(name);
+
+  const { maskedValue, unMask } = useMask(value, mask);
 
   const { validateNumber } = useValidateNumber(min, max);
   const [isValidNumber, setIsValidNumber] = useState(true);
@@ -60,17 +64,18 @@ function GTInputNumber({
   const handleChange = useCallback(
     (e: any) => {
       const { value: iVal } = e.target;
-      const { isValid, invalidMessage, errorsVar } = validateNumber(iVal, inputValidations);
+      const unMaskedVal = unMask(iVal);
+      const { isValid, invalidMessage, errorsVar } = validateNumber(unMaskedVal, inputValidations);
 
-      validateState(isValid, iVal);
+      validateState(isValid, unMaskedVal);
       setIsValidNumber(isValid);
       setErrorMessage(invalidMessage);
       setLocaleErrorsParams(errorsVar);
-      handleInputChange(iVal);
+      handleInputChange(unMaskedVal);
 
       onChange(e);
     },
-    [validateNumber, inputValidations, validateState, handleInputChange, onChange]
+    [unMask, validateNumber, inputValidations, validateState, handleInputChange, onChange]
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -87,8 +92,8 @@ function GTInputNumber({
         {t(label)}
       </Input.Label>
       <Input.Field
-        type="number"
-        value={value}
+        type="text"
+        value={maskedValue}
         onChange={handleChange}
         onBlur={handleInputBlur}
         onFocus={handleInputFocus}
@@ -104,9 +109,9 @@ function GTInputNumber({
   );
 }
 
-export default GTInputNumber;
+export default GTInputNumericMask;
 
-GTInputNumber.propTypes = {
+GTInputNumericMask.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func,
@@ -114,7 +119,7 @@ GTInputNumber.propTypes = {
   defaultValidation: PropTypes.bool,
 };
 
-GTInputNumber.defaultProps = {
+GTInputNumericMask.defaultProps = {
   onChange: () => { },
   validations: defaultValidationObj,
   defaultValidation: true,
