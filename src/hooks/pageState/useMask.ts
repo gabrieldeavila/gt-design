@@ -37,22 +37,25 @@ function useMask(value: string | number, mask: INumericMask) {
   // example: $1,234,567.89 => 1234567.89
   const unMask = useCallback(
     (valToUnMask: number | string) => {
-      const { decimalLimit } = mask;
+      const { decimalLimit, integerLimit } = mask;
       valToUnMask = valToUnMask.toString();
 
       // only accepts numbers
-      const currValue = valToUnMask.replace(/[^\d]/g, "");
+      let currValue = valToUnMask.replace(/[^\d]/g, "");
 
       let newValue = "0";
 
-      // if the value is less than the decimal limit, it adds the decimal symbol
-      if (currValue.length === decimalLimit) {
-        newValue = `0.${currValue}`;
-      } else {
-        // adds the decimal symbol, ex.: 00010 => 0.0010
-        newValue = currValue.replace(/(\d+)(\d{2})$/, "$1.$2");
+      // if it reaches both limits, removes the first digit
+      if (currValue.length > decimalLimit + integerLimit) {
+        // removes the first digit
+        currValue = currValue.slice(1);
       }
 
+      // adds the decimal symbol, ex.: 00010 => 0.0010, using splice based on the decimal limit
+      const currInt = currValue.slice(0, -decimalLimit) || "0";
+      const currDec = currValue.slice(-decimalLimit) || "0";
+
+      newValue = `${currInt}.${currDec}`;
       return parseFloat(newValue || "0");
     },
     [mask]

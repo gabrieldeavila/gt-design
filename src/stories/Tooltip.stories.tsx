@@ -14,7 +14,7 @@ const numericMask: INumericMask = {
   thousandsSeparatorSymbol: ".",
   decimalSymbol: ",",
   decimalLimit: 2,
-  integerLimit: 7,
+  integerLimit: 4,
   allowNegative: false,
   allowLeadingZeroes: false,
   type: "numeric_mask"
