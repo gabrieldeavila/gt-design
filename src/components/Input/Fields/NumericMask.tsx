@@ -40,7 +40,7 @@ function GTInputNumericMask({
 
   const { validateState } = useValidateState(name, inputValidations);
 
-  const { labelIsUp, value, handleInputChange, handleInputBlur, handleInputFocus } =
+  const { value, handleInputChange, handleInputBlur, handleInputFocus } =
     useInputValues(name);
 
   const { maskedValue, unMask } = useMask(value, mask);
@@ -65,13 +65,13 @@ function GTInputNumericMask({
     (e: any) => {
       const { value: iVal } = e.target;
       const unMaskedVal = unMask(iVal);
-      const { isValid, invalidMessage, errorsVar } = validateNumber(unMaskedVal, inputValidations);
+      const { isValid, invalidMessage, errorsVar } = validateNumber(unMaskedVal.toString(), inputValidations);
 
       validateState(isValid, unMaskedVal);
       setIsValidNumber(isValid);
       setErrorMessage(invalidMessage);
       setLocaleErrorsParams(errorsVar);
-      handleInputChange(unMaskedVal);
+      handleInputChange(unMaskedVal.toString());
 
       onChange(e);
     },
@@ -88,7 +88,7 @@ function GTInputNumericMask({
 
   return (
     <Input.Container row={row} ref={containerRef}>
-      <Input.Label up={labelIsUp} htmlFor={name}>
+      <Input.Label up htmlFor={name}>
         {t(label)}
       </Input.Label>
       <Input.Field
