@@ -8,9 +8,21 @@ export default {
   title: "GTDesign/Tooltip",
 };
 
-const numericMask: INumericMask = {
+const moneyMask: INumericMask = {
   suffix: "",
-  prefix: "R$ ",
+  prefix: "US$  ",
+  thousandsSeparatorSymbol: ".",
+  decimalSymbol: ",",
+  decimalLimit: 2,
+  integerLimit: 7,
+  allowNegative: false,
+  allowLeadingZeroes: false,
+  type: "numeric_mask"
+};
+
+const percentMask: INumericMask = {
+  suffix: "%",
+  prefix: "",
   thousandsSeparatorSymbol: ".",
   decimalSymbol: ",",
   decimalLimit: 2,
@@ -58,7 +70,9 @@ const Template = function TooltipStory() {
 
             <GTInput.Number min={1} max={5.2} row={5} text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="NUMBER" label="És uno numero!" />
 
-            <GTInput.NumericMask name="price" label="Lá máscarada!" mask={numericMask} />
+            <GTInput.NumericMask row={5} name="price" label="Money" mask={moneyMask} />
+
+            <GTInput.NumericMask row={5} name="percent" label="Percent" mask={percentMask} />
           </Input.Group>
         </Space.Horizontal>
       </GTPageStateProvider>

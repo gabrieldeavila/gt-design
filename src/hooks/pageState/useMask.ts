@@ -40,6 +40,14 @@ function useMask(value: string | number, mask: INumericMask) {
       const { decimalLimit, integerLimit } = mask;
       valToUnMask = valToUnMask.toString();
 
+      let removedSuffix = false;
+
+      // if it has a suffix in the mask, but not in the value
+      // it removes the suffix from the value
+      if (mask.suffix && !valToUnMask.includes(mask.suffix)) {
+        removedSuffix = true;
+      }
+
       // only accepts numbers
       let currValue = valToUnMask.replace(/[^\d]/g, "");
 
@@ -49,6 +57,11 @@ function useMask(value: string | number, mask: INumericMask) {
       if (currValue.length > decimalLimit + integerLimit) {
         // removes the first digit
         currValue = currValue.slice(1);
+      }
+
+      // if removedSuffix is true, it removes the last digit
+      if (removedSuffix) {
+        currValue = currValue.slice(0, -1);
       }
 
       // adds the decimal symbol, ex.: 00010 => 0.0010, using splice based on the decimal limit
