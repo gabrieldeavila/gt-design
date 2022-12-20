@@ -9,6 +9,7 @@ const createMask = (value: string | number, mask: INumericMask) => {
     decimalSymbol,
     thousandsSeparatorSymbol,
     suffix,
+    allowNegative,
   } = mask;
   const currValue = !value ? "0" : value.toString();
 
@@ -17,10 +18,17 @@ const createMask = (value: string | number, mask: INumericMask) => {
   const newDecimal = currDecimalValue.padEnd(decimalLimit, "0");
 
   // adds the thousands separator symbol
-  const newInteger = currIntegerValue.replace(
+  let newInteger = currIntegerValue.replace(
     /\B(?=(\d{3})+(?!\d))/g,
     thousandsSeparatorSymbol
   );
+
+  if (allowNegative && currValue.includes("-")) {
+    // removes the negative symbol from the value
+    newInteger = newInteger.replace("-", "");
+
+    return `-${prefix}${newInteger}${decimalSymbol}${newDecimal}${suffix}`;
+  }
 
   const newValue = `${prefix}${newInteger}${decimalSymbol}${newDecimal}${suffix}`;
 
@@ -37,15 +45,24 @@ function useMask(value: string | number, mask: INumericMask) {
   // example: $1,234,567.89 => 1234567.89
   const unMask = useCallback(
     (valToUnMask: number | string) => {
-      const { decimalLimit, integerLimit } = mask;
+      const { decimalLimit, integerLimit, allowNegative } = mask;
       valToUnMask = valToUnMask.toString();
 
       let removedSuffix = false;
+      let isNegative = false;
 
       // if it has a suffix in the mask, but not in the value
       // it removes the suffix from the value
       if (mask.suffix && !valToUnMask.includes(mask.suffix)) {
         removedSuffix = true;
+      }
+
+      if (
+        allowNegative &&
+        valToUnMask.includes("-") &&
+        !valToUnMask.includes("+")
+      ) {
+        isNegative = true;
       }
 
       // only accepts numbers
@@ -69,6 +86,11 @@ function useMask(value: string | number, mask: INumericMask) {
       const currDec = currValue.slice(-decimalLimit) || "0";
 
       newValue = `${currInt}.${currDec}`;
+
+      if (isNegative) {
+        newValue = `-${newValue}`;
+      }
+
       return parseFloat(newValue || "0");
     },
     [mask]

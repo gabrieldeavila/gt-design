@@ -30,7 +30,6 @@ export interface INumericMask {
   decimalLimit: number;
   integerLimit: number;
   allowNegative: boolean;
-  allowLeadingZeroes: boolean;
   type: "numeric_mask"
 }
 

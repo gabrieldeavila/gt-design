@@ -15,8 +15,7 @@ const moneyMask: INumericMask = {
   decimalSymbol: ",",
   decimalLimit: 2,
   integerLimit: 7,
-  allowNegative: false,
-  allowLeadingZeroes: false,
+  allowNegative: true,
   type: "numeric_mask"
 };
 
@@ -28,7 +27,6 @@ const percentMask: INumericMask = {
   decimalLimit: 2,
   integerLimit: 4,
   allowNegative: false,
-  allowLeadingZeroes: false,
   type: "numeric_mask"
 };
 
