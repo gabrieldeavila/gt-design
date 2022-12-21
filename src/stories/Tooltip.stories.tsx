@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { GTInput, Input, Space } from "../components";
-import { INumericMask } from "../components/Input/Fields/interface";
+import { INonNumericMask, INumericMask } from "../components/Input/Fields/interface";
 import GTPageStateProvider from "../context/pageState";
 import { GTBasic } from "../gt";
 
@@ -28,6 +28,11 @@ const percentMask: INumericMask = {
   integerLimit: 4,
   allowNegative: false,
   type: "numeric_mask"
+};
+
+const docMask: INonNumericMask = {
+  options: ["999.999.999-99", "99.999.999/9999-99"],
+  type: "non_numeric_mask"
 };
 
 const Template = function TooltipStory() {
@@ -71,6 +76,8 @@ const Template = function TooltipStory() {
             <GTInput.NumericMask row={5} name="price" label="Money" mask={moneyMask} />
 
             <GTInput.NumericMask row={5} name="percent" label="Percent" mask={percentMask} />
+
+            <GTInput.NumericMask row={5} name="doc" label="CPF/CNPJ" mask={docMask} />
           </Input.Group>
         </Space.Horizontal>
       </GTPageStateProvider>

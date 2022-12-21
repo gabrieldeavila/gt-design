@@ -30,11 +30,18 @@ export interface INumericMask {
   decimalLimit: number;
   integerLimit: number;
   allowNegative: boolean;
-  type: "numeric_mask"
+  type: "numeric_mask";
 }
 
+export interface INonNumericMask {
+  type: "non_numeric_mask";
+  options: string[];
+}
+
+export type TNumericOptions = INumericMask | INonNumericMask;
+
 export interface IGTInputNumericMask extends IGTInput {
-  mask: INumericMask;
+  mask: TNumericOptions;
   min?: number | string;
   max?: number | string;
 }

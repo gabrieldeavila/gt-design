@@ -1,50 +1,110 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { useCallback, useMemo } from "react";
-import { INumericMask } from "../../components/Input/Fields/interface";
+import {
+  INonNumericMask,
+  INumericMask,
+  TNumericOptions,
+} from "../../components/Input/Fields/interface";
 
-const createMask = (value: string | number, mask: INumericMask) => {
-  const {
-    prefix,
-    decimalLimit,
-    decimalSymbol,
-    thousandsSeparatorSymbol,
-    suffix,
-    allowNegative,
-  } = mask;
-  const currValue = !value ? "0" : value.toString();
+function useMask(value: string | number, mask: TNumericOptions) {
+  const handleNumericMask = useCallback(
+    (value: string | number, mask: INumericMask) => {
+      const {
+        prefix,
+        decimalLimit,
+        decimalSymbol,
+        thousandsSeparatorSymbol,
+        suffix,
+        allowNegative,
+      } = mask;
+      const currValue = !value ? "0" : value.toString();
 
-  const [currIntegerValue, currDecimalValue = "0"] = currValue.split(".");
+      const [currIntegerValue, currDecimalValue = "0"] = currValue.split(".");
 
-  const newDecimal = currDecimalValue.padEnd(decimalLimit, "0");
+      const newDecimal = currDecimalValue.padEnd(decimalLimit, "0");
 
-  // adds the thousands separator symbol
-  let newInteger = currIntegerValue.replace(
-    /\B(?=(\d{3})+(?!\d))/g,
-    thousandsSeparatorSymbol
+      // adds the thousands separator symbol
+      let newInteger = currIntegerValue.replace(
+        /\B(?=(\d{3})+(?!\d))/g,
+        thousandsSeparatorSymbol
+      );
+
+      if (allowNegative && currValue.includes("-")) {
+        // removes the negative symbol from the value
+        newInteger = newInteger.replace("-", "");
+
+        return `-${prefix}${newInteger}${decimalSymbol}${newDecimal}${suffix}`;
+      }
+
+      const newValue = `${prefix}${newInteger}${decimalSymbol}${newDecimal}${suffix}`;
+
+      return newValue;
+    },
+    []
   );
 
-  if (allowNegative && currValue.includes("-")) {
-    // removes the negative symbol from the value
-    newInteger = newInteger.replace("-", "");
+  const handleNonNumericMask = useCallback(
+    (value: string | number, mask: INonNumericMask) => {
+      // options may be ['999.999.999-99', '99.999.999/9999-99']
+      const { options } = mask;
 
-    return `-${prefix}${newInteger}${decimalSymbol}${newDecimal}${suffix}`;
-  }
+      // only keeps numbers and letters
+      const valueLength = value.toString().replace(/[^0-9a-z]/gi, "").length;
 
-  const newValue = `${prefix}${newInteger}${decimalSymbol}${newDecimal}${suffix}`;
+      // gets the best mask for the value
+      // ex.: if values is 123, gets the first mask, but if it is 12345678910, gets the second mask
+      const bestMask = options.find((option) => {
+        const optionLength = option.replace(/[^0-9a-z]/gi, "").length;
 
-  return newValue;
-};
+        // if the value length is less than the option length, it is the best mask
+        if (valueLength <= optionLength) {
+          return true;
+        }
 
-function useMask(value: string | number, mask: INumericMask) {
+        return false;
+      });
+
+      if (!bestMask) return value;
+
+      let maskedValue = "";
+
+      // now masks the value
+      bestMask.split("").forEach((char) => {
+        if (char === "9") {
+          maskedValue += value.toString().charAt(0);
+          value = value.toString().slice(1);
+        } else {
+          maskedValue += char;
+        }
+      });
+      console.log(maskedValue);
+      return value;
+    },
+    []
+  );
+
+  const handleMaskValue = useCallback(
+    (value: string | number, mask: TNumericOptions) => {
+      if (mask.type === "numeric_mask") {
+        return handleNumericMask(value, mask);
+      }
+
+      if (mask.type === "non_numeric_mask") {
+        return handleNonNumericMask(value, mask);
+      }
+
+      return value;
+    },
+    [handleNonNumericMask, handleNumericMask]
+  );
+
   // masks the value, example: 1234567.89 => $1,234,567.89
   const maskedValue = useMemo(() => {
-    return createMask(value, mask);
-  }, [mask, value]);
+    return handleMaskValue(value, mask);
+  }, [handleMaskValue, mask, value]);
 
-  // it receives the masked value and returns the unmasked value
-  // example: $1,234,567.89 => 1234567.89
-  const unMask = useCallback(
-    (valToUnMask: number | string) => {
+  const unMaskNumeric = useCallback(
+    (valToUnMask: number | string, mask: INumericMask) => {
       const { decimalLimit, integerLimit, allowNegative } = mask;
       valToUnMask = valToUnMask.toString();
 
@@ -93,10 +153,23 @@ function useMask(value: string | number, mask: INumericMask) {
 
       return parseFloat(newValue || "0");
     },
-    [mask]
+    []
   );
 
-  return { maskedValue, unMask };
+  // it receives the masked value and returns the unmasked value
+  // example: $1,234,567.89 => 1234567.89
+  const unMask = useCallback(
+    (valToUnMask: number | string) => {
+      if (mask.type === "numeric_mask") {
+        return unMaskNumeric(valToUnMask, mask);
+      }
+
+      return valToUnMask;
+    },
+    [mask, unMaskNumeric]
+  );
+
+  return { handleMaskValue, maskedValue, unMask };
 }
 
 export default useMask;
