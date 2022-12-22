@@ -6,6 +6,26 @@ import {
   TNumericOptions,
 } from "../../components/Input/Fields/interface";
 
+const getBestMask = (value: string, options: string[]) => {
+  // only keeps numbers and letters
+  const valueLength = value.toString().replace(/[^0-9a-z]/gi, "").length;
+
+  // gets the best mask for the value
+  // ex.: if values is 123, gets the first mask, but if it is 12345678910, gets the second mask
+  const bestMask = options.find((option) => {
+    const optionLength = option.replace(/[^0-9a-z]/gi, "").length;
+
+    // if the value length is less than the option length, it is the best mask
+    if (valueLength <= optionLength) {
+      return true;
+    }
+
+    return false;
+  });
+
+  return bestMask;
+};
+
 function useMask(value: string | number, mask: TNumericOptions) {
   const handleNumericMask = useCallback(
     (value: string | number, mask: INumericMask) => {
@@ -48,37 +68,25 @@ function useMask(value: string | number, mask: TNumericOptions) {
       // options may be ['999.999.999-99', '99.999.999/9999-99']
       const { options } = mask;
 
-      // only keeps numbers and letters
-      const valueLength = value.toString().replace(/[^0-9a-z]/gi, "").length;
-
-      // gets the best mask for the value
-      // ex.: if values is 123, gets the first mask, but if it is 12345678910, gets the second mask
-      const bestMask = options.find((option) => {
-        const optionLength = option.replace(/[^0-9a-z]/gi, "").length;
-
-        // if the value length is less than the option length, it is the best mask
-        if (valueLength <= optionLength) {
-          return true;
-        }
-
-        return false;
-      });
+      const bestMask = getBestMask(value.toString(), options);
 
       if (!bestMask) return value;
 
       let maskedValue = "";
 
+      const valueChars = value.toString().split("");
+
       // now masks the value
-      bestMask.split("").forEach((char) => {
-        if (char === "9") {
-          maskedValue += value.toString().charAt(0);
-          value = value.toString().slice(1);
+      bestMask.split("").forEach((char, index) => {
+        if (["9", "A"].includes(char) || valueChars[index] === "*") {
+          console.log("char", char, valueChars[index]);
+          maskedValue += valueChars[index] || "_";
         } else {
           maskedValue += char;
         }
       });
-      console.log(maskedValue);
-      return value;
+      console.log("wtf", maskedValue);
+      return maskedValue;
     },
     []
   );
@@ -156,6 +164,34 @@ function useMask(value: string | number, mask: TNumericOptions) {
     []
   );
 
+  const unMaskNonNumeric = useCallback(
+    (valToUnMask: number | string, mask: INonNumericMask) => {
+      const { options } = mask;
+
+      const unMask = valToUnMask.toString().split("");
+      let newValue = "";
+
+      const bestMask = getBestMask(valToUnMask.toString(), options);
+
+      // // removes the mask characters
+      unMask.forEach((char, index) => {
+        if (char === "_") {
+          newValue += "*";
+          return;
+        }
+
+        // se for um número ou letra, adiciona no novo valor
+        if (/[0-9a-z]/i.test(char)) {
+          newValue += char;
+        }
+      });
+      console.log(newValue, "mano o newValue tá malucasso");
+
+      return newValue;
+    },
+    [value]
+  );
+
   // it receives the masked value and returns the unmasked value
   // example: $1,234,567.89 => 1234567.89
   const unMask = useCallback(
@@ -164,9 +200,13 @@ function useMask(value: string | number, mask: TNumericOptions) {
         return unMaskNumeric(valToUnMask, mask);
       }
 
+      if (mask.type === "non_numeric_mask") {
+        return unMaskNonNumeric(valToUnMask, mask);
+      }
+
       return valToUnMask;
     },
-    [mask, unMaskNumeric]
+    [mask, unMaskNonNumeric, unMaskNumeric]
   );
 
   return { handleMaskValue, maskedValue, unMask };
