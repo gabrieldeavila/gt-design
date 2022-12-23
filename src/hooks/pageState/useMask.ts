@@ -67,7 +67,7 @@ function useMask(value: string | number, mask: TNumericOptions) {
     (value: string | number, mask: INonNumericMask) => {
       // options may be ['999.999.999-99', '99.999.999/9999-99']
       const { options } = mask;
-
+      console.log("value to unMask", value);
       const bestMask = getBestMask(value.toString(), options);
 
       if (!bestMask) return value;
@@ -77,15 +77,22 @@ function useMask(value: string | number, mask: TNumericOptions) {
       const valueChars = value.toString().split("");
 
       // now masks the value
-      bestMask.split("").forEach((char, index) => {
-        if (["9", "A"].includes(char) || valueChars[index] === "*") {
-          console.log("char", char, valueChars[index]);
-          maskedValue += valueChars[index] || "_";
-        } else {
+
+      // if (["9", "A"].includes(char) || valueChars[index] === "*") {
+
+      let index = 0;
+      for (const char of bestMask.split("")) {
+        if (!/[0-9a-z]/i.test(char)) {
           maskedValue += char;
+          continue;
         }
-      });
-      console.log("wtf", maskedValue);
+
+        if (["9", "A"].includes(char) || valueChars[index] === "*") {
+          maskedValue += valueChars[index] || "_";
+          index += 1;
+        }
+      }
+      console.log(maskedValue);
       return maskedValue;
     },
     []
@@ -167,6 +174,7 @@ function useMask(value: string | number, mask: TNumericOptions) {
   const unMaskNonNumeric = useCallback(
     (valToUnMask: number | string, mask: INonNumericMask) => {
       const { options } = mask;
+      console.log(valToUnMask, "valToUnMask");
 
       const unMask = valToUnMask.toString().split("");
       let newValue = "";
@@ -175,17 +183,11 @@ function useMask(value: string | number, mask: TNumericOptions) {
 
       // // removes the mask characters
       unMask.forEach((char, index) => {
-        if (char === "_") {
-          newValue += "*";
-          return;
-        }
-
         // se for um número ou letra, adiciona no novo valor
-        if (/[0-9a-z]/i.test(char)) {
+        if (/[0-9a-z]/i.test(char) || char === "_") {
           newValue += char;
         }
       });
-      console.log(newValue, "mano o newValue tá malucasso");
 
       return newValue;
     },
