@@ -174,12 +174,13 @@ function useMask(value: string | number, mask: TNumericOptions) {
   const unMaskNonNumeric = useCallback(
     (valToUnMask: number | string, mask: INonNumericMask) => {
       const { options } = mask;
-      console.log(valToUnMask, "valToUnMask");
 
       const unMask = valToUnMask.toString().split("");
       let newValue = "";
 
       const bestMask = getBestMask(valToUnMask.toString(), options);
+
+      // removes as the non lent
 
       // // removes the mask characters
       unMask.forEach((char, index) => {
@@ -188,7 +189,7 @@ function useMask(value: string | number, mask: TNumericOptions) {
           newValue += char;
         }
       });
-
+      console.log(newValue.length, bestMask?.length);
       return newValue;
     },
     [value]
