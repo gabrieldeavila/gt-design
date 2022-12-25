@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   INonNumericMask,
   INumericMask,
@@ -23,10 +23,18 @@ const getBestMask = (value: string, options: string[]) => {
     return false;
   });
 
-  return bestMask;
+  return bestMask ?? options[options.length - 1];
 };
 
-function useMask(value: string | number, mask: TNumericOptions) {
+function useMask(
+  value: string | number,
+  mask: TNumericOptions,
+  inpRef: React.RefObject<HTMLInputElement>
+) {
+  const currPosition = useRef<null | number>(0);
+  const isDeleting = useRef(false);
+  const [forceReset, setForceReset] = useState(false);
+
   const handleNumericMask = useCallback(
     (value: string | number, mask: INumericMask) => {
       const {
@@ -63,11 +71,49 @@ function useMask(value: string | number, mask: TNumericOptions) {
     []
   );
 
+  // prevents the cursor from going to wrong position
+  const getRightPosition = useCallback(
+    (currInpPosition: number, maskedValue: string) => {
+      let newPosition = currInpPosition;
+
+      if (isDeleting.current) {
+        for (let i = currInpPosition; i >= 0; i--) {
+          if (/[0-9a-z]/i.test(maskedValue[i])) {
+            newPosition = i;
+            break;
+          }
+        }
+
+        isDeleting.current = false;
+
+        // if the new position is 1, then it should not be considered
+        // because if we add +1, it will be 2, and the cursor will be in the wrong position
+        if (newPosition === 1) {
+          currPosition.current = 1;
+        } else {
+          currPosition.current = newPosition === 1 ? 1 : newPosition + 1;
+        }
+
+        return;
+      }
+
+      // do a for loop to get the right position, because maybe the next is also a symbol
+      for (let i = currInpPosition; i < maskedValue.length; i++) {
+        if (/[0-9a-z]/i.test(maskedValue[i])) {
+          newPosition = i;
+          break;
+        }
+      }
+
+      currPosition.current = newPosition + 1;
+    },
+    []
+  );
+
   const handleNonNumericMask = useCallback(
     (value: string | number, mask: INonNumericMask) => {
       // options may be ['999.999.999-99', '99.999.999/9999-99']
       const { options } = mask;
-      console.log("value to unMask", value);
       const bestMask = getBestMask(value.toString(), options);
 
       if (!bestMask) return value;
@@ -78,8 +124,6 @@ function useMask(value: string | number, mask: TNumericOptions) {
 
       // now masks the value
 
-      // if (["9", "A"].includes(char) || valueChars[index] === "*") {
-
       let index = 0;
       for (const char of bestMask.split("")) {
         if (!/[0-9a-z]/i.test(char)) {
@@ -87,15 +131,42 @@ function useMask(value: string | number, mask: TNumericOptions) {
           continue;
         }
 
-        if (["9", "A"].includes(char) || valueChars[index] === "*") {
+        const isNumber = /[0-9]/.test(char);
+        const isLetter = /[a-z]/i.test(char);
+        const isFollowingMaskOrder =
+          (/[0-9]/.test(valueChars[index]) && isNumber) ||
+          (/[a-z]/i.test(valueChars[index]) && isLetter);
+
+        if (!isFollowingMaskOrder || char === "_") {
+          maskedValue += "_";
+          index += 1;
+
+          setForceReset((prev: boolean) => !prev);
+          continue;
+        }
+
+        if (["9", "A"].includes(char)) {
           maskedValue += valueChars[index] || "_";
           index += 1;
         }
       }
-      console.log(maskedValue);
+
+      const currInpPosition = inpRef.current?.selectionStart ?? 0;
+      const currMaskPosition = maskedValue[currInpPosition - 1];
+
+      // if the currMaskPosition is not a number or a letter, shall move the cursor to the next position
+      const isNumberOrLetter = /[0-9a-z]/i.test(currMaskPosition);
+
+      // puts the cursor where the user is typing
+      if (isNumberOrLetter) {
+        currPosition.current = currInpPosition;
+      } else {
+        getRightPosition(currInpPosition, maskedValue);
+      }
+
       return maskedValue;
     },
-    []
+    [getRightPosition, inpRef]
   );
 
   const handleMaskValue = useCallback(
@@ -117,6 +188,15 @@ function useMask(value: string | number, mask: TNumericOptions) {
   const maskedValue = useMemo(() => {
     return handleMaskValue(value, mask);
   }, [handleMaskValue, mask, value]);
+
+  useEffect(() => {
+    if (mask.type === "non_numeric_mask" && inpRef.current != null) {
+      inpRef.current.setSelectionRange(
+        currPosition.current,
+        currPosition.current
+      );
+    }
+  }, [maskedValue, forceReset]);
 
   const unMaskNumeric = useCallback(
     (valToUnMask: number | string, mask: INumericMask) => {
@@ -175,24 +255,54 @@ function useMask(value: string | number, mask: TNumericOptions) {
     (valToUnMask: number | string, mask: INonNumericMask) => {
       const { options } = mask;
 
+      // if user is typing in the end of the value, adds it to the begin, but only if there is no other number
+      // only keeps letters and numbers
+      const onlyNumbersAndLetters = valToUnMask
+        .toString()
+        .replace(/[^0-9a-z]/gi, "").length;
+
+      // gets the last char of the value
+      const lastChar = valToUnMask
+        .toString()
+        .slice(-1)
+        .replace(/[^0-9a-z]/gi, "").length;
+
+      if (onlyNumbersAndLetters === 1 && lastChar === 1) {
+        inpRef.current?.setSelectionRange(1, 1);
+        valToUnMask = `${valToUnMask.toString().slice(-1)}${valToUnMask
+          .toString()
+          .slice(0, -1)}`;
+      }
+
       const unMask = valToUnMask.toString().split("");
       let newValue = "";
 
-      const bestMask = getBestMask(valToUnMask.toString(), options);
+      let bestMask = getBestMask(valToUnMask.toString(), options);
+      // only keeps letters and numbers
+      bestMask = bestMask.replace(/[^0-9a-z]/gi, "");
 
-      // removes as the non lent
-
-      // // removes the mask characters
-      unMask.forEach((char, index) => {
+      // removes the mask characters
+      unMask.forEach((char) => {
         // se for um número ou letra, adiciona no novo valor
         if (/[0-9a-z]/i.test(char) || char === "_") {
           newValue += char;
         }
       });
-      console.log(newValue.length, bestMask?.length);
+
+      // if the value is bigger than the mask, removes the last char
+      if (newValue.length > bestMask.length) {
+        newValue = newValue.slice(0, -1);
+      }
+
+      // if value has less chars than valToUnMask, it means that the user is removing chars
+      const newValueOnlyChars = newValue.replace(/[^0-9a-z]/gi, "");
+      const prevValueOnlyChars = value.toString().replace(/[^0-9a-z]/gi, "");
+
+      isDeleting.current = prevValueOnlyChars.length > newValueOnlyChars.length;
+
       return newValue;
     },
-    [value]
+    [inpRef, value]
   );
 
   // it receives the masked value and returns the unmasked value

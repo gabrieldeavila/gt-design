@@ -30,6 +30,11 @@ const percentMask: INumericMask = {
   type: "numeric_mask"
 };
 
+const phoneMask: INonNumericMask = {
+  options: ["(99) 9999-9999", "(99) 99999-9999"],
+  type: "non_numeric_mask"
+};
+
 const docMask: INonNumericMask = {
   options: ["999.999.999-99", "99.999.999/9999-99"],
   type: "non_numeric_mask"
@@ -46,6 +51,10 @@ const Template = function TooltipStory() {
 
   const [pageState, setPageState] = useState({});
   const [errors, setErrors] = useState<string[]>([]);
+
+  // useEffect(() => {
+  //   console.log(pageState.doc);
+  // }, [pageState]);
 
   return (
     <GTBasic>
@@ -78,6 +87,8 @@ const Template = function TooltipStory() {
             <GTInput.NumericMask row={5} name="percent" label="Percent" mask={percentMask} />
 
             <GTInput.NumericMask row={5} name="doc" label="CPF/CNPJ" mask={docMask} />
+
+            <GTInput.NumericMask row={5} name="phone" label="Phone" mask={phoneMask} />
           </Input.Group>
         </Space.Horizontal>
       </GTPageStateProvider>

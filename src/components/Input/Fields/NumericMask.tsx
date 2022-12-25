@@ -43,7 +43,9 @@ function GTInputNumericMask({
   const { value, handleInputChange, handleInputBlur, handleInputFocus } =
     useInputValues(name);
 
-  const { maskedValue, unMask } = useMask(value, mask);
+  const inpRef = useRef<HTMLInputElement>(null);
+
+  const { maskedValue, unMask } = useMask(value, mask, inpRef);
 
   const { validateNumber } = useValidateNumber(min, max);
   const [isValidNumber, setIsValidNumber] = useState(true);
@@ -78,6 +80,24 @@ function GTInputNumericMask({
     [unMask, validateNumber, inputValidations, validateState, handleInputChange, onChange]
   );
 
+  const handleFocus = useCallback(() => {
+    const { type } = mask;
+
+    handleInputFocus();
+
+    if (inpRef.current == null) return;
+
+    if (type === "numeric_mask") {
+      // selection range is in the end of the input
+      inpRef.current.setSelectionRange(inpRef.current.value.length, inpRef.current.value.length);
+      return;
+    }
+
+    if (type === "non_numeric_mask") {
+      inpRef.current.setSelectionRange(0, 0);
+    }
+  }, [handleInputFocus, mask]);
+
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { isLoading } = useGTPageStateContext();
@@ -92,11 +112,12 @@ function GTInputNumericMask({
         {t(label)}
       </Input.Label>
       <Input.Field
+        ref={inpRef}
         type="text"
         value={maskedValue}
         onChange={handleChange}
         onBlur={handleInputBlur}
-        onFocus={handleInputFocus}
+        onFocus={handleFocus}
         id={name}
         name={name}
         autoComplete="off"
