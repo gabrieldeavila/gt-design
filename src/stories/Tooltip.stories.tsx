@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GTInput, Input, Space } from "../components";
 import { INonNumericMask, INumericMask } from "../components/Input/Fields/interface";
 import GTPageStateProvider from "../context/pageState";
@@ -11,8 +11,8 @@ export default {
 const moneyMask: INumericMask = {
   suffix: "",
   prefix: "US$  ",
-  thousandsSeparatorSymbol: ".",
-  decimalSymbol: ",",
+  thousandsSeparatorSymbol: ",",
+  decimalSymbol: ".",
   decimalLimit: 2,
   integerLimit: 7,
   allowNegative: true,
@@ -22,8 +22,8 @@ const moneyMask: INumericMask = {
 const percentMask: INumericMask = {
   suffix: "%",
   prefix: "",
-  thousandsSeparatorSymbol: ".",
-  decimalSymbol: ",",
+  thousandsSeparatorSymbol: ",",
+  decimalSymbol: ".",
   decimalLimit: 2,
   integerLimit: 4,
   allowNegative: false,
@@ -51,10 +51,6 @@ const Template = function TooltipStory() {
 
   const [pageState, setPageState] = useState({});
   const [errors, setErrors] = useState<string[]>([]);
-
-  // useEffect(() => {
-  //   console.log(pageState.doc);
-  // }, [pageState]);
 
   return (
     <GTBasic>

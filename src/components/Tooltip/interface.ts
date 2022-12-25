@@ -13,6 +13,7 @@ export interface ITooltipWrapper {
   show: boolean;
   isFirstRender: boolean;
   isAboveParent: boolean;
+  zIndex: number;
 }
 
 export interface ITooltipContainer {

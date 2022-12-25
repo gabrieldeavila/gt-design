@@ -22,12 +22,12 @@ const TooltipWrapper = styled.div<ITooltipWrapper>`
   background: ${({ theme }) => theme.primary};
   padding: 0.5rem;
   ${shadows.simple}
-  z-index: 1;
   border-radius: 0.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 0;
+  z-index: ${({ zIndex }) => zIndex};
 
   ${({ show, isFirstRender }) =>
     !isFirstRender &&

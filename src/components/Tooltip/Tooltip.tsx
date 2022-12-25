@@ -115,11 +115,33 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
     };
   }, []);
 
+  // avoids visual bugs, like can't click on the input because
+  // the tooltip is above it
+  const [zIndex, setZIndex] = useState<number>(1);
+
+  useEffect(() => {
+    let clearTimer: NodeJS.Timeout;
+
+    // if the tooltip is shown, set the zIndex to 1
+    if (showTooltip) {
+      setZIndex(1);
+    } else {
+      // if the tooltip is not shown, set the zIndex to 0
+      clearTimer = setTimeout(() => {
+        setZIndex(0);
+      }, 200);
+    }
+
+    return () => {
+      clearTimeout(clearTimer);
+    };
+  }, [showTooltip]);
+
   // if there's no title or text, don't render the tooltip
   if (!title && !text) return null;
 
   return (
-    <Tooltip.Wrapper ref={tooltipRef} isAboveParent={isAboveParent} isFirstRender={isFirst} left={left} top={tooltipTop} show={showTooltip}>
+    <Tooltip.Wrapper zIndex={zIndex} ref={tooltipRef} isAboveParent={isAboveParent} isFirstRender={isFirst} left={left} top={tooltipTop} show={showTooltip}>
       <Tooltip.Container isAboveParent={isAboveParent}>
         {
           (title != null) &&
