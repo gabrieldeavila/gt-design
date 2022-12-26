@@ -11,10 +11,10 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   // info about the tooltip element
-  const { height = 1, width: tooltipWidth = 1, top = 1, } = (tooltipRef.current?.getBoundingClientRect()) ?? {};
+  const { height = 1, width: tooltipWidth = 1, top = 1 } = (tooltipRef.current?.getBoundingClientRect()) ?? {};
 
   // width of the parent element
-  const { width = 1, height: parentHeight = 1 } = parentRef?.current?.getBoundingClientRect() ?? {};
+  const { width = 1, height: parentHeight = 1, right = 1, y = 1, top: pTop = 1 } = parentRef?.current?.getBoundingClientRect() ?? {};
 
   const prevAboveParent = useRef<boolean>(false);
 
@@ -23,26 +23,30 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
     if (prevAboveParent.current) {
       return false;
     }
+    // const isAbove = top > 0 || top < -height;
+    const isAbove = (y - height - 20) >= 0;
+    console.log(isAbove, y - height);
 
-    const isAbove = top > 0 || top < -height;
-
-    if (!isAbove) {
+    if (!isAbove && tooltipRef.current != null) {
       prevAboveParent.current = true;
     }
 
     return isAbove;
-  }, [height, top]);
+  }, [height, y]);
 
   const tooltipTop = useMemo(() => {
     if (isAboveParent) {
-      return height;
+      console.log("parent", parentRef.current?.getBoundingClientRect());
+      console.log("tooltip", tooltipRef.current?.getBoundingClientRect());
+      return pTop - height - 20;
     } else {
-      return parentHeight;
+      return y + parentHeight;
     }
-  }, [height, isAboveParent, parentHeight]);
+  }, [isAboveParent, parentRef, pTop, height, y, parentHeight]);
 
   // find the left position of the tooltip
-  const left = width / 2 - tooltipWidth / 2;
+  // const left = width / 2 - tooltipWidth / 2;
+  const left = (right - width / 2) - tooltipWidth / 2;
 
   // if the tooltip should be shown
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
@@ -126,9 +130,9 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
     if (showTooltip) {
       setZIndex(1);
     } else {
-      // if the tooltip is not shown, set the zIndex to 0
+      // if the tooltip is not shown, set the zIndex to -1
       clearTimer = setTimeout(() => {
-        setZIndex(0);
+        setZIndex(-1);
       }, 200);
     }
 
@@ -141,7 +145,15 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
   if (!title && !text) return null;
 
   return (
-    <Tooltip.Wrapper zIndex={zIndex} ref={tooltipRef} isAboveParent={isAboveParent} isFirstRender={isFirst} left={left} top={tooltipTop} show={showTooltip}>
+    <Tooltip.Wrapper
+      zIndex={zIndex}
+      ref={tooltipRef}
+      isAboveParent={isAboveParent}
+      isFirstRender={isFirst}
+      left={left}
+      top={tooltipTop}
+      show={showTooltip}
+    >
       <Tooltip.Container isAboveParent={isAboveParent}>
         {
           (title != null) &&
@@ -157,6 +169,7 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
 
       </Tooltip.Container>
     </Tooltip.Wrapper >
+
   );
 }
 

@@ -1,19 +1,23 @@
 import styled, { css } from "styled-components";
 import { animations, flex, shadows } from "../../utils";
-import { ITooltipContainer, ITooltipWrapper } from "./interface";
+import {
+  ITooltipContainer,
+  ITooltipIconWrapper,
+  ITooltipWrapper,
+} from "./interface";
 
 const getSize = (top: number, isAboveParent: boolean) => {
   top += 10;
 
-  if (isAboveParent) {
-    return -top;
-  }
+  // if (isAboveParent) {
+  //   return -top;
+  // }
 
   return top;
 };
 
 const TooltipWrapper = styled.div<ITooltipWrapper>`
-  position: absolute;
+  position: fixed;
   top: ${({ top, isAboveParent }) => getSize(top, isAboveParent)}px;
   left: ${({ left }) => left}px;
   min-width: 1rem;

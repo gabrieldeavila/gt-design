@@ -5,7 +5,12 @@ import styled, { css } from "styled-components";
 import { hovers, scrolls, shadows } from "../../utils";
 import animations from "../../utils/animations";
 import flex from "../../utils/flex";
-import { IInputContainer, IInputField, ISelectValue } from "./interface";
+import {
+  IIconWrapper,
+  IInputContainer,
+  IInputField,
+  ISelectValue,
+} from "./interface";
 
 const InputWrapper = styled.div`
   ${flex.wrapGap}
@@ -47,6 +52,26 @@ const loadingInput = css`
   }
 `;
 
+const iconCenter = css`
+  top: 1.25rem;
+  right: 0.5rem;
+`;
+
+const topRight = css`
+  background: blue;
+`;
+
+const types = {
+  center: iconCenter,
+  top_right: topRight,
+};
+
+const IconWrapper = styled.div<IIconWrapper>`
+  position: absolute;
+  opacity: 0;
+  ${({ type }) => types[type]};
+`;
+
 const InputContainer = styled.div<IInputContainer>`
   ${getRowWidth}
   flex-grow: 1;
@@ -78,6 +103,10 @@ const InputContainer = styled.div<IInputContainer>`
   &:focus-within::after {
     box-shadow: 0 0 0 0.25rem
       ${(props) => transparentize(0.5, props.theme.outline)};
+  }
+
+  &:hover ${IconWrapper} {
+    opacity: 1;
   }
 
   svg:not(.svg-no-active) {
@@ -141,6 +170,7 @@ const InputError = styled.span`
   color: ${(props) => props.theme.errorColor};
   top: 100%;
   margin-top: 0.35rem;
+  padding: 0 0.5rem;
 `;
 
 const Input = {
@@ -150,6 +180,7 @@ const Input = {
   Field: InputField,
   Label: InputLabel,
   Error: InputError,
+  IconWrapper,
 };
 
 export default Input;

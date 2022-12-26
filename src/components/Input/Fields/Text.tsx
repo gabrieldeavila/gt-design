@@ -3,6 +3,7 @@
 /* eslint-disable operator-linebreak */
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContext } from "../../../context/pageState";
 import useInputValues from "../../../hooks/pageState/useInputValues";
@@ -89,7 +90,7 @@ function GTInputText({
   }
 
   return (
-    <Input.Container row={row} ref={containerRef}>
+    <Input.Container row={row}>
       <Input.Label up={labelIsUp} htmlFor={name}>
         {t(label)}
       </Input.Label>
@@ -105,7 +106,15 @@ function GTInputText({
 
       {!isValidText && <Input.Error>{t(`TEXT.${errorMessage}`, localeErrorsParams)}</Input.Error>}
 
-      <GTTooltip parentRef={containerRef} title={title} text={text} />
+      {
+        ((title != null) || (text != null)) && <>
+          <Input.IconWrapper type="center" ref={containerRef}>
+            <Icon.Info size={15} className="svg-no-active" />
+          </Input.IconWrapper>
+
+          <GTTooltip parentRef={containerRef} title={title} text={text} />
+        </>
+      }
     </Input.Container>
   );
 }

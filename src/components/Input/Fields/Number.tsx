@@ -11,6 +11,7 @@ import useValidateState from "../../../hooks/validation/useValidateState";
 import GTTooltip from "../../Tooltip/Tooltip";
 import Input from "../Input";
 import { IGTInputNumber } from "./interface";
+import * as Icon from "react-feather";
 
 const defaultValidationObj = ["required"];
 
@@ -82,7 +83,7 @@ function GTInputNumber({
   }
 
   return (
-    <Input.Container row={row} ref={containerRef}>
+    <Input.Container row={row}>
       <Input.Label up={labelIsUp} htmlFor={name}>
         {t(label)}
       </Input.Label>
@@ -99,7 +100,15 @@ function GTInputNumber({
 
       {!isValidNumber && <Input.Error>{t(`NUMBER.${errorMessage}`, localeErrorsParams)}</Input.Error>}
 
-      <GTTooltip parentRef={containerRef} title={title} text={text} />
+      {
+        ((title != null) || (text != null)) && <>
+          <Input.IconWrapper type="center" ref={containerRef}>
+            <Icon.Info size={15} className="svg-no-active" />
+          </Input.IconWrapper>
+
+          <GTTooltip parentRef={containerRef} title={title} text={text} />
+        </>
+      }
     </Input.Container>
   );
 }

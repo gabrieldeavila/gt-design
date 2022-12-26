@@ -1,6 +1,7 @@
 /* eslint-disable operator-linebreak */
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContext } from "../../../context/pageState";
 import useInputValues from "../../../hooks/pageState/useInputValues";
@@ -67,7 +68,7 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange, t
   }
 
   return (
-    <Input.Container row={row} ref={containerRef}>
+    <Input.Container row={row}>
       <Input.Label up={labelIsUp} htmlFor={name}>
         {t(label)}
       </Input.Label>
@@ -83,7 +84,15 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange, t
 
       {!isValidEmail && <Input.Error>{t(`EMAIL.${errorMessage}`)}</Input.Error>}
 
-      <GTTooltip parentRef={containerRef} title={title} text={text}/>
+      {
+        ((title != null) || (text != null)) && <>
+          <Input.IconWrapper type="center" ref={containerRef}>
+            <Icon.Info size={15} className="svg-no-active" />
+          </Input.IconWrapper>
+
+          <GTTooltip parentRef={containerRef} title={title} text={text} />
+        </>
+      }
     </Input.Container>
   );
 }

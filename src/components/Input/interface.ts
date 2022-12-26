@@ -15,3 +15,7 @@ export interface ISelectValue {
   isPreSelected: boolean;
   theme: GTTheme;
 }
+
+export interface IIconWrapper {
+  type: "center" | "top_right";
+}
