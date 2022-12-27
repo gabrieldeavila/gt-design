@@ -58,7 +58,8 @@ const iconCenter = css`
 `;
 
 const topRight = css`
-  background: blue;
+  top: 0.3rem;
+  right: 0.9rem;
 `;
 
 const types = {

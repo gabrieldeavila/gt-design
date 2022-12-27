@@ -2,6 +2,7 @@
 import { t } from "i18next";
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import * as Icon from "react-feather";
 import { ChevronDown } from "react-feather";
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContext } from "../../../context/pageState";
@@ -26,6 +27,9 @@ function GTInputSelect({ name, label, options, text, title, row }: IGTInputSelec
     useInputValues(name);
 
   const { validateState } = useValidateState(name, []);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const iconRef = useRef<HTMLDivElement>(null);
 
   // it is used to point the preSelected option
   const selectedIndexRef = useRef<number>(0);
@@ -109,7 +113,7 @@ function GTInputSelect({ name, label, options, text, title, row }: IGTInputSelec
 
   const handleKey = useCallback(() => {
     // if it is not showing the options, open it
-    const hasFocus = (ref.current?.contains(document.activeElement)) ?? false;
+    const hasFocus = (containerRef.current?.contains(document.activeElement)) ?? false;
     if (!showOptions && hasFocus) {
       // discover if ref has focus
       setShowOptions(true);
@@ -128,9 +132,7 @@ function GTInputSelect({ name, label, options, text, title, row }: IGTInputSelec
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const ref = useRef<HTMLDivElement>(null);
-
-  useOnClickOutside(ref, null, handleCloseSelect);
+  useOnClickOutside(containerRef, null, handleCloseSelect);
 
   const { isLoading } = useGTPageStateContext();
 
@@ -140,7 +142,7 @@ function GTInputSelect({ name, label, options, text, title, row }: IGTInputSelec
 
   return (
     <SelectContext.Provider value={{ searchTerm, handleSelect, selected, setSelected, preSelected, setPreSelected }}>
-      <Input.Container row={row} ref={ref} onFocus={handleShowOptions} isUp={showOptions}>
+      <Input.Container row={row} onFocus={handleShowOptions} ref={containerRef} isUp={showOptions}>
         <Input.Label up={labelIsUp} htmlFor={name}>
           {t(label)}
         </Input.Label>
@@ -159,14 +161,21 @@ function GTInputSelect({ name, label, options, text, title, row }: IGTInputSelec
         />
 
         <ChevronDown onClick={handleChevClick} />
+        {
+          ((title != null) || (text != null)) && <>
+            <Input.IconWrapper type="top_right" ref={iconRef}>
+              <Icon.Info size={10} className="svg-no-active" />
+            </Input.IconWrapper>
+
+            <GTTooltip parentRef={iconRef} title={title} text={text} />
+          </>
+        }
 
         {
           showOptions && (
             <SelectOptions options={options} />
           )
         }
-        <GTTooltip parentRef={ref} title={title} text={text} />
-
       </Input.Container>
     </SelectContext.Provider>
   );
