@@ -1,17 +1,11 @@
 import styled, { css } from "styled-components";
 import { animations, flex, shadows } from "../../utils";
 import {
-  ITooltipContainer,
-  ITooltipIconWrapper,
-  ITooltipWrapper,
+  ITooltipContainer, ITooltipWrapper
 } from "./interface";
 
 const getSize = (top: number, isAboveParent: boolean) => {
   top += 10;
-
-  // if (isAboveParent) {
-  //   return -top;
-  // }
 
   return top;
 };

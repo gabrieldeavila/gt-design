@@ -138,7 +138,7 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
       {
         ((title != null) || (text != null)) && <>
           <Input.IconWrapper type="top_right" ref={containerRef}>
-            <Icon.Info size={10} className="svg-no-active" />
+            <Icon.Info size={15} className="svg-no-active" />
           </Input.IconWrapper>
 
           <GTTooltip parentRef={containerRef} title={title} text={text} />
