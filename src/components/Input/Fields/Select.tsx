@@ -1,25 +1,48 @@
 /* eslint-disable operator-linebreak */
 import { t } from "i18next";
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  memo,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import * as Icon from "react-feather";
 import { ChevronDown } from "react-feather";
 import { useTranslation } from "react-i18next";
-import { useGTPageStateContext } from "../../../context/pageState";
+import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useOnClickOutside from "../../../hooks/helpers/useOnClickOutside";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import wordFilter from "../../../utils/wordFilter";
 import GTTooltip from "../../Tooltip/Tooltip";
 import Input, { Select } from "../Input";
-import { IGTInputSelect, ISelectContext, ISelectOption, ISelectOptions, SelectionOptions } from "./interface";
+import {
+  IGTInputSelect,
+  ISelectContext,
+  ISelectOption,
+  ISelectOptions,
+  SelectionOptions,
+} from "./interface";
 
 const defaultValidationObj = ["required"];
 
 const SelectContext = React.createContext<ISelectContext>({ preSelected: 0 });
 
-function GTInputSelect({ name, label, options, text, title, row }: IGTInputSelect): JSX.Element {
+function GTInputSelect({
+  name,
+  label,
+  options,
+  text,
+  title,
+  row,
+}: IGTInputSelect): JSX.Element {
   const { t } = useTranslation();
+
+  const { isLoading } = useGTPageStateContextSetters();
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -79,15 +102,18 @@ function GTInputSelect({ name, label, options, text, title, row }: IGTInputSelec
   }, []);
 
   // update the select value
-  const handleSelect = useCallback((option: SelectionOptions, selectedIndex: number) => {
-    validateState(true, option.value);
-    setSearchTerm(option.label);
-    handleInputChange(option.label);
-    setSelected(option.value);
+  const handleSelect = useCallback(
+    (option: SelectionOptions, selectedIndex: number) => {
+      validateState(true, option.value);
+      setSearchTerm(option.label);
+      handleInputChange(option.label);
+      setSelected(option.value);
 
-    selectedIndexRef.current = selectedIndex;
-    handleCloseSelect();
-  }, [handleCloseSelect, handleInputChange, validateState]);
+      selectedIndexRef.current = selectedIndex;
+      handleCloseSelect();
+    },
+    [handleCloseSelect, handleInputChange, validateState]
+  );
 
   const handleChevClick = useCallback(() => {
     setShowOptions((prev) => {
@@ -103,17 +129,24 @@ function GTInputSelect({ name, label, options, text, title, row }: IGTInputSelec
     });
   }, []);
 
-  const handleSelectFocus = useCallback((e: React.FormEvent) => {
-    handleInputFocus();
-  }, [handleInputFocus]);
+  const handleSelectFocus = useCallback(
+    (e: React.FormEvent) => {
+      handleInputFocus();
+    },
+    [handleInputFocus]
+  );
 
-  const handleSelectBlur = useCallback((e: React.FormEvent) => {
-    handleInputBlur();
-  }, [handleInputBlur]);
+  const handleSelectBlur = useCallback(
+    (e: React.FormEvent) => {
+      handleInputBlur();
+    },
+    [handleInputBlur]
+  );
 
   const handleKey = useCallback(() => {
     // if it is not showing the options, open it
-    const hasFocus = (containerRef.current?.contains(document.activeElement)) ?? false;
+    const hasFocus =
+      containerRef.current?.contains(document.activeElement) ?? false;
     if (!showOptions && hasFocus) {
       // discover if ref has focus
       setShowOptions(true);
@@ -134,16 +167,28 @@ function GTInputSelect({ name, label, options, text, title, row }: IGTInputSelec
 
   useOnClickOutside(containerRef, null, handleCloseSelect);
 
-  const { isLoading } = useGTPageStateContext();
-
   if (isLoading ?? false) {
     return <Input.Container row={row} isLoading />;
   }
 
   return (
     <>
-      <SelectContext.Provider value={{ searchTerm, handleSelect, selected, setSelected, preSelected, setPreSelected }}>
-        <Input.Container row={row} onFocus={handleShowOptions} ref={containerRef} isUp={showOptions}>
+      <SelectContext.Provider
+        value={{
+          searchTerm,
+          handleSelect,
+          selected,
+          setSelected,
+          preSelected,
+          setPreSelected,
+        }}
+      >
+        <Input.Container
+          row={row}
+          onFocus={handleShowOptions}
+          ref={containerRef}
+          isUp={showOptions}
+        >
           <Input.Label up={labelIsUp} htmlFor={name}>
             {t(label)}
           </Input.Label>
@@ -163,24 +208,26 @@ function GTInputSelect({ name, label, options, text, title, row }: IGTInputSelec
 
           <ChevronDown onClick={handleChevClick} />
 
-          {((title != null) || (text != null)) && <>
-            <Input.IconWrapper type="top_right" ref={iconRef} onClick={handleChevClick}>
-              <Icon.Info size={15} className="svg-no-active" />
-            </Input.IconWrapper>
-          </>}
+          {(title != null || text != null) && (
+            <>
+              <Input.IconWrapper
+                type="top_right"
+                ref={iconRef}
+                onClick={handleChevClick}
+              >
+                <Icon.Info size={15} className="svg-no-active" />
+              </Input.IconWrapper>
+            </>
+          )}
 
-          {
-            showOptions && (
-              <SelectOptions options={options} />
-            )
-          }
+          {showOptions && <SelectOptions options={options} />}
         </Input.Container>
       </SelectContext.Provider>
-      {
-        ((title != null) || (text != null)) && <>
+      {(title != null || text != null) && (
+        <>
           <GTTooltip parentRef={iconRef} title={title} text={text} />
         </>
-      }
+      )}
     </>
   );
 }
@@ -193,19 +240,23 @@ GTInputSelect.propTypes = {
   options: PropTypes.array.isRequired,
   validations: PropTypes.arrayOf(PropTypes.string),
   defaultValidation: PropTypes.bool,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 GTInputSelect.defaultProps = {
   validations: defaultValidationObj,
   defaultValidation: true,
-  onChange: () => { },
+  onChange: () => {},
 };
 
-const SelectOptions = ({ options }: ISelectOptions) => {
-  const { searchTerm, preSelected, setPreSelected, handleSelect } = React.useContext<ISelectContext>(SelectContext);
+const SelectOptions = memo(function SelectOptions({ options }: ISelectOptions) {
+  const { searchTerm, preSelected, setPreSelected, handleSelect } =
+    useContext<ISelectContext>(SelectContext);
 
-  const filteredOptions = useMemo(() => wordFilter(options, searchTerm ?? ""), [options, searchTerm]);
+  const filteredOptions = useMemo(
+    () => wordFilter(options, searchTerm ?? ""),
+    [options, searchTerm]
+  );
 
   const selectRef = useRef<HTMLDivElement>(null);
 
@@ -259,7 +310,10 @@ const SelectOptions = ({ options }: ISelectOptions) => {
 
   useEffect(() => {
     // when the filtered options changes, it sets the preselected to 0
-    if (oldPreSelected.current !== null && oldPreSelected.current !== preSelected) {
+    if (
+      oldPreSelected.current !== null &&
+      oldPreSelected.current !== preSelected
+    ) {
       setPreSelected?.(0);
     } else {
       oldPreSelected.current = preSelected;
@@ -270,35 +324,44 @@ const SelectOptions = ({ options }: ISelectOptions) => {
   return (
     <Select.OptionsWrapper>
       <Select.OptionsContainer ref={selectRef}>
-        {
-          filteredOptions.map((option, index) =>
-            <SelectOption selectRef={selectRef} index={index} option={option} key={option.value} />
-          )
-        }
+        {filteredOptions.map((option, index) => (
+          <SelectOption
+            selectRef={selectRef}
+            index={index}
+            option={option}
+            key={option.value}
+          />
+        ))}
 
-        {
-          filteredOptions.length === 0 && (
-            <Select.NotFound>
-              {t("SELECT.NOT_FOUND")}
-            </Select.NotFound>
-          )
-        }
-
+        {filteredOptions.length === 0 && (
+          <Select.NotFound>{t("SELECT.NOT_FOUND")}</Select.NotFound>
+        )}
       </Select.OptionsContainer>
     </Select.OptionsWrapper>
   );
-};
+});
 
-const SelectOption = ({ selectRef, option, index }: ISelectOption) => {
-  const { handleSelect, selected, preSelected, setPreSelected } = React.useContext<ISelectContext>(SelectContext);
+const SelectOption = memo(function SelectOption({
+  selectRef,
+  option,
+  index,
+}: ISelectOption) {
+  const { handleSelect, selected, preSelected, setPreSelected } =
+    useContext<ISelectContext>(SelectContext);
 
   const optionRef = useRef<HTMLDivElement>(null);
 
   const dontScrollToSelected = useRef<boolean>(false);
 
-  const isSelected = useMemo(() => selected === option.value, [selected, option]);
+  const isSelected = useMemo(
+    () => selected === option.value,
+    [selected, option]
+  );
 
-  const isPreSelected = useMemo(() => preSelected === index, [preSelected, index]);
+  const isPreSelected = useMemo(
+    () => preSelected === index,
+    [preSelected, index]
+  );
 
   useEffect(() => {
     if ((isSelected || isPreSelected) && !dontScrollToSelected.current) {
@@ -306,7 +369,7 @@ const SelectOption = ({ selectRef, option, index }: ISelectOption) => {
       selectRef.current?.scrollTo({
         left: 0,
         top: (optionRef.current?.offsetTop ?? 0) - 70,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     }
   }, [isSelected, selectRef, isPreSelected]);
@@ -338,6 +401,13 @@ const SelectOption = ({ selectRef, option, index }: ISelectOption) => {
   }, [handleSelect, index, option]);
 
   return (
-    <Select.Value ref={optionRef} isPreSelected={isPreSelected} isSelected={isSelected} onClick={onSelect}>{option.label}</Select.Value>
+    <Select.Value
+      ref={optionRef}
+      isPreSelected={isPreSelected}
+      isSelected={isSelected}
+      onClick={onSelect}
+    >
+      {option.label}
+    </Select.Value>
   );
-};
+});

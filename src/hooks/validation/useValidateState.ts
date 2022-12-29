@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { useCallback, useEffect } from "react";
-import { useGTPageStateContext } from "../../context/pageState";
+import { useGTPageStateContextSetters } from "../../context/pageState";
 
 function useValidateState(name: string, inputValidations: string[]) {
-  const { setPageState, setErrors } = useGTPageStateContext();
+  const { setPageState, setErrors } = useGTPageStateContextSetters();
 
   useEffect(() => {
     let inputVal = {};

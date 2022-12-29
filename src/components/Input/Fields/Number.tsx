@@ -6,17 +6,17 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState,
+  useState
 } from "react";
+import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
-import { useGTPageStateContext } from "../../../context/pageState";
+import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateNumber from "../../../hooks/validation/useValidateNumber";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import GTTooltip from "../../Tooltip/Tooltip";
 import Input from "../Input";
 import { IGTInputNumber } from "./interface";
-import * as Icon from "react-feather";
 
 const defaultValidationObj = ["required"];
 
@@ -33,6 +33,8 @@ function GTInputNumber({
   max,
 }: IGTInputNumber) {
   const { t } = useTranslation();
+
+  const { isLoading } = useGTPageStateContextSetters();
 
   const inputValidations = useMemo(() => {
     if (defaultValidation) {
@@ -94,8 +96,6 @@ function GTInputNumber({
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const { isLoading } = useGTPageStateContext();
 
   if (isLoading ?? false) {
     return <Input.Container row={row} isLoading />;

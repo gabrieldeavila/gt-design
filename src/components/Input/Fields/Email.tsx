@@ -1,9 +1,15 @@
 /* eslint-disable operator-linebreak */
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
-import { useGTPageStateContext } from "../../../context/pageState";
+import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateEmail from "../../../hooks/validation/useValidateEmail";
 import useValidateState from "../../../hooks/validation/useValidateState";
@@ -13,8 +19,19 @@ import { IGTInput } from "./interface";
 
 const defaultValidationObj = ["required"];
 
-function GTInputEmail({ name, label, validations, defaultValidation, onChange, text, title, row }: IGTInput): JSX.Element {
+function GTInputEmail({
+  name,
+  label,
+  validations,
+  defaultValidation,
+  onChange,
+  text,
+  title,
+  row,
+}: IGTInput): JSX.Element {
   const { t } = useTranslation();
+
+  const { isLoading } = useGTPageStateContextSetters();
 
   const inputValidations = useMemo(() => {
     if (defaultValidation) {
@@ -26,8 +43,13 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange, t
 
   const { validateState } = useValidateState(name, inputValidations);
 
-  const { labelIsUp, value, handleInputChange, handleInputBlur, handleInputFocus } =
-    useInputValues(name);
+  const {
+    labelIsUp,
+    value,
+    handleInputChange,
+    handleInputBlur,
+    handleInputFocus,
+  } = useInputValues(name);
 
   const { validateEmail } = useValidateEmail();
   const [isValidEmail, setIsValidEmail] = useState(true);
@@ -47,7 +69,10 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange, t
   const handleChange = useCallback(
     (e: any) => {
       const { value: emailVal } = e.target;
-      const { isValid, invalidMessage } = validateEmail(emailVal, inputValidations);
+      const { isValid, invalidMessage } = validateEmail(
+        emailVal,
+        inputValidations
+      );
 
       validateState(isValid, emailVal);
       setIsValidEmail(isValid);
@@ -56,12 +81,16 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange, t
 
       onChange(e);
     },
-    [validateEmail, inputValidations, validateState, handleInputChange, onChange]
+    [
+      validateEmail,
+      inputValidations,
+      validateState,
+      handleInputChange,
+      onChange,
+    ]
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const { isLoading } = useGTPageStateContext();
 
   if (isLoading ?? false) {
     return <Input.Container row={row} isLoading />;
@@ -83,21 +112,20 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange, t
           name={name}
         />
 
-        {!isValidEmail && <Input.Error>{t(`EMAIL.${errorMessage}`)}</Input.Error>}
+        {!isValidEmail && (
+          <Input.Error>{t(`EMAIL.${errorMessage}`)}</Input.Error>
+        )}
 
-        {
-          ((title != null) || (text != null)) &&
+        {(title != null || text != null) && (
           <Input.IconWrapper type="center" ref={containerRef}>
             <Icon.Info size={15} className="svg-no-active" />
           </Input.IconWrapper>
-        }
+        )}
       </Input.Container>
 
-      {
-        ((title != null) || (text != null)) &&
+      {(title != null || text != null) && (
         <GTTooltip parentRef={containerRef} title={title} text={text} />
-
-      }
+      )}
     </>
   );
 }
@@ -109,11 +137,11 @@ GTInputEmail.propTypes = {
   label: PropTypes.string.isRequired,
   validations: PropTypes.arrayOf(PropTypes.string),
   defaultValidation: PropTypes.bool,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 GTInputEmail.defaultProps = {
   validations: defaultValidationObj,
   defaultValidation: true,
-  onChange: () => { }
+  onChange: () => {},
 };

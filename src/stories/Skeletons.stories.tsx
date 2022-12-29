@@ -25,7 +25,7 @@ export default {
   },
 };
 
-const Template = function Skeleton({ isLoading }: { isLoading: boolean; }) {
+const Template = function ExInput({ isLoading }: { isLoading: boolean; }) {
   const options = [
     { value: "B", label: "Bananas 🍌" },
     { value: "F", label: "Figs 🥝" },
@@ -68,4 +68,4 @@ const Template = function Skeleton({ isLoading }: { isLoading: boolean; }) {
   );
 };
 
-export const Skeleton = Template.bind({});
+export const InputSkeleton = Template.bind({});

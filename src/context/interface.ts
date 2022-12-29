@@ -4,8 +4,8 @@ export interface IGTContext {
   children?: React.ReactNode;
 }
 
-interface IPageStateValues {
-  [key: string]: string | number;
+export interface IPageStateValues {
+  [key: string | number]: string | number;
 }
 
 export interface IGTPageState {
@@ -15,4 +15,11 @@ export interface IGTPageState {
   setPageState: React.Dispatch<React.SetStateAction<IPageStateValues>>;
   children?: React.ReactNode;
   isLoading?: boolean;
+}
+
+export interface IGTPageStateSetters {
+  setPageState: React.Dispatch<React.SetStateAction<IPageStateValues>>;
+  setErrors: React.Dispatch<React.SetStateAction<string[]>>;
+  isLoading?: boolean;
+  pageStateRef: React.RefObject<IPageStateValues>;
 }

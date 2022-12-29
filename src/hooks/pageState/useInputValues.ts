@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import _ from "lodash";
 import { useCallback, useState } from "react";
-import { useGTPageStateContext } from "../../context/pageState";
+import { useGTPageStateContextSetters } from "../../context/pageState";
 
 function useInputValues(name: string) {
-  const { pageState } = useGTPageStateContext();
+  const { pageStateRef } = useGTPageStateContextSetters();
 
-  const [value, setValue] = useState(pageState[name] || "");
-  const [labelIsUp, setLabelIsUp] = useState(!!pageState[name]);
+  const [value, setValue] = useState(pageStateRef?.current?.[name] ?? "");
+  const [labelIsUp, setLabelIsUp] = useState(!!pageStateRef?.current?.[name]);
 
   const handleInputFocus = useCallback(() => {
     setLabelIsUp(true);

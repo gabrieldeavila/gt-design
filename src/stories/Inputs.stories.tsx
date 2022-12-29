@@ -76,7 +76,6 @@ const Template = function InputsStory() {
             <GTInput.Text
               row={6}
               text="щ(ʘ╻ʘ)щ"
-              defaultValidation
               validations={["noSpaces"]}
               name="nickname"
               label="TEMPLATE.LOGIN.NICKNAME_LABEL"
@@ -87,14 +86,6 @@ const Template = function InputsStory() {
               text="(￣、￣)"
               name="email"
               label="TEMPLATE.LOGIN.EMAIL_LABEL"
-            />
-
-            <GTInput.Password
-              row={5}
-              text="＞﹏＜"
-              title="(❤️ ω ❤️)"
-              name="password"
-              label="TEMPLATE.LOGIN.PASSWORD_LABEL"
             />
 
             <GTInput.Number

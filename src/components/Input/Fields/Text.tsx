@@ -10,7 +10,7 @@ import React, {
 } from "react";
 import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
-import { useGTPageStateContext } from "../../../context/pageState";
+import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import useValidateText from "../../../hooks/validation/useValidateText";
@@ -104,7 +104,7 @@ function GTInputText({
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const { isLoading } = useGTPageStateContext();
+  const { isLoading } = useGTPageStateContextSetters();
 
   if (isLoading ?? false) {
     return <Input.Container row={row} isLoading />;

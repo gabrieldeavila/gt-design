@@ -25,7 +25,7 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
   const { t } = useTranslation();
 
   // state to keep track of all the inputs
-  const { pageState } = useGTPageStateContext();
+  const { pageState, isLoading } = useGTPageStateContext();
 
   // validations that are passed to the input
   const inputValidations = useMemo(() => {
@@ -102,8 +102,6 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
   }, [sameAsValue]);
 
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const { isLoading } = useGTPageStateContext();
 
   if (isLoading ?? false) {
     return <Input.Container row={row} isLoading />;

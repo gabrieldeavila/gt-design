@@ -10,7 +10,7 @@ import React, {
 } from "react";
 import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
-import { useGTPageStateContext } from "../../../context/pageState";
+import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useMask from "../../../hooks/pageState/useMask";
 import useValidateNumber from "../../../hooks/validation/useValidateNumber";
@@ -35,6 +35,8 @@ function GTInputNumericMask({
   mask,
 }: IGTInputNumericMask) {
   const { t } = useTranslation();
+
+  const { isLoading } = useGTPageStateContextSetters();
 
   const inputValidations = useMemo(() => {
     if (defaultValidation) {
@@ -118,8 +120,6 @@ function GTInputNumericMask({
   }, [handleInputFocus, mask]);
 
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const { isLoading } = useGTPageStateContext();
 
   if (isLoading ?? false) {
     return <Input.Container row={row} isLoading />;
