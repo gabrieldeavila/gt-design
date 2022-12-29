@@ -67,8 +67,7 @@ const Template = function InputsStory() {
           <Input.Group>
             <GTInput.Select
               row={6}
-              title="wow such charm 🐲"
-              text="what"
+              title="🐲"
               label="Select"
               name="select"
               options={options}
@@ -76,7 +75,7 @@ const Template = function InputsStory() {
 
             <GTInput.Text
               row={6}
-              text="change"
+              text="щ(ʘ╻ʘ)щ"
               defaultValidation
               validations={["noSpaces"]}
               name="nickname"
@@ -85,33 +84,30 @@ const Template = function InputsStory() {
 
             <GTInput.Email
               row={21}
-              title="EXAMPLE.TITLE"
-              text="HEHEHE"
+              text="(￣、￣)"
               name="email"
               label="TEMPLATE.LOGIN.EMAIL_LABEL"
             />
 
             <GTInput.Password
               row={5}
-              text="EXAMPLE.TEXT"
-              title="EXAMPLE.TITLE"
+              text="＞﹏＜"
+              title="(❤️ ω ❤️)"
               name="password"
               label="TEMPLATE.LOGIN.PASSWORD_LABEL"
             />
 
             <GTInput.Number
+              text="ಠ╭╮ಠ"
               min={1}
               max={5.2}
               row={5}
-              text="EXAMPLE.TEXT"
-              title="EXAMPLE.TITLE"
               name="NUMBER"
-              label="És uno numero!"
+              label="EXAMPLE.NUMBER"
             />
 
             <GTInput.NumericMask
-              text="EXAMPLE.TEXT"
-              title="EXAMPLE.TITLE"
+              title="（⊙ｏ⊙）"
               row={5}
               name="price"
               label="Money"
@@ -119,24 +115,27 @@ const Template = function InputsStory() {
             />
 
             <GTInput.NumericMask
+              text="←_←"
               row={5}
               name="percent"
               title="wowww"
-              label="Percent"
+              label="EXAMPLE.PERCENT"
               mask={percentMask}
             />
 
             <GTInput.NumericMask
+              title="(((φ(◎ロ◎;)φ)))"
               row={5}
               name="doc"
-              label="CPF/CNPJ"
+              label="EXAMPLE.DOC"
               mask={docMask}
             />
 
             <GTInput.NumericMask
+              text="┌( ´_ゝ` )┐"
               row={5}
               name="phone"
-              label="Phone"
+              label="EXAMPLE.PHONE"
               mask={phoneMask}
             />
           </Input.Group>

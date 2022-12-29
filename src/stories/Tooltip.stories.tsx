@@ -1,46 +1,10 @@
 import React, { useState } from "react";
 import { GTInput, Input, Space } from "../components";
-import {
-  INonNumericMask,
-  INumericMask,
-} from "../components/Input/Fields/interface";
 import GTPageStateProvider from "../context/pageState";
 import { GTBasic } from "../gt";
 
 export default {
   title: "GTDesign/Tooltip",
-};
-
-const moneyMask: INumericMask = {
-  suffix: "",
-  prefix: "US$  ",
-  thousandsSeparatorSymbol: ",",
-  decimalSymbol: ".",
-  decimalLimit: 2,
-  integerLimit: 7,
-  allowNegative: true,
-  type: "numeric_mask",
-};
-
-const percentMask: INumericMask = {
-  suffix: "%",
-  prefix: "",
-  thousandsSeparatorSymbol: ",",
-  decimalSymbol: ".",
-  decimalLimit: 2,
-  integerLimit: 4,
-  allowNegative: false,
-  type: "numeric_mask",
-};
-
-const phoneMask: INonNumericMask = {
-  options: ["(99) 9999-9999", "(99) 99999-9999"],
-  type: "non_numeric_mask",
-};
-
-const docMask: INonNumericMask = {
-  options: ["999.999.999-99", "99.999.999/9999-99"],
-  type: "non_numeric_mask",
 };
 
 const Template = function TooltipStory() {
@@ -67,8 +31,8 @@ const Template = function TooltipStory() {
           <Input.Group>
             <GTInput.Select
               row={6}
-              title="wow such charm 🐲"
-              text="what"
+              text="EXAMPLE.TEXT"
+              title="EXAMPLE.TITLE"
               label="Select"
               name="select"
               options={options}
@@ -76,7 +40,7 @@ const Template = function TooltipStory() {
 
             <GTInput.Text
               row={6}
-              text="change"
+              text="EXAMPLE.TITLE"
               defaultValidation
               validations={["noSpaces"]}
               name="nickname"
@@ -86,7 +50,6 @@ const Template = function TooltipStory() {
             <GTInput.Email
               row={21}
               title="EXAMPLE.TITLE"
-              text="HEHEHE"
               name="email"
               label="TEMPLATE.LOGIN.EMAIL_LABEL"
             />
@@ -103,7 +66,6 @@ const Template = function TooltipStory() {
               min={1}
               max={5.2}
               row={5}
-              text="EXAMPLE.TEXT"
               title="EXAMPLE.TITLE"
               name="number"
               label="Number"

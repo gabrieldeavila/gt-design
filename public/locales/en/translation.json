@@ -50,6 +50,10 @@
   },
   "EXAMPLE": {
     "TITLE": "Example",
-    "TEXT": "with locales!"
+    "TEXT": "with locales!",
+    "PHONE": "Phone",
+    "DOC": "Document",
+    "PERCENT": "Percent",
+    "NUMBER": "Number"
   }
 }

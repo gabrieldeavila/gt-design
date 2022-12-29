@@ -24,10 +24,10 @@
     "NOT_FOUND": "Nenhum item encontrado 😪"
   },
   "NUMBER": {
-      "REQUIRED": "Este campo é obrigatório.",
-      "MIN": "Este campo deve ser maior ou igual a {{MIN}}.",
-      "MAX": "Este campo deve ser menor ou igual a {{MAX}}.",
-      "BETWEEN": "Este campo deve estar entre {{MIN}} e {{MAX}}."
+    "REQUIRED": "Este campo é obrigatório.",
+    "MIN": "Este campo deve ser maior ou igual a {{MIN}}.",
+    "MAX": "Este campo deve ser menor ou igual a {{MAX}}.",
+    "BETWEEN": "Este campo deve estar entre {{MIN}} e {{MAX}}."
   },
   "TEMPLATE": {
     "LOGIN": {
@@ -50,6 +50,10 @@
   },
   "EXAMPLE": {
     "TITLE": "Título!",
-    "TEXT": "Texto de Localidades"
+    "TEXT": "Texto de Localidades",
+    "PHONE": "Telefone",
+    "DOC": "CPF/CNPJ",
+    "PERCENT": "Percentual",
+    "NUMBER": "Número"
   }
 }
