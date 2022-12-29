@@ -141,13 +141,17 @@ const InputField = styled.input<IInputField>`
   background: ${(props) => transparentize(0.2, props.theme.primary)};
   color: ${(props) => props.theme.contrast};
   font-family: "Kanit", sans-serif;
+
+  /* changes the placeholder color */
+  &::placeholder {
+    color: ${(props) => props.theme.contrast};
+  }
 `;
 
 const InputLabel = styled.label`
   user-select: none;
   cursor: text;
   position: absolute;
-  font-size: 0.75rem;
   left: 0.5rem;
   color: ${(props) => props.theme.contrast};
   /* creates color with gradient */

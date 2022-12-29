@@ -78,22 +78,22 @@ const upLabel = css`
   @keyframes up {
     0% {
       top: 50%;
-      font-size: 0.75rem;
+      font-size: 0.85rem;
     }
     100% {
       top: 20%;
-      font-size: 0.65rem;
+      font-size: 0.75rem;
     }
   }
 
   @keyframes upReverse {
     0% {
       top: 20%;
-      font-size: 0.5rem;
+      font-size: 0.75rem;
     }
     100% {
       top: 40%;
-      font-size: 0.75rem;
+      font-size: 0.85rem;
     }
   }
 `;
