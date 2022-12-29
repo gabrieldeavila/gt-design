@@ -164,7 +164,7 @@ function GTInputSelect({ name, label, options, text, title, row }: IGTInputSelec
           <ChevronDown onClick={handleChevClick} />
 
           {((title != null) || (text != null)) && <>
-            <Input.IconWrapper type="top_right" ref={iconRef}>
+            <Input.IconWrapper type="top_right" ref={iconRef} onClick={handleChevClick}>
               <Icon.Info size={15} className="svg-no-active" />
             </Input.IconWrapper>
           </>}

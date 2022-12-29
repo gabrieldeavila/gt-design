@@ -89,21 +89,10 @@ const InputContainer = styled.div<IInputContainer>`
     outline-offset: 0.15rem;
   }
 
-  &:focus-within::after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    background: red;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 0.25rem;
-    box-shadow: 0 0 0 0.15rem
-      ${(props) => transparentize(1, props.theme.outline)};
-  }
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0 0.15rem ${(props) => transparentize(1, props.theme.outline)};
 
-  &:focus-within::after {
+  &:focus-within {
     box-shadow: 0 0 0 0.25rem
       ${(props) => transparentize(0.5, props.theme.outline)};
   }
