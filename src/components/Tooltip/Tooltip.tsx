@@ -10,6 +10,7 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
 
   // ref to the tooltip element
   const tooltipRef = useRef<HTMLDivElement>(null);
+  const updateWhenScroll = useRef<boolean>(false);
 
   // it is used to force the tooltip to update the position when the window is resized
   const [updateParams, setUpdateParams] = useState<boolean>(false);
@@ -37,11 +38,16 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
       setUpdateParams((prev) => !prev);
     };
 
+    const handleScroll = () => {
+      updateWhenScroll.current = true;
+    };
+
     handleResize();
 
     window.addEventListener("resize", handleResize);
-
+    window.addEventListener("scroll", handleScroll);
     return () => {
+      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
     };
   }, []);
@@ -95,13 +101,28 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
   }, [showTooltip]);
 
   useEffect(() => {
+    let clearMouseEnterTimer: NodeJS.Timeout;
+
     // show only if the mouse is over the parent
     const handleMouseEnter = () => {
+      if (updateWhenScroll.current) {
+        updateWhenScroll.current = false;
+        setUpdateParams((prev) => !prev);
+
+        // avoids showing the tooltip in the wrong position when the window is scrolled
+        clearMouseEnterTimer = setTimeout(() => {
+          setShowTooltip(true);
+        }, 100);
+        return;
+      }
       setShowTooltip(true);
     };
 
     // hide if the mouse is not over the parent
     const handleMouseLeave = () => {
+      // avoids showTooltip being set to true when the mouse already left the parent
+      clearTimeout(clearMouseEnterTimer);
+
       setShowTooltip(false);
     };
 
@@ -115,6 +136,7 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
     return () => {
       parent?.removeEventListener("mouseenter", handleMouseEnter);
       parent?.removeEventListener("mouseleave", handleMouseLeave);
+      clearTimeout(clearMouseEnterTimer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
