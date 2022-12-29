@@ -16,7 +16,7 @@ const SwitchSlider = styled.span`
   position: absolute;
   padding: 0.5rem;
   top: 0.14rem;
-  left: 0.1rem;
+  left: 0.14rem;
   bottom: 0;
   display: block;
   cursor: pointer;

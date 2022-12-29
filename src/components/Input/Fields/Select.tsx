@@ -141,43 +141,47 @@ function GTInputSelect({ name, label, options, text, title, row }: IGTInputSelec
   }
 
   return (
-    <SelectContext.Provider value={{ searchTerm, handleSelect, selected, setSelected, preSelected, setPreSelected }}>
-      <Input.Container row={row} onFocus={handleShowOptions} ref={containerRef} isUp={showOptions}>
-        <Input.Label up={labelIsUp} htmlFor={name}>
-          {t(label)}
-        </Input.Label>
-        <Input.Field
-          ref={inputRef}
-          type="text"
-          onChange={handleChange}
-          value={searchTerm}
-          placeholder={selectedLabel}
-          onBlur={handleSelectBlur}
-          onFocus={handleSelectFocus}
-          id={name}
-          name={name}
-          autoComplete="off"
-          isLabel
-        />
+    <>
+      <SelectContext.Provider value={{ searchTerm, handleSelect, selected, setSelected, preSelected, setPreSelected }}>
+        <Input.Container row={row} onFocus={handleShowOptions} ref={containerRef} isUp={showOptions}>
+          <Input.Label up={labelIsUp} htmlFor={name}>
+            {t(label)}
+          </Input.Label>
+          <Input.Field
+            ref={inputRef}
+            type="text"
+            onChange={handleChange}
+            value={searchTerm}
+            placeholder={selectedLabel}
+            onBlur={handleSelectBlur}
+            onFocus={handleSelectFocus}
+            id={name}
+            name={name}
+            autoComplete="off"
+            isLabel
+          />
 
-        <ChevronDown onClick={handleChevClick} />
-        {
-          ((title != null) || (text != null)) && <>
+          <ChevronDown onClick={handleChevClick} />
+
+          {((title != null) || (text != null)) && <>
             <Input.IconWrapper type="top_right" ref={iconRef}>
               <Icon.Info size={15} className="svg-no-active" />
             </Input.IconWrapper>
+          </>}
 
-            <GTTooltip parentRef={iconRef} title={title} text={text} />
-          </>
-        }
-
-        {
-          showOptions && (
-            <SelectOptions options={options} />
-          )
-        }
-      </Input.Container>
-    </SelectContext.Provider>
+          {
+            showOptions && (
+              <SelectOptions options={options} />
+            )
+          }
+        </Input.Container>
+      </SelectContext.Provider>
+      {
+        ((title != null) || (text != null)) && <>
+          <GTTooltip parentRef={iconRef} title={title} text={text} />
+        </>
+      }
+    </>
   );
 }
 

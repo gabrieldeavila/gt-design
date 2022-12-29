@@ -1,8 +1,13 @@
-
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable operator-linebreak */
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContext } from "../../../context/pageState";
 import useInputValues from "../../../hooks/pageState/useInputValues";
@@ -39,8 +44,13 @@ function GTInputNumber({
 
   const { validateState } = useValidateState(name, inputValidations);
 
-  const { labelIsUp, value, handleInputChange, handleInputBlur, handleInputFocus } =
-    useInputValues(name);
+  const {
+    labelIsUp,
+    value,
+    handleInputChange,
+    handleInputBlur,
+    handleInputFocus,
+  } = useInputValues(name);
 
   const { validateNumber } = useValidateNumber(min, max);
   const [isValidNumber, setIsValidNumber] = useState(true);
@@ -61,7 +71,10 @@ function GTInputNumber({
   const handleChange = useCallback(
     (e: any) => {
       const { value: iVal } = e.target;
-      const { isValid, invalidMessage, errorsVar } = validateNumber(iVal, inputValidations);
+      const { isValid, invalidMessage, errorsVar } = validateNumber(
+        iVal,
+        inputValidations
+      );
 
       validateState(isValid, iVal);
       setIsValidNumber(isValid);
@@ -71,7 +84,13 @@ function GTInputNumber({
 
       onChange(e);
     },
-    [validateNumber, inputValidations, validateState, handleInputChange, onChange]
+    [
+      validateNumber,
+      inputValidations,
+      validateState,
+      handleInputChange,
+      onChange,
+    ]
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -83,33 +102,39 @@ function GTInputNumber({
   }
 
   return (
-    <Input.Container row={row}>
-      <Input.Label up={labelIsUp} htmlFor={name}>
-        {t(label)}
-      </Input.Label>
-      <Input.Field
-        type="number"
-        value={value}
-        onChange={handleChange}
-        onBlur={handleInputBlur}
-        onFocus={handleInputFocus}
-        id={name}
-        name={name}
-        autoComplete="off"
-      />
+    <>
+      <Input.Container row={row}>
+        <Input.Label up={labelIsUp} htmlFor={name}>
+          {t(label)}
+        </Input.Label>
+        <Input.Field
+          type="number"
+          value={value}
+          onChange={handleChange}
+          onBlur={handleInputBlur}
+          onFocus={handleInputFocus}
+          id={name}
+          name={name}
+          autoComplete="off"
+        />
 
-      {!isValidNumber && <Input.Error>{t(`NUMBER.${errorMessage}`, localeErrorsParams)}</Input.Error>}
+        {!isValidNumber && (
+          <Input.Error>
+            {t(`NUMBER.${errorMessage}`, localeErrorsParams)}
+          </Input.Error>
+        )}
 
-      {
-        ((title != null) || (text != null)) && <>
+        {(title != null || text != null) && (
           <Input.IconWrapper type="center" ref={containerRef}>
             <Icon.Info size={15} className="svg-no-active" />
           </Input.IconWrapper>
+        )}
+      </Input.Container>
 
-          <GTTooltip parentRef={containerRef} title={title} text={text} />
-        </>
-      }
-    </Input.Container>
+      {(title != null || text != null) && (
+        <GTTooltip parentRef={containerRef} title={title} text={text} />
+      )}
+    </>
   );
 }
 
@@ -124,7 +149,7 @@ GTInputNumber.propTypes = {
 };
 
 GTInputNumber.defaultProps = {
-  onChange: () => { },
+  onChange: () => {},
   validations: defaultValidationObj,
   defaultValidation: true,
 };

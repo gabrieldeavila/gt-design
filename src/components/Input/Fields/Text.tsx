@@ -1,8 +1,13 @@
-
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable operator-linebreak */
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContext } from "../../../context/pageState";
@@ -26,7 +31,7 @@ function GTInputText({
   onChange,
   text,
   title,
-  row
+  row,
 }: IGTInputText) {
   const { t } = useTranslation();
 
@@ -40,8 +45,13 @@ function GTInputText({
 
   const { validateState } = useValidateState(name, inputValidations);
 
-  const { labelIsUp, value, handleInputChange, handleInputBlur, handleInputFocus } =
-    useInputValues(name);
+  const {
+    labelIsUp,
+    value,
+    handleInputChange,
+    handleInputBlur,
+    handleInputFocus,
+  } = useInputValues(name);
 
   const { validateText, validateMinAndMax } = useValidateText(
     minWords,
@@ -68,7 +78,11 @@ function GTInputText({
     (e: any) => {
       const { value: iVal } = e.target;
       const { isValid, invalidMessage } = validateText(iVal, inputValidations);
-      const { isAllValid, invalidAllMessage, errorsVars } = validateMinAndMax(invalidMessage, isValid, iVal);
+      const { isAllValid, invalidAllMessage, errorsVars } = validateMinAndMax(
+        invalidMessage,
+        isValid,
+        iVal
+      );
 
       validateState(isAllValid, iVal);
       setErrorMessage(invalidAllMessage);
@@ -78,7 +92,14 @@ function GTInputText({
 
       onChange(e);
     },
-    [onChange, validateText, inputValidations, validateMinAndMax, validateState, handleInputChange]
+    [
+      onChange,
+      validateText,
+      inputValidations,
+      validateMinAndMax,
+      validateState,
+      handleInputChange,
+    ]
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -90,32 +111,38 @@ function GTInputText({
   }
 
   return (
-    <Input.Container row={row}>
-      <Input.Label up={labelIsUp} htmlFor={name}>
-        {t(label)}
-      </Input.Label>
-      <Input.Field
-        type="text"
-        value={value}
-        onChange={handleChange}
-        onBlur={handleInputBlur}
-        onFocus={handleInputFocus}
-        id={name}
-        name={name}
-      />
+    <>
+      <Input.Container row={row}>
+        <Input.Label up={labelIsUp} htmlFor={name}>
+          {t(label)}
+        </Input.Label>
+        <Input.Field
+          type="text"
+          value={value}
+          onChange={handleChange}
+          onBlur={handleInputBlur}
+          onFocus={handleInputFocus}
+          id={name}
+          name={name}
+        />
 
-      {!isValidText && <Input.Error>{t(`TEXT.${errorMessage}`, localeErrorsParams)}</Input.Error>}
+        {!isValidText && (
+          <Input.Error>
+            {t(`TEXT.${errorMessage}`, localeErrorsParams)}
+          </Input.Error>
+        )}
 
-      {
-        ((title != null) || (text != null)) && <>
+        {(title != null || text != null) && (
           <Input.IconWrapper type="center" ref={containerRef}>
             <Icon.Info size={15} className="svg-no-active" />
           </Input.IconWrapper>
+        )}
+      </Input.Container>
 
-          <GTTooltip parentRef={containerRef} title={title} text={text} />
-        </>
-      }
-    </Input.Container>
+      {(title != null || text != null) && (
+        <GTTooltip parentRef={containerRef} title={title} text={text} />
+      )}
+    </>
   );
 }
 
@@ -130,15 +157,15 @@ GTInputText.propTypes = {
   maxWords: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   defaultValidation: PropTypes.bool,
   minChars: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  maxChars: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  maxChars: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 GTInputText.defaultProps = {
-  onChange: () => { },
+  onChange: () => {},
   validations: defaultValidationObj,
   minWords: 0,
   maxWords: 0,
   defaultValidation: true,
   minChars: 0,
-  maxChars: 0
+  maxChars: 0,
 };

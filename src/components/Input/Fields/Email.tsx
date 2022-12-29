@@ -68,32 +68,37 @@ function GTInputEmail({ name, label, validations, defaultValidation, onChange, t
   }
 
   return (
-    <Input.Container row={row}>
-      <Input.Label up={labelIsUp} htmlFor={name}>
-        {t(label)}
-      </Input.Label>
-      <Input.Field
-        type="email"
-        onChange={handleChange}
-        value={value}
-        onBlur={handleInputBlur}
-        onFocus={handleInputFocus}
-        id={name}
-        name={name}
-      />
+    <>
+      <Input.Container row={row}>
+        <Input.Label up={labelIsUp} htmlFor={name}>
+          {t(label)}
+        </Input.Label>
+        <Input.Field
+          type="email"
+          onChange={handleChange}
+          value={value}
+          onBlur={handleInputBlur}
+          onFocus={handleInputFocus}
+          id={name}
+          name={name}
+        />
 
-      {!isValidEmail && <Input.Error>{t(`EMAIL.${errorMessage}`)}</Input.Error>}
+        {!isValidEmail && <Input.Error>{t(`EMAIL.${errorMessage}`)}</Input.Error>}
 
-      {
-        ((title != null) || (text != null)) && <>
+        {
+          ((title != null) || (text != null)) &&
           <Input.IconWrapper type="center" ref={containerRef}>
             <Icon.Info size={15} className="svg-no-active" />
           </Input.IconWrapper>
+        }
+      </Input.Container>
 
-          <GTTooltip parentRef={containerRef} title={title} text={text} />
-        </>
+      {
+        ((title != null) || (text != null)) &&
+        <GTTooltip parentRef={containerRef} title={title} text={text} />
+
       }
-    </Input.Container>
+    </>
   );
 }
 

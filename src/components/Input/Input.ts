@@ -92,7 +92,9 @@ const InputContainer = styled.div<IInputContainer>`
   &:focus-within::after {
     content: "";
     position: absolute;
+    z-index: -1;
     top: 0;
+    background: red;
     left: 0;
     right: 0;
     bottom: 0;
@@ -132,7 +134,7 @@ const InputContainer = styled.div<IInputContainer>`
   ${({ isLoading }) => (isLoading ?? false) && loadingInput}
 `;
 
-const InputGroup = styled.div`
+const InputGroup = styled.form`
   ${flex.wrapGap}
   gap: 1.75rem;
   flex-direction: row;
@@ -224,7 +226,7 @@ const SelectValue = styled.div<ISelectValue>`
   ${hovers.scaleTransYOpacity}
 
   &:active {
-    transform: scale(0.9);
+    transform: scale(0.98);
   }
 
   ${({ isSelected, isPreSelected, theme }) => css`

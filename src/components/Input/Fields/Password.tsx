@@ -110,43 +110,46 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
   }
 
   return (
-    <Input.Container row={row}>
-      <Input.Label up={labelIsUp} htmlFor={name}>
-        {t(label)}
-      </Input.Label>
-      <Input.Field
-        type={type}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        value={value}
-        onFocus={handleInputFocus}
-        id={name}
-        name={name}
-      />
+    <>
+      <Input.Container row={row}>
+        <Input.Label up={labelIsUp} htmlFor={name}>
+          {t(label)}
+        </Input.Label>
+        <Input.Field
+          type={type}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={value}
+          onFocus={handleInputFocus}
+          id={name}
+          name={name}
+        />
 
-      {showPassword
-        ? (
-          <Icon.Eye onClick={handleShowPassword} />
-          )
-        : (
-          <Icon.EyeOff onClick={handleShowPassword} />
-          )
-      }
+        {showPassword
+          ? (
+            <Icon.Eye onClick={handleShowPassword} />
+            )
+          : (
+            <Icon.EyeOff onClick={handleShowPassword} />
+            )
+        }
 
-      {!isValidPassword && <Input.Error>{t(`PASSWORD.${errorMessage}`)}</Input.Error>}
+        {!isValidPassword && <Input.Error>{t(`PASSWORD.${errorMessage}`)}</Input.Error>}
 
-      {
-        ((title != null) || (text != null)) && <>
-          <Input.IconWrapper type="top_right" ref={containerRef}>
+        {
+          ((title != null) || (text != null)) && <Input.IconWrapper type="top_right" ref={containerRef}>
             <Icon.Info size={15} className="svg-no-active" />
           </Input.IconWrapper>
+        }
 
-          <GTTooltip parentRef={containerRef} title={title} text={text} />
-        </>
+        <GTTooltip parentRef={containerRef} title={title} text={text} />
+      </Input.Container>
+
+      {
+        ((title != null) || (text != null)) && <GTTooltip parentRef={containerRef} title={title} text={text} />
       }
+    </>
 
-      <GTTooltip parentRef={containerRef} title={title} text={text} />
-    </Input.Container>
   );
 }
 

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { memo, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { defaultClientBoundings } from "../../utils/default";
 import { IGTTooltip } from "./interface";
 import Tooltip from "./style";
 
@@ -10,40 +11,71 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
   // ref to the tooltip element
   const tooltipRef = useRef<HTMLDivElement>(null);
 
+  // it is used to force the tooltip to update the position when the window is resized
+  const [updateParams, setUpdateParams] = useState<boolean>(false);
+
   // info about the tooltip element
-  const { height = 1, width: tooltipWidth = 1 } = (tooltipRef.current?.getBoundingClientRect()) ?? {};
+  const { height: tooltipHeight, width: tooltipWidth } =
+    tooltipRef.current?.getBoundingClientRect() ?? defaultClientBoundings;
 
   // width of the parent element
-  const { width = 1, height: parentHeight = 1, right = 1, y = 1, top: parentTop = 1 } = parentRef?.current?.getBoundingClientRect() ?? {};
+  const {
+    width: parentWidth,
+    height: parentHeight,
+    right,
+    y,
+    top: parentTop,
+  } = useMemo(
+    () => parentRef?.current?.getBoundingClientRect() ?? defaultClientBoundings,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [updateParams]
+  );
+
+  // update the tooltip position when the window is resized
+  useEffect(() => {
+    const handleResize = () => {
+      setUpdateParams((prev) => !prev);
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const prevAboveParent = useRef<boolean>(false);
 
-  // if the tooltip should be shown above the parent element 🤷‍♂️
+  // if the tooltip should be shown above the parent element
   const isAboveParent = useMemo(() => {
     if (prevAboveParent.current) {
       return false;
     }
 
-    const isAbove = (y - height - 20) >= 0;
+    const isAbove = y - tooltipHeight - 20 >= 0;
 
     if (!isAbove && tooltipRef.current != null) {
       prevAboveParent.current = true;
     }
 
     return isAbove;
-  }, [height, y]);
+  }, [tooltipHeight, y]);
 
   const tooltipTop = useMemo(() => {
     if (isAboveParent) {
-      return parentTop - height - 20;
+      return parentTop - tooltipHeight - 20;
     } else {
       return y + parentHeight;
     }
-  }, [isAboveParent, parentTop, height, y, parentHeight]);
+  }, [isAboveParent, parentTop, tooltipHeight, y, parentHeight]);
 
   // find the left position of the tooltip
-  // const left = width / 2 - tooltipWidth / 2;
-  const left = ((right - width / 2) - tooltipWidth / 2) - 1;
+  const left = useMemo(
+    () => right - parentWidth / 2 - tooltipWidth / 2 - 1,
+    [right, tooltipWidth, parentWidth]
+  );
 
   // if the tooltip should be shown
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
@@ -62,19 +94,14 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showTooltip]);
 
-  // if the mouse is not over the parent
-  const leavedParent = useRef<boolean>(false);
-
   useEffect(() => {
     // show only if the mouse is over the parent
     const handleMouseEnter = () => {
-      leavedParent.current = false;
       setShowTooltip(true);
     };
 
     // hide if the mouse is not over the parent
     const handleMouseLeave = () => {
-      leavedParent.current = true;
       setShowTooltip(false);
     };
 
@@ -90,30 +117,6 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
       parent?.removeEventListener("mouseleave", handleMouseLeave);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    // if tooltipRef is hovered, hide the tooltip, so avoiding visual bugs
-    const handleMouseEnter = () => {
-      setShowTooltip(false);
-    };
-
-    const handleMouseLeave = () => {
-      // if the mouse is not over the parent, don't show the tooltip
-      if (leavedParent.current) return;
-
-      setShowTooltip(true);
-    };
-
-    const tooltip = tooltipRef.current;
-
-    tooltip?.addEventListener("mouseenter", handleMouseEnter);
-    tooltip?.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      tooltip?.removeEventListener("mouseenter", handleMouseEnter);
-      tooltip?.removeEventListener("mouseleave", handleMouseLeave);
-    };
   }, []);
 
   // avoids visual bugs, like can't click on the input because
@@ -152,22 +155,12 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
       show={showTooltip}
     >
       <Tooltip.Container isAboveParent={isAboveParent}>
-        {
-          (title != null) &&
-          <Tooltip.Title> {t(title)} </Tooltip.Title>
-        }
+        {title != null && <Tooltip.Title> {t(title)} </Tooltip.Title>}
 
-        {
-          (text != null) &&
-          <Tooltip.Text>
-            {t(text)}
-          </Tooltip.Text>
-        }
-
+        {text != null && <Tooltip.Text>{t(text)}</Tooltip.Text>}
       </Tooltip.Container>
-    </Tooltip.Wrapper >
-
+    </Tooltip.Wrapper>
   );
 }
 
-export default GTTooltip;
+export default memo(GTTooltip);

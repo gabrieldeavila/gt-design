@@ -1,8 +1,13 @@
-
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable operator-linebreak */
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContext } from "../../../context/pageState";
@@ -27,7 +32,7 @@ function GTInputNumericMask({
   row,
   min,
   max,
-  mask
+  mask,
 }: IGTInputNumericMask) {
   const { t } = useTranslation();
 
@@ -68,7 +73,10 @@ function GTInputNumericMask({
     (e: any) => {
       const { value: iVal } = e.target;
       const unMaskedVal = unMask(iVal);
-      const { isValid, invalidMessage, errorsVar } = validateNumber(unMaskedVal.toString(), inputValidations);
+      const { isValid, invalidMessage, errorsVar } = validateNumber(
+        unMaskedVal.toString(),
+        inputValidations
+      );
 
       validateState(isValid, unMaskedVal);
       setIsValidNumber(isValid);
@@ -78,7 +86,14 @@ function GTInputNumericMask({
 
       onChange(e);
     },
-    [unMask, validateNumber, inputValidations, validateState, handleInputChange, onChange]
+    [
+      unMask,
+      validateNumber,
+      inputValidations,
+      validateState,
+      handleInputChange,
+      onChange,
+    ]
   );
 
   const handleFocus = useCallback(() => {
@@ -90,7 +105,10 @@ function GTInputNumericMask({
 
     if (type === "numeric_mask") {
       // selection range is in the end of the input
-      inpRef.current.setSelectionRange(inpRef.current.value.length, inpRef.current.value.length);
+      inpRef.current.setSelectionRange(
+        inpRef.current.value.length,
+        inpRef.current.value.length
+      );
       return;
     }
 
@@ -108,34 +126,40 @@ function GTInputNumericMask({
   }
 
   return (
-    <Input.Container row={row}>
-      <Input.Label up htmlFor={name}>
-        {t(label)}
-      </Input.Label>
-      <Input.Field
-        ref={inpRef}
-        type="text"
-        value={maskedValue}
-        onChange={handleChange}
-        onBlur={handleInputBlur}
-        onFocus={handleFocus}
-        id={name}
-        name={name}
-        autoComplete="off"
-      />
+    <>
+      <Input.Container row={row}>
+        <Input.Label up htmlFor={name}>
+          {t(label)}
+        </Input.Label>
+        <Input.Field
+          ref={inpRef}
+          type="text"
+          value={maskedValue}
+          onChange={handleChange}
+          onBlur={handleInputBlur}
+          onFocus={handleFocus}
+          id={name}
+          name={name}
+          autoComplete="off"
+        />
 
-      {!isValidNumber && <Input.Error>{t(`NUMBER.${errorMessage}`, localeErrorsParams)}</Input.Error>}
+        {!isValidNumber && (
+          <Input.Error>
+            {t(`NUMBER.${errorMessage}`, localeErrorsParams)}
+          </Input.Error>
+        )}
 
-      {
-        ((title != null) || (text != null)) && <>
+        {(title != null || text != null) && (
           <Input.IconWrapper type="center" ref={containerRef}>
             <Icon.Info size={15} className="svg-no-active" />
           </Input.IconWrapper>
+        )}
+      </Input.Container>
 
-          <GTTooltip parentRef={containerRef} title={title} text={text} />
-        </>
-      }
-    </Input.Container>
+      {(title != null || text != null) && (
+        <GTTooltip parentRef={containerRef} title={title} text={text} />
+      )}
+    </>
   );
 }
 
@@ -150,7 +174,7 @@ GTInputNumericMask.propTypes = {
 };
 
 GTInputNumericMask.defaultProps = {
-  onChange: () => { },
+  onChange: () => {},
   validations: defaultValidationObj,
   defaultValidation: true,
 };
