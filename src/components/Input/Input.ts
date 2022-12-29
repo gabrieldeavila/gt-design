@@ -159,7 +159,7 @@ const InputLabel = styled.label`
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 
   ${animations.upLabel}
 `;

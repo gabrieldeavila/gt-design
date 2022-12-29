@@ -8,7 +8,7 @@ import GTPageStateProvider from "../context/pageState";
 import { GTBasic } from "../gt";
 
 export default {
-  title: "GTDesign/Tooltip",
+  title: "GTDesign/Inputs",
 };
 
 const moneyMask: INumericMask = {
@@ -43,7 +43,7 @@ const docMask: INonNumericMask = {
   type: "non_numeric_mask",
 };
 
-const Template = function TooltipStory() {
+const Template = function InputsStory() {
   const options = [
     { value: "B", label: "Bananas 🍌" },
     { value: "F", label: "Figs 🥝" },
@@ -105,8 +105,39 @@ const Template = function TooltipStory() {
               row={5}
               text="EXAMPLE.TEXT"
               title="EXAMPLE.TITLE"
-              name="number"
-              label="Number"
+              name="NUMBER"
+              label="És uno numero!"
+            />
+
+            <GTInput.NumericMask
+              text="EXAMPLE.TEXT"
+              title="EXAMPLE.TITLE"
+              row={5}
+              name="price"
+              label="Money"
+              mask={moneyMask}
+            />
+
+            <GTInput.NumericMask
+              row={5}
+              name="percent"
+              title="wowww"
+              label="Percent"
+              mask={percentMask}
+            />
+
+            <GTInput.NumericMask
+              row={5}
+              name="doc"
+              label="CPF/CNPJ"
+              mask={docMask}
+            />
+
+            <GTInput.NumericMask
+              row={5}
+              name="phone"
+              label="Phone"
+              mask={phoneMask}
             />
           </Input.Group>
         </Space.Horizontal>
@@ -115,4 +146,4 @@ const Template = function TooltipStory() {
   );
 };
 
-export const GTTooltip = Template.bind({});
+export const GTInputs = Template.bind({});
