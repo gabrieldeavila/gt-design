@@ -150,6 +150,16 @@ const InputLabel = styled.label`
   font-size: 0.75rem;
   left: 0.5rem;
   color: ${(props) => props.theme.contrast};
+  /* creates color with gradient */
+  background: -webkit-linear-gradient(
+    300deg,
+    ${(props) => props.theme.labelSecondary},
+    ${(props) => props.theme.labelPrimary} 70%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-box-decoration-break: clone;
 
   ${animations.upLabel}
 `;

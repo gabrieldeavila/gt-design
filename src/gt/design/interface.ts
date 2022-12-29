@@ -20,6 +20,8 @@ export interface GTTheme {
   containerSecondary?: string;
   outline?: string;
   switchOn?: string;
+  labelPrimary?: string;
+  labelSecondary?: string;
 }
 
 // IGTDesign

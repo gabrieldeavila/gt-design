@@ -25,7 +25,9 @@ const defaultTheme = {
   containerMain: "#f0f8ff",
   containerSecondary: "#f0fff0",
   outline: "#80daeb",
-  switchOn: "#76ff7a"
+  switchOn: "#76ff7a",
+  labelPrimary: "#002366",
+  labelSecondary: "#66ddaa",
 };
 
 function GTDesign({ theme, children }: IGTDesign) {
