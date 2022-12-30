@@ -1,7 +1,7 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable implicit-arrow-linebreak */
 import { transparentize } from "polished";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { scrolls } from "../../utils";
 import flex from "../../utils/flex";
 import shadows from "../../utils/shadows";
@@ -47,6 +47,24 @@ const LoginBoxPrimary = styled.div<ILoginBoxPrimary>`
   }
 `;
 
+const mirrorCss = css`
+  /* add animation based on the mirror */
+  animation: mirrorFace 1s forwards;
+
+  @keyframes mirrorFace {
+    0% {
+      transform: rotateY(180deg);
+    }
+    100% {
+      transform: rotateY(0deg);
+    }
+  }
+`;
+
+const mirrorWhenFirstRender = css`
+  transform: rotateY(0deg);
+`;
+
 const LoginBoxMain = styled.main`
   position: absolute;
   height: 75%;
@@ -74,17 +92,8 @@ const LoginBoxMain = styled.main`
 
   transform: rotateY(180deg);
 
-  /* add animation based on the mirror */
-  animation: mirrorFace 1s forwards;
-
-  @keyframes mirrorFace {
-    0% {
-      transform: rotateY(180deg);
-    }
-    100% {
-      transform: rotateY(0deg);
-    }
-  }
+  ${({ isFirstRender }: { isFirstRender?: boolean }) =>
+    isFirstRender ?? false ? mirrorWhenFirstRender : mirrorCss}
 `;
 
 const LoginBoxWrapper = styled.div`

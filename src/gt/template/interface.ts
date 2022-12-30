@@ -3,4 +3,5 @@ export interface ILogin {
   canSave: boolean;
   loginRef: React.RefObject<HTMLDivElement>;
   onPasswordForgot?: () => void;
+  isFirstRender?: boolean;
 }

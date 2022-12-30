@@ -5,20 +5,20 @@
 
   "TEXT": {
     "REQUIRED": "Please enter your text.",
-    "NO_INITIAL_SPACE": "This field cannot start with a space.",
-    "NO_TRAILING_SPACE": "This field cannot end with a space.",
-    "NO_SPACES": "This field cannot contain spaces.",
-    "USERNAME": "This field can only have letters and numbers.",
-    "MAX_WORDS_BETWEEN": "This field must have between {{MIN}} and {{MAX}} words.",
-    "MAX_CHARS": "This field must have between {{MIN}} and {{MAX}} characters. You have {{CURR}} characters"
+    "NO_INITIAL_SPACE": "It cannot start with a space.",
+    "NO_TRAILING_SPACE": "It cannot end with a space.",
+    "NO_SPACES": "It cannot contain spaces.",
+    "USERNAME": "It can only have letters and numbers.",
+    "MAX_WORDS_BETWEEN": "It must have between {{MIN}} and {{MAX}} words.",
+    "MAX_CHARS": "Between {{MIN}} and {{MAX}} characters. You have: {{CURR}}"
   },
   "PASSWORD": {
     "REQUIRED": "Please enter your password.",
-    "EIGHT_LONG": "Password must be at least 8 characters long.",
-    "ONE_NUMBER": "Password must contain at least one number.",
-    "ONE_SPECIAL": "Password must contain at least one special character.",
-    "ONE_UPPERCASE": "Password must contain at least one uppercase letter.",
-    "ONE_LOWERCASE": "Password must contain at least one lowercase letter.",
+    "EIGHT_LONG": "It must be at least 8 characters long.",
+    "ONE_NUMBER": "It must contain at least one number.",
+    "ONE_SPECIAL": "It must contain at least one special character.",
+    "ONE_UPPERCASE": "It must contain at least one uppercase letter.",
+    "ONE_LOWERCASE": "It must contain at least one lowercase letter.",
     "PASSWORDS_NOT_MATCH": "Passwords do not match."
   },
   "SELECT": {

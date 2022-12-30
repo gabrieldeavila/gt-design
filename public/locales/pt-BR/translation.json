@@ -9,15 +9,15 @@
     "NO_SPACES": "Este campo não pode conter espaços.",
     "USERNAME": "Este campo deve conter apenas letras minúsculas, números, hífens e sublinhados.",
     "MAX_WORDS_BETWEEN": "Por favor, insira entre {{MIN}} e {{MAX}} palavras.",
-    "MAX_CHARS": "Este campo deve ter entre {{MIN}} e {{MAX}} caracteres. Você tem {{CURR}} caracteres."
+    "MAX_CHARS": "Entre {{MIN}} e {{MAX}} caracteres. Atual: {{CURR}}"
   },
   "PASSWORD": {
     "REQUIRED": "Este campo é obrigatório.",
-    "EIGHT_LONG": "Esta senha deve ter pelo menos 8 caracteres.",
-    "ONE_NUMBER": "Esta senha deve conter pelo menos um número.",
-    "ONE_SPECIAL": "Esta senha deve conter pelo menos um caractere especial.",
-    "ONE_UPPERCASE": "Esta senha deve conter pelo menos uma letra maiúscula.",
-    "ONE_LOWERCASE": "Esta senha deve conter pelo menos uma letra minúscula.",
+    "EIGHT_LONG": "Deve ter pelo menos 8 caracteres.",
+    "ONE_NUMBER": "Deve conter pelo menos um número.",
+    "ONE_SPECIAL": "Deve conter pelo menos um caractere especial.",
+    "ONE_UPPERCASE": "Deve conter pelo menos uma letra maiúscula.",
+    "ONE_LOWERCASE": "Deve conter pelo menos uma letra minúscula.",
     "PASSWORDS_NOT_MATCH": "As senhas não coincidem."
   },
   "SELECT": {
@@ -25,9 +25,9 @@
   },
   "NUMBER": {
     "REQUIRED": "Este campo é obrigatório.",
-    "MIN": "Este campo deve ser maior ou igual a {{MIN}}.",
-    "MAX": "Este campo deve ser menor ou igual a {{MAX}}.",
-    "BETWEEN": "Este campo deve estar entre {{MIN}} e {{MAX}}."
+    "MIN": "Deve ser maior ou igual a {{MIN}}.",
+    "MAX": "Deve ser menor ou igual a {{MAX}}.",
+    "BETWEEN": "Deve estar entre {{MIN}} e {{MAX}}."
   },
   "TEMPLATE": {
     "LOGIN": {

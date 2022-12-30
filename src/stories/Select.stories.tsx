@@ -1,13 +1,9 @@
 import React from "react";
-import { GTInput, Input } from "../components";
+import { GTInput, Input, Space } from "../components";
 import { GTBasic } from "../gt";
-import { DEVONLY } from "../gt/Container/Container";
 
 export default {
   title: "GTDesign/Select",
-  parameters: {
-    layout: "centered",
-  },
 };
 
 const Template = function SwitchStory() {
@@ -31,11 +27,16 @@ const Template = function SwitchStory() {
 
   return (
     <GTBasic>
-      <DEVONLY>
+      <Space.Horizontal>
         <Input.Group>
-          <GTInput.Select label="Select" name="select" options={options} />
+          <GTInput.Select
+            row={6}
+            label="Select"
+            name="select"
+            options={options}
+          />
         </Input.Group>
-      </DEVONLY>
+      </Space.Horizontal>
     </GTBasic>
   );
 };

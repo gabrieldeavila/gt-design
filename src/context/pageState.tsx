@@ -25,7 +25,7 @@ const defaultValues = {
 const defaultValuesSetters = {
   setErrors: () => {},
   setPageState: () => {},
-  isLoading: true,
+  isLoading: false,
   pageStateRef: { current: {} },
 };
 

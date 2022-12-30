@@ -1,21 +1,37 @@
+/* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo, useRef,
+  useState
+} from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Text } from "../../components";
 import GTInput from "../../components/Input/GTInput";
 import Input from "../../components/Input/Input";
 import Login from "../../components/Login/Login";
 import Space from "../../components/Space/Space";
-import GTPageStateProvider, { useGTPageStateContext } from "../../context/pageState";
+import GTPageStateProvider, {
+  useGTPageStateContext
+} from "../../context/pageState";
 import { ILogin } from "./interface";
 
-function GTLogin({ onPasswordForgot }: { onPasswordForgot: () => void; }) {
+function GTLogin({ onPasswordForgot }: { onPasswordForgot: () => void }) {
   const [pageState, setPageState] = useState({});
   const [errors, setErrors] = useState<string[]>([]);
   const [isCreate, setIsCreate] = useState(true);
   const heightRef = useRef<HTMLDivElement>(null);
   const canSave = useMemo(() => errors.length === 0, [errors]);
+
+  const [isFirstRender, setIsFirstRender] = useState(true);
+
+  useEffect(() => {
+    if (isFirstRender && !isCreate) {
+      setIsFirstRender(false);
+    }
+  }, [isCreate]);
 
   return (
     <GTPageStateProvider
@@ -28,13 +44,22 @@ function GTLogin({ onPasswordForgot }: { onPasswordForgot: () => void; }) {
         <Login.BoxContrast />
         <Login.BoxPrimary height={heightRef.current?.clientHeight ?? 0} />
 
-        {isCreate
-          ? (
-            <LoginCreate onPasswordForgot={onPasswordForgot} loginRef={heightRef} setIsCreate={setIsCreate} canSave={canSave} />
-            )
-          : (
-            <LoginSignIn onPasswordForgot={onPasswordForgot} loginRef={heightRef} setIsCreate={setIsCreate} canSave={canSave} />
-            )}
+        {isCreate ? (
+          <LoginCreate
+            onPasswordForgot={onPasswordForgot}
+            loginRef={heightRef}
+            setIsCreate={setIsCreate}
+            canSave={canSave}
+            isFirstRender={isFirstRender}
+          />
+        ) : (
+          <LoginSignIn
+            onPasswordForgot={onPasswordForgot}
+            loginRef={heightRef}
+            setIsCreate={setIsCreate}
+            canSave={canSave}
+          />
+        )}
       </Login.Wrapper>
     </GTPageStateProvider>
   );
@@ -42,11 +67,11 @@ function GTLogin({ onPasswordForgot }: { onPasswordForgot: () => void; }) {
 
 export default GTLogin;
 
-function LoginCreate({ setIsCreate, canSave, loginRef }: ILogin) {
+function LoginCreate({ setIsCreate, canSave, loginRef, isFirstRender }: ILogin) {
   const { t } = useTranslation();
 
   return (
-    <Login.BoxMain ref={loginRef}>
+    <Login.BoxMain ref={loginRef} isFirstRender={isFirstRender}>
       <Login.BoxWrapper>
         <Space.Flex>
           <Text.H1>{t("TEMPLATE.LOGIN.CREATE_TITLE")}</Text.H1>
@@ -72,17 +97,24 @@ function LoginCreate({ setIsCreate, canSave, loginRef }: ILogin) {
 
             <GTInput.Email name="email" label="TEMPLATE.LOGIN.EMAIL_LABEL" />
 
-            <GTInput.Password name="password" label="TEMPLATE.LOGIN.PASSWORD_LABEL" />
+            <GTInput.Password
+              name="password"
+              label="TEMPLATE.LOGIN.PASSWORD_LABEL"
+            />
 
-            <GTInput.Password sameAs="password" name="confirm_password" label="TEMPLATE.LOGIN.CONFIRM_PASSWORD_LABEL" />
+            <GTInput.Password
+              sameAs="password"
+              name="confirm_password"
+              label="TEMPLATE.LOGIN.CONFIRM_PASSWORD_LABEL"
+            />
           </Input.Wrapper>
         </Space.FullSpace>
         <Space.Flex>
-          <Text.P sm>
-            {t("TEMPLATE.LOGIN.DATA_POLICY")}
-          </Text.P>
+          <Text.P sm>{t("TEMPLATE.LOGIN.DATA_POLICY")}</Text.P>
           <Space.FullSpace>
-            <Button.NormalShadow disabled={!canSave}>{t("TEMPLATE.LOGIN.CREATE_BUTTON")}</Button.NormalShadow>
+            <Button.NormalShadow disabled={!canSave}>
+              {t("TEMPLATE.LOGIN.CREATE_BUTTON")}
+            </Button.NormalShadow>
           </Space.FullSpace>
 
           <Space.Center>
@@ -99,16 +131,21 @@ function LoginCreate({ setIsCreate, canSave, loginRef }: ILogin) {
 LoginCreate.propTypes = {
   canSave: PropTypes.bool,
   setIsCreate: PropTypes.func,
-  loginRef: PropTypes.object.isRequired
+  loginRef: PropTypes.object.isRequired,
 };
 
 LoginCreate.defaultProps = {
   canSave: false,
-  setIsCreate: () => { }
+  setIsCreate: () => {},
 };
 
 const signInFields = ["password", "nickname"];
-function LoginSignIn({ canSave, setIsCreate, loginRef, onPasswordForgot }: ILogin) {
+function LoginSignIn({
+  canSave,
+  setIsCreate,
+  loginRef,
+  onPasswordForgot,
+}: ILogin) {
   const { t } = useTranslation();
 
   const { setErrors, pageState } = useGTPageStateContext();
@@ -140,7 +177,10 @@ function LoginSignIn({ canSave, setIsCreate, loginRef, onPasswordForgot }: ILogi
               label="TEMPLATE.LOGIN.NICKNAME_LABEL"
             />
 
-            <GTInput.Password name="password" label="TEMPLATE.LOGIN.PASSWORD_LABEL" />
+            <GTInput.Password
+              name="password"
+              label="TEMPLATE.LOGIN.PASSWORD_LABEL"
+            />
           </Input.Wrapper>
         </Space.FullSpace>
         <Space.Flex>
@@ -154,7 +194,9 @@ function LoginSignIn({ canSave, setIsCreate, loginRef, onPasswordForgot }: ILogi
             <Text.Btn onClick={() => setIsCreate(true)}>
               {t("TEMPLATE.LOGIN.DONT_HAVE_ACCOUNT")}
             </Text.Btn>
-            <Text.Btn onClick={onPasswordForgot}>{t("TEMPLATE.LOGIN.FORGOT_PASSWORD")}</Text.Btn>
+            <Text.Btn onClick={onPasswordForgot}>
+              {t("TEMPLATE.LOGIN.FORGOT_PASSWORD")}
+            </Text.Btn>
           </Space.Between>
         </Space.Flex>
       </Login.BoxWrapper>
@@ -165,10 +207,10 @@ function LoginSignIn({ canSave, setIsCreate, loginRef, onPasswordForgot }: ILogi
 LoginSignIn.propTypes = {
   canSave: PropTypes.bool,
   setIsCreate: PropTypes.func,
-  loginRef: PropTypes.object.isRequired
+  loginRef: PropTypes.object.isRequired,
 };
 
 LoginSignIn.defaultProps = {
   canSave: false,
-  setIsCreate: () => { }
+  setIsCreate: () => {},
 };
