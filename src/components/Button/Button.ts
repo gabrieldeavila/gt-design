@@ -16,7 +16,6 @@ const resetBtn = css`
   margin: 0;
   cursor: pointer;
   user-select: none;
-  font-family: "Kanit", sans-serif;
   width: fit-content;
   padding: 1rem;
   border-radius: 0.25rem;

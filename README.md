@@ -59,13 +59,13 @@ Also, it's fully responsive and customizable, so you can use it on any device or
 
 ## :inbox_tray: Installation
 
-###NPM
+NPM
 
 ```bash
 npm i @geavila/gt-design
 ```
 
-###Yarn
+Yarn
 
 ```bash
 yarn add @geavila/gt-design

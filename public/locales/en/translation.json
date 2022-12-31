@@ -55,5 +55,10 @@
     "DOC": "Document",
     "PERCENT": "Percent",
     "NUMBER": "Number"
+  },
+  "STORIES": {
+    "TOOLTIP": {
+      "SUBTITLE": "Hover the input to see the icon 'i' and hover it to see the tooltip."
+    }
   }
 }

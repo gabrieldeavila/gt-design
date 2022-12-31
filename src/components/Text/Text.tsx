@@ -4,14 +4,14 @@ import React, { memo, useCallback, useState } from "react";
 import styled, { css } from "styled-components";
 import { fontSize, space } from "styled-system";
 import { animations, transforms } from "../../utils";
-import { ITextBtn } from "./interface";
+import { ITextBtn, IText, ITextP } from "./interface";
 
-const P = styled.p`
+const P = styled.p<ITextP>`
   color: ${(props) => props.theme.contrast};
   font-weight: 300;
 
   text-align: justify;
-  ${({ sm }: { sm?: boolean }) =>
+  ${({ sm }) =>
     (sm ?? false) &&
     css`
       font-size: 0.75rem;
@@ -27,14 +27,24 @@ const h1Css = css`
   font-size: 1.5rem;
   ${space}
   ${fontSize}
-`;
+  width: fit-content;
 
-const H1 = styled.h1`
-  color: ${(props) => props.theme.contrast};
+  background-image: linear-gradient(
+    300deg,
+    ${(props) => props.theme.labelSecondary},
+    ${(props) => props.theme.labelPrimary} 70%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+ `;
+
+const H1 = styled.h1<IText>`
   ${h1Css}
 `;
 
-const H1Contrast = styled.h1`
+const H1Contrast = styled.h1<IText>`
   color: ${(props) => props.theme.primary};
   ${h1Css}
 `;
@@ -46,7 +56,6 @@ const BtnStyled = styled.button`
   margin: 0;
   cursor: pointer;
   user-select: none;
-  font-family: "Kanit", sans-serif;
   width: fit-content;
   height: fit-content;
   color: ${(props) => props.theme.textBtn};

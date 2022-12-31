@@ -55,5 +55,10 @@
     "DOC": "CPF/CNPJ",
     "PERCENT": "Percentual",
     "NUMBER": "Número"
+  },
+  "STORIES": {
+    "TOOLTIP": {
+      "SUBTITLE": "Passe o mouse sobre o input para ver o ícone 'i' e sobre ele para ver o tooltip."
+    }
   }
 }

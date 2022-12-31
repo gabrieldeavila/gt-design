@@ -13,10 +13,13 @@ const GlobalStyle = createGlobalStyle`
   }
   
   body {
-    font-family: 'Kanit', sans-serif;
     background: ${({ theme }: IGLobalStyle) => theme.secondary};
 
     ${scrolls.default}
+  }
+
+  body, input, button {
+    font-family: 'Kanit', sans-serif;
   }
 
   ::selection {
