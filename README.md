@@ -38,8 +38,36 @@
 
 <p align="center">
   <a href="#dart-about">About</a> &#xa0; | &#xa0;
-  <a href="#rocket-main-technologies">Technologies</a> &#xa0; | &#xa0;
+  <a href="#inbox_tray-main-technologies">Technologies</a> &#xa0; | &#xa0;
   <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
+  <a href="#inbox_tray-installation">Installation</a> &#xa0; | &#xa0;
   <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
+
   <!-- <a href="">Contributing</a> -->
 </p>
+
+## :dart: About
+
+Tired of using the same design system over and over again?
+
+Well, me too. That's why I decided to create my own design system, with the colors and fonts that I like the most.
+
+Also, it's fully responsive and customizable, so you can use it on any device or project!
+
+<!-- to do: create website -->
+<!-- Want to see it in action? [Click here](https://gabrieldeavila.github.io/gt-design/) -->
+
+## :inbox_tray: Installation
+
+###NPM
+
+```bash
+npm i @geavila/gt-design
+```
+
+###Yarn
+
+```bash
+yarn add @geavila/gt-design
+```
+
