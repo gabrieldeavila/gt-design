@@ -39,14 +39,20 @@ const i18nextStoryDecorator = (Story, context) => {
   return (
     <>
       {/* adds default font */}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
       <link
-        href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,600&family=Rubik+Bubbles&display=swap"
         rel="stylesheet"
-      ></link>
+      />
+
       <link
-        href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,600&display=swap"
-        rel="stylesheet"
-      ></link>
+        rel="preload"
+        href="/fonts/Mona-Sans.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin="true"
+      />
 
       {/* here catches the suspense from components not yet ready (still loading
       translations)

@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
     color: ${({ theme }: IGLobalStyle) => theme.contrast};
     ${transitions.basic}
   }
-
+  
   body {
     font-family: 'Kanit', sans-serif;
     background: ${({ theme }: IGLobalStyle) => theme.secondary};

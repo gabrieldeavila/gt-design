@@ -12,6 +12,7 @@ module.exports = {
   },
   plugins: ["react", "@typescript-eslint", "react-hooks"],
   rules: {
+    "react/react-in-jsx-scope": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/quotes": ["error", "double"],
     "@typescript-eslint/semi": "off",
@@ -23,5 +24,6 @@ module.exports = {
     "@typescript-eslint/member-delimiter-style": "off",
     "@typescript-eslint/space-before-function-paren": "off",
     "@typescript-eslint/comma-dangle": "off",
+    "react/prop-types": 1,
   },
 };

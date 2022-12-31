@@ -1,7 +1,10 @@
 /* eslint-disable operator-linebreak */
+import PropTypes from "prop-types";
+import React, { memo, useCallback, useState } from "react";
 import styled, { css } from "styled-components";
-import { space, fontSize } from "styled-system";
+import { fontSize, space } from "styled-system";
 import { animations, transforms } from "../../utils";
+import { ITextBtn } from "./interface";
 
 const P = styled.p`
   color: ${(props) => props.theme.contrast};
@@ -37,7 +40,7 @@ const H1Contrast = styled.h1`
 `;
 
 // a simple btn that is used to call a function or navigate to a page
-const Btn = styled.button`
+const BtnStyled = styled.button`
   background: none;
   border: none;
   margin: 0;
@@ -58,14 +61,13 @@ const Btn = styled.button`
     top: 1rem;
     height: 2px;
     background: ${(props) => props.theme.textBtn};
-    animation: underlineFill 0.5s ease-in-out forwards;
+    ${({ isFirstRender }: { isFirstRender: boolean }) =>
+      !isFirstRender && "animation: underlineFill 0.5s ease-in-out forwards;"}
   }
 
   /* adiciona animação no after */
-  &:hover {
-    &::after {
-      animation: underline 0.5s ease-in-out forwards;
-    }
+  &:hover::after {
+    animation: underline 0.5s ease-in-out forwards;
   }
 
   &:active {
@@ -75,6 +77,55 @@ const Btn = styled.button`
   ${animations.underline}
 `;
 
+function BtnProps({
+  children,
+  onClick,
+  className,
+  style,
+  disabled,
+  type,
+}: ITextBtn) {
+  const [isFirstRender, setIsFirstRender] = useState(true);
+
+  // avoid animation on first render
+  const handleRender = useCallback(() => {
+    setIsFirstRender(false);
+  }, []);
+
+  return (
+    <BtnStyled
+      type={type}
+      onClick={onClick}
+      className={className}
+      style={style}
+      disabled={disabled}
+      isFirstRender={isFirstRender}
+      onMouseEnter={handleRender}
+    >
+      {children}
+    </BtnStyled>
+  );
+}
+
+const Btn = memo(BtnProps);
+
 const Text = { P, H1, H1Contrast, Btn };
 
 export default Text;
+
+BtnProps.propTypes = {
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  disabled: PropTypes.bool,
+  type: PropTypes.oneOf(["button", "submit", "reset"]),
+};
+
+BtnProps.defaultProps = {
+  onClick: () => {},
+  className: "",
+  style: {},
+  disabled: false,
+  type: "button",
+};

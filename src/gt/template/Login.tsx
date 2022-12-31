@@ -2,10 +2,12 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import PropTypes from "prop-types";
 import React, {
+  memo,
   useCallback,
   useEffect,
-  useMemo, useRef,
-  useState
+  useMemo,
+  useRef,
+  useState,
 } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Text } from "../../components";
@@ -14,11 +16,15 @@ import Input from "../../components/Input/Input";
 import Login from "../../components/Login/Login";
 import Space from "../../components/Space/Space";
 import GTPageStateProvider, {
-  useGTPageStateContext
+  useGTPageStateContext,
 } from "../../context/pageState";
 import { ILogin } from "./interface";
 
-function GTLogin({ onPasswordForgot }: { onPasswordForgot: () => void }) {
+const GTLogin = memo(function GTLogin({
+  onPasswordForgot,
+}: {
+  onPasswordForgot: () => void;
+}) {
   const [pageState, setPageState] = useState({});
   const [errors, setErrors] = useState<string[]>([]);
   const [isCreate, setIsCreate] = useState(true);
@@ -31,6 +37,7 @@ function GTLogin({ onPasswordForgot }: { onPasswordForgot: () => void }) {
     if (isFirstRender && !isCreate) {
       setIsFirstRender(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isCreate]);
 
   return (
@@ -45,7 +52,7 @@ function GTLogin({ onPasswordForgot }: { onPasswordForgot: () => void }) {
         <Login.BoxPrimary height={heightRef.current?.clientHeight ?? 0} />
 
         {isCreate ? (
-          <LoginCreate
+          <LoginCreateMemo
             onPasswordForgot={onPasswordForgot}
             loginRef={heightRef}
             setIsCreate={setIsCreate}
@@ -53,7 +60,7 @@ function GTLogin({ onPasswordForgot }: { onPasswordForgot: () => void }) {
             isFirstRender={isFirstRender}
           />
         ) : (
-          <LoginSignIn
+          <LoginSignInMemo
             onPasswordForgot={onPasswordForgot}
             loginRef={heightRef}
             setIsCreate={setIsCreate}
@@ -63,11 +70,16 @@ function GTLogin({ onPasswordForgot }: { onPasswordForgot: () => void }) {
       </Login.Wrapper>
     </GTPageStateProvider>
   );
-}
+});
 
 export default GTLogin;
 
-function LoginCreate({ setIsCreate, canSave, loginRef, isFirstRender }: ILogin) {
+function LoginCreate({
+  setIsCreate,
+  canSave,
+  loginRef,
+  isFirstRender,
+}: ILogin) {
   const { t } = useTranslation();
 
   return (
@@ -128,6 +140,8 @@ function LoginCreate({ setIsCreate, canSave, loginRef, isFirstRender }: ILogin) 
   );
 }
 
+const LoginCreateMemo = memo(LoginCreate);
+
 LoginCreate.propTypes = {
   canSave: PropTypes.bool,
   setIsCreate: PropTypes.func,
@@ -140,6 +154,7 @@ LoginCreate.defaultProps = {
 };
 
 const signInFields = ["password", "nickname"];
+
 function LoginSignIn({
   canSave,
   setIsCreate,
@@ -203,6 +218,8 @@ function LoginSignIn({
     </Login.BoxMain>
   );
 }
+
+const LoginSignInMemo = memo(LoginSignIn);
 
 LoginSignIn.propTypes = {
   canSave: PropTypes.bool,
