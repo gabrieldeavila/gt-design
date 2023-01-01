@@ -10,7 +10,7 @@ import {
   IInputContainer,
   IInputField,
   IInputLabel,
-  ISelectValue,
+  ISelectValue
 } from "./interface";
 
 const InputWrapper = styled.div`
@@ -93,7 +93,7 @@ const InputContainer = styled.div<IInputContainer>`
 
   border-radius: 0.25rem;
   box-shadow: 0 0 0 0.15rem ${(props) => transparentize(1, props.theme.outline)};
-
+  
   &:focus-within {
     box-shadow: 0 0 0 0.25rem
       ${(props) => transparentize(0.5, props.theme.outline)};
@@ -183,7 +183,6 @@ const InputLabel = styled.label<IInputLabel>`
   background-clip: text;
   -webkit-text-fill-color: transparent;
   box-decoration-break: clone;
-
   ${animations.upLabel}
 `;
 

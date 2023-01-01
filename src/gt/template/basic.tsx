@@ -21,6 +21,7 @@ const darkThemeStyle = {
   preSelectColor: "#414a4c",
   labelPrimary: "#00ced1",
   labelSecondary: "#2a52be",
+  glowShadow: "#44d7a8",
 };
 
 function GTBasic({ children }: { children: React.ReactNode; }) {

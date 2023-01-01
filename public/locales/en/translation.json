@@ -70,7 +70,7 @@
       "SUBTITLE": "You can add any component inside the box."
     },
     "INPUTS": {
-      "SUBTITLE": "Utilizando o GTPageStateProvider, o único passo necessário é definir o nome e a label do input. Ele cuidará do resto automaticamente."
+      "SUBTITLE": "With a GTPageStateProvider, the only required step is to set the name and label of the input. It will handle the rest automatically."
     }
   }
 }

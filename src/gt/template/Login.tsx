@@ -124,9 +124,9 @@ function LoginCreate({
         <Space.Flex>
           <Text.P fontSize={0}>{t("TEMPLATE.LOGIN.DATA_POLICY")}</Text.P>
           <Space.FullSpace>
-            <Button.NormalShadow disabled={!canSave}>
+            <Button.Normal disabled={!canSave}>
               {t("TEMPLATE.LOGIN.CREATE_BUTTON")}
-            </Button.NormalShadow>
+            </Button.Normal>
           </Space.FullSpace>
 
           <Space.Center>
@@ -200,9 +200,9 @@ function LoginSignIn({
         </Space.FullSpace>
         <Space.Flex>
           <Space.FullSpace>
-            <Button.NormalShadow onClick={handleSignIn} disabled={!canSave}>
+            <Button.Normal onClick={handleSignIn} disabled={!canSave}>
               {t("TEMPLATE.LOGIN.SIGN_IN_BUTTON")}
-            </Button.NormalShadow>
+            </Button.Normal>
           </Space.FullSpace>
 
           <Space.Between>

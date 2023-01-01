@@ -37,6 +37,13 @@ const resetBtn = css`
   &:active {
     ${({ disabled }) => !disabled && transforms.press}
   }
+
+  &:hover:not(:disabled) {
+    ${shadows.simple}
+  }
+
+  /* avoid hover when button is disabled */
+  
 `;
 
 const ButtonWrapper = styled.div`
@@ -52,17 +59,11 @@ const ButtonNormal = styled.button`
   ${resetBtn};
   background: ${(props) => props.theme.primary};
   color: ${(props) => props.theme.contrast};
-  ${shadows.simple}
   ${btnOptions}
-`;
-
-const ButtonNormalShadow = styled(ButtonNormal)`
-  ${shadows.basic}
 `;
 
 const ButtonContrast = styled.button`
   ${resetBtn};
-  ${shadows.simple}
   background: ${(props) => props.theme.contrast};
   color: ${(props) => props.theme.primary};
 
@@ -73,6 +74,5 @@ const ButtonContrast = styled.button`
 export default {
   Wrapper: ButtonWrapper,
   Normal: ButtonNormal,
-  NormalShadow: ButtonNormalShadow,
   Contrast: ButtonContrast,
 };

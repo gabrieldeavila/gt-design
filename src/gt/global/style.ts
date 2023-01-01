@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
   * {
     color: ${({ theme }: IGLobalStyle) => theme.contrast};
     ${transitions.basic}
+    line-height: 1.5 !important
   }
   
   body {

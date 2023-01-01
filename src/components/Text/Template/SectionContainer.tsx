@@ -1,9 +1,12 @@
-import React from "react";
+import React, { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { ISectionContainer } from "../interface";
 import Text from "../Text";
 
-function SectionContainer({ title, subtitle }: ISectionContainer) {
+const SectionContainer = memo(function SectionContainer({
+  title,
+  subtitle,
+}: ISectionContainer) {
   const { t } = useTranslation();
 
   return (
@@ -14,6 +17,6 @@ function SectionContainer({ title, subtitle }: ISectionContainer) {
       </Text.P>
     </>
   );
-}
+});
 
 export default SectionContainer;

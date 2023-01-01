@@ -69,7 +69,7 @@
     "BOX": {
       "SUBTITLE": "Você pode adicionar qualquer componente dentro do Box."
     },
-    "Input": {
+    "INPUTS": {
       "SUBTITLE": "Com um GTPageStateProvider, o único passo necessário é definir o nome e a etiqueta do input. Ele cuidará do resto automaticamente."
     }
   }
