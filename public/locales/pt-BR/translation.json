@@ -62,6 +62,15 @@
     },
     "SKELETONS": {
       "SUBTITLE": "Para usar o Skeleton, basta passar o isLoading como true no GTPageStateProvider."
+    },
+    "SWITCH": {
+      "SUBTITLE": "Permite alterar os valores entre true e false."
+    },
+    "BOX": {
+      "SUBTITLE": "Você pode adicionar qualquer componente dentro do Box."
+    },
+    "Input": {
+      "SUBTITLE": "Com um GTPageStateProvider, o único passo necessário é definir o nome e a etiqueta do input. Ele cuidará do resto automaticamente."
     }
   }
 }

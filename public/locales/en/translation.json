@@ -62,6 +62,15 @@
     },
     "SKELETONS": {
       "SUBTITLE": "To display a loading input, set the value of isLoading to true in the GTPageStateProvider."
+    },
+    "SWITCH": {
+      "SUBTITLE": "This feature allows you to toggle between two states: on and off."
+    },
+    "BOX": {
+      "SUBTITLE": "You can add any component inside the box."
+    },
+    "INPUTS": {
+      "SUBTITLE": "Utilizando o GTPageStateProvider, o único passo necessário é definir o nome e a label do input. Ele cuidará do resto automaticamente."
     }
   }
 }

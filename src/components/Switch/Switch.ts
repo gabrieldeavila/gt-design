@@ -91,6 +91,12 @@ const activeSlider = css`
     box-shadow: 0px 0px 7px ${(props) => props.theme.switchOn},
       -0px -0px 31px ${(props) => props.theme.switchOn};
   }
+
+  & ~ ${SwitchSlider}:active, &:checked ~ ${SwitchSlider}:active {
+    height: 0.8rem;
+    width: 0.8rem;
+    top: 8%;
+  }
 `;
 
 const SwitchInput = styled.input<ISwitchInput>`

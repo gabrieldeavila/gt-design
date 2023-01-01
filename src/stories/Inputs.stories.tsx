@@ -4,6 +4,7 @@ import {
   INonNumericMask,
   INumericMask,
 } from "../components/Input/Fields/interface";
+import SectionContainer from "../components/Text/Template/SectionContainer";
 import GTPageStateProvider from "../context/pageState";
 import { GTBasic } from "../gt";
 
@@ -64,6 +65,7 @@ const Template = function InputsStory() {
         setErrors={setErrors}
       >
         <Space.Horizontal>
+          <SectionContainer title="Inputs" subtitle="STORIES.INPUTS.SUBTITLE" />
           <Input.Group>
             <GTInput.Select
               row={6}

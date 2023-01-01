@@ -1,12 +1,12 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { useAnimation, useInView } from "framer-motion";
 import React, { useEffect, useMemo, useRef } from "react";
 import Motion from "./Motion";
 import randomNumber from "../../utils/randomNumber";
 import Box from "../Box/Box";
-import Text from "../Text/Text";
 import { IMotionBox } from "./interface";
 
-function MotionBox({ bg, label }: IMotionBox) {
+function MotionBox({ bg, children }: IMotionBox) {
   const control = useAnimation();
   const ref = useRef(null);
   const isInView = useInView(ref);
@@ -41,9 +41,7 @@ function MotionBox({ bg, label }: IMotionBox) {
         initial="hidden"
         animate={control}
       >
-        <Box.Container bg={bg}>
-          <Text.H1>{label}</Text.H1>
-        </Box.Container>
+        <Box.Container bg={bg}>{children}</Box.Container>
       </Motion.Container>
     </Motion.Wrapper>
   );

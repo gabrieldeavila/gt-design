@@ -43,9 +43,9 @@ const BoxContainer = styled.div<IBoxContainer>`
   border-radius: 0.25rem;
   ${flex.wrapGap};
   ${flex.column};
-  ${shadows.simple} // which one is better?
-  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
-  ${color};
+  ${shadows.simple}; // which one is better?
+  /* box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25); */
+  ${color}
   background-color: ${({ bg, theme }) =>
     transparentize(0.45, bg ?? theme.primary)};
   backdrop-filter: blur(15px);
@@ -65,7 +65,6 @@ const BoxColumn = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-auto-rows: 0.5rem;
   grid-gap: 0.5rem;
-  padding: 1rem;
 
   ${BoxContainer} {
     margin: 0.25rem;

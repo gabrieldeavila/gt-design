@@ -60,6 +60,14 @@ const Horizontal = styled.div<ISpaceHorizontal>`
   padding: 2rem;
 `;
 
+const MiddleCenter = styled.div`
+  ${flex.alignCenterCol}
+  height: -webkit-fill-available;
+
+  flex-direction: column;
+  gap: 1rem;
+`;
+
 export default {
   Flex,
   FlexCenter,
@@ -68,4 +76,5 @@ export default {
   Center,
   Between,
   Horizontal,
+  MiddleCenter
 };
