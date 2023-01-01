@@ -9,3 +9,8 @@ export interface ISwitch {
 export interface ISwitchInput {
   mode?: string;
 }
+
+export interface IGTActiveSwitch {
+  isChecked?: boolean;
+  onChange?: (newValue: boolean) => void;
+}

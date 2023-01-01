@@ -4,19 +4,12 @@ import React, { memo, useCallback, useState } from "react";
 import styled, { css } from "styled-components";
 import { fontSize, space } from "styled-system";
 import { animations, transforms } from "../../utils";
-import { ITextBtn, IText, ITextP } from "./interface";
+import { ITextBtn, IText } from "./interface";
 
-const P = styled.p<ITextP>`
+const P = styled.p<IText>`
   color: ${(props) => props.theme.contrast};
   font-weight: 300;
-
   text-align: justify;
-  ${({ sm }) =>
-    (sm ?? false) &&
-    css`
-      font-size: 0.75rem;
-      font-weight: 200;
-    `}
 
   ${space}
   ${fontSize}
@@ -37,8 +30,7 @@ const h1Css = css`
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-
- `;
+`;
 
 const H1 = styled.h1<IText>`
   ${h1Css}

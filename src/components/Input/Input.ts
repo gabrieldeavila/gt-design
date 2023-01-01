@@ -31,6 +31,7 @@ const loadingInput = css`
   background: ${({ theme }) => theme.primary};
   overflow: hidden;
   min-height: 3.5rem;
+  cursor: wait;
 
   &::after {
     content: "";
@@ -106,7 +107,6 @@ const InputContainer = styled.div<IInputContainer>`
     cursor: pointer;
     top: 30%;
     right: 0.5rem;
-    stroke: ${(props) => props.theme.contrast};
     position: absolute;
 
     &:active {

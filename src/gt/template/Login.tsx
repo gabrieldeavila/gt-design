@@ -122,7 +122,7 @@ function LoginCreate({
           </Input.Wrapper>
         </Space.FullSpace>
         <Space.Flex>
-          <Text.P sm>{t("TEMPLATE.LOGIN.DATA_POLICY")}</Text.P>
+          <Text.P fontSize={0}>{t("TEMPLATE.LOGIN.DATA_POLICY")}</Text.P>
           <Space.FullSpace>
             <Button.NormalShadow disabled={!canSave}>
               {t("TEMPLATE.LOGIN.CREATE_BUTTON")}

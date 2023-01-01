@@ -11,6 +11,7 @@ export interface ITextBtn {
 
 export interface IText extends SpaceProps, FontSizeProps {}
 
-export interface ITextP extends IText {
-  sm?: boolean;
+export interface ISectionContainer {
+  title: string;
+  subtitle: string;
 }

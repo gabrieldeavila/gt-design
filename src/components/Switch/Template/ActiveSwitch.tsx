@@ -1,23 +1,25 @@
 import PropTypes from "prop-types";
 import React, { useCallback, useId, useMemo, useState } from "react";
+import { IGTActiveSwitch } from "../interface";
 import Switch from "../Switch";
 
-function GTActiveSwitch({ isInitialChecked }: { isInitialChecked?: boolean; }) {
+function GTActiveSwitch({ isChecked, onChange }: IGTActiveSwitch) {
   const id = useId();
   const labelId = useMemo(() => `label-${id}`, [id]);
 
-  const [checked, setChecked] = useState(isInitialChecked);
+  const [checked, setChecked] = useState(isChecked);
 
   const handleSwitch = useCallback(() => {
-    setChecked((checked) => !(checked ?? false));
-  }, []);
+    setChecked((checked) => {
+      const newValue = !(checked ?? false);
+
+      onChange?.(newValue);
+      return newValue;
+    });
+  }, [onChange]);
 
   return (
-    <Switch.Label
-      htmlFor={labelId}
-      mode="active"
-      checked={checked}
-    >
+    <Switch.Label htmlFor={labelId} mode="active" checked={checked}>
       <Switch.Input
         mode="active"
         id={labelId}

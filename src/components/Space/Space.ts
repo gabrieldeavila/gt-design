@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { space, SpaceProps } from "styled-system";
 import flex from "../../utils/flex";
+import { ISpaceHorizontal } from "./interface";
 
 const customHeight = css`
   height: ${(props: { height?: string }) => props.height};
@@ -55,7 +56,7 @@ const Between = styled.div`
   ${space}
 `;
 
-const Horizontal = styled.div`
+const Horizontal = styled.div<ISpaceHorizontal>`
   padding: 2rem;
 `;
 

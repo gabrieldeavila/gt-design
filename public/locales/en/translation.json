@@ -59,6 +59,9 @@
   "STORIES": {
     "TOOLTIP": {
       "SUBTITLE": "Hover the input to see the icon 'i' and hover it to see the tooltip."
+    },
+    "SKELETONS": {
+      "SUBTITLE": "To display a loading input, set the value of isLoading to true in the GTPageStateProvider."
     }
   }
 }

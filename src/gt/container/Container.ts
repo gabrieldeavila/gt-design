@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { color, space } from "styled-system";
-import { flex } from "../../utils";
 
 const Default = styled.div`
   ${color}
@@ -20,9 +19,3 @@ const GTContainer = {
 };
 
 export default GTContainer;
-
-export const DEVONLY = styled.div`
-  width: 100vw;
-  height: 100vh;
-  ${flex.alignCenter}
-`;

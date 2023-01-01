@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { GTInput, Input, Space } from "../components";
+import SectionContainer from "../components/Text/Template/SectionContainer";
 import GTPageStateProvider from "../context/pageState";
 import { GTBasic } from "../gt";
 
@@ -11,7 +12,7 @@ export default {
   argTypes: {
     isLoading: {
       control: "boolean",
-      default: false
+      default: false,
     },
   },
 
@@ -19,13 +20,14 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: "Skeleton components that show when the page is loading. You only need to pass if it is loading or not. The rest is handled by the context.",
+        component:
+          "Skeleton components that show when the page is loading. You only need to pass if it is loading or not. The rest is handled by the context.",
       },
     },
   },
 };
 
-const Template = function ExInput({ isLoading }: { isLoading: boolean; }) {
+const Template = function ExInput({ isLoading }: { isLoading: boolean }) {
   const options = [
     { value: "B", label: "Bananas 🍌" },
     { value: "F", label: "Figs 🥝" },
@@ -47,8 +49,19 @@ const Template = function ExInput({ isLoading }: { isLoading: boolean; }) {
         isLoading={isLoading}
       >
         <Space.Horizontal>
+          <SectionContainer
+            title="Skeletons"
+            subtitle="STORIES.SKELETONS.SUBTITLE"
+          />
           <Input.Group>
-            <GTInput.Select row={4} title="wow such charm 🐲" text="what" label="Select" name="select" options={options} />
+            <GTInput.Select
+              row={4}
+              title="wow such charm 🐲"
+              text="what"
+              label="Select"
+              name="select"
+              options={options}
+            />
             <GTInput.Text
               row={4}
               text="change"
@@ -58,9 +71,20 @@ const Template = function ExInput({ isLoading }: { isLoading: boolean; }) {
               label="TEMPLATE.LOGIN.NICKNAME_LABEL"
             />
 
-            <GTInput.Email row={8} text="Email" name="email" label="TEMPLATE.LOGIN.EMAIL_LABEL" />
+            <GTInput.Email
+              row={8}
+              text="Email"
+              name="email"
+              label="TEMPLATE.LOGIN.EMAIL_LABEL"
+            />
 
-            <GTInput.Password row={8} text="EXAMPLE.TEXT" title="EXAMPLE.TITLE" name="password" label="TEMPLATE.LOGIN.PASSWORD_LABEL" />
+            <GTInput.Password
+              row={8}
+              text="EXAMPLE.TEXT"
+              title="EXAMPLE.TITLE"
+              name="password"
+              label="TEMPLATE.LOGIN.PASSWORD_LABEL"
+            />
           </Input.Group>
         </Space.Horizontal>
       </GTPageStateProvider>

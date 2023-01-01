@@ -1,21 +1,26 @@
-import React from "react";
+import React, { useCallback } from "react";
+import { Space } from "../components";
 import { GTActiveSwitch } from "../components/Switch";
+import SectionContainer from "../components/Text/Template/SectionContainer";
 import { GTBasic } from "../gt";
-import { DEVONLY } from "../gt/Container/Container";
 
 export default {
   title: "GTDesign/Switch",
-  parameters: {
-    layout: "centered",
-  },
 };
 
 const Template = function SwitchStory() {
+  const handleChange = useCallback((e: boolean) => {
+    console.log("SWITCH VALUE", e);
+  }, []);
+
   return (
     <GTBasic>
-      <DEVONLY>
-        <GTActiveSwitch />
-      </DEVONLY>
+      <Space.Horizontal>
+        <SectionContainer title="Switch" subtitle="STORIES.SWITCH.SUBTITLE" />
+        <Space.FlexCenterRow>
+          <GTActiveSwitch isChecked onChange={handleChange} />
+        </Space.FlexCenterRow>
+      </Space.Horizontal>
     </GTBasic>
   );
 };

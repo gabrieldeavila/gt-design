@@ -59,6 +59,9 @@
   "STORIES": {
     "TOOLTIP": {
       "SUBTITLE": "Passe o mouse sobre o input para ver o ícone 'i' e sobre ele para ver o tooltip."
+    },
+    "SKELETONS": {
+      "SUBTITLE": "Para usar o Skeleton, basta passar o isLoading como true no GTPageStateProvider."
     }
   }
 }

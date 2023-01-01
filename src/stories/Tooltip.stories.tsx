@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { GTInput, Input, Space, Text } from "../components";
+import { GTInput, Input, Space } from "../components";
+import SectionContainer from "../components/Text/Template/SectionContainer";
 import GTPageStateProvider from "../context/pageState";
 import { GTBasic } from "../gt";
 
@@ -9,8 +9,6 @@ export default {
 };
 
 const Template = function TooltipStory() {
-  const { t } = useTranslation();
-
   const options = [
     { value: "B", label: "Bananas 🍌" },
     { value: "F", label: "Figs 🥝" },
@@ -31,11 +29,10 @@ const Template = function TooltipStory() {
         setErrors={setErrors}
       >
         <Space.Horizontal>
-          <Text.H1 my="15px">Tooltips</Text.H1>
-          <Text.P my="15px">
-            {t("STORIES.TOOLTIP.SUBTITLE")}
-          </Text.P>
-
+          <SectionContainer
+            title="Tooltips"
+            subtitle="STORIES.TOOLTIP.SUBTITLE"
+          />
           <Input.Group>
             <GTInput.Select
               row={6}
