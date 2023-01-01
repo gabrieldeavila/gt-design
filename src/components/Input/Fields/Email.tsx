@@ -99,7 +99,7 @@ function GTInputEmail({
   return (
     <>
       <Input.Container row={row}>
-        <Input.Label up={labelIsUp} htmlFor={name}>
+        <Input.Label isWrong={!isValidEmail} up={labelIsUp} htmlFor={name}>
           {t(label)}
         </Input.Label>
         <Input.Field

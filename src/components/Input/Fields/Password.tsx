@@ -1,7 +1,13 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable operator-linebreak */
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContext } from "../../../context/pageState";
@@ -18,10 +24,20 @@ const defaultValidationObj = [
   "oneSpecial",
   "oneLowercase",
   "oneNumber",
-  "oneUppercase"
+  "oneUppercase",
 ];
 
-function GTInputPassword({ name, label, defaultValidation, validations, onChange, sameAs, title, text, row }: IGTInputPassword) {
+function GTInputPassword({
+  name,
+  label,
+  defaultValidation,
+  validations,
+  onChange,
+  sameAs,
+  title,
+  text,
+  row,
+}: IGTInputPassword) {
   const { t } = useTranslation();
 
   // state to keep track of all the inputs
@@ -40,8 +56,13 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
   const { validateState } = useValidateState(name, inputValidations);
 
   // shows the label up or down
-  const { labelIsUp, value, handleInputChange, handleInputBlur, handleInputFocus } =
-    useInputValues(name);
+  const {
+    labelIsUp,
+    value,
+    handleInputChange,
+    handleInputBlur,
+    handleInputFocus,
+  } = useInputValues(name);
 
   // password validation
   const { validatePassword } = useValidatePassword();
@@ -50,13 +71,19 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const type = useMemo(() => (showPassword ? "text" : "password"), [showPassword]);
+  const type = useMemo(
+    () => (showPassword ? "text" : "password"),
+    [showPassword]
+  );
 
   useEffect(() => {
     const chars = value.toString();
     if (chars.length === 0) return;
 
-    const { isValid, invalidMessage } = validatePassword(chars, inputValidations);
+    const { isValid, invalidMessage } = validatePassword(
+      chars,
+      inputValidations
+    );
 
     setIsValidPassword(isValid);
     setErrorMessage(invalidMessage);
@@ -74,7 +101,11 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
   const handleChange = useCallback(
     (e: any) => {
       const { value: pswVal } = e.target;
-      const { isValid, invalidMessage } = validatePassword(pswVal, inputValidations, sameAs);
+      const { isValid, invalidMessage } = validatePassword(
+        pswVal,
+        inputValidations,
+        sameAs
+      );
 
       validateState(isValid, pswVal);
       setIsValidPassword(isValid);
@@ -83,7 +114,14 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
 
       onChange(e);
     },
-    [handleInputChange, inputValidations, onChange, sameAs, validatePassword, validateState]
+    [
+      handleInputChange,
+      inputValidations,
+      onChange,
+      sameAs,
+      validatePassword,
+      validateState,
+    ]
   );
 
   const sameAsValue = useMemo(() => {
@@ -110,7 +148,7 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
   return (
     <>
       <Input.Container row={row}>
-        <Input.Label up={labelIsUp} htmlFor={name}>
+        <Input.Label isWrong={!isValidPassword} up={labelIsUp} htmlFor={name}>
           {t(label)}
         </Input.Label>
         <Input.Field
@@ -125,29 +163,29 @@ function GTInputPassword({ name, label, defaultValidation, validations, onChange
 
         {showPassword
           ? (
-            <Icon.Eye onClick={handleShowPassword} />
+          <Icon.Eye onClick={handleShowPassword} />
             )
           : (
-            <Icon.EyeOff onClick={handleShowPassword} />
-            )
-        }
+          <Icon.EyeOff onClick={handleShowPassword} />
+            )}
 
-        {!isValidPassword && <Input.Error>{t(`PASSWORD.${errorMessage}`)}</Input.Error>}
+        {!isValidPassword && (
+          <Input.Error>{t(`PASSWORD.${errorMessage}`)}</Input.Error>
+        )}
 
-        {
-          ((title != null) || (text != null)) && <Input.IconWrapper type="top_right" ref={containerRef}>
+        {(title != null || text != null) && (
+          <Input.IconWrapper type="top_right" ref={containerRef}>
             <Icon.Info size={15} className="svg-no-active" />
           </Input.IconWrapper>
-        }
+        )}
 
         <GTTooltip parentRef={containerRef} title={title} text={text} />
       </Input.Container>
 
-      {
-        ((title != null) || (text != null)) && <GTTooltip parentRef={containerRef} title={title} text={text} />
-      }
+      {(title != null || text != null) && (
+        <GTTooltip parentRef={containerRef} title={title} text={text} />
+      )}
     </>
-
   );
 }
 
@@ -159,12 +197,12 @@ GTInputPassword.propTypes = {
   validations: PropTypes.arrayOf(PropTypes.string),
   defaultValidation: PropTypes.bool,
   onChange: PropTypes.func,
-  sameAs: PropTypes.string
+  sameAs: PropTypes.string,
 };
 
 GTInputPassword.defaultProps = {
   validations: defaultValidationObj,
   defaultValidation: true,
-  onChange: () => { },
-  sameAs: ""
+  onChange: () => {},
+  sameAs: "",
 };

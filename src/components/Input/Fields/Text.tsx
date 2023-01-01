@@ -113,7 +113,7 @@ function GTInputText({
   return (
     <>
       <Input.Container row={row}>
-        <Input.Label up={labelIsUp} htmlFor={name}>
+        <Input.Label isWrong={!isValidText} up={labelIsUp} htmlFor={name}>
           {t(label)}
         </Input.Label>
         <Input.Field

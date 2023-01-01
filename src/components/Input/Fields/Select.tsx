@@ -189,7 +189,8 @@ function GTInputSelect({
           ref={containerRef}
           isUp={showOptions}
         >
-          <Input.Label up={labelIsUp} htmlFor={name}>
+          {/* TO DO: ADD VALIDATIONS TO SELECT */}
+          <Input.Label isWrong={false} up={labelIsUp} htmlFor={name}>
             {t(label)}
           </Input.Label>
           <Input.Field

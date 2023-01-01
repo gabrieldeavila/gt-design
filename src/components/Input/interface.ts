@@ -19,3 +19,7 @@ export interface ISelectValue {
 export interface IIconWrapper {
   type: "center" | "top_right";
 }
+export interface IInputLabel {
+  isWrong: boolean;
+  up: boolean;
+}

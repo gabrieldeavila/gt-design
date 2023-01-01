@@ -128,7 +128,8 @@ function GTInputNumericMask({
   return (
     <>
       <Input.Container row={row}>
-        <Input.Label up htmlFor={name}>
+        {/* TO DO: ADD VALIDATIONS TO NUMERIC MAS AND CHANGES ITS NAME TO MASK ONLY BECAUSE WE DONT HAVE TWO TYPES OF MASKS */}
+        <Input.Label isWrong={false} up htmlFor={name}>
           {t(label)}
         </Input.Label>
         <Input.Field

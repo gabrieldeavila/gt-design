@@ -9,6 +9,7 @@ import {
   IIconWrapper,
   IInputContainer,
   IInputField,
+  IInputLabel,
   ISelectValue,
 } from "./interface";
 
@@ -147,7 +148,24 @@ const InputField = styled.input<IInputField>`
   }
 `;
 
-const InputLabel = styled.label`
+const wrongCss = css<IInputLabel>`
+  background: -webkit-linear-gradient(
+    300deg,
+    ${({ theme }) => theme.labelSecondary},
+    ${({ theme, isWrong }) => (isWrong ? theme.errorColor : theme.labelPrimary)}
+      90%
+  );
+`;
+
+const correctCss = css`
+  background: -webkit-linear-gradient(
+    300deg,
+    ${({ theme }) => theme.labelSecondary},
+    ${({ theme }) => theme.labelPrimary} 70%
+  );
+`;
+
+const InputLabel = styled.label<IInputLabel>`
   user-select: none;
   cursor: text;
   position: absolute;
@@ -155,9 +173,12 @@ const InputLabel = styled.label`
   /* creates color with gradient */
   background: -webkit-linear-gradient(
     300deg,
-    ${(props) => props.theme.labelSecondary},
-    ${(props) => props.theme.labelPrimary} 70%
+    ${({ theme }) => theme.labelSecondary},
+    ${({ theme }) => theme.labelPrimary} 70%
   );
+
+  ${({ isWrong }) => (isWrong ? wrongCss : correctCss)}
+
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
