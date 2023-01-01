@@ -61,7 +61,7 @@ const iconCenter = css`
 
 const topRight = css`
   right: 2.5rem;
-  top: 1.3rem;
+  top: 1.2rem;
 `;
 
 const types = {
@@ -193,7 +193,7 @@ const InputError = styled.span`
   font-size: 0.65rem;
   color: ${(props) => props.theme.errorColor};
   top: 100%;
-  margin-top: 0.35rem;
+  margin-top: 0.15rem;
   padding: 0 0.5rem;
 `;
 

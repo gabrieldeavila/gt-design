@@ -26,8 +26,8 @@
   },
   "NUMBER": {
     "REQUIRED": "Please enter a valid number.",
-    "MIN": "This field must be greater than {{MIN}}.",
-    "MAX": "This field must be less than {{MAX}}."
+    "MIN": "It must be greater than {{MIN}}.",
+    "MAX": "It must be less than {{MAX}}."
   },
   "TEMPLATE": {
     "LOGIN": {
