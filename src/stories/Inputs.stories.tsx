@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GTInput, Input, Space } from "../components";
 import {
   INonNumericMask,
@@ -84,7 +84,7 @@ const Template = function InputsStory() {
             />
 
             <GTInput.Email
-              row={21}
+              row={20}
               text="(￣、￣)"
               name="email"
               label="TEMPLATE.LOGIN.EMAIL_LABEL"

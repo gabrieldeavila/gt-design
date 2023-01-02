@@ -43,7 +43,7 @@ function useValidateState(name: string, inputValidations: string[]) {
     (isValid: boolean, value: string | number) => {
       setPageState((prevState) => ({
         ...prevState,
-        [name]: value,
+        [name]: "value",
       }));
 
       if (isValid) {

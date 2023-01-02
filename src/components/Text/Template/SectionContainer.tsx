@@ -12,7 +12,7 @@ const SectionContainer = memo(function SectionContainer({
   return (
     <>
       <Text.H1 my="5px">{title}</Text.H1>
-      <Text.P fontSize={1} mb="2rem">
+      <Text.P fontSize={1} mt="0" mb="2rem">
         {t(subtitle)}
       </Text.P>
     </>

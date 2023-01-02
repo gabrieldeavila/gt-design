@@ -31,13 +31,15 @@ const defaultValuesSetters = {
 
 /**
  * 👨‍🚒 WHY TWO CONTEXTS? 👨‍🚒
- * Because if we use only one context, we will have to re-render the entire tree
- * every time we change a value. This is not good for performance.
+ * Because if we use only one, we'll have to re-render the entire tree
+ * every time we change a value.
+ *
+ * This is not good for performance.
  *
  * So, we use two contexts, one for the values and another for the setters.
  *
- * This way, we can use the values context in the components that need to read the values
- * and the setters context in the components that need to change the values.
+ * This way, we can use the values in the components that need to read them
+ * and the setters in those that need to change the values.
  */
 
 const GTPageStateContext = createContext<IGTPageState | undefined>(
