@@ -1,4 +1,5 @@
 <div align="center">
+  <a href="https://github.com/gabrieldeavila/gt-design" rel="noopener" target="_blank"><img width="150" src="docs/public/static/logo.svg" alt="GT Design logo"></a>
   <h1>GT Design</h1>
 
   <h3>
@@ -70,4 +71,3 @@ Yarn
 ```bash
 yarn add @geavila/gt-design
 ```
-
