@@ -17,8 +17,12 @@ const PopupWrapperStyled = styled.div`
   min-height: 7rem;
   top: 100%;
   right: 0;
-  display: ${(props: { easeClose: boolean, open: boolean }) => (props.easeClose ? "block" : "none")};
-  animation: ${(props) => (props.open ? "popup 0.2s ease-in-out forwards" : "popupReverse 0.2s ease-in-out forwards")};
+  display: ${(props: { easeClose: boolean; open: boolean }) =>
+    props.easeClose ? "block" : "none"};
+  animation: ${(props) =>
+    props.open
+      ? "popup 0.2s ease-in-out forwards"
+      : "popupReverse 0.2s ease-in-out forwards"};
 
   ${animations.easeOpenClose}
 `;
@@ -30,7 +34,10 @@ const PopupContainer = styled.div`
 
 // there are two consts because memo doesn't work with proptypes
 const PopupWrapperComp = ({
-  children, open, setOpen, avoidComponents
+  children,
+  open,
+  setOpen,
+  avoidComponents,
 }: IPopupWrapper) => {
   const easeClose = useEaseClose(open);
   const ref = useRef(null);
@@ -38,9 +45,9 @@ const PopupWrapperComp = ({
   useOnClickOutside(ref, avoidComponents, () => setOpen(false));
 
   return (
-        <PopupWrapperStyled ref={ref} easeClose={easeClose} open={open}>
-            {children}
-        </PopupWrapperStyled>
+    <PopupWrapperStyled ref={ref} easeClose={easeClose} open={open}>
+      {children}
+    </PopupWrapperStyled>
   );
 };
 
@@ -48,7 +55,7 @@ const PopupWrapper = memo(PopupWrapperComp);
 
 const Popup = {
   Wrapper: PopupWrapper,
-  Container: PopupContainer
+  Container: PopupContainer,
 };
 
 export default Popup;
@@ -57,11 +64,11 @@ PopupWrapperComp.propTypes = {
   open: PropTypes.bool,
   setOpen: PropTypes.func,
   avoidComponents: PropTypes.array,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 PopupWrapperComp.defaultProps = {
   open: false,
-  setOpen: () => { },
-  avoidComponents: []
+  setOpen: () => {},
+  avoidComponents: [],
 };

@@ -68,6 +68,11 @@ const MiddleCenter = styled.div`
   gap: 1rem;
 `;
 
+const SpaceMain = styled.main`
+  padding: 2rem;
+  padding-top: 5rem;
+`;
+
 export default {
   Flex,
   FlexCenter,
@@ -76,5 +81,6 @@ export default {
   Center,
   Between,
   Horizontal,
-  MiddleCenter
+  MiddleCenter,
+  Main: SpaceMain,
 };

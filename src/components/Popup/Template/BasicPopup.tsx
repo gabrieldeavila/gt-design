@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 import React, { useCallback, useRef, useState } from "react";
 import * as Icon from "react-feather";
 import Space from "../../Space/Space";
@@ -33,7 +34,7 @@ function SymbolPopup() {
       </Symbol.Container>
 
       <Popup.Wrapper avoidComponents={[ref]} open={open} setOpen={setOpen}>
-        <Popup.Container>Redireciona-me</Popup.Container>
+        {/* <Popup.Container>Redireciona-me</Popup.Container> */}
       </Popup.Wrapper>
     </Symbol.Wrapper>
   );

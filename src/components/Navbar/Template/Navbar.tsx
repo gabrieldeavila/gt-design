@@ -6,10 +6,10 @@ import Symbol from "../../Symbol/Symbol";
 import useIsMobile from "../../../hooks/helpers/useIsMobile";
 import SymbolPopup from "../../Popup/Template/BasicPopup";
 import { IGTNavbarOption, IGTNavbarOptions } from "../interface";
+import Logo from "../../../stories/logo";
 
-function GTNavbar({ showModal }: { showModal: boolean }) {
+function GTNavbar() {
   // if is showing modal, add padding to the wrapper
-  const wrapperStyle = showModal ? 14 : 0;
   const oldScroll = useRef(0);
 
   // when scrolls down, hide the navbar, when scrolls up, show the navbar
@@ -30,25 +30,28 @@ function GTNavbar({ showModal }: { showModal: boolean }) {
   }, [handleScroll]);
 
   return (
-    <Navbar.Wrapper show={showNavbar} mr={wrapperStyle}>
+    <Navbar.Wrapper show={showNavbar}>
       <Navbar.Container>
         <Navbar.Left>
-          <Navbar.Title>Gt Design</Navbar.Title>
+          <Navbar.Logo>
+            <Logo />
+          </Navbar.Logo>
+          {/* <Navbar.Title>GT</Navbar.Title> */}
           <GTNavbarOptions>
             <GTNavbarOption name="Home" icon={<Icon.Home />}>
-              <Navbar.Text>Home</Navbar.Text>
-              <Navbar.Text>Home</Navbar.Text>
-              <Navbar.Text>Home</Navbar.Text>
+              <Navbar.SubText>Home</Navbar.SubText>
+              <Navbar.SubText>Home</Navbar.SubText>
+              <Navbar.SubText>Home</Navbar.SubText>
             </GTNavbarOption>
             <GTNavbarOption name="Projects" icon={<Icon.Book />}>
-              <Navbar.Text>Projects</Navbar.Text>
-              <Navbar.Text>Projects</Navbar.Text>
-              <Navbar.Text>Projects</Navbar.Text>
+              <Navbar.SubText>Projects</Navbar.SubText>
+              <Navbar.SubText>Projects</Navbar.SubText>
+              <Navbar.SubText>Projects</Navbar.SubText>
             </GTNavbarOption>
             <GTNavbarOption name="About" icon={<Icon.Info />}>
-              <Navbar.Text>About</Navbar.Text>
-              <Navbar.Text>About</Navbar.Text>
-              <Navbar.Text>About</Navbar.Text>
+              <Navbar.SubText>About</Navbar.SubText>
+              <Navbar.SubText>About</Navbar.SubText>
+              <Navbar.SubText>About</Navbar.SubText>
             </GTNavbarOption>
           </GTNavbarOptions>
         </Navbar.Left>

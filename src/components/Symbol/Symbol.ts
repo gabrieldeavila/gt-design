@@ -10,7 +10,7 @@ const SymbolContainer = styled.div`
   justify-content: center;
   overflow: hidden;
   align-items: center;
-  background: ${(props) => transparentize(0.08, props.theme.contrast)};
+  background: ${(props) => transparentize(0.2, props.theme.contrast)};
   width: 3rem;
   height: 3rem;
   border-radius: 1.5rem;

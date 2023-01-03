@@ -8,7 +8,7 @@ const darkThemeStyle = {
   primary: "#080808",
   secondary: "#242124",
   contrast: "#fffafa",
-  backgroundHover: "#696969",
+  backgroundHover: "#80808061",
   backgroundMobileNav: "#555d50",
   sunColor: "#b8860b",
   moonColor: "#00b7eb",

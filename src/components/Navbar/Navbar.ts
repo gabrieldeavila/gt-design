@@ -2,7 +2,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-confusing-arrow */
 import { transparentize } from "polished";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { color, flexbox, space } from "styled-system";
 import animations from "../../utils/animations";
 import flex from "../../utils/flex";
@@ -86,12 +86,12 @@ const NavbarLeft = styled.div`
 
 const NavbarTitle = styled.h1`
   user-select: none;
-  font-weight: 800;
+  font-weight: 100;
   font-size: 1.5rem;
   color: ${(props) => props.theme.contrast};
 `;
 
-const NavbarText = styled.p`
+const textCss = css`
   user-select: none;
   cursor: pointer;
   height: fit-content;
@@ -104,10 +104,21 @@ const NavbarText = styled.p`
   }
 `;
 
+const NavbarText = styled.p`
+  ${textCss}
+`;
+
+const NavbarSubText = styled.h2`
+  ${textCss}
+  font-weight: 200;
+  font-size: 1rem;
+  color: ${(props) => props.theme.contrast};
+`;
+
 const NavbarPopupWrapper = styled.div`
   position: absolute;
   width: 100%;
-  height: 4rem;
+  height: 4.5rem;
 
   @media (max-width: 768px) {
     top: -250%;
@@ -115,24 +126,25 @@ const NavbarPopupWrapper = styled.div`
 `;
 
 const NavbarPopup = styled.div`
-  margin-top: 4rem;
+  margin-top: 4.5rem;
   padding: 0.35rem 0;
   min-width: 15rem;
-  background: ${(props) => props.theme.primary};
+  background: ${(props) => transparentize(0.1, props.theme.primary)};
+  backdrop-filter: blur(10px);
   border-radius: 0.25rem;
   gap: 0.5rem;
   flex-direction: column;
   z-index: 10;
-  ${shadows.basic}
   ${transitions.basic}
+  ${shadows.simple}
 
   animation: ${(props: { open: boolean }) =>
     props.open
-      ? "popup 0.2s ease-in-out forwards"
+      ? "popup 0.2s ease-in-out forlwards"
       : "popupReverse 0.2s ease-in-out forwards"};
   ${animations.easeOpenClose}
 
-  ${NavbarText}:hover {
+  ${NavbarText}:hover, ${NavbarSubText}:hover {
     background: ${(props) => props.theme.backgroundHover};
   }
 `;
@@ -143,6 +155,13 @@ const NavbarOptionWrapper = styled.div`
 
 const NavbarRight = styled.div``;
 
+const NavbarLogo = styled.div`
+  & > * {
+    height: 3rem;
+    width: 3rem;
+  }
+`;
+
 export default {
   Wrapper: NavbarWrapper,
   Container: NavbarContainer,
@@ -152,7 +171,9 @@ export default {
   Option: NavbarOption,
   OptionWrapper: NavbarOptionWrapper,
   Text: NavbarText,
+  SubText: NavbarSubText,
   PopupWrapper: NavbarPopupWrapper,
   Popup: NavbarPopup,
   Right: NavbarRight,
+  Logo: NavbarLogo,
 };
