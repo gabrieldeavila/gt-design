@@ -27,14 +27,14 @@ function SymbolPopup() {
             src="https://thispersondoesnotexist.com/image"
           />
         ) : (
-          <Space.FullSpace p={10}>
+          <Space.Modifiers addOns={["middle", "center", "full-space"]}>
             <Icon.X onClick={handleClose} />
-          </Space.FullSpace>
+          </Space.Modifiers>
         )}
       </Symbol.Container>
 
       <Popup.Wrapper avoidComponents={[ref]} open={open} setOpen={setOpen}>
-        {/* <Popup.Container>Redireciona-me</Popup.Container> */}
+        <Popup.Container>Redireciona-me</Popup.Container>
       </Popup.Wrapper>
     </Symbol.Wrapper>
   );

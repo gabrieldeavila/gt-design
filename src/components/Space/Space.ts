@@ -1,10 +1,19 @@
 import styled, { css } from "styled-components";
-import { space, SpaceProps } from "styled-system";
+import { color, space } from "styled-system";
 import flex from "../../utils/flex";
-import { ISpaceHorizontal } from "./interface";
+import addOnsCss from "./addOns/addOns";
+import { ISpace, ISpaceModifiers } from "./interface";
 
 const customHeight = css`
   height: ${(props: { height?: string }) => props.height};
+`;
+
+const SpaceBase = styled.div<ISpace>`
+  display: flex;
+
+  ${space}
+  ${color}
+  ${customHeight};
 `;
 
 const Flex = styled.div`
@@ -29,7 +38,7 @@ const FlexCenterRow = styled(Flex)`
   ${space}
 `;
 
-const FullSpace = styled.div<SpaceProps>`
+const FullSpace = styled.div<ISpace>`
   width: -webkit-fill-available;
   height: fit-content;
 
@@ -56,7 +65,7 @@ const Between = styled.div`
   ${space}
 `;
 
-const Horizontal = styled.div<ISpaceHorizontal>`
+const Horizontal = styled.div`
   padding: 2rem;
 `;
 
@@ -73,6 +82,12 @@ const SpaceMain = styled.main`
   padding-top: 5rem;
 `;
 
+const SpaceModifiers = styled(SpaceBase)<ISpaceModifiers>`
+  flex-direction: ${(props) => props.type ?? "row"};
+
+  ${({ addOns, type }) => addOnsCss(addOns, type)}
+`;
+
 export default {
   Flex,
   FlexCenter,
@@ -83,4 +98,5 @@ export default {
   Horizontal,
   MiddleCenter,
   Main: SpaceMain,
+  Modifiers: SpaceModifiers,
 };

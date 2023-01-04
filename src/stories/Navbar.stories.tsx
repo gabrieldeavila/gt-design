@@ -39,8 +39,8 @@ const Template = function NavbarStory() {
             "#00ffff",
             "#00ffff",
             "#ff00ff",
-          ].map((bg) => (
-            <MotionBox bg={bg} key={bg}>
+          ].map((bg, index) => (
+            <MotionBox bg={bg} key={index}>
               （⊙ｏ⊙）
             </MotionBox>
           ))}
