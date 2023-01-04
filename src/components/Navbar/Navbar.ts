@@ -126,17 +126,16 @@ const NavbarPopupWrapper = styled.div`
 `;
 
 const NavbarPopup = styled.div`
+  border-radius: 0.25rem;
   margin-top: 4.5rem;
   padding: 0.35rem 0;
   min-width: 15rem;
-  background: ${(props) => transparentize(0.1, props.theme.primary)};
-  backdrop-filter: blur(10px);
-  border-radius: 0.25rem;
+  background-color: ${(props) => props.theme.primary};
   gap: 0.5rem;
   flex-direction: column;
   z-index: 10;
-  ${transitions.basic}
-  ${shadows.simple}
+  ${transitions.basic};
+  ${shadows.simple};
 
   animation: ${(props: { open: boolean }) =>
     props.open

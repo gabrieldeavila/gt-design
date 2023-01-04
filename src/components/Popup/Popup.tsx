@@ -7,16 +7,15 @@ import useOnClickOutside from "../../hooks/helpers/useOnClickOutside";
 import shadows from "../../utils/shadows";
 
 const PopupWrapperStyled = styled.div`
-  margin-top: 0.5rem;
-  position: absolute;
+  margin-top: 0.25rem;
+  position: fixed;
   background: ${(props) => props.theme.primary};
   color: ${(props) => props.theme.contrast};
-  ${shadows.basic}
   border-radius: 0.25rem;
   min-width: 15rem;
   min-height: 7rem;
   top: 100%;
-  right: 0;
+  right: 18px;
   display: ${(props: { easeClose: boolean; open: boolean }) =>
     props.easeClose ? "block" : "none"};
   animation: ${(props) =>
@@ -24,6 +23,7 @@ const PopupWrapperStyled = styled.div`
       ? "popup 0.2s ease-in-out forwards"
       : "popupReverse 0.2s ease-in-out forwards"};
 
+  ${shadows.simple};
   ${animations.easeOpenClose}
 `;
 

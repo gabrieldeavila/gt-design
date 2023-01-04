@@ -35,6 +35,8 @@ function SymbolPopup() {
 
       <Popup.Wrapper avoidComponents={[ref]} open={open} setOpen={setOpen}>
         <Popup.Container>Redireciona-me</Popup.Container>
+        <Popup.Container>Redireciona-me</Popup.Container>
+        <Popup.Container>Redireciona-me</Popup.Container>
       </Popup.Wrapper>
     </Symbol.Wrapper>
   );
