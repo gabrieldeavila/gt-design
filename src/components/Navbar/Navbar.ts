@@ -146,6 +146,14 @@ const NavbarPopup = styled.div`
   ${NavbarText}:hover, ${NavbarSubText}:hover {
     background: ${(props) => props.theme.backgroundHover};
   }
+
+  ${NavbarText}, ${NavbarSubText} {
+    border-bottom: 1px solid ${(props) => transparentize(0.5, props.theme.contrast)};
+  }
+
+  ${NavbarText}:last-child, ${NavbarSubText}:last-child {
+    border-bottom: none;
+  }
 `;
 
 const NavbarOptionWrapper = styled.div`

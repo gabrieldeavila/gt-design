@@ -3,9 +3,10 @@ import React, { useCallback, useRef, useState } from "react";
 import * as Icon from "react-feather";
 import Space from "../../Space/Space";
 import Symbol from "../../Symbol/Symbol";
+import { IGTSymbolPopup } from "../interface";
 import Popup from "../Popup";
 
-function SymbolPopup() {
+function GTSymbolPopup({ img, alt, children }: IGTSymbolPopup) {
   const [open, setOpen] = useState(false);
 
   const ref = useRef(null);
@@ -22,24 +23,22 @@ function SymbolPopup() {
     <Symbol.Wrapper ref={ref}>
       <Symbol.Container>
         {!open ? (
-          <Symbol.Image
-            onClick={handleOpen}
-            src="https://thispersondoesnotexist.com/image"
-          />
+          <Symbol.Image onClick={handleOpen} src={img} alt={alt} />
         ) : (
-          <Space.Modifiers addOns={["middle", "center", "full-space"]}>
-            <Icon.X onClick={handleClose} />
+          <Space.Modifiers
+            onClick={handleClose}
+            addOns={["middle", "center", "full-space"]}
+          >
+            <Icon.X />
           </Space.Modifiers>
         )}
       </Symbol.Container>
 
       <Popup.Wrapper avoidComponents={[ref]} open={open} setOpen={setOpen}>
-        <Popup.Container>Redireciona-me</Popup.Container>
-        <Popup.Container>Redireciona-me</Popup.Container>
-        <Popup.Container>Redireciona-me</Popup.Container>
+        {children}
       </Popup.Wrapper>
     </Symbol.Wrapper>
   );
 }
 
-export default SymbolPopup;
+export default GTSymbolPopup;

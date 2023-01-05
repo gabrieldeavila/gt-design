@@ -78,6 +78,11 @@ const BtnStyled = styled.button`
   ${animations.underline}
 `;
 
+const Strong = styled.strong`
+  color: ${(props) => props.theme.contrast};
+  font-weight: 500;
+`;
+
 function BtnProps({
   children,
   onClick,
@@ -110,7 +115,7 @@ function BtnProps({
 
 const Btn = memo(BtnProps);
 
-const Text = { P, H1, H1Contrast, Btn };
+const Text = { P, H1, H1Contrast, Btn, Strong };
 
 export default Text;
 

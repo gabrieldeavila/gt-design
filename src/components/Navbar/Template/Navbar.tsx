@@ -1,14 +1,10 @@
 import PropTypes from "prop-types";
 import React, { memo, useCallback, useEffect, useRef, useState } from "react";
-import * as Icon from "react-feather";
-import Navbar from "../Navbar";
-import Symbol from "../../Symbol/Symbol";
 import useIsMobile from "../../../hooks/helpers/useIsMobile";
-import SymbolPopup from "../../Popup/Template/BasicPopup";
 import { IGTNavbarOption, IGTNavbarOptions } from "../interface";
-import Logo from "../../../stories/logo";
+import Navbar from "../Navbar";
 
-function GTNavbar() {
+function GTNavbar({ children }: { children: React.ReactNode }) {
   // if is showing modal, add padding to the wrapper
   const oldScroll = useRef(0);
 
@@ -32,11 +28,12 @@ function GTNavbar() {
   return (
     <Navbar.Wrapper show={showNavbar}>
       <Navbar.Container>
-        <Navbar.Left>
+        {children}
+        {/* <Navbar.Left>
           <Navbar.Logo>
-            <Logo />
+          <Logo />
+          // <Navbar.Title>GT</Navbar.Title>
           </Navbar.Logo>
-          {/* <Navbar.Title>GT</Navbar.Title> */}
           <GTNavbarOptions>
             <GTNavbarOption name="Home" icon={<Icon.Home />}>
               <Navbar.SubText>Home</Navbar.SubText>
@@ -67,21 +64,13 @@ function GTNavbar() {
               <SymbolPopup />
             </Navbar.OptionWrapper>
           </Navbar.Options>
-        </Navbar.Right>
+        </Navbar.Right> */}
       </Navbar.Container>
     </Navbar.Wrapper>
   );
 }
 
 export default GTNavbar;
-
-GTNavbar.propTypes = {
-  showModal: PropTypes.bool,
-};
-
-GTNavbar.defaultProps = {
-  showModal: false,
-};
 
 const GTNavbarOptionsTemp = ({ children }: IGTNavbarOptions) => {
   const isMobile = useIsMobile();
@@ -112,7 +101,7 @@ GTNavbarOptionsTemp.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const GTNavbarOptions = memo(GTNavbarOptionsTemp);
+export const GTNavbarOptions = memo(GTNavbarOptionsTemp);
 
 const GTNavbarOptionTemp = ({ name, icon, children }: IGTNavbarOption) => {
   const [open, setOpen] = useState(false);
@@ -161,4 +150,4 @@ GTNavbarOptionTemp.defaultProps = {
   icon: null,
 };
 
-const GTNavbarOption = memo(GTNavbarOptionTemp);
+export const GTNavbarOption = memo(GTNavbarOptionTemp);

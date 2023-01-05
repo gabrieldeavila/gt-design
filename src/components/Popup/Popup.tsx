@@ -1,10 +1,12 @@
+import { transparentize } from "polished";
+import PropTypes from "prop-types";
 import React, { memo, useRef } from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import useEaseClose from "../../hooks/helpers/useEaseClose";
-import animations from "../../utils/animations";
 import useOnClickOutside from "../../hooks/helpers/useOnClickOutside";
+import animations from "../../utils/animations";
 import shadows from "../../utils/shadows";
+import { IPopupWrapper } from "./interface";
 
 const PopupWrapperStyled = styled.div`
   margin-top: 0.25rem;
@@ -12,7 +14,7 @@ const PopupWrapperStyled = styled.div`
   background: ${(props) => props.theme.primary};
   color: ${(props) => props.theme.contrast};
   border-radius: 0.25rem;
-  min-width: 15rem;
+  min-width: 10rem;
   min-height: 7rem;
   top: 100%;
   right: 18px;
@@ -29,7 +31,28 @@ const PopupWrapperStyled = styled.div`
 
 const PopupContainer = styled.div`
   position: relative;
-  margin: 1rem;
+  padding: 0.5rem 0rem;
+  border-bottom: 1px solid
+    ${(props) => transparentize(0.5, props.theme.contrast)};
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  /* only in the first lane children */
+  & > * {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+  }
+`;
+
+const PopupItem = styled.a`
+  display: block;
+  cursor: pointer;
+
+  &:hover {
+    background: ${(props) => transparentize(0, props.theme.backgroundHover)};
+  }
 `;
 
 // there are two consts because memo doesn't work with proptypes
@@ -56,6 +79,7 @@ const PopupWrapper = memo(PopupWrapperComp);
 const Popup = {
   Wrapper: PopupWrapper,
   Container: PopupContainer,
+  Item: PopupItem,
 };
 
 export default Popup;
