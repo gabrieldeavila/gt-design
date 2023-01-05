@@ -40,6 +40,9 @@ function GTInputPassword({
 }: IGTInputPassword) {
   const { t } = useTranslation();
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inpRef = useRef<HTMLInputElement>(null);
+
   // state to keep track of all the inputs
   const { pageState, isLoading } = useGTPageStateContext();
 
@@ -92,7 +95,15 @@ function GTInputPassword({
 
   const handleShowPassword = useCallback(() => {
     setShowPassword((prevState) => !prevState);
-  }, []);
+
+    // add the focus on the last character
+    const { length = 0 } = value.toString();
+    inpRef.current?.focus();
+
+    setTimeout(() => {
+      inpRef.current?.setSelectionRange(length, length);
+    });
+  }, [value]);
 
   const handleBlur = useCallback(() => {
     handleInputBlur();
@@ -139,8 +150,6 @@ function GTInputPassword({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sameAsValue]);
 
-  const containerRef = useRef<HTMLDivElement>(null);
-
   if (isLoading ?? false) {
     return <Input.Container row={row} isLoading />;
   }
@@ -152,6 +161,7 @@ function GTInputPassword({
           {t(label)}
         </Input.Label>
         <Input.Field
+          ref={inpRef}
           type={type}
           onChange={handleChange}
           onBlur={handleBlur}
@@ -161,13 +171,11 @@ function GTInputPassword({
           name={name}
         />
 
-        {showPassword
-          ? (
+        {showPassword ? (
           <Icon.Eye onClick={handleShowPassword} />
-            )
-          : (
+        ) : (
           <Icon.EyeOff onClick={handleShowPassword} />
-            )}
+        )}
 
         {!isValidPassword && (
           <Input.Error>{t(`PASSWORD.${errorMessage}`)}</Input.Error>
