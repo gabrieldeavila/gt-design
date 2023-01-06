@@ -1,3 +1,4 @@
+import _ from "lodash";
 import PropTypes from "prop-types";
 import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import useIsMobile from "../../../hooks/helpers/useIsMobile";
@@ -27,45 +28,7 @@ function GTNavbar({ children }: { children: React.ReactNode }) {
 
   return (
     <Navbar.Wrapper show={showNavbar}>
-      <Navbar.Container>
-        {children}
-        {/* <Navbar.Left>
-          <Navbar.Logo>
-          <Logo />
-          // <Navbar.Title>GT</Navbar.Title>
-          </Navbar.Logo>
-          <GTNavbarOptions>
-            <GTNavbarOption name="Home" icon={<Icon.Home />}>
-              <Navbar.SubText>Home</Navbar.SubText>
-              <Navbar.SubText>Home</Navbar.SubText>
-              <Navbar.SubText>Home</Navbar.SubText>
-            </GTNavbarOption>
-            <GTNavbarOption name="Projects" icon={<Icon.Book />}>
-              <Navbar.SubText>Projects</Navbar.SubText>
-              <Navbar.SubText>Projects</Navbar.SubText>
-              <Navbar.SubText>Projects</Navbar.SubText>
-            </GTNavbarOption>
-            <GTNavbarOption name="About" icon={<Icon.Info />}>
-              <Navbar.SubText>About</Navbar.SubText>
-              <Navbar.SubText>About</Navbar.SubText>
-              <Navbar.SubText>About</Navbar.SubText>
-            </GTNavbarOption>
-          </GTNavbarOptions>
-        </Navbar.Left>
-
-        <Navbar.Right>
-          <Navbar.Options>
-            <Navbar.OptionWrapper>
-              <Symbol.Container>
-                <Symbol.Text>G</Symbol.Text>
-              </Symbol.Container>
-            </Navbar.OptionWrapper>
-            <Navbar.OptionWrapper>
-              <SymbolPopup />
-            </Navbar.OptionWrapper>
-          </Navbar.Options>
-        </Navbar.Right> */}
-      </Navbar.Container>
+      <Navbar.Container>{children}</Navbar.Container>
     </Navbar.Wrapper>
   );
 }
@@ -103,7 +66,12 @@ GTNavbarOptionsTemp.propTypes = {
 
 export const GTNavbarOptions = memo(GTNavbarOptionsTemp);
 
-const GTNavbarOptionTemp = ({ name, icon, children }: IGTNavbarOption) => {
+const GTNavbarOptionTemp = ({
+  name,
+  icon,
+  children,
+  onClick,
+}: IGTNavbarOption) => {
   const [open, setOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
@@ -122,6 +90,13 @@ const GTNavbarOptionTemp = ({ name, icon, children }: IGTNavbarOption) => {
     }, 200);
   }, []);
 
+  const handleClick = useCallback(
+    (e: any) => {
+      onClick?.(e, name);
+    },
+    [onClick, name]
+  );
+
   return (
     <Navbar.OptionWrapper>
       <Navbar.Option
@@ -129,8 +104,10 @@ const GTNavbarOptionTemp = ({ name, icon, children }: IGTNavbarOption) => {
         onMouseLeave={handleMouseLeave}
       >
         {isMobile && icon}
-        <Navbar.Text>{name}</Navbar.Text>
-        {showPopup && (
+
+        <Navbar.Text onClick={handleClick}>{name}</Navbar.Text>
+
+        {showPopup && !_.isUndefined(children) && (
           <Navbar.PopupWrapper>
             <Navbar.Popup isOpen={open}>{children}</Navbar.Popup>
           </Navbar.PopupWrapper>

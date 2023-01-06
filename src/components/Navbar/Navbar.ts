@@ -87,7 +87,7 @@ const NavbarLeft = styled.div`
 
 const NavbarTitle = styled.h1`
   user-select: none;
-  font-weight: 100;
+  font-weight: 500;
   font-size: 1.5rem;
   color: ${(props) => props.theme.contrast};
 `;
@@ -148,7 +148,8 @@ const NavbarPopup = styled.div`
   }
 
   ${NavbarText}, ${NavbarSubText} {
-    border-bottom: 1px solid ${(props) => transparentize(0.5, props.theme.contrast)};
+    border-bottom: 1px solid
+      ${(props) => transparentize(0.5, props.theme.contrast)};
   }
 
   ${NavbarText}:last-child, ${NavbarSubText}:last-child {
@@ -164,6 +165,7 @@ const NavbarRight = styled.div``;
 
 const NavbarLogo = styled.div`
   & > * {
+    ${flex.alignCenterCol};
     height: 3rem;
     width: 3rem;
   }

@@ -13,9 +13,10 @@ export interface IGTNavbarOptions {
 }
 
 export interface IGTNavbarOption {
-  children: React.ReactNode;
-  name?: string;
+  children?: React.ReactNode;
+  name: string;
   icon?: React.ReactNode;
+  onClick?: (e: any, name: string) => void;
 }
 
 export interface IGTNavbarMobileOptions {

@@ -112,4 +112,4 @@ const Template = function NavbarStory() {
   );
 };
 
-export const NavbarEx = Template.bind({});
+export const NavbarEx1 = Template.bind({});
