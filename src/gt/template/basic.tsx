@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+import PropTypes from "prop-types";
 import React, { useMemo, useState } from "react";
 import DarkSwitch from "../../components/Switch/Template/DarkSwitch";
 import GTProvider from "../../context/gt";
@@ -24,7 +26,13 @@ const darkThemeStyle = {
   glowShadow: "#44d7a8",
 };
 
-function GTBasic({ children }: { children: React.ReactNode; }) {
+function GTBasic({
+  children,
+  noThemeChange,
+}: {
+  children: React.ReactNode;
+  noThemeChange?: boolean;
+}) {
   const [darkTheme, setDarkTheme] = useState(
     localStorage.getItem("darkTheme") === "1"
   );
@@ -36,11 +44,19 @@ function GTBasic({ children }: { children: React.ReactNode; }) {
       <GTDesign theme={theme}>
         <GlobalStyle />
         {children}
-
-        <DarkSwitch fixed />
+        {!noThemeChange && <DarkSwitch fixed />}
       </GTDesign>
     </GTProvider>
   );
 }
 
 export default GTBasic;
+
+GTBasic.propTypes = {
+  children: PropTypes.node.isRequired,
+  noThemeChange: PropTypes.bool,
+};
+
+GTBasic.defaultProps = {
+  noThemeChange: false,
+};

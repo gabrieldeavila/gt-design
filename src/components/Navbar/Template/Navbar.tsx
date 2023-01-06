@@ -132,7 +132,7 @@ const GTNavbarOptionTemp = ({ name, icon, children }: IGTNavbarOption) => {
         <Navbar.Text>{name}</Navbar.Text>
         {showPopup && (
           <Navbar.PopupWrapper>
-            <Navbar.Popup open={open}>{children}</Navbar.Popup>
+            <Navbar.Popup isOpen={open}>{children}</Navbar.Popup>
           </Navbar.PopupWrapper>
         )}
       </Navbar.Option>

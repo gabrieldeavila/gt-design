@@ -17,3 +17,7 @@ export interface IGTNavbarOption {
   name?: string;
   icon?: React.ReactNode;
 }
+
+export interface IGTNavbarMobileOptions {
+  children: React.ReactNode | JSX.Element[];
+}

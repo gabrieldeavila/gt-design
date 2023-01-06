@@ -171,11 +171,13 @@ function GTInputPassword({
           name={name}
         />
 
-        {showPassword ? (
+        {showPassword
+          ? (
           <Icon.Eye onClick={handleShowPassword} />
-        ) : (
+            )
+          : (
           <Icon.EyeOff onClick={handleShowPassword} />
-        )}
+            )}
 
         {!isValidPassword && (
           <Input.Error>{t(`PASSWORD.${errorMessage}`)}</Input.Error>

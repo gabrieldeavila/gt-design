@@ -1,13 +1,11 @@
 import React from "react";
 import * as Icon from "react-feather";
 import {
-  Box,
   GTNavbar,
-  MotionBox,
+  GTNavbarMobile,
   Navbar,
+  NavbarMobile,
   Popup,
-  Space,
-  Symbol,
   Text,
 } from "../components";
 import {
@@ -15,7 +13,6 @@ import {
   GTNavbarOptions,
 } from "../components/Navbar/Template/Navbar";
 import GTSymbolPopup from "../components/Popup/Template/BasicPopup";
-import SectionContainer from "../components/Text/Template/SectionContainer";
 import { GTBasic } from "../gt";
 import Logo from "./logo";
 
@@ -27,7 +24,7 @@ const Template = function NavbarStory() {
   const img = "https://thispersondoesnotexist.com/image";
 
   return (
-    <GTBasic>
+    <GTBasic noThemeChange>
       <GTNavbar>
         <Navbar.Left>
           <Navbar.Logo>
@@ -55,12 +52,17 @@ const Template = function NavbarStory() {
         <Navbar.Right>
           <Navbar.Options>
             <Navbar.OptionWrapper>
-              <Symbol.Container>
-                <Symbol.Text>G</Symbol.Text>
-              </Symbol.Container>
+              <GTSymbolPopup alt="GT DESIGN">
+                <Popup.Container>
+                  <Popup.Item>
+                    <Text.P>nothing here!</Text.P>
+                  </Popup.Item>
+                </Popup.Container>
+              </GTSymbolPopup>
             </Navbar.OptionWrapper>
+
             <Navbar.OptionWrapper>
-              <GTSymbolPopup img={img} alt={"Img Example"}>
+              <GTSymbolPopup img={img} alt="Img Example">
                 <Popup.Container>
                   <Popup.Item>
                     <Text.P>
@@ -93,41 +95,19 @@ const Template = function NavbarStory() {
         </Navbar.Right>
       </GTNavbar>
 
-      <Space.Main>
-        <SectionContainer title="Box" subtitle="STORIES.BOX.SUBTITLE" />
-        <Box.Column>
-          {[
-            "#e0ffff",
-            "#98fb98",
-            "black",
-            "white",
-            "#a0d6b4",
-            "#66ddaa",
-            "#00a693",
-            "#00a86b",
-            "#ffddf4",
-            "#7cfc00",
-            "#cae00d",
-            "#db7093",
-            "#7b68ee",
-            "#8a2be2",
-            "#4b0082",
-            "#008080",
-            "#00ced1",
-            "#00bfff",
-            "#00bfff",
-            "#00bfff",
-            "#00bfff",
-            "#00ffff",
-            "#00ffff",
-            "#ff00ff",
-          ].map((bg, index) => (
-            <MotionBox bg={bg} key={index}>
-              （⊙ｏ⊙）
-            </MotionBox>
-          ))}
-        </Box.Column>
-      </Space.Main>
+      <GTNavbarMobile>
+        <NavbarMobile.Container>
+          <NavbarMobile.LinkWrapper>
+            <Icon.Home />
+          </NavbarMobile.LinkWrapper>
+          <NavbarMobile.LinkWrapper>
+            <Icon.Book />
+          </NavbarMobile.LinkWrapper>
+          <NavbarMobile.LinkWrapper>
+            <Icon.Info />
+          </NavbarMobile.LinkWrapper>
+        </NavbarMobile.Container>
+      </GTNavbarMobile>
     </GTBasic>
   );
 };

@@ -58,7 +58,8 @@ const NavbarOptions = styled.div<INavbarOptions>`
 
 const NavbarOption = styled.div`
   cursor: pointer;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
+  padding: 0.15rem;
   ${transitions.basic}
   ${flex.alignCenterCol}
 
@@ -95,7 +96,7 @@ const textCss = css`
   user-select: none;
   cursor: pointer;
   height: fit-content;
-  padding: 1rem;
+  padding: 0.75rem 0.5rem;
   ${transitions.basic}
 
   /* when mobile, removes padding */
@@ -110,8 +111,8 @@ const NavbarText = styled.p`
 
 const NavbarSubText = styled.h2`
   ${textCss}
-  font-weight: 200;
-  font-size: 1rem;
+  font-weight: 300;
+  font-size: 0.8rem;
   color: ${(props) => props.theme.contrast};
 `;
 
@@ -128,7 +129,6 @@ const NavbarPopupWrapper = styled.div`
 const NavbarPopup = styled.div`
   border-radius: 0.25rem;
   margin-top: 4.5rem;
-  padding: 0.35rem 0;
   min-width: 15rem;
   background-color: ${(props) => props.theme.primary};
   gap: 0.5rem;
@@ -137,8 +137,8 @@ const NavbarPopup = styled.div`
   ${transitions.basic};
   ${shadows.simple};
 
-  animation: ${(props: { open: boolean }) =>
-    props.open
+  animation: ${(props: { isOpen: boolean }) =>
+    props.isOpen
       ? "popup 0.2s ease-in-out forlwards"
       : "popupReverse 0.2s ease-in-out forwards"};
   ${animations.easeOpenClose}

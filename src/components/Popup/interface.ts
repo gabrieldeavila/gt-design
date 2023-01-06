@@ -6,7 +6,13 @@ export interface IPopupWrapper {
 }
 
 export interface IGTSymbolPopup {
-  children: JSX.Element[];
+  children: React.ReactNode | JSX.Element[];
   alt: string;
   img?: string;
+}
+
+export interface IGTBestSymbolOptions {
+  alt: string;
+  img?: string;
+  handleOpen: () => void;
 }

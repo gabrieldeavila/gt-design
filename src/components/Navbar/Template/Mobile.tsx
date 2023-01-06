@@ -1,23 +1,14 @@
 import React from "react";
-import * as Icon from "react-feather";
+import useIsMobile from "../../../hooks/helpers/useIsMobile";
+import { IGTNavbarMobileOptions } from "../interface";
 import NavbarMobile from "../NavbarMobile";
 
-function GTNavbarMobile() {
-  return (
-    <NavbarMobile.Wrapper>
-      <NavbarMobile.Container>
-        <NavbarMobile.LinkWrapper>
-          <Icon.Home />
-        </NavbarMobile.LinkWrapper>
-        <NavbarMobile.LinkWrapper>
-          <Icon.Book />
-        </NavbarMobile.LinkWrapper>
-        <NavbarMobile.LinkWrapper>
-          <Icon.Info />
-        </NavbarMobile.LinkWrapper>
-      </NavbarMobile.Container>
-    </NavbarMobile.Wrapper>
-  );
+function GTNavbarMobile({ children }: IGTNavbarMobileOptions) {
+  const isMobile = useIsMobile();
+
+  if (!isMobile) return null;
+
+  return <NavbarMobile.Wrapper>{children}</NavbarMobile.Wrapper>;
 }
 
 export default GTNavbarMobile;

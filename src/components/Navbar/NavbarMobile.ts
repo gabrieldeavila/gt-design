@@ -28,7 +28,7 @@ const NavbarMobileLinkWrapper = styled.div`
   ${transitions.basic}
 
   &:hover {
-    background: ${(props) => transparentize(0.5, props.theme.secundary)};
+    background: ${(props) => transparentize(0.5, props.theme.secondary)};
     cursor: pointer;
   }
 `;
