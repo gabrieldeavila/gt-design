@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable operator-linebreak */
 import styled, { css } from "styled-components";
@@ -22,7 +23,7 @@ const resetBtn = css`
   width: -webkit-fill-available;
 
   /* if it's disabled */
-  ${({ disabled }: { disabled: boolean }) =>
+  ${({ disabled }: { disabled?: boolean }) =>
     disabled &&
     css`
       cursor: not-allowed;
@@ -43,7 +44,6 @@ const resetBtn = css`
   }
 
   /* avoid hover when button is disabled */
-  
 `;
 
 const ButtonWrapper = styled.div`
