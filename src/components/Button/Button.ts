@@ -10,7 +10,7 @@ import shadows from "../../utils/shadows";
 import transitions from "../../utils/transitions";
 import { IButton } from "./interface";
 
-const resetBtn = css`
+const resetBtn = css<IButton>`
   background: none;
   border: none;
   padding: 0;
@@ -23,7 +23,7 @@ const resetBtn = css`
   width: -webkit-fill-available;
 
   /* if it's disabled */
-  ${({ disabled }: { disabled?: boolean }) =>
+  ${({ disabled }) =>
     disabled &&
     css`
       cursor: not-allowed;
@@ -43,7 +43,7 @@ const resetBtn = css`
     ${shadows.simple}
   }
 
-  /* avoid hover when button is disabled */
+  ${space};
 `;
 
 const ButtonWrapper = styled.div`
@@ -51,28 +51,40 @@ const ButtonWrapper = styled.div`
   ${flexbox}
 `;
 
-const btnOptions = css<IButton>`
-  ${({ fitContent }) => (fitContent ?? false) && "width: fit-content"}
-`;
-
 const ButtonNormal = styled.button`
   ${resetBtn};
   background: ${(props) => props.theme.primary};
   color: ${(props) => props.theme.contrast};
-  ${btnOptions}
 `;
 
 const ButtonContrast = styled.button`
   ${resetBtn};
   background: ${(props) => props.theme.contrast};
   color: ${(props) => props.theme.primary};
+`;
 
-  ${btnOptions}
-  ${space};
+const ButtonGlow = styled.button`
+  ${resetBtn}; 
+
+  color: #fff;
+  background: #000;
+  background-clip: padding-box; /* !importanté */
+  border: solid 1rem transparent; /* !importanté */
+  border-radius: 1em;
+  position: relative;
+  padding: 30% 2em;
+  box-sizing: border-box;
+`;
+
+const ButtonTransparent = styled.button`
+  ${shadows.simple};
+  ${resetBtn};
 `;
 
 export default {
   Wrapper: ButtonWrapper,
   Normal: ButtonNormal,
   Contrast: ButtonContrast,
+  Transparent: ButtonTransparent,
+  Glow: ButtonGlow,
 };

@@ -36,9 +36,11 @@ const H1 = styled.h1<IText>`
   ${h1Css}
 `;
 
-const H1Contrast = styled.h1<IText>`
-  color: ${(props) => props.theme.primary};
+const H2 = styled.h2<IText>`
   ${h1Css}
+
+  font-weight: 400;
+  font-size: 1.2rem;
 `;
 
 // a simple btn that is used to call a function or navigate to a page
@@ -115,7 +117,7 @@ function BtnProps({
 
 const Btn = memo(BtnProps);
 
-const Text = { P, H1, H1Contrast, Btn, Strong };
+const Text = { P, H1, H2, Btn, Strong };
 
 export default Text;
 
