@@ -14,23 +14,15 @@ const Template = function BoxStory() {
       <Space.Horizontal>
         <SectionContainer title="Buttons" subtitle="STORIES.BUTTONS.SUBTITLE" />
 
-        <Text.H2>
+        <Text.Divider>
           {/* <Text.Modifiers addOns={["bold"]}>Normal</Text.Modifiers> */}
           Normal
-        </Text.H2>
+        </Text.Divider>
         <Space.Modifiers
           addOns={["center", "pd-1", "middle", "flex-wrap", "gap-1"]}
         >
           <Space.Modifiers addOns={["w-20", "mobile-100"]}>
-            <Button.Normal>✍️(◔◡◔)</Button.Normal>
-          </Space.Modifiers>
-
-          <Space.Modifiers addOns={["w-10", "mobile-100"]}>
-            <Button.Normal>(•ˋ _ ˊ•)</Button.Normal>
-          </Space.Modifiers>
-
-          <Space.Modifiers addOns={["w-20", "mobile-grow"]}>
-            <Button.Normal>╰（‵□′）╯</Button.Normal>
+            <Button.Normal>Normal</Button.Normal>
           </Space.Modifiers>
         </Space.Modifiers>
 
@@ -39,7 +31,7 @@ const Template = function BoxStory() {
           addOns={["center", "pd-1", "middle", "flex-wrap", "gap-1"]}
         >
           <Space.Modifiers addOns={["w-20", "mobile-100"]}>
-            <Button.Contrast>✍️(◔◡◔)</Button.Contrast>
+            <Button.Contrast>Contrast</Button.Contrast>
           </Space.Modifiers>
         </Space.Modifiers>
 
@@ -48,16 +40,25 @@ const Template = function BoxStory() {
           addOns={["center", "pd-1", "middle", "flex-wrap", "gap-1"]}
         >
           <Space.Modifiers addOns={["w-20", "mobile-100"]}>
-            <Button.Transparent>damn</Button.Transparent>
+            <Button.Transparent>Transparent</Button.Transparent>
           </Space.Modifiers>
         </Space.Modifiers>
 
-        <Text.H2>Glow</Text.H2>
+        <Text.H2>Success</Text.H2>
         <Space.Modifiers
           addOns={["center", "pd-1", "middle", "flex-wrap", "gap-1"]}
         >
           <Space.Modifiers addOns={["w-20", "mobile-100"]}>
-            <Button.Glow>damn</Button.Glow>
+            <Button.Success>Success</Button.Success>
+          </Space.Modifiers>
+        </Space.Modifiers>
+
+        <Text.H2>Error</Text.H2>
+        <Space.Modifiers
+          addOns={["center", "pd-1", "middle", "flex-wrap", "gap-1"]}
+        >
+          <Space.Modifiers addOns={["w-20", "mobile-100"]}>
+            <Button.Error>Error</Button.Error>
           </Space.Modifiers>
         </Space.Modifiers>
       </Space.Horizontal>

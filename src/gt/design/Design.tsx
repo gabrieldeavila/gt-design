@@ -28,6 +28,10 @@ const defaultTheme = {
   switchOn: "#76ff7a",
   labelPrimary: "#002366",
   labelSecondary: "#66ddaa",
+  buttonSuccess1: "#9ab973",
+  buttonSuccess2: "#98fb98",
+  buttonError1: "#8b0000",
+  buttonError2: "#e66771",
 };
 
 function GTDesign({ theme, children }: IGTDesign) {

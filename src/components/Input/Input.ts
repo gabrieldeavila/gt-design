@@ -121,6 +121,8 @@ const InputContainer = styled.div<IInputContainer>`
     `}
   }
 
+  ${shadows.simple};
+
   ${({ isLoading }) => (isLoading ?? false) && loadingInput}
 `;
 

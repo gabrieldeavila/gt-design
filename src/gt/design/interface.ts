@@ -22,6 +22,10 @@ export interface GTTheme {
   switchOn?: string;
   labelPrimary?: string;
   labelSecondary?: string;
+  buttonSuccess1?: string;
+  buttonSuccess2?: string;
+  buttonError1?: string;
+  buttonError2?: string;
 }
 
 // IGTDesign

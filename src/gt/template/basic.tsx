@@ -24,6 +24,10 @@ const darkThemeStyle = {
   labelPrimary: "#00ced1",
   labelSecondary: "#2a52be",
   glowShadow: "#44d7a8",
+  buttonSuccess1: "#00ff00",
+  buttonSuccess2: "#264348",
+  buttonError1: "#8b0000",
+  buttonError2: "#7c4848",
 };
 
 function GTBasic({
