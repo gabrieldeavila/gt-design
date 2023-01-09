@@ -15,3 +15,17 @@ export interface ISectionContainer {
   title: string;
   subtitle: string;
 }
+
+export interface ITextDivider {
+  children: React.ReactNode | JSX.Element[];
+  color?: string;
+  position?: "left" | "right" | "center";
+}
+
+interface DividerWrapperProps {
+  after: string;
+  before: string;
+}
+export interface ITextDividerWrapper {
+  width: DividerWrapperProps;
+}

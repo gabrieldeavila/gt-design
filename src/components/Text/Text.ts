@@ -1,10 +1,12 @@
 /* eslint-disable operator-linebreak */
-import PropTypes from "prop-types";
-import React, { memo, useCallback, useState } from "react";
+import { transparentize } from "polished";
+import { memo } from "react";
 import styled, { css } from "styled-components";
 import { fontSize, space } from "styled-system";
 import { animations, transforms } from "../../utils";
-import { ITextBtn, IText } from "./interface";
+import TextBtn from "./Extras/Btn";
+import Divider from "./Extras/Divider";
+import { IText, ITextDividerWrapper } from "./interface";
 
 const P = styled.p<IText>`
   color: ${(props) => props.theme.contrast};
@@ -44,7 +46,7 @@ const H2 = styled.h2<IText>`
 `;
 
 // a simple btn that is used to call a function or navigate to a page
-const BtnStyled = styled.button`
+export const TextBtnStyled = styled.button`
   background: none;
   border: none;
   margin: 0;
@@ -85,55 +87,35 @@ const Strong = styled.strong`
   font-weight: 500;
 `;
 
-function BtnProps({
-  children,
-  onClick,
-  className,
-  style,
-  disabled,
-  type,
-}: ITextBtn) {
-  const [isFirstRender, setIsFirstRender] = useState(true);
+export const DividerStyled = styled.div``;
 
-  // avoid animation on first render
-  const handleRender = useCallback(() => {
-    setIsFirstRender(false);
-  }, []);
+export const DividerWrapper = styled.div<ITextDividerWrapper>`
+  display: flex;
+  border-block-start: 0 rgba(253, 253, 253, 0.12);
 
-  return (
-    <BtnStyled
-      type={type}
-      onClick={onClick}
-      className={className}
-      style={style}
-      disabled={disabled}
-      isFirstRender={isFirstRender}
-      onMouseEnter={handleRender}
-    >
-      {children}
-    </BtnStyled>
-  );
-}
+  &:after,
+  &:before {
+    content: "";
+    position: relative;
+    border-block-start: 1px solid transparent;
+    border-block-start-color: ${(props) => transparentize(0.9, props.theme.contrast)};
+    border-block-end: 0;
+    transform: translateY(50%);
+  }
 
-const Btn = memo(BtnProps);
+  &:after {
+    width: ${(props) => props.width.after};
+  }
 
-const Text = { P, H1, H2, Btn, Strong };
+  &:before {
+    width: ${(props) => props.width.before};
+  }
+`;
+
+export const DividerText = styled(H2)`
+  padding: 0 0.5rem;
+`;
+
+const Text = { P, H1, H2, Btn: memo(TextBtn), Strong, Divider: memo(Divider) };
 
 export default Text;
-
-BtnProps.propTypes = {
-  children: PropTypes.node.isRequired,
-  onClick: PropTypes.func,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  disabled: PropTypes.bool,
-  type: PropTypes.oneOf(["button", "submit", "reset"]),
-};
-
-BtnProps.defaultProps = {
-  onClick: () => {},
-  className: "",
-  style: {},
-  disabled: false,
-  type: "button",
-};

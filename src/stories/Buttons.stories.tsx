@@ -14,10 +14,8 @@ const Template = function BoxStory() {
       <Space.Horizontal>
         <SectionContainer title="Buttons" subtitle="STORIES.BUTTONS.SUBTITLE" />
 
-        <Text.Divider>
-          {/* <Text.Modifiers addOns={["bold"]}>Normal</Text.Modifiers> */}
-          Normal
-        </Text.Divider>
+        <Text.Divider position="left">Normal</Text.Divider>
+
         <Space.Modifiers
           addOns={["center", "pd-1", "middle", "flex-wrap", "gap-1"]}
         >
@@ -26,7 +24,7 @@ const Template = function BoxStory() {
           </Space.Modifiers>
         </Space.Modifiers>
 
-        <Text.H2>Contrast</Text.H2>
+        <Text.Divider position="left">Contrast</Text.Divider>
         <Space.Modifiers
           addOns={["center", "pd-1", "middle", "flex-wrap", "gap-1"]}
         >
@@ -35,7 +33,7 @@ const Template = function BoxStory() {
           </Space.Modifiers>
         </Space.Modifiers>
 
-        <Text.H2>Transparent</Text.H2>
+        <Text.Divider position="left">Transparent</Text.Divider>
         <Space.Modifiers
           addOns={["center", "pd-1", "middle", "flex-wrap", "gap-1"]}
         >
@@ -44,7 +42,7 @@ const Template = function BoxStory() {
           </Space.Modifiers>
         </Space.Modifiers>
 
-        <Text.H2>Success</Text.H2>
+        <Text.Divider position="left">Success</Text.Divider>
         <Space.Modifiers
           addOns={["center", "pd-1", "middle", "flex-wrap", "gap-1"]}
         >
@@ -53,7 +51,7 @@ const Template = function BoxStory() {
           </Space.Modifiers>
         </Space.Modifiers>
 
-        <Text.H2>Error</Text.H2>
+        <Text.Divider position="left">Error</Text.Divider>
         <Space.Modifiers
           addOns={["center", "pd-1", "middle", "flex-wrap", "gap-1"]}
         >

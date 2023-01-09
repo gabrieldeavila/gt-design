@@ -111,7 +111,7 @@ export const ExtraError = styled(ExtraSuccess)`
 
 const ButtonTransparent = styled(ResetBtn)``;
 
-export default {
+const Button = {
   Wrapper: ButtonWrapper,
   Normal: ButtonNormal,
   Contrast: ButtonContrast,
@@ -119,3 +119,5 @@ export default {
   Success: ButtonSuccess,
   Error: ButtonError,
 };
+
+export default Button;
