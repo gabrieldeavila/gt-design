@@ -42,10 +42,13 @@ function useValidatePassword() {
         "password"
       );
 
+      /**
+       * if the input has a sameAs prop, it checks if the password is the same as the one in the pageState
+       *
+       */
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (sameAs && isValid) {
         isValid = value === pageState[sameAs];
-
         invalidMessage = isValid ? "" : "PASSWORDS_NOT_MATCH";
       }
 
