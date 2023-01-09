@@ -25,6 +25,18 @@ const addOnsOptions: IAddOns = {
   "pd-4": "padding: 4rem;",
   "pd-5": "padding: 5rem;",
 
+  "px-1": "padding: 0 1rem;",
+  "px-2": "padding: 0 2rem;",
+  "px-3": "padding: 0 3rem;",
+  "px-4": "padding: 0 4rem;",
+  "px-5": "padding: 0 5rem;",
+
+  "py-1": "padding: 1rem 0;",
+  "py-2": "padding: 2rem 0;",
+  "py-3": "padding: 3rem 0;",
+  "py-4": "padding: 4rem 0;",
+  "py-5": "padding: 5rem 0;",
+
   "pt-1": "padding-top: 1rem;",
   "pt-2": "padding-top: 2rem;",
   "pt-3": "padding-top: 3rem;",
@@ -78,6 +90,18 @@ const addOnsOptions: IAddOns = {
   "mg-3": "margin: 3rem;",
   "mg-4": "margin: 4rem;",
   "mg-5": "margin: 5rem;",
+
+  "mx-1": "margin: 0 1rem;",
+  "mx-2": "margin: 0 2rem;",
+  "mx-3": "margin: 0 3rem;",
+  "mx-4": "margin: 0 4rem;",
+  "mx-5": "margin: 0 5rem;",
+
+  "my-1": "margin: 1rem 0;",
+  "my-2": "margin: 2rem 0;",
+  "my-3": "margin: 3rem 0;",
+  "my-4": "margin: 4rem 0;",
+  "my-5": "margin: 5rem 0;",
 
   "w-10": "width: 10%;",
   "w-20": "width: 20%;",

@@ -4,6 +4,7 @@
 import { transparentize } from "polished";
 import styled, { css } from "styled-components";
 import { color, flexbox, space } from "styled-system";
+import { transforms } from "../../utils";
 import animations from "../../utils/animations";
 import flex from "../../utils/flex";
 import shadows from "../../utils/shadows";
@@ -66,6 +67,14 @@ const NavbarOption = styled.div`
   &:hover {
     background: ${(props) => props.theme.backgroundHover};
   }
+
+  ${({ isParent }: { isParent: boolean }) =>
+    !isParent &&
+    css`
+      &:active {
+        ${transforms.XLpress};
+      }
+    `}
 
   /* when mobile, scale down */
   @media (max-width: 768px) {

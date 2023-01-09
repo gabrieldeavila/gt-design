@@ -59,6 +59,17 @@ const Template = function BoxStory() {
             <Button.Error>Error</Button.Error>
           </Space.Modifiers>
         </Space.Modifiers>
+
+        <Space.Dashed addOns={["my-5"]} />
+
+        <Text.Divider position="left">Loading</Text.Divider>
+        <Space.Modifiers
+          addOns={["center", "pd-1", "middle", "flex-wrap", "gap-1"]}
+        >
+          <Space.Modifiers addOns={["w-20", "mobile-100"]}>
+            <Button.Error>Loading</Button.Error>
+          </Space.Modifiers>
+        </Space.Modifiers>
       </Space.Horizontal>
     </GTBasic>
   );

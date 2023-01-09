@@ -76,7 +76,7 @@ const SwitchLabel = styled.label<ISwitch>`
   ${({ mode }) => mode === "active" && activeLabel}
 
   &:active ${SwitchSlider} {
-    ${transforms.press}
+    ${transforms.XLpress}
   }
 `;
 

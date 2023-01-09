@@ -74,7 +74,27 @@ type addOns =
   | "mobile-grow"
   | "mobile-100"
   | "flex-wrap"
-  | "flex-grow";
+  | "flex-grow"
+  | "mx-1"
+  | "mx-2"
+  | "mx-3"
+  | "mx-4"
+  | "mx-5"
+  | "my-1"
+  | "my-2"
+  | "my-3"
+  | "my-4"
+  | "my-5"
+  | "px-1"
+  | "px-2"
+  | "px-3"
+  | "px-4"
+  | "px-5"
+  | "py-1"
+  | "py-2"
+  | "py-3"
+  | "py-4"
+  | "py-5";
 
 export interface ISpace extends SpaceProps {
   addOns?: addOns[];

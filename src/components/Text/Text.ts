@@ -97,8 +97,10 @@ export const DividerWrapper = styled.div<ITextDividerWrapper>`
   &:before {
     content: "";
     position: relative;
+    border-block-start-style: dashed;
     border-block-start: 1px solid transparent;
-    border-block-start-color: ${(props) => transparentize(0.9, props.theme.contrast)};
+    border-block-start-color: ${(props) =>
+      transparentize(0.9, props.theme.contrast)};
     border-block-end: 0;
     transform: translateY(50%);
   }

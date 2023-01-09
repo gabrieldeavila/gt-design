@@ -36,10 +36,11 @@ function TextDivider({ children, position }: ITextDivider) {
 export default TextDivider;
 
 TextDivider.prototype = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   position: PropTypes.oneOf(["left", "center", "right"]),
 };
 
 TextDivider.defaultProps = {
+  children: null,
   position: "center",
 };

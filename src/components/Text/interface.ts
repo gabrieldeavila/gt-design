@@ -17,7 +17,7 @@ export interface ISectionContainer {
 }
 
 export interface ITextDivider {
-  children: React.ReactNode | JSX.Element[];
+  children?: React.ReactNode | JSX.Element[];
   color?: string;
   position?: "left" | "right" | "center";
 }

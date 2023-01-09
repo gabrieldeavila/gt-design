@@ -102,6 +102,7 @@ const GTNavbarOptionTemp = ({
       <Navbar.Option
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        isParent={!_.isUndefined(children)}
       >
         {isMobile && icon}
 
