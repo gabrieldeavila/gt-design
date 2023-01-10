@@ -1,9 +1,14 @@
 import React, { useMemo } from "react";
 import Loader from "../../Loader";
-import { ExtraError } from "../Button";
+import { ResetBtn } from "../Button";
 import { IGTButton } from "../interface";
 
-function ButtonError({ children, isLoading, disabled, ...props }: IGTButton) {
+function ButtonTransparent({
+  children,
+  isLoading,
+  disabled,
+  ...props
+}: IGTButton) {
   const verifyDisabled = useMemo(
     () => disabled ?? isLoading,
     [disabled, isLoading]
@@ -11,13 +16,13 @@ function ButtonError({ children, isLoading, disabled, ...props }: IGTButton) {
 
   return (
     // @ts-expect-error
-    <ExtraError disabled={verifyDisabled} isLoading={isLoading} {...props}>
+    <ResetBtn disabled={verifyDisabled} isLoading={isLoading} {...props}>
       <span className="extra-title">
         {(isLoading ?? false) && <Loader.Simple />}
         <span className="extra-title-children">{children}</span>
       </span>
-    </ExtraError>
+    </ResetBtn>
   );
 }
 
-export default ButtonError;
+export default ButtonTransparent;

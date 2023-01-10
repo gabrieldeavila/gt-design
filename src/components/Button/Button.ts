@@ -10,11 +10,14 @@ import hovers from "../../utils/hovers";
 import shadows from "../../utils/shadows";
 import transitions from "../../utils/transitions";
 import { LoaderWrapper } from "../Loader/Loader";
+import ButtonContrast from "./Extras/Contrast";
 import ButtonError from "./Extras/Error";
+import ButtonNormal from "./Extras/Normal";
 import ButtonSuccess from "./Extras/Success";
+import ButtonTransparent from "./Extras/Transparent";
 import { IButton } from "./interface";
 
-const ResetBtn = styled.button<IButton>`
+export const ResetBtn = styled.button<IButton>`
   background: none;
   border: none;
   padding: 0;
@@ -53,6 +56,18 @@ const ResetBtn = styled.button<IButton>`
 
   ${shadows.simple};
   ${space};
+
+  & .extra-title {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  & .extra-title-children,
+  ${LoaderWrapper} {
+    display: flex;
+  }
 `;
 
 const ButtonWrapper = styled.div`
@@ -60,14 +75,24 @@ const ButtonWrapper = styled.div`
   ${flexbox}
 `;
 
-const ButtonNormal = styled(ResetBtn)`
+export const ExtraNormal = styled(ResetBtn)`
   background: ${(props) => transparentize(0.5, props.theme.primary)};
-  color: ${(props) => props.theme.contrast};
+
+  & .extra-title-children {
+    color: ${(props) => props.theme.contrast};
+  }
 `;
 
-const ButtonContrast = styled(ResetBtn)`
+export const ExtraContrast = styled(ResetBtn)`
   background: ${(props) => transparentize(0.1, props.theme.contrast)};
-  color: ${(props) => props.theme.primary};
+
+  & .extra-title-children {
+    color: ${(props) => props.theme.primary};
+  }
+
+  & .extra-title svg {
+    stroke: ${(props) => props.theme.primary};
+  }
 `;
 
 export const ExtraSuccess = styled(ResetBtn)`
@@ -100,18 +125,6 @@ export const ExtraSuccess = styled(ResetBtn)`
   &:active:before {
     background-size: 1px 800px;
   }
-
-  & .extra-title {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  & .extra-title-children,
-  ${LoaderWrapper} {
-    display: flex;
-  }
 `;
 
 export const ExtraError = styled(ExtraSuccess)`
@@ -125,8 +138,6 @@ export const ExtraError = styled(ExtraSuccess)`
     background-position: 0px;
   }
 `;
-
-const ButtonTransparent = styled(ResetBtn)``;
 
 const Button = {
   Wrapper: ButtonWrapper,

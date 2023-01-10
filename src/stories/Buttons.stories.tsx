@@ -67,7 +67,7 @@ const Template = function BoxStory() {
           addOns={["center", "pd-1", "middle", "flex-wrap", "gap-1"]}
         >
           <Space.Modifiers addOns={["w-20", "mobile-100"]}>
-            <Button.Success isLoading>Loading</Button.Success>
+            <Button.Normal isLoading>Loading</Button.Normal>
           </Space.Modifiers>
         </Space.Modifiers>
       </Space.Horizontal>
