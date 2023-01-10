@@ -9,6 +9,7 @@ import flex from "../../utils/flex";
 import hovers from "../../utils/hovers";
 import shadows from "../../utils/shadows";
 import transitions from "../../utils/transitions";
+import { LoaderWrapper } from "../Loader/Loader";
 import ButtonError from "./Extras/Error";
 import ButtonSuccess from "./Extras/Success";
 import { IButton } from "./interface";
@@ -26,10 +27,18 @@ const ResetBtn = styled.button<IButton>`
   width: -webkit-fill-available;
 
   /* if it's disabled */
-  ${({ disabled }) =>
+  ${({ disabled, isLoading }) =>
     disabled &&
+    !isLoading &&
     css`
       cursor: not-allowed;
+      opacity: 0.5;
+    `}
+
+  ${({ isLoading }) =>
+    isLoading &&
+    css`
+      cursor: progress;
       opacity: 0.5;
     `}
 
@@ -94,6 +103,14 @@ export const ExtraSuccess = styled(ResetBtn)`
 
   & .extra-title {
     position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  & .extra-title-children,
+  ${LoaderWrapper} {
+    display: flex;
   }
 `;
 
