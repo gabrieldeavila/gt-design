@@ -71,6 +71,9 @@
     },
     "INPUTS": {
       "SUBTITLE": "With a GTPageStateProvider, the only required step is to set the name and label of the input. It will handle the rest automatically."
+    },
+    "BUTTONS": {
+      "SUBTITLE": "The focus of the button is to work well both in desktop and mobile. For that reason, you always gotta define a width, otherwise, it's going to fit all of the available width!"
     }
   }
 }

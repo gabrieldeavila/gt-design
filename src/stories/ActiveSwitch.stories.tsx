@@ -17,9 +17,9 @@ const Template = function SwitchStory() {
     <GTBasic>
       <Space.Horizontal>
         <SectionContainer title="Switch" subtitle="STORIES.SWITCH.SUBTITLE" />
-        <Space.FlexCenterRow>
+        <Space.FlexCenter>
           <GTActiveSwitch isChecked onChange={handleChange} />
-        </Space.FlexCenterRow>
+        </Space.FlexCenter>
       </Space.Horizontal>
     </GTBasic>
   );

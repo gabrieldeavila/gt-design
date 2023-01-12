@@ -9,14 +9,13 @@ const GlobalStyle = createGlobalStyle`
 
   * {
     color: ${({ theme }: IGLobalStyle) => theme.contrast};
-    ${transitions.basic}
-    line-height: 1.5 !important
+    line-height: 1.5 !important;
+    ${transitions.basic};
   }
   
   body {
     background: ${({ theme }: IGLobalStyle) => theme.secondary};
-
-    ${scrolls.default}
+    ${scrolls.default};
   }
 
   body, input, button {

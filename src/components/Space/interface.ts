@@ -96,7 +96,7 @@ type addOns =
   | "py-4"
   | "py-5";
 
-export interface ISpace extends SpaceProps {
+export interface ISpace extends SpaceProps, ColorProps {
   addOns?: addOns[];
 }
 

@@ -17,13 +17,12 @@ const SpaceBase = styled.div<ISpace>`
   ${customHeight};
 `;
 
-const Flex = styled.div`
+const Flex = styled(SpaceBase)<ISpace>`
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
   flex-direction: column;
   width: -webkit-fill-available;
-  ${space}
 
   ${customHeight};
 `;
@@ -31,11 +30,6 @@ const Flex = styled.div`
 const FlexCenter = styled(Flex)`
   ${flex.alignCenter}
 
-  ${space}
-`;
-
-const FlexCenterRow = styled(Flex)`
-  ${flex.alignCenterCol}
   ${space}
 `;
 
@@ -50,16 +44,17 @@ const FullSpace = styled.div<ISpace>`
 
   ${customHeight};
   ${space}
+  ${color}
 `;
 
-const Center = styled.div`
+const Center = styled(SpaceBase)`
   ${flex.alignCenter}
 
   ${customHeight};
   ${space}
 `;
 
-const Between = styled.div`
+const Between = styled(SpaceBase)`
   ${flex.spaceBetween}
 
   ${customHeight};
@@ -70,7 +65,7 @@ const Horizontal = styled.div`
   padding: 2rem;
 `;
 
-const MiddleCenter = styled.div`
+const MiddleCenter = styled(SpaceBase)`
   ${flex.alignCenterCol}
   height: -webkit-fill-available;
 
@@ -78,7 +73,7 @@ const MiddleCenter = styled.div`
   gap: 1rem;
 `;
 
-const SpaceMain = styled.main`
+const SpaceMain = styled(SpaceBase)`
   padding: 2rem;
   padding-top: 5rem;
 `;
@@ -99,7 +94,6 @@ const SpaceModifiers = styled(SpaceBase)<ISpaceModifiers>`
 export default {
   Flex,
   FlexCenter,
-  FlexCenterRow,
   FullSpace,
   Center,
   Between,

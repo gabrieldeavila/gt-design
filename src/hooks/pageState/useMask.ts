@@ -123,7 +123,6 @@ function useMask(
       const valueChars = value.toString().split("");
 
       // now masks the value
-
       let index = 0;
       for (const char of bestMask.split("")) {
         if (!/[0-9a-z]/i.test(char)) {
