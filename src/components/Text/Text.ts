@@ -106,11 +106,11 @@ export const DividerWrapper = styled.div<ITextDividerWrapper>`
   }
 
   &:after {
-    width: ${(props) => props.width.after};
+    width: ${(props) => props.currWidth.after};
   }
 
   &:before {
-    width: ${(props) => props.width.before};
+    width: ${(props) => props.currWidth.before};
   }
 `;
 

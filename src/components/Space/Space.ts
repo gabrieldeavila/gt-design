@@ -1,20 +1,16 @@
 import { transparentize } from "polished";
-import styled, { css } from "styled-components";
-import { color, space } from "styled-system";
+import styled from "styled-components";
+import { color, layout, space } from "styled-system";
 import flex from "../../utils/flex";
 import addOnsCss from "./addOns/addOns";
 import { ISpace, ISpaceModifiers } from "./interface";
 
-const customHeight = css`
-  height: ${(props: { height?: string }) => props.height};
-`;
-
 const SpaceBase = styled.div<ISpace>`
   display: flex;
 
-  ${space}
-  ${color}
-  ${customHeight};
+  ${space};
+  ${color};
+  ${layout};
 `;
 
 const Flex = styled(SpaceBase)<ISpace>`
@@ -23,51 +19,34 @@ const Flex = styled(SpaceBase)<ISpace>`
   flex-wrap: wrap;
   flex-direction: column;
   width: -webkit-fill-available;
-
-  ${customHeight};
-`;
-
-const FlexCenter = styled(Flex)`
-  ${flex.alignCenter}
-
-  ${space}
-`;
-
-const FullSpace = styled.div<ISpace>`
-  width: -webkit-fill-available;
-  height: fit-content;
-
-  > * {
-    width: 100%;
-    height: -webkit-fill-available;
-  }
-
-  ${customHeight};
-  ${space}
-  ${color}
 `;
 
 const Center = styled(SpaceBase)`
   ${flex.alignCenter}
+  width: -webkit-fill-available;
 
-  ${customHeight};
   ${space}
 `;
 
 const Between = styled(SpaceBase)`
   ${flex.spaceBetween}
 
-  ${customHeight};
   ${space}
 `;
 
-const Horizontal = styled.div`
+const Horizontal = styled.div<ISpace>`
   padding: 2rem;
+  width: -webkit-fill-available;
+
+  ${space};
+  ${color};
+  ${layout};
 `;
 
 const MiddleCenter = styled(SpaceBase)`
   ${flex.alignCenterCol}
   height: -webkit-fill-available;
+  width: -webkit-fill-available;
 
   flex-direction: column;
   gap: 1rem;
@@ -76,6 +55,8 @@ const MiddleCenter = styled(SpaceBase)`
 const SpaceMain = styled(SpaceBase)`
   padding: 2rem;
   padding-top: 5rem;
+
+  width: -webkit-fill-available;
 `;
 
 const SpaceDashed = styled(SpaceBase)<ISpaceModifiers>`
@@ -93,8 +74,6 @@ const SpaceModifiers = styled(SpaceBase)<ISpaceModifiers>`
 
 export default {
   Flex,
-  FlexCenter,
-  FullSpace,
   Center,
   Between,
   Horizontal,

@@ -89,45 +89,41 @@ function LoginCreate({
           <Text.H1>{t("TEMPLATE.LOGIN.CREATE_TITLE")}</Text.H1>
           <Text.P>{t("TEMPLATE.LOGIN.CREATE_SUBTITLE")}</Text.P>
         </Space.Flex>
-        <Space.FullSpace>
-          <Input.Wrapper>
-            <GTInput.Text
-              minChars="10"
-              maxChars="20"
-              minWords="2"
-              maxWords="5"
-              name="name"
-              label="TEMPLATE.LOGIN.NAME_LABEL"
-            />
+        <Input.Wrapper>
+          <GTInput.Text
+            minChars="10"
+            maxChars="20"
+            minWords="2"
+            maxWords="5"
+            name="name"
+            label="TEMPLATE.LOGIN.NAME_LABEL"
+          />
 
-            <GTInput.Text
-              defaultValidation
-              validations={["noSpaces"]}
-              name="nickname"
-              label="TEMPLATE.LOGIN.NICKNAME_LABEL"
-            />
+          <GTInput.Text
+            defaultValidation
+            validations={["noSpaces"]}
+            name="nickname"
+            label="TEMPLATE.LOGIN.NICKNAME_LABEL"
+          />
 
-            <GTInput.Email name="email" label="TEMPLATE.LOGIN.EMAIL_LABEL" />
+          <GTInput.Email name="email" label="TEMPLATE.LOGIN.EMAIL_LABEL" />
 
-            <GTInput.Password
-              name="password"
-              label="TEMPLATE.LOGIN.PASSWORD_LABEL"
-            />
+          <GTInput.Password
+            name="password"
+            label="TEMPLATE.LOGIN.PASSWORD_LABEL"
+          />
 
-            <GTInput.Password
-              sameAs="password"
-              name="confirm_password"
-              label="TEMPLATE.LOGIN.CONFIRM_PASSWORD_LABEL"
-            />
-          </Input.Wrapper>
-        </Space.FullSpace>
+          <GTInput.Password
+            sameAs="password"
+            name="confirm_password"
+            label="TEMPLATE.LOGIN.CONFIRM_PASSWORD_LABEL"
+          />
+        </Input.Wrapper>
         <Space.Flex>
           <Text.P fontSize={0}>{t("TEMPLATE.LOGIN.DATA_POLICY")}</Text.P>
-          <Space.FullSpace>
-            <Button.Normal disabled={!canSave}>
-              {t("TEMPLATE.LOGIN.CREATE_BUTTON")}
-            </Button.Normal>
-          </Space.FullSpace>
+          <Button.Normal disabled={!canSave}>
+            {t("TEMPLATE.LOGIN.CREATE_BUTTON")}
+          </Button.Normal>
 
           <Space.Center>
             <Text.Btn onClick={() => setIsCreate(false)}>
@@ -183,7 +179,7 @@ function LoginSignIn({
           <Text.H1>{t("TEMPLATE.LOGIN.SIGN_IN_TITLE")}</Text.H1>
           <Text.P>{t("TEMPLATE.LOGIN.SIGN_IN_SUBTITLE")}</Text.P>
         </Space.Flex>
-        <Space.FullSpace>
+        <Space.Flex>
           <Input.Wrapper>
             <GTInput.Text
               defaultValidation
@@ -197,13 +193,11 @@ function LoginSignIn({
               label="TEMPLATE.LOGIN.PASSWORD_LABEL"
             />
           </Input.Wrapper>
-        </Space.FullSpace>
+        </Space.Flex>
         <Space.Flex>
-          <Space.FullSpace>
-            <Button.Normal onClick={handleSignIn} disabled={!canSave}>
-              {t("TEMPLATE.LOGIN.SIGN_IN_BUTTON")}
-            </Button.Normal>
-          </Space.FullSpace>
+          <Button.Normal onClick={handleSignIn} disabled={!canSave}>
+            {t("TEMPLATE.LOGIN.SIGN_IN_BUTTON")}
+          </Button.Normal>
 
           <Space.Between>
             <Text.Btn onClick={() => setIsCreate(true)}>

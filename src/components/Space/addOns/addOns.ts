@@ -9,7 +9,7 @@ const middleRow = "align-items: center;";
 const middleColumn = "justify-content: center;";
 
 const fullSpace =
-  "width: -webkit-fill-available; height: -webkit-fill-available;";
+  "width: -webkit-fill-available; height: -webkit-fill-available; * { width: -webkit-fill-available; }";
 
 const addOnsOptions: IAddOns = {
   centerColumn,
@@ -25,17 +25,17 @@ const addOnsOptions: IAddOns = {
   "pd-4": "padding: 4rem;",
   "pd-5": "padding: 5rem;",
 
-  "px-1": "padding: 0 1rem;",
-  "px-2": "padding: 0 2rem;",
-  "px-3": "padding: 0 3rem;",
-  "px-4": "padding: 0 4rem;",
-  "px-5": "padding: 0 5rem;",
+  "px-1": "padding-right: 1rem; padding-left: 1rem;",
+  "px-2": "padding-right: 2rem; padding-left: 2rem;",
+  "px-3": "padding-right: 3rem; padding-left: 3rem;",
+  "px-4": "padding-right: 4rem; padding-left: 4rem;",
+  "px-5": "padding-right: 5rem; padding-left: 5rem;",
 
-  "py-1": "padding: 1rem 0;",
-  "py-2": "padding: 2rem 0;",
-  "py-3": "padding: 3rem 0;",
-  "py-4": "padding: 4rem 0;",
-  "py-5": "padding: 5rem 0;",
+  "py-1": "padding-top: 1rem; padding-bottom: 1rem;",
+  "py-2": "padding-top: 2rem; padding-bottom: 2rem;",
+  "py-3": "padding-top: 3rem; padding-bottom: 3rem;",
+  "py-4": "padding-top: 4rem; padding-bottom: 4rem;",
+  "py-5": "padding-top: 5rem; padding-bottom: 5rem;",
 
   "pt-1": "padding-top: 1rem;",
   "pt-2": "padding-top: 2rem;",

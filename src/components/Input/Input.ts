@@ -17,6 +17,7 @@ const InputWrapper = styled.div`
   ${flex.wrapGap}
   gap: 1.75rem;
 `;
+
 const getRowWidth = ({ row }: IInputContainer) => {
   let cssSrc = "";
 

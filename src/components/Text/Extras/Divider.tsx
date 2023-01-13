@@ -27,7 +27,7 @@ function TextDivider({ children, position }: ITextDivider) {
   }, [position]);
 
   return (
-    <DividerWrapper width={width}>
+    <DividerWrapper currWidth={width}>
       <DividerText>{children}</DividerText>
     </DividerWrapper>
   );

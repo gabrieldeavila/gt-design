@@ -27,5 +27,5 @@ interface DividerWrapperProps {
   before: string;
 }
 export interface ITextDividerWrapper {
-  width: DividerWrapperProps;
+  currWidth: DividerWrapperProps;
 }

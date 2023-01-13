@@ -1,4 +1,4 @@
-import { ColorProps, SpaceProps } from "styled-system";
+import { ColorProps, LayoutProps, SpaceProps } from "styled-system";
 
 type addOns =
   | "center"
@@ -96,11 +96,11 @@ type addOns =
   | "py-4"
   | "py-5";
 
-export interface ISpace extends SpaceProps, ColorProps {
+export interface ISpace extends SpaceProps, ColorProps, LayoutProps {
   addOns?: addOns[];
 }
 
-export interface ISpaceModifiers extends ISpace, ColorProps {
+export interface ISpaceModifiers extends ISpace {
   type?: "column" | "row";
 }
 
