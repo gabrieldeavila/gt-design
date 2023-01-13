@@ -92,6 +92,7 @@ export const DividerStyled = styled.div``;
 export const DividerWrapper = styled.div<ITextDividerWrapper>`
   display: flex;
   border-block-start: 0 rgba(253, 253, 253, 0.12);
+  align-items: center;
 
   &:after,
   &:before {
@@ -103,6 +104,7 @@ export const DividerWrapper = styled.div<ITextDividerWrapper>`
       transparentize(0.9, props.theme.contrast)};
     border-block-end: 0;
     transform: translateY(50%);
+    height: 1px;
   }
 
   &:after {

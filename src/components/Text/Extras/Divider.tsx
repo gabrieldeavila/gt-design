@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useMemo } from "react";
+import Space from "../../Space";
 import { ITextDivider } from "../interface";
 import { DividerText, DividerWrapper } from "../Text";
 
@@ -27,9 +28,11 @@ function TextDivider({ children, position }: ITextDivider) {
   }, [position]);
 
   return (
-    <DividerWrapper currWidth={width}>
-      <DividerText>{children}</DividerText>
-    </DividerWrapper>
+    <Space.Modifiers addOns={["mt-1", "full-space"]}>
+      <DividerWrapper currWidth={width}>
+        <DividerText>{children}</DividerText>
+      </DividerWrapper>
+    </Space.Modifiers>
   );
 }
 
