@@ -5,10 +5,10 @@ import SectionContainer from "../components/Text/Template/SectionContainer";
 import { GTBasic } from "../gt";
 
 export default {
-  title: "GTDesign/Space",
+  title: "Layout/Spaces",
 };
 
-const Template = function DamnSpace() {
+const Template = () => {
   return (
     <GTBasic>
       <Space.Horizontal>
@@ -57,7 +57,10 @@ const Template = function DamnSpace() {
         </Space.Modifiers>
 
         <Text.Divider position="left">Modifiers</Text.Divider>
-        <Space.Modifiers addOns={["mt-2", "mb-5", "px-5", "py-2", "w-80"]} bg="#87ceeb">
+        <Space.Modifiers
+          addOns={["mt-2", "mb-5", "px-5", "py-2", "w-80"]}
+          bg="#87ceeb"
+        >
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
         </Space.Modifiers>
       </Space.Horizontal>
@@ -65,4 +68,4 @@ const Template = function DamnSpace() {
   );
 };
 
-export const GTSpace = Template.bind({});
+export const Spaces = Template.bind({});

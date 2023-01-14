@@ -5,7 +5,7 @@ import GTPageStateProvider from "../context/pageState";
 import { GTBasic } from "../gt";
 
 export default {
-  title: "GTDesign/Skeletons",
+  title: "Feedback/Skeletons/Inputs",
   args: {
     isLoading: true,
   },
@@ -27,7 +27,7 @@ export default {
   },
 };
 
-const Template = function ExInput({ isLoading }: { isLoading: boolean }) {
+const Template = ({ isLoading }: { isLoading: boolean }) => {
   const options = [
     { value: "B", label: "Bananas 🍌" },
     { value: "F", label: "Figs 🥝" },
@@ -92,4 +92,4 @@ const Template = function ExInput({ isLoading }: { isLoading: boolean }) {
   );
 };
 
-export const InputSkeleton = Template.bind({});
+export const Inputs = Template.bind({});

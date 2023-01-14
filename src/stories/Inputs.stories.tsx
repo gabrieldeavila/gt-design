@@ -9,7 +9,7 @@ import GTPageStateProvider from "../context/pageState";
 import { GTBasic } from "../gt";
 
 export default {
-  title: "GTDesign/Inputs",
+  title: "Data Entry/Inputs",
 };
 
 const moneyMask: INumericMask = {
@@ -44,7 +44,7 @@ const docMask: INonNumericMask = {
   type: "non_numeric_mask",
 };
 
-const Template = function InputsStory() {
+const Template = () => {
   const options = [
     { value: "B", label: "Bananas 🍌" },
     { value: "F", label: "Figs 🥝" },
@@ -138,4 +138,4 @@ const Template = function InputsStory() {
   );
 };
 
-export const GTInputs = Template.bind({});
+export const Inputs = Template.bind({});

@@ -5,10 +5,10 @@ import GTPageStateProvider from "../context/pageState";
 import { GTBasic } from "../gt";
 
 export default {
-  title: "GTDesign/Tooltip",
+  title: "Data Display/Tooltips",
 };
 
-const Template = function TooltipStory() {
+const Template = () => {
   const options = [
     { value: "B", label: "Bananas 🍌" },
     { value: "F", label: "Figs 🥝" },
@@ -82,4 +82,4 @@ const Template = function TooltipStory() {
   );
 };
 
-export const GTTooltip = Template.bind({});
+export const Tooltips = Template.bind({});

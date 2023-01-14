@@ -16,10 +16,10 @@ import GTSymbolPopup from "../components/Popup/Template/BasicPopup";
 import { GTBasic } from "../gt";
 
 export default {
-  title: "GTDesign/Navbar",
+  title: "Templates/Navbars/Options Click",
 };
 
-const Template = function NavbarStory() {
+const Template = () => {
   // TO DO: REMOVE ANY FROM ALL EVENT HANDLERS
   const handleClick = useCallback((e: any, name: string) => {
     alert(name);
@@ -83,4 +83,4 @@ const Template = function NavbarStory() {
   );
 };
 
-export const NavbarEx2 = Template.bind({});
+export const OptionsClick = Template.bind({});

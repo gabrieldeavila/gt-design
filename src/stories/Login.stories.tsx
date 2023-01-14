@@ -3,10 +3,10 @@ import { GTBasic } from "../gt";
 import { GTLogin } from "../gt/Template";
 
 export default {
-  title: "GTDesign/Login",
+  title: "Templates/Login",
 };
 
-const Template = function LoginStory() {
+const Template = () => {
   const onPasswordForgot = useCallback(() => {
     console.log("onPasswordForgot");
   }, []);
@@ -18,4 +18,4 @@ const Template = function LoginStory() {
   );
 };
 
-export const GTBox = Template.bind({});
+export const Login = Template.bind({});

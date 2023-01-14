@@ -17,10 +17,10 @@ import { GTBasic } from "../gt";
 import Logo from "./logo";
 
 export default {
-  title: "GTDesign/Navbar",
+  title: "Templates/Navbars/Options Popup",
 };
 
-const Template = function NavbarStory() {
+const Template = () => {
   const img = "https://thispersondoesnotexist.com/image";
 
   return (
@@ -112,4 +112,4 @@ const Template = function NavbarStory() {
   );
 };
 
-export const NavbarEx1 = Template.bind({});
+export const OptionsPopup = Template.bind({});

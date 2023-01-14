@@ -5,10 +5,10 @@ import SectionContainer from "../components/Text/Template/SectionContainer";
 import { GTBasic } from "../gt";
 
 export default {
-  title: "GTDesign/Buttons",
+  title: "Data Entry/Buttons",
 };
 
-const Template = function BoxStory() {
+const Template = () => {
   return (
     <GTBasic>
       <Space.Horizontal>
@@ -75,4 +75,4 @@ const Template = function BoxStory() {
   );
 };
 
-export const GTButton = Template.bind({});
+export const Buttons = Template.bind({});

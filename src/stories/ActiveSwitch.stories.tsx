@@ -5,10 +5,10 @@ import SectionContainer from "../components/Text/Template/SectionContainer";
 import { GTBasic } from "../gt";
 
 export default {
-  title: "GTDesign/Switch",
+  title: "Data Entry/Switch",
 };
 
-const Template = function SwitchStory() {
+const Template = () => {
   const handleChange = useCallback((e: boolean) => {
     console.log("SWITCH VALUE", e);
   }, []);
@@ -25,4 +25,4 @@ const Template = function SwitchStory() {
   );
 };
 
-export const Active = Template.bind({});
+export const Switch = Template.bind({});

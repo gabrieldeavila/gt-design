@@ -6,10 +6,10 @@ import { GTBasic } from "../gt";
 import { randomNumber } from "../utils";
 
 export default {
-  title: "GTDesign/Box",
+  title: "Layout/Boxs",
 };
 
-const Template = function BoxStory() {
+const Template = () => {
   const emojis = useMemo(
     () => ["😖", "🥵", "👂", "🤝", "🫵", "🤖", "🥱", "🧌"],
     []
@@ -76,4 +76,4 @@ const Template = function BoxStory() {
   );
 };
 
-export const GTBox = Template.bind({});
+export const Boxs = Template.bind({});
