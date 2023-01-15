@@ -47,6 +47,7 @@ export const ResetBtn = styled.button<IButton>`
   cursor: pointer;
   user-select: none;
   width: fit-content;
+  height: fit-content;
   padding: 0.75rem;
   border-radius: 0.25rem;
   width: ${({ fitContent }) =>
@@ -92,11 +93,11 @@ export const ResetBtn = styled.button<IButton>`
     display: flex;
   }
 
-  /* ${({ size }) => {
+  ${({ size }) => {
     const val = size ?? "md";
 
     return sizesOpts[val];
-  }} */
+  }}
 `;
 
 const ButtonWrapper = styled.div`

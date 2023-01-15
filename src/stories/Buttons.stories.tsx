@@ -70,6 +70,19 @@ const Template = () => {
             <Button.Normal isLoading>Loading</Button.Normal>
           </Space.Modifiers>
         </Space.Modifiers>
+
+        <Space.Dashed addOns={["my-5"]} />
+
+        <Text.Divider position="left">Sizes</Text.Divider>
+        <Space.Modifiers
+          addOns={["center", "pd-1", "middle", "flex-wrap", "gap-1"]}
+        >
+          <Space.Modifiers addOns={["w-20", "gap-2", "mobile-100"]}>
+            <Button.Normal size="sm">Small</Button.Normal>
+            <Button.Normal size="md">Medium</Button.Normal>
+            <Button.Normal size="lg">Large</Button.Normal>
+          </Space.Modifiers>
+        </Space.Modifiers>
       </Space.Horizontal>
     </GTBasic>
   );

@@ -46,7 +46,7 @@ function GTModalBasic({ show, setShow, data }: IGTModal) {
 
           <Modal.Footer>
             <Space.Modifiers addOns={["flex-end", "gap-1"]}>
-              <Button.Error fitContent onClick={handleClose}>
+              <Button.Error fitContent size="sm" onClick={handleClose}>
                 Close
               </Button.Error>
 
