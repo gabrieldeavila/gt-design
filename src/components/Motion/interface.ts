@@ -1,4 +1,4 @@
 export interface IMotionBox {
-  bg: string;
+  bg?: string;
   children: React.ReactNode;
 }

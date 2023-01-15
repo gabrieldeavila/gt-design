@@ -28,7 +28,7 @@ const BoxWrapper = styled.div<IBoxWrapper>`
 const handleColorContrast = ({
   bg,
 }: IHandleColorContrastReceive): IHandleColorContrastReturn => {
-  const luminance = getLuminance(bg);
+  const luminance = bg != null && getLuminance(bg);
 
   if (luminance > 0.5) {
     return "black !important";

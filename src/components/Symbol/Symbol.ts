@@ -31,6 +31,7 @@ const SymbolContainer = styled.div`
 
 const SymbolText = styled.p`
   font-size: 1.25rem;
+  text-align: center;
   color: ${(props) => props.theme.primary};
 `;
 

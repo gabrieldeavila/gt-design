@@ -4,6 +4,7 @@ type addOns =
   | "center"
   | "middle"
   | "full-space"
+  | "flex-end"
   | "pd-1"
   | "pd-2"
   | "pd-3"

@@ -19,6 +19,8 @@ const addOnsOptions: IAddOns = {
 
   "full-space": fullSpace,
 
+  "flex-end": "justify-content: flex-end;",
+
   "pd-1": "padding: 1rem;",
   "pd-2": "padding: 2rem;",
   "pd-3": "padding: 3rem;",

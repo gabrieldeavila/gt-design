@@ -17,6 +17,28 @@ import ButtonSuccess from "./Extras/Success";
 import ButtonTransparent from "./Extras/Transparent";
 import { IButton } from "./interface";
 
+const sm = css`
+  padding: 0.45rem;
+`;
+
+const md = css`
+  padding: 0.75rem;
+`;
+
+const lg = css`
+  padding: 1rem;
+`;
+
+type sizes = {
+  [key in "sm" | "md" | "lg"]: any;
+};
+
+const sizesOpts: sizes = {
+  sm,
+  md,
+  lg,
+};
+
 export const ResetBtn = styled.button<IButton>`
   background: none;
   border: none;
@@ -27,7 +49,8 @@ export const ResetBtn = styled.button<IButton>`
   width: fit-content;
   padding: 0.75rem;
   border-radius: 0.25rem;
-  width: -webkit-fill-available;
+  width: ${({ fitContent }) =>
+    fitContent ? "fit-content" : "-webkit-fill-available;"};
 
   /* if it's disabled */
   ${({ disabled, isLoading }) =>
@@ -68,6 +91,12 @@ export const ResetBtn = styled.button<IButton>`
   ${LoaderWrapper} {
     display: flex;
   }
+
+  /* ${({ size }) => {
+    const val = size ?? "md";
+
+    return sizesOpts[val];
+  }} */
 `;
 
 const ButtonWrapper = styled.div`
@@ -96,7 +125,6 @@ export const ExtraContrast = styled(ResetBtn)`
 `;
 
 export const ExtraSuccess = styled(ResetBtn)`
-  width: -webkit-fill-available;
   position: relative;
   box-sizing: border-box;
 

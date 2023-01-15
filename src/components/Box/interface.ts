@@ -6,7 +6,7 @@ export interface IBoxWrapper {
 
 // IHandleColorContrastReceive should receive a bg with a string
 export interface IHandleColorContrastReceive {
-  bg: string;
+  bg?: string;
 }
 
 // IHandleColorContrastReturn should return a string
@@ -14,6 +14,6 @@ export type IHandleColorContrastReturn = string;
 
 // BoxContainer will receive a bg with a string
 export interface IBoxContainer {
-  bg: string;
+  bg?: string;
   theme: GTTheme;
 }
