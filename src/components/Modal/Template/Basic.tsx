@@ -82,6 +82,19 @@ function GTModalBasic({ show, setShow, data }: IGTModal) {
     [handleClose]
   );
 
+  // removes scrolls from body when modal is open
+  useEffect(() => {
+    if (show) {
+      document.body.style.overflow = "hidden";
+      // add in px to avoid scroll jump
+      document.body.style.paddingRight = "0.5rem";
+    } else {
+      document.body.style.overflow = "unset";
+      // remove in px to avoid scroll jump
+      document.body.style.paddingRight = "0px";
+    }
+  }, [show]);
+
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown, false);
 

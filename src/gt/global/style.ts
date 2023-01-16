@@ -1,7 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import { scrolls } from "../../utils";
-import transitions from "../../utils/transitions";
 import { IGLobalStyle } from "./interface";
 
 const GlobalStyle = createGlobalStyle`
@@ -10,7 +9,6 @@ const GlobalStyle = createGlobalStyle`
   * {
     color: ${({ theme }: IGLobalStyle) => theme.contrast};
     line-height: 1.5 !important;
-    ${transitions.basic};
   }
   
   body {
