@@ -1,8 +1,8 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-confusing-arrow */
-import styled, { css } from "styled-components";
 import { transparentize } from "polished";
-import { animations, flex, hovers, transitions } from "../../utils";
+import styled, { css } from "styled-components";
+import { animations, flex, hovers, transforms } from "../../utils";
 import { IModal } from "./interface";
 
 // Y
@@ -83,9 +83,7 @@ const ModalContent = styled.div<IModal>`
   }}
 `;
 
-const ModalContainer = styled.div`
-  margin: 2rem;
-`;
+const ModalContainer = styled.div``;
 
 const ModalWrapper = styled.div<IModal>`
   min-width: 35vw;
@@ -100,24 +98,34 @@ const ModalWrapper = styled.div<IModal>`
 `;
 
 const ModalHeader = styled.div`
+  padding: 1.5rem;
+  padding-bottom: 0;
+
   ${flex.justifyBetween}
 `;
 
-const ModalClose = styled.div`
+const ModalClose = styled.button`
+  background: none;
+  border: none;
   cursor: pointer;
 
-  ${transitions.linear}
+  &:active {
+    ${transforms.XLpress};
+  }
+
   ${hovers.scaleTransYOpacity}
 `;
 
 const ModalMain = styled.main`
-  margin-top: 1.5rem;
+  padding: 0 1.5rem;
   padding-top: 1.5rem;
+  margin: 1.5rem 0;
   border-top: 1px solid ${(props) => transparentize(0.8, props.theme.contrast)};
 `;
 
 const ModalFooter = styled.footer`
-  padding-top: 1.5rem;
+  border-top: 1px solid ${(props) => transparentize(0.8, props.theme.contrast)};
+  padding: 1.5rem;
 `;
 
 export default {

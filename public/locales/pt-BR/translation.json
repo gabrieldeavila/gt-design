@@ -71,6 +71,22 @@
     },
     "INPUTS": {
       "SUBTITLE": "Com um GTPageStateProvider, o único passo necessário é definir o nome e a etiqueta do input. Ele cuidará do resto automaticamente."
+    },
+    "BUTTONS": {
+      "SUBTITLE": "O botão foi projetado para funcionar otimamente tanto em dispositivos desktop quanto smartphones."
+    },
+    "SPACE": {
+      "SUBTITLE": "Uma ferramenta versátil para criar espaçamentos consistentes entre os elementos de sua aplicação."
+    },
+    "TEXT": {
+      "SUBTITLE": "Com sua interface fácil de usar, você pode adicionar rapidamente e facilmente texto ao seu aplicativo em uma variedade de estilos e formatos."
+    },
+    "MODAL_BASIC": {
+      "SUBTITLE": "Permite que os usuários interajam com conteúdo específico ou concluam uma tarefa sem precisar navegar para fora da página.",
+      "CONTENT": "Este é um exemplo de modal básico.",
+      "UNCLOSEABLE": "A modal não pode ser fechada clicando fora dela.",
+      "BEFORE_CONFIRM": "A função onBeforeConfirm será chamada antes da função onConfirm. Agora, é randomicamente definido como true ou false.",
+      "BEFORE_CANCEL": "A função onBeforeCancel será chamada antes da função onCancel. Agora, é randomicamente definido como true ou false."
     }
   }
 }

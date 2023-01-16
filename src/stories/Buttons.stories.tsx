@@ -82,6 +82,7 @@ const Template = () => {
             <Button.Normal size="md">Medium</Button.Normal>
             <Button.Normal size="lg">Large</Button.Normal>
           </Space.Modifiers>
+          <Button.Normal fitContent>Fit Content</Button.Normal>
         </Space.Modifiers>
       </Space.Horizontal>
     </GTBasic>

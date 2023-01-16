@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React, { useCallback, useRef, useState } from "react";
 import { Button, Space } from "../components";
 import { IModalData } from "../components/Modal/interface";
 import GTModalBasic from "../components/Modal/Template/Basic";
 import SectionContainer from "../components/Text/Template/SectionContainer";
 import { GTBasic } from "../gt";
+import { randomNumber } from "../utils";
 
 export default {
   title: "Feedback/Modals/Basic",
@@ -13,7 +15,7 @@ const Template = () => {
   const [showModalBasic, setShowModalBasic] = useState(false);
   const modalData = useRef<IModalData>({
     title: "Modal Basic",
-    content: "MODAL.CONTENT",
+    content: "STORIES.MODAL_BASIC.CONTENT",
     orientationY: "center",
     orientationX: "center",
   });
@@ -21,7 +23,7 @@ const Template = () => {
   const handleBasicOpen = useCallback(() => {
     modalData.current = {
       title: "Modal Basic",
-      content: "MODAL.CONTENT",
+      content: "STORIES.MODAL_BASIC.CONTENT",
       orientationY: "center",
       orientationX: "center",
     };
@@ -32,7 +34,7 @@ const Template = () => {
   const handleBasicTop = useCallback(() => {
     modalData.current = {
       title: "Modal Top",
-      content: "MODAL.CONTENT",
+      content: "STORIES.MODAL_BASIC.CONTENT",
       orientationY: "top",
       orientationX: "center",
     };
@@ -42,7 +44,7 @@ const Template = () => {
 
   const handleBasicBottom = useCallback(() => {
     modalData.current = {
-      content: "MODAL.CONTENT",
+      content: "STORIES.MODAL_BASIC.CONTENT",
       title: "Modal Bottom",
       orientationY: "bottom",
       orientationX: "center",
@@ -53,7 +55,7 @@ const Template = () => {
 
   const handleBasicLeft = useCallback(() => {
     modalData.current = {
-      content: "MODAL.CONTENT",
+      content: "STORIES.MODAL_BASIC.CONTENT",
       title: "Modal Left",
       orientationX: "left",
     };
@@ -63,7 +65,7 @@ const Template = () => {
 
   const handleBasicRight = useCallback(() => {
     modalData.current = {
-      content: "MODAL.CONTENT",
+      content: "STORIES.MODAL_BASIC.CONTENT",
       title: "Modal Right",
       orientationX: "right",
     };
@@ -73,7 +75,7 @@ const Template = () => {
 
   const handleBasicTopRight = useCallback(() => {
     modalData.current = {
-      content: "MODAL.CONTENT",
+      content: "STORIES.MODAL_BASIC.CONTENT",
       title: "Modal Top Right",
       orientationY: "top",
       orientationX: "right",
@@ -82,11 +84,74 @@ const Template = () => {
     setShowModalBasic(true);
   }, []);
 
-  const handleBasicConfirmBtn = useCallback(() => {
+  const handleBasicActions = useCallback(() => {
     modalData.current = {
-      content: "MODAL.CONTENT",
-      title: "Modal Top Right",
+      content: "STORIES.MODAL_BASIC.CONTENT",
+      title: "Modal Actions",
       confirmText: "Confirm",
+      cancelText: "Cancel",
+      onCancel: () => {
+        console.log(
+          "wow this function should be called when cancel button clicked"
+        );
+      },
+      onConfirm: () => {
+        console.log(
+          "wow this function should be called when confirm button clicked"
+        );
+      },
+      onClose: () => {
+        console.log("wow this function should be called when modal closed");
+      },
+    };
+
+    setShowModalBasic(true);
+  }, []);
+
+  const handleBasicUnclosable = useCallback(() => {
+    modalData.current = {
+      content: "STORIES.MODAL_BASIC.UNCLOSEABLE",
+      title: "Modal Unclosable",
+      confirmText: "Confirm",
+      closable: false,
+    };
+
+    setShowModalBasic(true);
+  }, []);
+
+  const handleBeforeConfirm = useCallback(() => {
+    modalData.current = {
+      content: "STORIES.MODAL_BASIC.BEFORE_CONFIRM",
+      title: "Modal OnBeforeConfirm",
+      confirmText: "Confirm",
+      onBeforeConfirm: async () => {
+        return await new Promise((resolve) => {
+          setTimeout(() => {
+            const random = randomNumber(0, 1) ?? 0;
+
+            resolve(!!random);
+          }, 2000);
+        });
+      },
+    };
+
+    setShowModalBasic(true);
+  }, []);
+
+  const handleBeforeCancel = useCallback(() => {
+    modalData.current = {
+      content: "STORIES.MODAL_BASIC.BEFORE_CANCEL",
+      title: "Modal OnBeforeCancel",
+      cancelText: "Cancel",
+      onBeforeCancel: async () => {
+        return await new Promise((resolve) => {
+          setTimeout(() => {
+            const random = randomNumber(0, 1) ?? 0;
+
+            resolve(!!random);
+          }, 2000);
+        });
+      },
     };
 
     setShowModalBasic(true);
@@ -125,8 +190,20 @@ const Template = () => {
               Modal Top Right
             </Button.Normal>
 
-            <Button.Normal fitContent onClick={handleBasicConfirmBtn}>
-              Modal Confirm Button
+            <Button.Normal fitContent onClick={handleBasicActions}>
+              Modal Actions
+            </Button.Normal>
+
+            <Button.Normal fitContent onClick={handleBasicUnclosable}>
+              Modal Unclosable
+            </Button.Normal>
+
+            <Button.Normal fitContent onClick={handleBeforeConfirm}>
+              Modal onBeforeConfirm
+            </Button.Normal>
+
+            <Button.Normal fitContent onClick={handleBeforeCancel}>
+              Modal onBeforeCancel
             </Button.Normal>
           </Space.Modifiers>
         </Space.Modifiers>

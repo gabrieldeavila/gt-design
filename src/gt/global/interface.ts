@@ -4,11 +4,31 @@ export interface IGLobalStyle {
   theme: GTTheme;
 }
 
+export type onClickType = (
+  e: React.MouseEvent<HTMLDivElement>
+) => void | Promise<void>;
+
+export type onChangeType = (
+  e: React.ChangeEvent<HTMLInputElement>
+) => void | Promise<void>;
+
+export type onFocusType = (
+  e: React.FocusEvent<HTMLInputElement>
+) => void | Promise<void>;
+
+export type onBlurType = (
+  e: React.FocusEvent<HTMLInputElement>
+) => void | Promise<void>;
+
+export type onKeyPressType = (
+  e: React.KeyboardEvent<HTMLInputElement>
+) => void | Promise<void>;
+
 export interface IGTHandlers {
   children: React.ReactNode | JSX.Element[];
-  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onClick?: onClickType;
+  onChange?: onChangeType;
+  onFocus?: onFocusType;
+  onBlur?: onBlurType;
+  onKeyPress?: onKeyPressType;
 }

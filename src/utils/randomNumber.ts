@@ -1,8 +1,6 @@
-interface IRandomNumber {
-  (min: number, max: number): number;
-}
+type randomType = (min: number, max: number) => number;
 
-const randomNumber: IRandomNumber = (min, max) =>
+const randomNumber: randomType = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
 
 export default randomNumber;

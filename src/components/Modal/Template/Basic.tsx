@@ -1,7 +1,8 @@
 /* eslint-disable object-curly-newline */
 import PropTypes from "prop-types";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import * as Icon from "react-feather";
+import { useTranslation } from "react-i18next";
 import useOnClickOutside from "../../../hooks/helpers/useOnClickOutside";
 import Button from "../../Button";
 import Space from "../../Space";
@@ -10,18 +11,84 @@ import { IGTModal } from "../interface";
 import Modal from "../Modal";
 
 function GTModalBasic({ show, setShow, data }: IGTModal) {
+  const { t } = useTranslation();
+
   const [isOpen, setIsOpen] = useState(true);
+  const [isLoadingConfirm, setIsLoadingConfirm] = useState(false);
+  const [isLoadingCancel, setIsLoadingCancel] = useState(false);
+
   const ref = useRef<HTMLDivElement>(null);
 
-  const handleClose = useCallback(() => {
+  const handleCloseAnimation = useCallback(() => {
     setIsOpen(false);
+
     setTimeout(() => {
       setShow(false);
       setIsOpen(true);
     }, 200);
   }, [setShow]);
 
-  useOnClickOutside(ref, null, handleClose);
+  const handleClose = useCallback(
+    (isComingFromHandlers?: boolean) => {
+      const isLoading = isLoadingConfirm || isLoadingCancel;
+      const isClosable =
+        !(data.closable ?? true) && !(isComingFromHandlers ?? false);
+
+      if (isClosable || isLoading) {
+        return;
+      }
+
+      handleCloseAnimation();
+
+      data.onClose?.();
+    },
+    [data, handleCloseAnimation, isLoadingCancel, isLoadingConfirm]
+  );
+
+  useOnClickOutside(ref, null, () => handleClose());
+
+  const handleCancel = useCallback(async () => {
+    const isComingFromHandlers = true;
+    setIsLoadingCancel(true);
+    const canClose = await data.onBeforeCancel?.();
+
+    if (canClose ?? true) {
+      handleClose(isComingFromHandlers);
+      data.onCancel?.();
+    }
+
+    setIsLoadingCancel(false);
+  }, [data, handleClose]);
+
+  const handleConfirm = useCallback(async () => {
+    const isComingFromHandlers = true;
+    setIsLoadingConfirm(true);
+    const canClose = await data.onBeforeConfirm?.();
+
+    if (canClose ?? true) {
+      handleClose(isComingFromHandlers);
+      data.onConfirm?.();
+    }
+
+    setIsLoadingConfirm(false);
+  }, [data, handleClose]);
+
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        handleClose();
+      }
+    },
+    [handleClose]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown, false);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown, false);
+    };
+  }, [handleKeyDown]);
 
   if (!show) return null;
 
@@ -34,27 +101,45 @@ function GTModalBasic({ show, setShow, data }: IGTModal) {
       <Modal.Wrapper ref={ref} isOpen={isOpen}>
         <Modal.Container>
           <Modal.Header>
-            <Text.H1>{data.title}</Text.H1>
-            <Modal.Close onClick={handleClose}>
-              <Icon.X />
-            </Modal.Close>
+            <Text.H1>{t(data.title)}</Text.H1>
+            {(data.closable ?? true) && (
+              <Modal.Close onClick={() => handleClose()}>
+                <Icon.X />
+              </Modal.Close>
+            )}
           </Modal.Header>
 
           <Modal.Main>
-            <Text.P>{data.content}</Text.P>
+            <Text.P>{t(data.content)}</Text.P>
           </Modal.Main>
 
-          <Modal.Footer>
-            <Space.Modifiers addOns={["flex-end", "gap-1"]}>
-              <Button.Error fitContent size="sm" onClick={handleClose}>
-                Close
-              </Button.Error>
+          {(data.cancelText != null || data.confirmText != null) && (
+            <Modal.Footer>
+              <Space.Modifiers addOns={["flex-end", "gap-1"]}>
+                {data.cancelText != null && (
+                  <Button.Error
+                    isLoading={isLoadingCancel}
+                    fitContent
+                    size="sm"
+                    onClick={handleCancel}
+                  >
+                    {t(data.cancelText)}
+                  </Button.Error>
+                )}
 
-              <Button.Success fitContent size="sm" onClick={handleClose}>
-                Confirm
-              </Button.Success>
-            </Space.Modifiers>
-          </Modal.Footer>
+                {data.confirmText != null && (
+                  <Button.Success
+                    isLoading={isLoadingConfirm}
+                    fitContent
+                    size="sm"
+                    onClick={handleConfirm}
+                  >
+                    {t(data.confirmText)}
+                  </Button.Success>
+                )}
+              </Space.Modifiers>
+            </Modal.Footer>
+          )}
         </Modal.Container>
       </Modal.Wrapper>
     </Modal.Content>

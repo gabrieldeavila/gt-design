@@ -14,13 +14,12 @@ export interface IModalData {
   orientationY?: orientationY;
   confirmText?: string;
   cancelText?: string;
-  closeDefault?: boolean;
-  escClose?: boolean;
-  footer?: React.ReactNode;
   closable?: boolean;
-  afterClose?: () => void;
+  onBeforeConfirm?: () => Promise<boolean>;
   onConfirm?: () => void;
+  onBeforeCancel?: () => Promise<boolean>;
   onCancel?: () => void;
+  onClose?: () => void;
 }
 
 export interface IGTModal {

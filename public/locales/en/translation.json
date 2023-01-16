@@ -73,7 +73,20 @@
       "SUBTITLE": "With a GTPageStateProvider, the only required step is to set the name and label of the input. It will handle the rest automatically."
     },
     "BUTTONS": {
-      "SUBTITLE": "The focus of the button is to work well both in desktop and mobile. For that reason, you always gotta define a width, otherwise, it's going to fit all of the available width!"
+      "SUBTITLE": "The button is designed to function optimally on both desktop and mobile devices."
+    },
+    "SPACE": {
+      "SUBTITLE": "A versatile tool for creating consistent spacing between elements on your application."
+    },
+    "TEXT": {
+      "SUBTITLE": "With its easy-to-use interface, you can quickly and easily add text to your application in a variety of styles and formats."
+    },
+    "MODAL_BASIC": {
+      "SUBTITLE": "It allows users to interact with specific content or complete a task without navigating away from the current page.",
+      "CONTENT": "This is a basic modal.",
+      "UNCLOSEABLE": "This is an uncloseable modal.",
+      "BEFORE_CONFIRM": "The onBeforeConfirm function is invoked prior to the execution of the onConfirm function. For now, it's set randomly to true or false.",
+      "BEFORE_CANCEL": "The onBeforeCancel function is invoked prior to the execution of the onCancel function. For now, it's set randomly to true or false."
     }
   }
 }
