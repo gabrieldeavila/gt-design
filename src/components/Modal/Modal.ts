@@ -2,7 +2,7 @@
 /* eslint-disable no-confusing-arrow */
 import { transparentize } from "polished";
 import styled, { css } from "styled-components";
-import { animations, flex, hovers, transforms } from "../../utils";
+import { animations, flex, hovers, scrolls, transforms } from "../../utils";
 import { IModal } from "./interface";
 
 // Y
@@ -118,6 +118,7 @@ const ModalClose = styled.button`
 
 const ModalMain = styled.main`
   padding: 0 1.5rem;
+  padding-right: 0.75rem;
   padding-top: 1.5rem;
   margin: 1.5rem 0;
   border-top: 1px solid ${(props) => transparentize(0.8, props.theme.contrast)};
@@ -128,6 +129,14 @@ const ModalFooter = styled.footer`
   padding: 1.5rem;
 `;
 
+const ModalMainWrapper = styled.div`
+  max-height: calc(100vh - 22rem);
+  overflow: auto;
+  padding-right: 0.75rem;
+
+  ${scrolls.default}
+`;
+
 export default {
   Content: ModalContent,
   Wrapper: ModalWrapper,
@@ -136,4 +145,5 @@ export default {
   Close: ModalClose,
   Main: ModalMain,
   Footer: ModalFooter,
+  MainWrapper: ModalMainWrapper,
 };

@@ -110,7 +110,9 @@ function GTModalBasic({ show, setShow, data }: IGTModal) {
           </Modal.Header>
 
           <Modal.Main>
-            <Text.P>{t(data.content)}</Text.P>
+            <Modal.MainWrapper>
+              <Text.P>{t(data.content)}</Text.P>
+            </Modal.MainWrapper>
           </Modal.Main>
 
           {(data.cancelText != null || data.confirmText != null) && (

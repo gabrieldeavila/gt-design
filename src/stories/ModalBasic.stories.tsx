@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React, { useCallback, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button, Space } from "../components";
 import { IModalData } from "../components/Modal/interface";
 import GTModalBasic from "../components/Modal/Template/Basic";
@@ -12,6 +13,8 @@ export default {
 };
 
 const Template = () => {
+  const { t } = useTranslation();
+
   const [showModalBasic, setShowModalBasic] = useState(false);
   const modalData = useRef<IModalData>({
     title: "Modal Basic",
@@ -157,6 +160,17 @@ const Template = () => {
     setShowModalBasic(true);
   }, []);
 
+  const handleALotOfContent = useCallback(() => {
+    modalData.current = {
+      content: "STORIES.MODAL_BASIC.A_LOT_OF_CONTENT",
+      title: "Modal OnBeforeCancel",
+      cancelText: "Cancel",
+      confirmText: "Confirm",
+    };
+
+    setShowModalBasic(true);
+  }, []);
+
   return (
     <GTBasic>
       <Space.Horizontal>
@@ -204,6 +218,10 @@ const Template = () => {
 
             <Button.Normal fitContent onClick={handleBeforeCancel}>
               Modal onBeforeCancel
+            </Button.Normal>
+
+            <Button.Normal fitContent onClick={handleALotOfContent}>
+              {t("STORIES.MODAL_BASIC.A_LOT_OF_CONTENT_BTN")}
             </Button.Normal>
           </Space.Modifiers>
         </Space.Modifiers>
