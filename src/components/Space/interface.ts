@@ -99,6 +99,7 @@ type addOns =
 
 export interface ISpace extends SpaceProps, ColorProps, LayoutProps {
   addOns?: addOns[];
+  teste?: addOns;
 }
 
 export interface ISpaceModifiers extends ISpace {

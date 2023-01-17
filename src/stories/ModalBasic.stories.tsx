@@ -163,7 +163,7 @@ const Template = () => {
   const handleALotOfContent = useCallback(() => {
     modalData.current = {
       content: "STORIES.MODAL_BASIC.A_LOT_OF_CONTENT",
-      title: "Modal OnBeforeCancel",
+      title: "STORIES.MODAL_BASIC.A_LOT_OF_CONTENT_BTN",
       cancelText: "Cancel",
       confirmText: "Confirm",
     };

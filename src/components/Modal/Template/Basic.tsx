@@ -84,6 +84,10 @@ function GTModalBasic({ show, setShow, data }: IGTModal) {
 
   // removes scrolls from body when modal is open
   useEffect(() => {
+    // verifies if there is a scrollbar
+    const hasScrollbar = document.body.scrollHeight > window.innerHeight;
+    if (!hasScrollbar) return;
+
     if (show) {
       document.body.style.overflow = "hidden";
       // add in px to avoid scroll jump

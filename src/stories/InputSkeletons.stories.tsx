@@ -15,16 +15,6 @@ export default {
       default: false,
     },
   },
-
-  // add description to the isloading arg
-  parameters: {
-    docs: {
-      description: {
-        component:
-          "Skeleton components that show when the page is loading. You only need to pass if it is loading or not. The rest is handled by the context.",
-      },
-    },
-  },
 };
 
 const Template = ({ isLoading }: { isLoading: boolean }) => {
