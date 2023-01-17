@@ -116,7 +116,7 @@ function GTModalBasic({ show, setShow, data }: IGTModal) {
       currOrientationY={data.orientationY}
     >
       <Modal.Wrapper ref={ref} isOpen={isOpen}>
-        <Modal.Container>
+        {/* <Modal.Container> */}
           <Modal.Header>
             <Text.H1>{t(data.title)}</Text.H1>
             {(data.closable ?? true) && (
@@ -159,7 +159,7 @@ function GTModalBasic({ show, setShow, data }: IGTModal) {
               </Space.Modifiers>
             </Modal.Footer>
           )}
-        </Modal.Container>
+        {/* </Modal.Container> */}
       </Modal.Wrapper>
     </Modal.Content>
   );

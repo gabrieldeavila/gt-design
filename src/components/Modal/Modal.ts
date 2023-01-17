@@ -81,9 +81,13 @@ const ModalContent = styled.div<IModal>`
 
     return orientationXOpts[pos];
   }}
-`;
 
-const ModalContainer = styled.div``;
+
+  /* when is mobile, it removes the padding */
+  @media (max-width: 768px) {
+    padding: 0;
+  }
+`;
 
 const ModalWrapper = styled.div<IModal>`
   min-width: 35vw;
@@ -95,6 +99,19 @@ const ModalWrapper = styled.div<IModal>`
   background: ${(props) => props.theme.primary};
   border-radius: 0.25rem;
   overflow: hidden;
+
+  /* when is mobile, it fits all the available space */
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
 `;
 
 const ModalHeader = styled.div`
@@ -102,6 +119,11 @@ const ModalHeader = styled.div`
   padding-bottom: 0;
 
   ${flex.justifyBetween}
+
+  /* when it's mobile, it height is 20% */
+  @media (max-width: 768px) {
+    height: fit-content;
+  }
 `;
 
 const ModalClose = styled.button`
@@ -122,6 +144,11 @@ const ModalMain = styled.main`
   padding-top: 1.5rem;
   margin: 1.5rem 0;
   border-top: 1px solid ${(props) => transparentize(0.8, props.theme.contrast)};
+
+  /* when it's mobile, it height is 60% less the 4.5rem */
+  @media (max-width: 768px) {
+    height: calc(70% - 5rem);
+  }
 `;
 
 const ModalFooter = styled.footer`
@@ -135,12 +162,15 @@ const ModalMainWrapper = styled.div`
   padding-right: 0.75rem;
 
   ${scrolls.default}
+
+  @media (max-width: 768px) {
+    max-height: 100%;
+  }
 `;
 
 export default {
   Content: ModalContent,
   Wrapper: ModalWrapper,
-  Container: ModalContainer,
   Header: ModalHeader,
   Close: ModalClose,
   Main: ModalMain,
