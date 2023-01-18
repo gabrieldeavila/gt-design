@@ -11,7 +11,8 @@ import {
   IInputContainer,
   IInputField,
   IInputLabel,
-  ISelectValue
+  ISelectOptionWrapper,
+  ISelectValue,
 } from "./interface";
 
 const InputWrapper = styled.div`
@@ -196,9 +197,9 @@ const Input = {
 
 export default Input;
 
-const SelectOptionsWrapper = styled.div`
+const SelectOptionsWrapper = styled.div<ISelectOptionWrapper>`
   position: absolute;
-  top: 100%;
+  top: ${({ isTop }) => (isTop ?? false ? "-190px" : "100%")};
   left: 0;
   right: 0;
   z-index: 1;

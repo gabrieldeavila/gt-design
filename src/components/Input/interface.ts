@@ -23,3 +23,7 @@ export interface IInputLabel {
   isWrong: boolean;
   up: boolean;
 }
+
+export interface ISelectOptionWrapper {
+  isTop?: boolean;
+}

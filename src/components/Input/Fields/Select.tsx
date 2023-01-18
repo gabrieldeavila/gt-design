@@ -148,7 +148,7 @@ function GTInputSelect({
     const hasFocus =
       containerRef.current?.contains(document.activeElement) ?? false;
     if (!showOptions && hasFocus) {
-      // discover if ref has focus
+      // discovers if ref has focus
       setShowOptions(true);
     }
   }, [showOptions]);
@@ -322,8 +322,24 @@ const SelectOptions = memo(function SelectOptions({ options }: ISelectOptions) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredOptions, setPreSelected]);
 
+  const [isTop, setIsTop] = useState(false);
+
+  // checks if the container should be on top or bottom
+  useEffect(() => {
+    if (selectRef.current != null) {
+      const { top, height } = selectRef.current.getBoundingClientRect();
+      console.log(top + height, window.innerHeight);
+
+      if (top + height > window.innerHeight) {
+        setIsTop(true);
+      } else {
+        setIsTop(false);
+      }
+    }
+  }, []);
+
   return (
-    <Select.OptionsWrapper>
+    <Select.OptionsWrapper isTop={isTop}>
       <Select.OptionsContainer ref={selectRef}>
         {filteredOptions.map((option, index) => (
           <SelectOption

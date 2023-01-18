@@ -61,7 +61,9 @@
       "SUBTITLE": "Passe o mouse sobre o input para ver o ícone 'i' e sobre ele para ver o tooltip."
     },
     "SKELETONS": {
-      "SUBTITLE": "Para usar o Skeleton, basta passar o isLoading como true no GTPageStateProvider.",
+      "INPUTS": {
+        "SUBTITLE": "Para usar o Skeleton, basta passar o isLoading como true no GTPageStateProvider."
+      },
       "BOXES": {
         "SUBTITLE": "A propriedade 'isLoading' permite o carregamento dinâmico de conteúdo dentro do componente."
       }

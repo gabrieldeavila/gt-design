@@ -40,8 +40,8 @@ const Template = ({ isLoading }: { isLoading: boolean }) => {
       >
         <Space.Horizontal>
           <SectionContainer
-            title="Skeletons"
-            subtitle="STORIES.SKELETONS.SUBTITLE"
+            title="Inputs"
+            subtitle="STORIES.SKELETONS.INPUTS.SUBTITLE"
           />
           <Input.Group>
             <GTInput.Select

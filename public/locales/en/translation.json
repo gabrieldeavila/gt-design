@@ -61,7 +61,9 @@
       "SUBTITLE": "Hover the input to see the icon 'i' and hover it to see the tooltip."
     },
     "SKELETONS": {
-      "SUBTITLE": "To display a loading input, set the value of isLoading to true in the GTPageStateProvider.",
+      "INPUTS": {
+        "SUBTITLE": "To display a loading input, set the value of isLoading to true in the GTPageStateProvider."
+      },
       "BOXES": {
         "SUBTITLE": "The 'isLoading' prop allows for dynamic loading of content within the component."
       }
