@@ -1,9 +1,10 @@
 import { getLuminance, transparentize } from "polished";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { color } from "styled-system";
 import flex from "../../utils/flex";
 import hovers from "../../utils/hovers";
 import shadows from "../../utils/shadows";
+import skeletons from "../../utils/skeletons";
 import {
   IBoxContainer,
   IBoxWrapper,
@@ -41,22 +42,29 @@ const BoxContainer = styled.div<IBoxContainer>`
   margin: 1rem;
   padding: 3rem;
   border-radius: 0.25rem;
-  ${flex.wrapGap};
-  ${flex.column};
-  ${shadows.simple}; // which one is better?
-  /* box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25); */
-  ${color}
   background-color: ${({ bg, theme }) =>
     transparentize(0.45, bg ?? theme.primary)};
   backdrop-filter: blur(15px);
   cursor: pointer;
   height: -webkit-fill-available;
-  ${hovers.scaleTransYOpacity}
+  overflow: hidden;
+  ${hovers.scaleTransYOpacity};
+  ${flex.wrapGap};
+  ${flex.column};
+  ${shadows.simple};
+  ${color}
 
   /* add contrast to children */
   & > * {
     color: ${handleColorContrast};
   }
+
+  ${({ isLoading }) =>
+    (isLoading ?? false) &&
+    css`
+      ${skeletons.after};
+      cursor: wait;
+    `}
 `;
 
 const BoxColumn = styled.div`

@@ -16,4 +16,9 @@ export type IHandleColorContrastReturn = string;
 export interface IBoxContainer {
   bg?: string;
   theme: GTTheme;
+  isLoading?: boolean;
+}
+
+export interface IBoxLoadingGroup {
+  boxes: number;
 }

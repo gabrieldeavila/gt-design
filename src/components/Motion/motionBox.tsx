@@ -6,7 +6,7 @@ import randomNumber from "../../utils/randomNumber";
 import Box from "../Box/Box";
 import { IMotionBox } from "./interface";
 
-function MotionBox({ bg, children }: IMotionBox) {
+function MotionBox({ bg, children, isLoading }: IMotionBox) {
   const control = useAnimation();
   const ref = useRef(null);
   const isInView = useInView(ref);
@@ -41,7 +41,9 @@ function MotionBox({ bg, children }: IMotionBox) {
         initial="hidden"
         animate={control}
       >
-        <Box.Container bg={bg}>{children}</Box.Container>
+        <Box.Container bg={bg} isLoading={isLoading}>
+          {children}
+        </Box.Container>
       </Motion.Container>
     </Motion.Wrapper>
   );

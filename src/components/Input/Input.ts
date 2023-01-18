@@ -5,6 +5,7 @@ import styled, { css } from "styled-components";
 import { hovers, scrolls, shadows } from "../../utils";
 import animations from "../../utils/animations";
 import flex from "../../utils/flex";
+import skeletons from "../../utils/skeletons";
 import {
   IIconWrapper,
   IInputContainer,
@@ -35,24 +36,7 @@ const loadingInput = css`
   min-height: 3.5rem;
   cursor: wait;
 
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    transform: translateX(-80%);
-    background-image: linear-gradient(
-      90deg,
-      ${({ theme }) => transparentize(1, theme.secondary)} 0,
-      ${({ theme }) => transparentize(0.2, theme.secondary)} 20%,
-      ${({ theme }) => transparentize(0.8, theme.secondary)} 60%,
-      ${({ theme }) => transparentize(1, theme.secondary)}
-    );
-    animation: skeleton 1s linear infinite;
-    ${animations.skeleton}
-  }
+  ${skeletons.after}
 `;
 
 const iconCenter = css`
@@ -94,7 +78,7 @@ const InputContainer = styled.div<IInputContainer>`
 
   border-radius: 0.25rem;
   box-shadow: 0 0 0 0.15rem ${(props) => transparentize(1, props.theme.outline)};
-  
+
   &:focus-within {
     box-shadow: 0 0 0 0.25rem
       ${(props) => transparentize(0.5, props.theme.outline)};
