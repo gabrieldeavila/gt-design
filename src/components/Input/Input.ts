@@ -199,7 +199,7 @@ export default Input;
 
 const SelectOptionsWrapper = styled.div<ISelectOptionWrapper>`
   position: absolute;
-  top: ${({ isTop }) => (isTop ?? false ? "-190px" : "100%")};
+  bottom: ${({ isTop }) => (isTop ?? false ? "60px" : "100%")};
   left: 0;
   right: 0;
   z-index: 1;
@@ -222,6 +222,7 @@ const SelectOptionsContainer = styled.div`
 const SelectValue = styled.div<ISelectValue>`
   width: -webkit-fill-available;
   max-width: 100%;
+  max-height: 1rem;
   font-size: 0.75rem;
   padding: 1rem;
   background: ${(props) => props.theme.secondary};
@@ -239,10 +240,10 @@ const SelectValue = styled.div<ISelectValue>`
   }
 
   ${({ isSelected, isPreSelected, theme }) => css`
-    background: ${isSelected
-      ? theme.secondary
-      : isPreSelected
+    background: ${isPreSelected
       ? theme.preSelectColor
+      : isSelected
+      ? theme.secondary
       : transparentize(0.7, theme.secondary)};
   `}
 `;

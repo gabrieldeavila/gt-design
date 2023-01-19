@@ -181,6 +181,7 @@ function GTInputSelect({
           setSelected,
           preSelected,
           setPreSelected,
+          containerRef,
         }}
       >
         <Input.Container
@@ -251,8 +252,13 @@ GTInputSelect.defaultProps = {
 };
 
 const SelectOptions = memo(function SelectOptions({ options }: ISelectOptions) {
-  const { searchTerm, preSelected, setPreSelected, handleSelect } =
-    useContext<ISelectContext>(SelectContext);
+  const {
+    searchTerm,
+    preSelected,
+    setPreSelected,
+    handleSelect,
+    containerRef,
+  } = useContext<ISelectContext>(SelectContext);
 
   const filteredOptions = useMemo(
     () => wordFilter(options, searchTerm ?? ""),
@@ -289,6 +295,7 @@ const SelectOptions = memo(function SelectOptions({ options }: ISelectOptions) {
 
         // if the key is enter
         if (e.key === "Enter") {
+          e.preventDefault();
           // get the selected option
           const selectedOption = filteredOptions[newValue];
           // sets the selected option
@@ -322,21 +329,28 @@ const SelectOptions = memo(function SelectOptions({ options }: ISelectOptions) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredOptions, setPreSelected]);
 
-  const [isTop, setIsTop] = useState(false);
+  const [isTop, setIsTop] = useState<undefined | boolean>(undefined);
 
   // checks if the container should be on top or bottom
   useEffect(() => {
-    if (selectRef.current != null) {
-      const { top, height } = selectRef.current.getBoundingClientRect();
-      console.log(top + height, window.innerHeight);
+    if (containerRef?.current != null) {
+      const { top } = containerRef.current?.getBoundingClientRect();
 
-      if (top + height > window.innerHeight) {
+      // by default, the options wrapper width is 10rem, so 300px gives a little bit of space
+      const isHittingBottom = top + 300 > window.innerHeight;
+      // it avoids to show the options on top if the container is too close to the top
+      const isHittingTop = top - 300 < 0;
+
+      if (isHittingBottom && !isHittingTop) {
         setIsTop(true);
       } else {
         setIsTop(false);
       }
     }
-  }, []);
+  }, [containerRef]);
+
+  // avoids the flickering
+  if (isTop === undefined) return null;
 
   return (
     <Select.OptionsWrapper isTop={isTop}>

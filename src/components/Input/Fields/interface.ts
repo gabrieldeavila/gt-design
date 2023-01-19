@@ -75,4 +75,5 @@ export interface ISelectContext {
   setSelected?: React.Dispatch<React.SetStateAction<string | number>>;
   preSelected: number;
   setPreSelected?: React.Dispatch<React.SetStateAction<number>>;
+  containerRef?: React.RefObject<HTMLDivElement>;
 }

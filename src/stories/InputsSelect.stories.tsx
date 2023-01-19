@@ -7,7 +7,7 @@ import { GTBasic } from "../gt";
 export default {
   title: "Data Entry/Inputs/Select",
   args: {
-    isLoading: true,
+    position: "bottom",
   },
   argTypes: {
     position: {
