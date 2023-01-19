@@ -113,7 +113,9 @@ const InputContainer = styled.div<IInputContainer>`
 `;
 
 const InputGroup = styled.form`
-  ${flex.wrapGap}
+  width: -webkit-fill-available;
+
+  ${flex.wrapGap};
   gap: 1.75rem;
   flex-direction: row;
 `;
@@ -197,9 +199,20 @@ const Input = {
 
 export default Input;
 
+const getSelectionPosition = (isTop?: boolean) => {
+  if (isTop ?? false) {
+    return css`
+      bottom: 60px;
+    `;
+  }
+
+  return css`
+    top: 100%;
+  `;
+};
+
 const SelectOptionsWrapper = styled.div<ISelectOptionWrapper>`
   position: absolute;
-  bottom: ${({ isTop }) => (isTop ?? false ? "60px" : "100%")};
   left: 0;
   right: 0;
   z-index: 1;
@@ -208,6 +221,8 @@ const SelectOptionsWrapper = styled.div<ISelectOptionWrapper>`
   padding: 0.5rem;
   margin-top: 0.25rem;
   ${shadows.basic}
+
+  ${({ isTop }) => getSelectionPosition(isTop)}
 `;
 
 const SelectOptionsContainer = styled.div`

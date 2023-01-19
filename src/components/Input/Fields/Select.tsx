@@ -340,6 +340,7 @@ const SelectOptions = memo(function SelectOptions({ options }: ISelectOptions) {
       const isHittingBottom = top + 300 > window.innerHeight;
       // it avoids to show the options on top if the container is too close to the top
       const isHittingTop = top - 300 < 0;
+      console.log(isHittingBottom, isHittingTop);
 
       if (isHittingBottom && !isHittingTop) {
         setIsTop(true);
