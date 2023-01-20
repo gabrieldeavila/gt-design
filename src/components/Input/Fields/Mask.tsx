@@ -17,11 +17,11 @@ import useValidateNumber from "../../../hooks/validation/useValidateNumber";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import GTTooltip from "../../Tooltip/Tooltip";
 import Input from "../Input";
-import { IGTInputNumericMask } from "./interface";
+import { IGTInputMask } from "./interface";
 
 const defaultValidationObj = ["required"];
 
-function GTInputNumericMask({
+function GTInputMask({
   name,
   label,
   validations,
@@ -33,7 +33,7 @@ function GTInputNumericMask({
   min,
   max,
   mask,
-}: IGTInputNumericMask) {
+}: IGTInputMask) {
   const { t } = useTranslation();
 
   const { isLoading } = useGTPageStateContextSetters();
@@ -164,9 +164,9 @@ function GTInputNumericMask({
   );
 }
 
-export default GTInputNumericMask;
+export default GTInputMask;
 
-GTInputNumericMask.propTypes = {
+GTInputMask.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func,
@@ -174,7 +174,7 @@ GTInputNumericMask.propTypes = {
   defaultValidation: PropTypes.bool,
 };
 
-GTInputNumericMask.defaultProps = {
+GTInputMask.defaultProps = {
   onChange: () => {},
   validations: defaultValidationObj,
   defaultValidation: true,

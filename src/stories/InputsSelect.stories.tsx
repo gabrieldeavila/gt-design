@@ -54,7 +54,7 @@ const Template = ({ position }: { position: "top" | "bottom" }) => {
             subtitle="STORIES.INPUTS.SELECT.SUBTITLE"
           />
           <Space.Modifiers mt={currPos} addOns={["middle"]}>
-            <Input.Group className="ladrao-e-vacilao">
+            <Input.Group>
               <GTInput.Select
                 row={6}
                 title="🐲"

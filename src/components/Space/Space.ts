@@ -41,6 +41,11 @@ const Horizontal = styled.div<ISpace>`
   ${space};
   ${color};
   ${layout};
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    padding-bottom: 5rem;
+  }
 `;
 
 const MiddleCenter = styled(SpaceBase)`

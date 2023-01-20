@@ -42,17 +42,16 @@ const BoxContainer = styled.div<IBoxContainer>`
   margin: 1rem;
   padding: 3rem;
   border-radius: 0.25rem;
+  ${flex.wrapGap};
+  ${flex.column};
+  ${shadows.simple};
+  ${color};
   background-color: ${({ bg, theme }) =>
     transparentize(0.45, bg ?? theme.primary)};
   backdrop-filter: blur(15px);
   cursor: pointer;
   height: -webkit-fill-available;
-  overflow: hidden;
-  ${hovers.scaleTransYOpacity};
-  ${flex.wrapGap};
-  ${flex.column};
-  ${shadows.simple};
-  ${color}
+  ${hovers.scaleTransYOpacity}
 
   /* add contrast to children */
   & > * {

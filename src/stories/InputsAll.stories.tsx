@@ -99,7 +99,7 @@ const Template = () => {
               label="EXAMPLE.NUMBER"
             />
 
-            <GTInput.NumericMask
+            <GTInput.Mask
               title="（⊙ｏ⊙）"
               row={5}
               name="price"
@@ -107,7 +107,7 @@ const Template = () => {
               mask={moneyMask}
             />
 
-            <GTInput.NumericMask
+            <GTInput.Mask
               text="←_←"
               row={5}
               name="percent"
@@ -116,7 +116,7 @@ const Template = () => {
               mask={percentMask}
             />
 
-            <GTInput.NumericMask
+            <GTInput.Mask
               title="(((φ(◎ロ◎;)φ)))"
               row={5}
               name="doc"
@@ -124,7 +124,7 @@ const Template = () => {
               mask={docMask}
             />
 
-            <GTInput.NumericMask
+            <GTInput.Mask
               text="┌( ´_ゝ` )┐"
               row={5}
               name="phone"
