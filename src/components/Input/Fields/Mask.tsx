@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useMask from "../../../hooks/pageState/useMask";
-import useValidateNumber from "../../../hooks/validation/useValidateNumber";
+import useValidateMask from "../../../hooks/validation/useValidateMask";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import GTTooltip from "../../Tooltip/Tooltip";
 import Input from "../Input";
@@ -30,8 +30,6 @@ function GTInputMask({
   text,
   title,
   row,
-  min,
-  max,
   mask,
 }: IGTInputMask) {
   const { t } = useTranslation();
@@ -55,8 +53,8 @@ function GTInputMask({
 
   const { maskedValue, unMask } = useMask(value, mask, inpRef);
 
-  const { validateNumber } = useValidateNumber(min, max);
-  const [isValidNumber, setIsValidNumber] = useState(true);
+  const { validateMask } = useValidateMask();
+  const [isValidMask, setIsValidMask] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [localeErrorsParams, setLocaleErrorsParams] = useState({});
 
@@ -64,9 +62,9 @@ function GTInputMask({
     const chars = value.toString();
     if (chars.length === 0) return;
 
-    const { isValid, invalidMessage } = validateNumber(chars, inputValidations);
+    const { isValid, invalidMessage } = validateMask(chars, inputValidations);
 
-    setIsValidNumber(isValid);
+    setIsValidMask(isValid);
     setErrorMessage(invalidMessage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -75,13 +73,13 @@ function GTInputMask({
     (e: any) => {
       const { value: iVal } = e.target;
       const unMaskedVal = unMask(iVal);
-      const { isValid, invalidMessage, errorsVar } = validateNumber(
+      const { isValid, invalidMessage, errorsVar } = validateMask(
         unMaskedVal.toString(),
         inputValidations
       );
 
       validateState(isValid, unMaskedVal);
-      setIsValidNumber(isValid);
+      setIsValidMask(isValid);
       setErrorMessage(invalidMessage);
       setLocaleErrorsParams(errorsVar);
       handleInputChange(unMaskedVal.toString());
@@ -90,7 +88,7 @@ function GTInputMask({
     },
     [
       unMask,
-      validateNumber,
+      validateMask,
       inputValidations,
       validateState,
       handleInputChange,
@@ -128,7 +126,6 @@ function GTInputMask({
   return (
     <>
       <Input.Container row={row}>
-        {/* TO DO: ADD VALIDATIONS TO NUMERIC MAS AND CHANGES ITS NAME TO MASK ONLY BECAUSE WE DONT HAVE TWO TYPES OF MASKS */}
         <Input.Label isWrong={false} up htmlFor={name}>
           {t(label)}
         </Input.Label>
@@ -144,7 +141,7 @@ function GTInputMask({
           autoComplete="off"
         />
 
-        {!isValidNumber && (
+        {!isValidMask && (
           <Input.Error>
             {t(`NUMBER.${errorMessage}`, localeErrorsParams)}
           </Input.Error>

@@ -42,9 +42,8 @@ export type TNumericOptions = INumericMask | INonNumericMask;
 
 export interface IGTInputMask extends IGTInput {
   mask: TNumericOptions;
-  min?: number | string;
-  max?: number | string;
 }
+
 export interface IGTInputPassword extends IGTInput {
   sameAs?: string;
 }
