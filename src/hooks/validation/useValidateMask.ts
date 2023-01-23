@@ -15,7 +15,7 @@ function useValidateMask(mask: TNumericOptions) {
 
   const validateMask = useCallback(
     (value: string, validations: string[]) => {
-      const { isValid, invalidMessage } = optionsValidation(
+      let { isValid, invalidMessage } = optionsValidation(
         validations,
         options,
         value,
@@ -37,6 +37,13 @@ function useValidateMask(mask: TNumericOptions) {
             errorsVar: { MIN: mask.min },
           };
         }
+      } else if (mask.type === "non_numeric_mask" && mask?.onMaskChange) {
+        // removes all the underlines of the value:
+        const newValue = value.replace(/_/g, "");
+
+        const { isValidMask, invalidMessageMask } = mask.onMaskChange(newValue);
+        isValid = isValidMask;
+        invalidMessage = invalidMessageMask;
       }
 
       return { isValid, invalidMessage, errorsVar: {} };

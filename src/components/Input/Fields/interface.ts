@@ -38,6 +38,10 @@ export interface INumericMask {
 export interface INonNumericMask {
   type: "non_numeric_mask";
   options: string[];
+  onMaskChange?: (value: string) => {
+    isValidMask: boolean;
+    invalidMessageMask: string;
+  };
 }
 
 export type TNumericOptions = INumericMask | INonNumericMask;
