@@ -53,7 +53,7 @@ function GTInputMask({
 
   const { maskedValue, unMask } = useMask(value, mask, inpRef);
 
-  const { validateMask } = useValidateMask();
+  const { validateMask } = useValidateMask(mask);
   const [isValidMask, setIsValidMask] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [localeErrorsParams, setLocaleErrorsParams] = useState({});

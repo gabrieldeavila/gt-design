@@ -22,6 +22,8 @@ const Template = () => {
     integerLimit: 7,
     allowNegative: true,
     type: "numeric_mask",
+    min: 57,
+    max: 522,
   };
 
   return (
@@ -44,6 +46,7 @@ const Template = () => {
               name="price"
               label="Money"
               mask={moneyMask}
+              min={10}
             />
           </Input.Group>
         </Space.Horizontal>
