@@ -50,6 +50,9 @@ export interface IGTInputMask extends IGTInput {
   mask: TNumericOptions;
   min?: number | string;
   max?: number | string;
+  onBlurValidate?: (
+    value: string | number
+  ) => [boolean, string] | Promise<[boolean, string]>;
 }
 
 export interface IGTInputPassword extends IGTInput {

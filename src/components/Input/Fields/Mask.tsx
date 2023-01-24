@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable operator-linebreak */
 import PropTypes from "prop-types";
@@ -31,6 +32,7 @@ function GTInputMask({
   title,
   row,
   mask,
+  onBlurValidate,
 }: IGTInputMask) {
   const { t } = useTranslation();
 
@@ -52,6 +54,8 @@ function GTInputMask({
   const inpRef = useRef<HTMLInputElement>(null);
 
   const { maskedValue, unMask } = useMask(value, mask, inpRef);
+
+  const alterFieldRef = useRef<boolean>(true);
 
   const { validateMask } = useValidateMask(mask);
   const [isValidMask, setIsValidMask] = useState(true);
@@ -85,6 +89,7 @@ function GTInputMask({
       handleInputChange(unMaskedVal.toString());
 
       onChange(e);
+      alterFieldRef.current = true;
     },
     [
       unMask,
@@ -117,6 +122,24 @@ function GTInputMask({
     }
   }, [handleInputFocus, mask]);
 
+  const handleMaskBlurErrors = useCallback(async () => {
+    const [hasError, errorMessage] = (await onBlurValidate?.(value)) ?? [];
+
+    validateState(!hasError, value);
+    setIsValidMask(!hasError);
+    setErrorMessage(errorMessage ?? "");
+  }, [onBlurValidate, validateState, value]);
+
+  const handleBlur = useCallback(() => {
+    handleInputBlur();
+
+    if (alterFieldRef.current) {
+      handleMaskBlurErrors().catch((e) => console.error(e));
+    }
+
+    alterFieldRef.current = false;
+  }, [handleInputBlur, handleMaskBlurErrors]);
+
   const containerRef = useRef<HTMLDivElement>(null);
 
   if (isLoading ?? false) {
@@ -134,7 +157,7 @@ function GTInputMask({
           type="text"
           value={maskedValue}
           onChange={handleChange}
-          onBlur={handleInputBlur}
+          onBlur={handleBlur}
           onFocus={handleFocus}
           id={name}
           name={name}

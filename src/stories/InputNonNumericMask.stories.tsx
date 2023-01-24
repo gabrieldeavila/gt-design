@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from "react";
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+import React, { useCallback, useEffect, useState } from "react";
 import { GTInput, Input, Space } from "../components";
 import { INonNumericMask } from "../components/Input/Fields/interface";
 import SectionContainer from "../components/Text/Template/SectionContainer";
@@ -34,6 +35,58 @@ function testCPF(strCPF: string) {
   return true;
 }
 
+export function cnpjValidation(value: string) {
+  if (value.length === 0) return false;
+
+  const isString = typeof value === "string";
+  const validTypes =
+    isString || Number.isInteger(value) || Array.isArray(value);
+
+  if (!validTypes) return false;
+
+  if (isString) {
+    if (value.length > 18) return false;
+
+    const digitsOnly = /^\d{14}$/.test(value);
+    const validFormat = /^\d{2}.\d{3}.\d{3}\/\d{4}-\d{2}$/.test(value);
+
+    if (digitsOnly || validFormat) true;
+    else return false;
+  }
+
+  const match = value.toString().match(/\d/g);
+  const numbers = Array.isArray(match) ? match.map(Number) : [];
+
+  if (numbers.length !== 14) return false;
+  // @ts-expect-error
+  const items = [...new Set(numbers)];
+  if (items.length === 1) return false;
+
+  const calc = (x: any) => {
+    const slice = numbers.slice(0, x);
+    let factor = x - 7;
+    let sum = 0;
+
+    for (let i = x; i >= 1; i--) {
+      const n = slice[x - i];
+      sum += n * factor--;
+      if (factor < 2) factor = 9;
+    }
+
+    const result = 11 - (sum % 11);
+
+    return result > 9 ? 0 : result;
+  };
+
+  const digits = numbers.slice(12);
+
+  const digit0 = calc(12);
+  if (digit0 !== digits[0]) return false;
+
+  const digit1 = calc(13);
+  return digit1 === digits[1];
+}
+
 const Template = () => {
   const [pageState, setPageState] = useState({});
   const [errors, setErrors] = useState<string[]>([]);
@@ -47,6 +100,10 @@ const Template = () => {
       // checks if it is a valid cpf
       isValidMask = testCPF(value);
       invalidMessageMask = !isValidMask ? "CPF ERRADO!!" : "";
+    } else {
+      // checks if it is a valid cnpj
+      isValidMask = cnpjValidation(value);
+      invalidMessageMask = !isValidMask ? "CNPJ ERRADO!!" : "";
     }
 
     return { isValidMask, invalidMessageMask };
@@ -57,6 +114,22 @@ const Template = () => {
     type: "non_numeric_mask",
     onMaskChange: handleDocChange,
   };
+
+  const handleBlurValidate = useCallback(
+    async (value: string | number): Promise<[boolean, string]> => {
+      return await new Promise((resolve) => {
+        setTimeout(() => {
+          const trueOrFalse = Math.random() >= 0.5;
+          resolve([trueOrFalse, "data"]);
+        }, 2000);
+      });
+    },
+    []
+  );
+
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
 
   return (
     <GTBasic>
@@ -79,6 +152,7 @@ const Template = () => {
               label="Doc"
               mask={docMask}
               min={10}
+              onBlurValidate={handleBlurValidate}
             />
           </Input.Group>
         </Space.Horizontal>
