@@ -16,7 +16,6 @@ import {
 } from "./interface";
 
 const InputWrapper = styled.div`
-  ${flex.wrapGap}
   gap: 1.75rem;
 `;
 
@@ -40,33 +39,16 @@ const loadingInput = css`
   ${skeletons.after}
 `;
 
-const iconCenter = css`
-  top: 1.25rem;
-  right: 0.5rem;
-`;
-
-const topRight = css`
-  right: 2.5rem;
-  top: 1.2rem;
-`;
-
-const types = {
-  center: iconCenter,
-  top_right: topRight,
-};
-
-const IconWrapper = styled.div<IIconWrapper>`
-  position: absolute;
+const InputIconWrapper = styled.div<IIconWrapper>`
+  display: flex;
   opacity: ${({ showOpacity }) => (showOpacity ?? false ? 1 : 0)};
-  ${({ type }) => types[type]};
 `;
 
 const InputContainer = styled.div<IInputContainer>`
   ${getRowWidth}
-  flex-grow: 1;
+  display: flex;
 
-  ${flex.column}
-  gap: 0.5rem;
+  flex-grow: 1;
   position: relative;
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -86,7 +68,7 @@ const InputContainer = styled.div<IInputContainer>`
       ${(props) => transparentize(0.5, props.theme.outline)};
   }
 
-  &:hover ${IconWrapper} {
+  &:hover ${InputIconWrapper} {
     opacity: 1;
   }
 
@@ -126,11 +108,10 @@ const InputField = styled.input<IInputField>`
   height: 2.5rem;
   outline: none;
   border-radius: 0.25rem;
-  padding: 0 0.5rem;
   padding-top: 1rem;
-  padding-right: 2.5rem;
   border: none;
   color: ${(props) => props.theme.contrast};
+  background-color: transparent;
 
   /* changes the placeholder color */
   &::placeholder {
@@ -182,9 +163,22 @@ const InputError = styled.span`
   position: absolute;
   font-size: 0.65rem;
   color: ${(props) => props.theme.errorColor};
-  top: 100%;
+  top: 105%;
   margin-top: 0.15rem;
   padding: 0 0.5rem;
+`;
+
+const InputFieldWrapper = styled.div`
+  width: -webkit-fill-available;
+  padding: 0 0.5rem;
+`;
+
+const InputFeedbackWrapper = styled.div`
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 `;
 
 const Input = {
@@ -194,7 +188,9 @@ const Input = {
   Field: InputField,
   Label: InputLabel,
   Error: InputError,
-  IconWrapper,
+  FieldWrapper: InputFieldWrapper,
+  FeedbackWrapper: InputFeedbackWrapper,
+  IconWrapper: InputIconWrapper,
 };
 
 export default Input;

@@ -19,7 +19,7 @@ function LoaderSimple({ size }: ILoader) {
 
   return (
     <LoaderWrapper>
-      <Loader size={sizeValue} />
+      <Loader size={sizeValue} className="svg-no-active" />
     </LoaderWrapper>
   );
 }

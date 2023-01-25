@@ -3,6 +3,8 @@ import styled from "styled-components";
 import LoaderSimple from "./Extras/Simple";
 
 export const LoaderWrapper = styled.div`
+  display: flex;
+
   & svg {
     animation: spin 1s linear infinite;
   }

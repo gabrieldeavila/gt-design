@@ -122,7 +122,7 @@ function GTInputMask({
     }
   }, [handleInputFocus, mask]);
 
-  const [isValidatingOnBlur, setIsValidatingOnBlur] = useState(true);
+  const [isValidatingOnBlur, setIsValidatingOnBlur] = useState(false);
 
   const handleMaskBlurErrors = useCallback(async () => {
     let errors = 0;
@@ -163,20 +163,22 @@ function GTInputMask({
   return (
     <>
       <Input.Container row={row}>
-        <Input.Label isWrong={false} up htmlFor={name}>
-          {t(label)}
-        </Input.Label>
-        <Input.Field
-          ref={inpRef}
-          type="text"
-          value={maskedValue}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          id={name}
-          name={name}
-          autoComplete="off"
-        />
+        <Input.FieldWrapper>
+          <Input.Label isWrong={false} up htmlFor={name}>
+            {t(label)}
+          </Input.Label>
+          <Input.Field
+            ref={inpRef}
+            type="text"
+            value={maskedValue}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            id={name}
+            name={name}
+            autoComplete="off"
+          />
+        </Input.FieldWrapper>
 
         {!isValidMask && (
           <Input.Error>
@@ -184,17 +186,19 @@ function GTInputMask({
           </Input.Error>
         )}
 
-        {(title != null || text != null) && (
-          <Input.IconWrapper type="center" ref={containerRef}>
-            <Icon.Info size={15} className="svg-no-active" />
-          </Input.IconWrapper>
-        )}
+        <Input.FeedbackWrapper>
+          {(title != null || text != null) && (
+            <Input.IconWrapper ref={containerRef}>
+              <Icon.Info size={15} className="svg-no-active" />
+            </Input.IconWrapper>
+          )}
 
-        {isValidatingOnBlur && (
-          <Input.IconWrapper showOpacity type="top_right">
-            <Loader.Simple size="sm" />
-          </Input.IconWrapper>
-        )}
+          {isValidatingOnBlur && (
+            <Input.IconWrapper showOpacity>
+              <Loader.Simple size="sm" />
+            </Input.IconWrapper>
+          )}
+        </Input.FeedbackWrapper>
       </Input.Container>
 
       {(title != null || text != null) && (
