@@ -16,12 +16,12 @@ import useInputValues from "../../../hooks/pageState/useInputValues";
 import useMask from "../../../hooks/pageState/useMask";
 import useValidateMask from "../../../hooks/validation/useValidateMask";
 import useValidateState from "../../../hooks/validation/useValidateState";
+import Loader from "../../Loader";
 import GTTooltip from "../../Tooltip/Tooltip";
 import Input from "../Input";
 import { IGTInputMask } from "./interface";
 
 const defaultValidationObj = ["required"];
-
 function GTInputMask({
   name,
   label,
@@ -36,7 +36,7 @@ function GTInputMask({
 }: IGTInputMask) {
   const { t } = useTranslation();
 
-  const { isLoading } = useGTPageStateContextSetters();
+  const { isLoading, setErrors } = useGTPageStateContextSetters();
 
   const inputValidations = useMemo(() => {
     if (defaultValidation) {
@@ -122,13 +122,27 @@ function GTInputMask({
     }
   }, [handleInputFocus, mask]);
 
+  const [isValidatingOnBlur, setIsValidatingOnBlur] = useState(true);
+
   const handleMaskBlurErrors = useCallback(async () => {
+    let errors = 0;
+
+    await setErrors((prev) => {
+      errors = prev.length;
+      return prev;
+    });
+
+    // if there is any error, don't validate the mask
+    if (errors > 0) return;
+
+    setIsValidatingOnBlur(true);
     const [hasError, errorMessage] = (await onBlurValidate?.(value)) ?? [];
 
     validateState(!hasError, value);
     setIsValidMask(!hasError);
     setErrorMessage(errorMessage ?? "");
-  }, [onBlurValidate, validateState, value]);
+    setIsValidatingOnBlur(false);
+  }, [onBlurValidate, setErrors, validateState, value]);
 
   const handleBlur = useCallback(() => {
     handleInputBlur();
@@ -166,13 +180,19 @@ function GTInputMask({
 
         {!isValidMask && (
           <Input.Error>
-            {t(`NUMBER.${errorMessage}`, localeErrorsParams)}
+            {t(`MASK.${errorMessage}`, localeErrorsParams)}
           </Input.Error>
         )}
 
         {(title != null || text != null) && (
           <Input.IconWrapper type="center" ref={containerRef}>
             <Icon.Info size={15} className="svg-no-active" />
+          </Input.IconWrapper>
+        )}
+
+        {isValidatingOnBlur && (
+          <Input.IconWrapper showOpacity type="top_right">
+            <Loader.Simple size="sm" />
           </Input.IconWrapper>
         )}
       </Input.Container>

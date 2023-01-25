@@ -11,6 +11,15 @@
     "MAX_WORDS_BETWEEN": "Por favor, insira entre {{MIN}} e {{MAX}} palavras.",
     "MAX_CHARS": "Entre {{MIN}} e {{MAX}} caracteres. Atual: {{CURR}}"
   },
+  "MASK": {
+    "REQUIRED": "Este campo é obrigatório.",
+    "DOC_ALREADY_EXISTS": "Este documento já está cadastrado.",
+    "INVALID_CNPJ": "CNPJ inválido.",
+    "INVALID_CPF": "CPF inválido.",
+    "MIN": "Deve ser maior ou igual a {{MIN}}.",
+    "MAX": "Deve ser menor ou igual a {{MAX}}.",
+    "BETWEEN": "Deve estar entre {{MIN}} e {{MAX}}."
+  },
   "PASSWORD": {
     "REQUIRED": "Este campo é obrigatório.",
     "EIGHT_LONG": "Deve ter pelo menos 8 caracteres.",

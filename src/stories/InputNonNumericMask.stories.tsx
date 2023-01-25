@@ -35,7 +35,7 @@ function testCPF(strCPF: string) {
   return true;
 }
 
-export function cnpjValidation(value: string) {
+function testCNPJ(value: string) {
   if (value.length === 0) return false;
 
   const isString = typeof value === "string";
@@ -99,11 +99,11 @@ const Template = () => {
     if (value.length <= 11) {
       // checks if it is a valid cpf
       isValidMask = testCPF(value);
-      invalidMessageMask = !isValidMask ? "CPF ERRADO!!" : "";
+      invalidMessageMask = !isValidMask ? "INVALID_CPF" : "";
     } else {
       // checks if it is a valid cnpj
-      isValidMask = cnpjValidation(value);
-      invalidMessageMask = !isValidMask ? "CNPJ ERRADO!!" : "";
+      isValidMask = testCNPJ(value);
+      invalidMessageMask = !isValidMask ? "INVALID_CNPJ" : "";
     }
 
     return { isValidMask, invalidMessageMask };
@@ -115,21 +115,22 @@ const Template = () => {
     onMaskChange: handleDocChange,
   };
 
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
+
   const handleBlurValidate = useCallback(
     async (value: string | number): Promise<[boolean, string]> => {
       return await new Promise((resolve) => {
         setTimeout(() => {
-          const trueOrFalse = Math.random() >= 0.5;
-          resolve([trueOrFalse, "data"]);
+          const hasError = Math.random() >= 0.5;
+
+          resolve([hasError, "DOC_ALREADY_EXISTS"]);
         }, 2000);
       });
     },
     []
   );
-
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
 
   return (
     <GTBasic>

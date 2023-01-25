@@ -12,6 +12,12 @@
     "MAX_WORDS_BETWEEN": "It must have between {{MIN}} and {{MAX}} words.",
     "MAX_CHARS": "Between {{MIN}} and {{MAX}} characters. You have: {{CURR}}"
   },
+  "MASK": {
+    "REQUIRED": "Please enter your text.",
+    "DOC_ALREADY_EXISTS": "This document already exists.",
+    "INVALID_CPF": "Invalid CPF.",
+    "INVALID_CNPJ": "Invalid CNPJ."
+  },
   "PASSWORD": {
     "REQUIRED": "Please enter your password.",
     "EIGHT_LONG": "It must be at least 8 characters long.",

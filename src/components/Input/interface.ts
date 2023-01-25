@@ -18,6 +18,7 @@ export interface ISelectValue {
 
 export interface IIconWrapper {
   type: "center" | "top_right";
+  showOpacity?: boolean;
 }
 export interface IInputLabel {
   isWrong: boolean;

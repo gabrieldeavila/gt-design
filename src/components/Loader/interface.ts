@@ -1,3 +1,4 @@
+export type LoaderSize = "sm" | "md" | "lg";
 export interface ILoader {
-    size?: string;
-} 
+  size?: LoaderSize;
+}

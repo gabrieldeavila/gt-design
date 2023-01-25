@@ -1,9 +1,8 @@
 import { memo } from "react";
 import styled from "styled-components";
 import LoaderSimple from "./Extras/Simple";
-import { ILoader } from "./interface";
 
-export const LoaderWrapper = styled.div<ILoader>`
+export const LoaderWrapper = styled.div`
   & svg {
     animation: spin 1s linear infinite;
   }

@@ -57,7 +57,7 @@ const types = {
 
 const IconWrapper = styled.div<IIconWrapper>`
   position: absolute;
-  opacity: 0;
+  opacity: ${({ showOpacity }) => (showOpacity ?? false ? 1 : 0)};
   ${({ type }) => types[type]};
 `;
 
@@ -71,6 +71,7 @@ const InputContainer = styled.div<IInputContainer>`
   outline: 2px solid transparent;
   outline-offset: 2px;
   border-radius: 0.25rem;
+  background: ${(props) => transparentize(0.2, props.theme.primary)};
 
   &:focus-within {
     outline: 2px solid ${(props) => props.theme.outline};
@@ -129,7 +130,6 @@ const InputField = styled.input<IInputField>`
   padding-top: 1rem;
   padding-right: 2.5rem;
   border: none;
-  background: ${(props) => transparentize(0.2, props.theme.primary)};
   color: ${(props) => props.theme.contrast};
 
   /* changes the placeholder color */
