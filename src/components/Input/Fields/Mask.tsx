@@ -48,8 +48,12 @@ function GTInputMask({
 
   const { validateState } = useValidateState(name, inputValidations);
 
-  const { value, handleInputChange, handleInputBlur, handleInputFocus } =
-    useInputValues(name);
+  const {
+    value,
+    handleInputChange,
+    handleInputBlur,
+    handleInputFocus,
+  } = useInputValues(name);
 
   const inpRef = useRef<HTMLInputElement>(null);
 
@@ -164,7 +168,11 @@ function GTInputMask({
     <>
       <Input.Container row={row}>
         <Input.FieldWrapper>
-          <Input.Label isWrong={false} up htmlFor={name}>
+          <Input.Label
+            isWrong={false}
+            up
+            htmlFor={name}
+          >
             {t(label)}
           </Input.Label>
           <Input.Field

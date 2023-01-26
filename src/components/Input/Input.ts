@@ -2,8 +2,7 @@
 /* eslint-disable no-confusing-arrow */
 import { transparentize } from "polished";
 import styled, { css } from "styled-components";
-import { hovers, scrolls, shadows } from "../../utils";
-import animations from "../../utils/animations";
+import { hovers, scrolls, shadows, transitions } from "../../utils";
 import flex from "../../utils/flex";
 import skeletons from "../../utils/skeletons";
 import {
@@ -129,6 +128,20 @@ const correctCss = css`
   );
 `;
 
+const handleLabelFirstRender = (up: boolean) => {
+  if (up) {
+    return css`
+      top: 16%;
+      font-size: 0.75rem;
+    `;
+  }
+
+  return css`
+    top: 34%;
+    font-size: 0.85rem;
+  `;
+};
+
 const InputLabel = styled.label<IInputLabel>`
   user-select: none;
   cursor: text;
@@ -142,12 +155,13 @@ const InputLabel = styled.label<IInputLabel>`
   );
 
   ${({ isWrong }) => (isWrong ? wrongCss : correctCss)}
+  ${({ up }) => handleLabelFirstRender(up)};
+  ${transitions.basic};
 
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   box-decoration-break: clone;
-  ${animations.upLabel}
 `;
 
 const InputError = styled.span`
