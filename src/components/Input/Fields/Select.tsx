@@ -190,41 +190,39 @@ function GTInputSelect({
           ref={containerRef}
           isUp={showOptions}
         >
-          {/* TO DO: ADD VALIDATIONS TO SELECT */}
-          <Input.Label isWrong={false} up={labelIsUp} htmlFor={name}>
-            {t(label)}
-          </Input.Label>
-          <Input.Field
-            ref={inputRef}
-            type="text"
-            onChange={handleChange}
-            value={searchTerm}
-            placeholder={selectedLabel}
-            onBlur={handleSelectBlur}
-            onFocus={handleSelectFocus}
-            id={name}
-            name={name}
-            autoComplete="off"
-            isLabel
-          />
-
-          <ChevronDown onClick={handleChevClick} />
-
-          {(title != null || text != null) && (
-            <>
-              <Input.IconWrapper
-                type="top_right"
-                ref={iconRef}
-                onClick={handleChevClick}
-              >
+          <Input.FieldWrapper>
+            <Input.Label isWrong={false} up={labelIsUp} htmlFor={name}>
+              {t(label)}
+            </Input.Label>
+            <Input.Field
+              ref={inputRef}
+              type="text"
+              onChange={handleChange}
+              value={searchTerm}
+              placeholder={selectedLabel}
+              onBlur={handleSelectBlur}
+              onFocus={handleSelectFocus}
+              id={name}
+              name={name}
+              autoComplete="off"
+              isLabel
+            />
+          </Input.FieldWrapper>
+          <Input.FeedbackWrapper>
+            {(title != null || text != null) && (
+              <Input.IconWrapper ref={iconRef} onClick={handleChevClick}>
                 <Icon.Info size={15} className="svg-no-active" />
               </Input.IconWrapper>
-            </>
-          )}
+            )}
 
+            <Input.IconWrapper showOpacity onClick={handleChevClick}>
+              <ChevronDown />
+            </Input.IconWrapper>
+          </Input.FeedbackWrapper>
           {showOptions && <SelectOptions options={options} />}
         </Input.Container>
       </SelectContext.Provider>
+
       {(title != null || text != null) && (
         <>
           <GTTooltip parentRef={iconRef} title={title} text={text} />

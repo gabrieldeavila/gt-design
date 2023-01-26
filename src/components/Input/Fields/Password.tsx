@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable operator-linebreak */
 import PropTypes from "prop-types";
@@ -157,39 +158,38 @@ function GTInputPassword({
   return (
     <>
       <Input.Container row={row}>
-        <Input.Label isWrong={!isValidPassword} up={labelIsUp} htmlFor={name}>
-          {t(label)}
-        </Input.Label>
-        <Input.Field
-          ref={inpRef}
-          type={type}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={value}
-          onFocus={handleInputFocus}
-          id={name}
-          name={name}
-        />
-
-        {showPassword
-          ? (
-          <Icon.Eye onClick={handleShowPassword} />
-            )
-          : (
-          <Icon.EyeOff onClick={handleShowPassword} />
-            )}
+        <Input.FieldWrapper>
+          <Input.Label isWrong={!isValidPassword} up={labelIsUp} htmlFor={name}>
+            {t(label)}
+          </Input.Label>
+          <Input.Field
+            ref={inpRef}
+            type={type}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={value}
+            onFocus={handleInputFocus}
+            id={name}
+            name={name}
+          />
+        </Input.FieldWrapper>
 
         {!isValidPassword && (
           <Input.Error>{t(`PASSWORD.${errorMessage}`)}</Input.Error>
         )}
+        <Input.FeedbackWrapper>
+          {showPassword ? (
+            <Icon.Eye onClick={handleShowPassword} />
+          ) : (
+            <Icon.EyeOff onClick={handleShowPassword} />
+          )}
 
-        {(title != null || text != null) && (
-          <Input.IconWrapper type="top_right" ref={containerRef}>
-            <Icon.Info size={15} className="svg-no-active" />
-          </Input.IconWrapper>
-        )}
-
-        <GTTooltip parentRef={containerRef} title={title} text={text} />
+          {(title != null || text != null) && (
+            <Input.IconWrapper ref={containerRef}>
+              <Icon.Info size={15} className="svg-no-active" />
+            </Input.IconWrapper>
+          )}
+        </Input.FeedbackWrapper>
       </Input.Container>
 
       {(title != null || text != null) && (

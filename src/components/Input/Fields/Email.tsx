@@ -99,28 +99,32 @@ function GTInputEmail({
   return (
     <>
       <Input.Container row={row}>
-        <Input.Label isWrong={!isValidEmail} up={labelIsUp} htmlFor={name}>
-          {t(label)}
-        </Input.Label>
-        <Input.Field
-          type="email"
-          onChange={handleChange}
-          value={value}
-          onBlur={handleInputBlur}
-          onFocus={handleInputFocus}
-          id={name}
-          name={name}
-        />
+        <Input.FieldWrapper>
+          <Input.Label isWrong={!isValidEmail} up={labelIsUp} htmlFor={name}>
+            {t(label)}
+          </Input.Label>
+          <Input.Field
+            type="email"
+            onChange={handleChange}
+            value={value}
+            onBlur={handleInputBlur}
+            onFocus={handleInputFocus}
+            id={name}
+            name={name}
+          />
+        </Input.FieldWrapper>
 
         {!isValidEmail && (
           <Input.Error>{t(`EMAIL.${errorMessage}`)}</Input.Error>
         )}
 
-        {(title != null || text != null) && (
-          <Input.IconWrapper type="center" ref={containerRef}>
-            <Icon.Info size={15} className="svg-no-active" />
-          </Input.IconWrapper>
-        )}
+        <Input.FeedbackWrapper>
+          {(title != null || text != null) && (
+            <Input.IconWrapper ref={containerRef}>
+              <Icon.Info size={15} className="svg-no-active" />
+            </Input.IconWrapper>
+          )}
+        </Input.FeedbackWrapper>
       </Input.Container>
 
       {(title != null || text != null) && (

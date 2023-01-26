@@ -6,7 +6,7 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState
+  useState,
 } from "react";
 import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
@@ -104,19 +104,21 @@ function GTInputNumber({
   return (
     <>
       <Input.Container row={row}>
-        <Input.Label isWrong={!isValidNumber} up={labelIsUp} htmlFor={name}>
-          {t(label)}
-        </Input.Label>
-        <Input.Field
-          type="number"
-          value={value}
-          onChange={handleChange}
-          onBlur={handleInputBlur}
-          onFocus={handleInputFocus}
-          id={name}
-          name={name}
-          autoComplete="off"
-        />
+        <Input.FieldWrapper>
+          <Input.Label isWrong={!isValidNumber} up={labelIsUp} htmlFor={name}>
+            {t(label)}
+          </Input.Label>
+          <Input.Field
+            type="number"
+            value={value}
+            onChange={handleChange}
+            onBlur={handleInputBlur}
+            onFocus={handleInputFocus}
+            id={name}
+            name={name}
+            autoComplete="off"
+          />
+        </Input.FieldWrapper>
 
         {!isValidNumber && (
           <Input.Error>
@@ -124,11 +126,13 @@ function GTInputNumber({
           </Input.Error>
         )}
 
-        {(title != null || text != null) && (
-          <Input.IconWrapper type="center" ref={containerRef}>
-            <Icon.Info size={15} className="svg-no-active" />
-          </Input.IconWrapper>
-        )}
+        <Input.FeedbackWrapper>
+          {(title != null || text != null) && (
+            <Input.IconWrapper ref={containerRef}>
+              <Icon.Info size={15} className="svg-no-active" />
+            </Input.IconWrapper>
+          )}
+        </Input.FeedbackWrapper>
       </Input.Container>
 
       {(title != null || text != null) && (

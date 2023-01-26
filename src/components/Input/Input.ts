@@ -15,10 +15,6 @@ import {
   ISelectValue,
 } from "./interface";
 
-const InputWrapper = styled.div`
-  gap: 1.75rem;
-`;
-
 const getRowWidth = ({ row }: IInputContainer) => {
   let cssSrc = "";
 
@@ -75,9 +71,6 @@ const InputContainer = styled.div<IInputContainer>`
   svg:not(.svg-no-active) {
     user-select: none;
     cursor: pointer;
-    top: 30%;
-    right: 0.5rem;
-    position: absolute;
 
     &:active {
       transform: scale(0.65);
@@ -163,7 +156,7 @@ const InputError = styled.span`
   position: absolute;
   font-size: 0.65rem;
   color: ${(props) => props.theme.errorColor};
-  top: 105%;
+  top: 98%;
   margin-top: 0.15rem;
   padding: 0 0.5rem;
 `;
@@ -175,6 +168,7 @@ const InputFieldWrapper = styled.div`
 
 const InputFeedbackWrapper = styled.div`
   padding: 1rem;
+  padding-left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -182,7 +176,6 @@ const InputFeedbackWrapper = styled.div`
 `;
 
 const Input = {
-  Wrapper: InputWrapper,
   Group: InputGroup,
   Container: InputContainer,
   Field: InputField,

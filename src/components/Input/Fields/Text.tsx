@@ -113,18 +113,20 @@ function GTInputText({
   return (
     <>
       <Input.Container row={row}>
-        <Input.Label isWrong={!isValidText} up={labelIsUp} htmlFor={name}>
-          {t(label)}
-        </Input.Label>
-        <Input.Field
-          type="text"
-          value={value}
-          onChange={handleChange}
-          onBlur={handleInputBlur}
-          onFocus={handleInputFocus}
-          id={name}
-          name={name}
-        />
+        <Input.FieldWrapper>
+          <Input.Label isWrong={!isValidText} up={labelIsUp} htmlFor={name}>
+            {t(label)}
+          </Input.Label>
+          <Input.Field
+            type="text"
+            value={value}
+            onChange={handleChange}
+            onBlur={handleInputBlur}
+            onFocus={handleInputFocus}
+            id={name}
+            name={name}
+          />
+        </Input.FieldWrapper>
 
         {!isValidText && (
           <Input.Error>
@@ -132,11 +134,13 @@ function GTInputText({
           </Input.Error>
         )}
 
-        {(title != null || text != null) && (
-          <Input.IconWrapper type="center" ref={containerRef}>
-            <Icon.Info size={15} className="svg-no-active" />
-          </Input.IconWrapper>
-        )}
+        <Input.FeedbackWrapper>
+          {(title != null || text != null) && (
+            <Input.IconWrapper ref={containerRef}>
+              <Icon.Info size={15} className="svg-no-active" />
+            </Input.IconWrapper>
+          )}
+        </Input.FeedbackWrapper>
       </Input.Container>
 
       {(title != null || text != null) && (

@@ -89,7 +89,7 @@ function LoginCreate({
           <Text.H1>{t("TEMPLATE.LOGIN.CREATE_TITLE")}</Text.H1>
           <Text.P>{t("TEMPLATE.LOGIN.CREATE_SUBTITLE")}</Text.P>
         </Space.Flex>
-        <Input.Wrapper>
+        <Input.Group>
           <GTInput.Text
             minChars="10"
             maxChars="20"
@@ -118,7 +118,7 @@ function LoginCreate({
             name="confirm_password"
             label="TEMPLATE.LOGIN.CONFIRM_PASSWORD_LABEL"
           />
-        </Input.Wrapper>
+        </Input.Group>
         <Space.Flex>
           <Text.P fontSize={0}>{t("TEMPLATE.LOGIN.DATA_POLICY")}</Text.P>
           <Button.Normal disabled={!canSave}>
@@ -180,7 +180,7 @@ function LoginSignIn({
           <Text.P>{t("TEMPLATE.LOGIN.SIGN_IN_SUBTITLE")}</Text.P>
         </Space.Flex>
         <Space.Flex>
-          <Input.Wrapper>
+          <Input.Group>
             <GTInput.Text
               defaultValidation
               validations={["noSpaces"]}
@@ -192,7 +192,7 @@ function LoginSignIn({
               name="password"
               label="TEMPLATE.LOGIN.PASSWORD_LABEL"
             />
-          </Input.Wrapper>
+          </Input.Group>
         </Space.Flex>
         <Space.Flex>
           <Button.Normal onClick={handleSignIn} disabled={!canSave}>
