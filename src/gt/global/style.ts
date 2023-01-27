@@ -11,6 +11,12 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.5 !important;
   }
   
+  input:-webkit-autofill { 
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: white !important;
+  }
+
   body {
     background: ${({ theme }: IGLobalStyle) => theme.secondary};
     ${scrolls.default};

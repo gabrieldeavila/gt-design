@@ -1,3 +1,7 @@
+export type TBlurValidate = (
+  value: string | number
+) => [boolean, string] | Promise<[boolean, string]>;
+
 export interface IGTInput {
   name: string;
   label: string;
@@ -8,6 +12,7 @@ export interface IGTInput {
   text?: string;
   row?: number;
   disabled?: boolean;
+  onBlurValidate?: TBlurValidate;
 }
 
 export interface IGTInputText extends IGTInput {
@@ -50,9 +55,6 @@ export interface IGTInputMask extends IGTInput {
   mask: TNumericOptions;
   min?: number | string;
   max?: number | string;
-  onBlurValidate?: (
-    value: string | number
-  ) => [boolean, string] | Promise<[boolean, string]>;
 }
 
 export interface IGTInputPassword extends IGTInput {

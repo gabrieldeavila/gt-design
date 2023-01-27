@@ -205,7 +205,7 @@ export default Input;
 const getSelectionPosition = (isTop?: boolean) => {
   if (isTop ?? false) {
     return css`
-      bottom: 60px;
+      bottom: 65px;
     `;
   }
 

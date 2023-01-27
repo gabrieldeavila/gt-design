@@ -14,6 +14,7 @@ import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import useValidateText from "../../../hooks/validation/useValidateText";
+import Loader from "../../Loader";
 import GTTooltip from "../../Tooltip/Tooltip";
 import Input from "../Input";
 import { IGTInputText } from "./interface";
@@ -32,8 +33,10 @@ function GTInputText({
   text,
   title,
   row,
+  onBlurValidate,
 }: IGTInputText) {
   const { t } = useTranslation();
+  const alterFieldRef = useRef<boolean>(true);
 
   const inputValidations = useMemo(() => {
     if (defaultValidation) {
@@ -46,12 +49,14 @@ function GTInputText({
   const { validateState } = useValidateState(name, inputValidations);
 
   const {
-    labelIsUp,
     value,
+    isValidatingOnBlur,
+    labelIsUp,
     handleInputChange,
     handleInputBlur,
+    handleInputBlurErrors,
     handleInputFocus,
-  } = useInputValues(name);
+  } = useInputValues(name, validateState, onBlurValidate);
 
   const { validateText, validateMinAndMax } = useValidateText(
     minWords,
@@ -89,6 +94,7 @@ function GTInputText({
       setIsValidText(isAllValid);
       setLocaleErrorsParams(errorsVars);
       handleInputChange(iVal);
+      alterFieldRef.current = true;
 
       onChange(e);
     },
@@ -101,6 +107,27 @@ function GTInputText({
       handleInputChange,
     ]
   );
+
+  const handleTextBlurErrors = useCallback(async () => {
+    const [isValid, errorMessage = ""] = (await handleInputBlurErrors()) ?? [];
+
+    if (isValid == null) {
+      return;
+    }
+
+    setIsValidText(isValid);
+    setErrorMessage(errorMessage);
+  }, [handleInputBlurErrors]);
+
+  const handleBlur = useCallback(() => {
+    handleInputBlur();
+
+    if (alterFieldRef.current) {
+      handleTextBlurErrors().catch((e) => console.error(e));
+    }
+
+    alterFieldRef.current = false;
+  }, [handleInputBlur, handleTextBlurErrors]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -121,7 +148,7 @@ function GTInputText({
             type="text"
             value={value}
             onChange={handleChange}
-            onBlur={handleInputBlur}
+            onBlur={handleBlur}
             onFocus={handleInputFocus}
             id={name}
             name={name}
@@ -138,6 +165,12 @@ function GTInputText({
           {(title != null || text != null) && (
             <Input.IconWrapper ref={containerRef}>
               <Icon.Info size={15} className="svg-no-active" />
+            </Input.IconWrapper>
+          )}
+
+          {isValidatingOnBlur && (
+            <Input.IconWrapper showOpacity>
+              <Loader.Simple size="sm" />
             </Input.IconWrapper>
           )}
         </Input.FeedbackWrapper>

@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { GTInput, Input, Space } from "../components";
 import { INonNumericMask } from "../components/Input/Fields/interface";
 import SectionContainer from "../components/Text/Template/SectionContainer";
@@ -115,22 +116,17 @@ const Template = () => {
     onMaskChange: handleDocChange,
   };
 
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
+  const handleBlurValidate = useCallback(async (): Promise<
+    [boolean, string]
+  > => {
+    return await new Promise((resolve) => {
+      setTimeout(() => {
+        const isValid = Math.random() >= 0.5;
 
-  const handleBlurValidate = useCallback(
-    async (value: string | number): Promise<[boolean, string]> => {
-      return await new Promise((resolve) => {
-        setTimeout(() => {
-          const hasError = Math.random() >= 0.5;
-
-          resolve([hasError, "DOC_ALREADY_EXISTS"]);
-        }, 2000);
-      });
-    },
-    []
-  );
+        resolve([isValid, "DOC_ALREADY_EXISTS"]);
+      }, 200);
+    });
+  }, []);
 
   return (
     <GTBasic>

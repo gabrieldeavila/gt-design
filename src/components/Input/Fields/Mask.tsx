@@ -36,7 +36,7 @@ function GTInputMask({
 }: IGTInputMask) {
   const { t } = useTranslation();
 
-  const { isLoading, setErrors } = useGTPageStateContextSetters();
+  const { isLoading } = useGTPageStateContextSetters();
 
   const inputValidations = useMemo(() => {
     if (defaultValidation) {
@@ -50,10 +50,12 @@ function GTInputMask({
 
   const {
     value,
+    isValidatingOnBlur,
     handleInputChange,
     handleInputBlur,
+    handleInputBlurErrors,
     handleInputFocus,
-  } = useInputValues(name);
+  } = useInputValues(name, validateState, onBlurValidate);
 
   const inpRef = useRef<HTMLInputElement>(null);
 
@@ -126,27 +128,16 @@ function GTInputMask({
     }
   }, [handleInputFocus, mask]);
 
-  const [isValidatingOnBlur, setIsValidatingOnBlur] = useState(false);
-
   const handleMaskBlurErrors = useCallback(async () => {
-    let errors = 0;
+    const [isValid, errorMessage = ""] = (await handleInputBlurErrors()) ?? [];
 
-    await setErrors((prev) => {
-      errors = prev.length;
-      return prev;
-    });
+    if (isValid == null) {
+      return;
+    }
 
-    // if there is any error, don't validate the mask
-    if (errors > 0) return;
-
-    setIsValidatingOnBlur(true);
-    const [hasError, errorMessage] = (await onBlurValidate?.(value)) ?? [];
-
-    validateState(!hasError, value);
-    setIsValidMask(!hasError);
-    setErrorMessage(errorMessage ?? "");
-    setIsValidatingOnBlur(false);
-  }, [onBlurValidate, setErrors, validateState, value]);
+    setIsValidMask(isValid);
+    setErrorMessage(errorMessage);
+  }, [handleInputBlurErrors]);
 
   const handleBlur = useCallback(() => {
     handleInputBlur();
@@ -168,11 +159,7 @@ function GTInputMask({
     <>
       <Input.Container row={row}>
         <Input.FieldWrapper>
-          <Input.Label
-            isWrong={false}
-            up
-            htmlFor={name}
-          >
+          <Input.Label isWrong={false} up htmlFor={name}>
             {t(label)}
           </Input.Label>
           <Input.Field

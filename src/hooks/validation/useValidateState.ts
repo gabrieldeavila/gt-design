@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { useCallback, useEffect } from "react";
 import { useGTPageStateContextSetters } from "../../context/pageState";
+import { TValidateState } from "./interface";
 
 function useValidateState(name: string, inputValidations: string[]) {
   const { setPageState, setErrors } = useGTPageStateContextSetters();
@@ -39,8 +40,8 @@ function useValidateState(name: string, inputValidations: string[]) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const validateState = useCallback(
-    (isValid: boolean, value: string | number) => {
+  const validateState: TValidateState = useCallback(
+    (isValid, value) => {
       setPageState((prevState) => ({
         ...prevState,
         [name]: value,
