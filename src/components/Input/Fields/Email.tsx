@@ -28,8 +28,10 @@ function GTInputEmail({
   text,
   title,
   row,
+  onBlurValidate,
 }: IGTInput): JSX.Element {
   const { t } = useTranslation();
+  const alterFieldRef = useRef<boolean>(true);
 
   const { isLoading } = useGTPageStateContextSetters();
 
@@ -48,8 +50,9 @@ function GTInputEmail({
     value,
     handleInputChange,
     handleInputBlur,
+    handleInputBlurErrors,
     handleInputFocus,
-  } = useInputValues(name);
+  } = useInputValues(name, validateState, onBlurValidate);
 
   const { validateEmail } = useValidateEmail();
   const [isValidEmail, setIsValidEmail] = useState(true);
@@ -78,6 +81,7 @@ function GTInputEmail({
       setIsValidEmail(isValid);
       setErrorMessage(invalidMessage);
       handleInputChange(emailVal);
+      alterFieldRef.current = true;
 
       onChange(e);
     },
@@ -89,6 +93,27 @@ function GTInputEmail({
       onChange,
     ]
   );
+
+  const handleEmailBlurErrors = useCallback(async () => {
+    const [isValid, errorMessage = ""] = (await handleInputBlurErrors()) ?? [];
+
+    if (isValid == null) {
+      return;
+    }
+
+    setIsValidEmail(isValid);
+    setErrorMessage(errorMessage);
+  }, [handleInputBlurErrors]);
+
+  const handleBlur = useCallback(() => {
+    handleInputBlur();
+
+    if (alterFieldRef.current) {
+      handleEmailBlurErrors().catch((e) => console.error(e));
+    }
+
+    alterFieldRef.current = false;
+  }, [handleInputBlur, handleEmailBlurErrors]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -107,16 +132,14 @@ function GTInputEmail({
             type="email"
             onChange={handleChange}
             value={value}
-            onBlur={handleInputBlur}
+            onBlur={handleBlur}
             onFocus={handleInputFocus}
             id={name}
             name={name}
           />
         </Input.FieldWrapper>
 
-        {!isValidEmail && (
-          <Input.Error>{t(`EMAIL.${errorMessage}`)}</Input.Error>
-        )}
+        {!isValidEmail && <Input.Error>{t(errorMessage)}</Input.Error>}
 
         <Input.FeedbackWrapper>
           {(title != null || text != null) && (

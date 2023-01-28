@@ -35,6 +35,7 @@ function GTInputMask({
   onBlurValidate,
 }: IGTInputMask) {
   const { t } = useTranslation();
+  const alterFieldRef = useRef<boolean>(true);
 
   const { isLoading } = useGTPageStateContextSetters();
 
@@ -60,8 +61,6 @@ function GTInputMask({
   const inpRef = useRef<HTMLInputElement>(null);
 
   const { maskedValue, unMask } = useMask(value, mask, inpRef);
-
-  const alterFieldRef = useRef<boolean>(true);
 
   const { validateMask } = useValidateMask(mask);
   const [isValidMask, setIsValidMask] = useState(true);
@@ -176,9 +175,7 @@ function GTInputMask({
         </Input.FieldWrapper>
 
         {!isValidMask && (
-          <Input.Error>
-            {t(`MASK.${errorMessage}`, localeErrorsParams)}
-          </Input.Error>
+          <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
         )}
 
         <Input.FeedbackWrapper>

@@ -1,35 +1,21 @@
 {
-  "EMAIL": {
-    "REQUIRED": "Please enter a valid email address."
-  },
-
-  "TEXT": {
-    "REQUIRED": "Please enter your text.",
-    "NO_INITIAL_SPACE": "It cannot start with a space.",
-    "NO_TRAILING_SPACE": "It cannot end with a space.",
-    "NO_SPACES": "It cannot contain spaces.",
-    "USERNAME": "It can only have letters and numbers.",
-    "MAX_WORDS_BETWEEN": "It must have between {{MIN}} and {{MAX}} words.",
-    "MAX_CHARS": "Between {{MIN}} and {{MAX}} characters. You have: {{CURR}}"
-  },
-  "MASK": {
-    "REQUIRED": "Please enter your text.",
-    "DOC_ALREADY_EXISTS": "This document already exists.",
-    "INVALID_CPF": "Invalid CPF.",
-    "INVALID_CNPJ": "Invalid CNPJ."
-  },
-  "PASSWORD": {
-    "REQUIRED": "Please enter your password.",
-    "EIGHT_LONG": "It must be at least 8 characters long.",
-    "ONE_NUMBER": "It must contain at least one number.",
-    "ONE_SPECIAL": "It must contain at least one special character.",
-    "ONE_UPPERCASE": "It must contain at least one uppercase letter.",
-    "ONE_LOWERCASE": "It must contain at least one lowercase letter.",
-    "PASSWORDS_NOT_MATCH": "Passwords do not match."
-  },
-  "SELECT": {
-    "NOT_FOUND": "No results found 😪"
-  },
+  "REQUIRED": "This field is required.",
+  "NO_INITIAL_SPACE": "It cannot start with a space.",
+  "NO_TRAILING_SPACE": "It cannot end with a space.",
+  "NO_SPACES": "It cannot contain spaces.",
+  "USERNAME": "It can only have letters and numbers.",
+  "MAX_WORDS_BETWEEN": "It must have between {{MIN}} and {{MAX}} words.",
+  "MAX_CHARS": "Between {{MIN}} and {{MAX}} characters. You have: {{CURR}}",
+  "DOC_ALREADY_EXISTS": "This document already exists.",
+  "INVALID_CPF": "Invalid CPF.",
+  "INVALID_CNPJ": "Invalid CNPJ.",
+  "EIGHT_LONG": "It must be at least 8 characters long.",
+  "ONE_NUMBER": "It must contain at least one number.",
+  "ONE_SPECIAL": "It must contain at least one special character.",
+  "ONE_UPPERCASE": "It must contain at least one uppercase letter.",
+  "ONE_LOWERCASE": "It must contain at least one lowercase letter.",
+  "PASSWORDS_NOT_MATCH": "Passwords do not match.",
+  "SELECT_NOT_FOUND": "No results found 😪",
   "NUMBER": {
     "REQUIRED": "Please enter a valid number.",
     "MIN": "It must be greater than {{MIN}}.",

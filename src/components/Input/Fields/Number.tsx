@@ -31,8 +31,10 @@ function GTInputNumber({
   row,
   min,
   max,
+  onBlurValidate,
 }: IGTInputNumber) {
   const { t } = useTranslation();
+  const alterFieldRef = useRef<boolean>(true);
 
   const { isLoading } = useGTPageStateContextSetters();
 
@@ -51,8 +53,9 @@ function GTInputNumber({
     value,
     handleInputChange,
     handleInputBlur,
+    handleInputBlurErrors,
     handleInputFocus,
-  } = useInputValues(name);
+  } = useInputValues(name, validateState, onBlurValidate);
 
   const { validateNumber } = useValidateNumber(min, max);
   const [isValidNumber, setIsValidNumber] = useState(true);
@@ -83,6 +86,7 @@ function GTInputNumber({
       setErrorMessage(invalidMessage);
       setLocaleErrorsParams(errorsVar);
       handleInputChange(iVal);
+      alterFieldRef.current = true;
 
       onChange(e);
     },
@@ -94,6 +98,27 @@ function GTInputNumber({
       onChange,
     ]
   );
+
+  const handleNumberBlurErrors = useCallback(async () => {
+    const [isValid, errorMessage = ""] = (await handleInputBlurErrors()) ?? [];
+
+    if (isValid == null) {
+      return;
+    }
+
+    setIsValidNumber(isValid);
+    setErrorMessage(errorMessage);
+  }, [handleInputBlurErrors]);
+
+  const handleBlur = useCallback(() => {
+    handleInputBlur();
+
+    if (alterFieldRef.current) {
+      handleNumberBlurErrors().catch((e) => console.error(e));
+    }
+
+    alterFieldRef.current = false;
+  }, [handleInputBlur, handleNumberBlurErrors]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -112,7 +137,7 @@ function GTInputNumber({
             type="number"
             value={value}
             onChange={handleChange}
-            onBlur={handleInputBlur}
+            onBlur={handleBlur}
             onFocus={handleInputFocus}
             id={name}
             name={name}
@@ -121,9 +146,7 @@ function GTInputNumber({
         </Input.FieldWrapper>
 
         {!isValidNumber && (
-          <Input.Error>
-            {t(`NUMBER.${errorMessage}`, localeErrorsParams)}
-          </Input.Error>
+          <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
         )}
 
         <Input.FeedbackWrapper>

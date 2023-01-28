@@ -156,9 +156,7 @@ function GTInputText({
         </Input.FieldWrapper>
 
         {!isValidText && (
-          <Input.Error>
-            {t(`TEXT.${errorMessage}`, localeErrorsParams)}
-          </Input.Error>
+          <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
         )}
 
         <Input.FeedbackWrapper>

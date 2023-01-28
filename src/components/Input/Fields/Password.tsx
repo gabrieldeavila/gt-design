@@ -38,8 +38,10 @@ function GTInputPassword({
   title,
   text,
   row,
+  onBlurValidate,
 }: IGTInputPassword) {
   const { t } = useTranslation();
+  const alterFieldRef = useRef<boolean>(true);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const inpRef = useRef<HTMLInputElement>(null);
@@ -65,8 +67,9 @@ function GTInputPassword({
     value,
     handleInputChange,
     handleInputBlur,
+    handleInputBlurErrors,
     handleInputFocus,
-  } = useInputValues(name);
+  } = useInputValues(name, validateState, onBlurValidate);
 
   // password validation
   const { validatePassword } = useValidatePassword();
@@ -105,10 +108,6 @@ function GTInputPassword({
       inpRef.current?.setSelectionRange(length, length);
     });
   }, [value]);
-
-  const handleBlur = useCallback(() => {
-    handleInputBlur();
-  }, [handleInputBlur]);
 
   const handleChange = useCallback(
     (e: any) => {
@@ -151,6 +150,27 @@ function GTInputPassword({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sameAsValue]);
 
+  const handlePasswordBlurErrors = useCallback(async () => {
+    const [isValid, errorMessage = ""] = (await handleInputBlurErrors()) ?? [];
+
+    if (isValid == null) {
+      return;
+    }
+
+    setIsValidPassword(isValid);
+    setErrorMessage(errorMessage);
+  }, [handleInputBlurErrors]);
+
+  const handleBlur = useCallback(() => {
+    handleInputBlur();
+
+    if (alterFieldRef.current) {
+      handlePasswordBlurErrors().catch((e) => console.error(e));
+    }
+
+    alterFieldRef.current = false;
+  }, [handleInputBlur, handlePasswordBlurErrors]);
+
   if (isLoading ?? false) {
     return <Input.Container row={row} isLoading />;
   }
@@ -174,20 +194,19 @@ function GTInputPassword({
           />
         </Input.FieldWrapper>
 
-        {!isValidPassword && (
-          <Input.Error>{t(`PASSWORD.${errorMessage}`)}</Input.Error>
-        )}
-        <Input.FeedbackWrapper>
-          {showPassword ? (
-            <Icon.Eye onClick={handleShowPassword} />
-          ) : (
-            <Icon.EyeOff onClick={handleShowPassword} />
-          )}
+        {!isValidPassword && <Input.Error>{t(errorMessage)}</Input.Error>}
 
+        <Input.FeedbackWrapper>
           {(title != null || text != null) && (
             <Input.IconWrapper ref={containerRef}>
               <Icon.Info size={15} className="svg-no-active" />
             </Input.IconWrapper>
+          )}
+
+          {showPassword ? (
+            <Icon.Eye onClick={handleShowPassword} />
+          ) : (
+            <Icon.EyeOff onClick={handleShowPassword} />
           )}
         </Input.FeedbackWrapper>
       </Input.Container>

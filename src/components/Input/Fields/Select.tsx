@@ -39,17 +39,26 @@ function GTInputSelect({
   text,
   title,
   row,
+  onBlurValidate,
 }: IGTInputSelect): JSX.Element {
   const { t } = useTranslation();
+  const alterFieldRef = useRef<boolean>(true);
 
   const { isLoading } = useGTPageStateContextSetters();
 
   const [searchTerm, setSearchTerm] = useState("");
-
-  const { labelIsUp, handleInputChange, handleInputBlur, handleInputFocus } =
-    useInputValues(name);
+  const [isValidSelect, setIsValidSelect] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const { validateState } = useValidateState(name, []);
+
+  const {
+    labelIsUp,
+    handleInputChange,
+    handleInputBlur,
+    handleInputBlurErrors,
+    handleInputFocus,
+  } = useInputValues(name, validateState, onBlurValidate);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const iconRef = useRef<HTMLDivElement>(null);
@@ -129,19 +138,26 @@ function GTInputSelect({
     });
   }, []);
 
-  const handleSelectFocus = useCallback(
-    (e: React.FormEvent) => {
-      handleInputFocus();
-    },
-    [handleInputFocus]
-  );
+  const handlePasswordBlurErrors = useCallback(async () => {
+    const [isValid, errorMessage = ""] = (await handleInputBlurErrors()) ?? [];
 
-  const handleSelectBlur = useCallback(
-    (e: React.FormEvent) => {
-      handleInputBlur();
-    },
-    [handleInputBlur]
-  );
+    if (isValid == null) {
+      return;
+    }
+
+    setIsValidSelect(isValid);
+    setErrorMessage(errorMessage);
+  }, [handleInputBlurErrors]);
+
+  const handleBlur = useCallback(() => {
+    handleInputBlur();
+
+    if (alterFieldRef.current) {
+      handlePasswordBlurErrors().catch((e) => console.error(e));
+    }
+
+    alterFieldRef.current = false;
+  }, [handleInputBlur, handlePasswordBlurErrors]);
 
   const handleKey = useCallback(() => {
     // if it is not showing the options, open it
@@ -191,7 +207,7 @@ function GTInputSelect({
           isUp={showOptions}
         >
           <Input.FieldWrapper>
-            <Input.Label isWrong={false} up={labelIsUp} htmlFor={name}>
+            <Input.Label isWrong={!isValidSelect} up={labelIsUp} htmlFor={name}>
               {t(label)}
             </Input.Label>
             <Input.Field
@@ -200,14 +216,17 @@ function GTInputSelect({
               onChange={handleChange}
               value={searchTerm}
               placeholder={selectedLabel}
-              onBlur={handleSelectBlur}
-              onFocus={handleSelectFocus}
+              onBlur={handleBlur}
+              onFocus={handleInputFocus}
               id={name}
               name={name}
               autoComplete="off"
               isLabel
             />
           </Input.FieldWrapper>
+
+          {!isValidSelect && <Input.Error>{t(errorMessage)}</Input.Error>}
+
           <Input.FeedbackWrapper>
             {(title != null || text != null) && (
               <Input.IconWrapper ref={iconRef} onClick={handleChevClick}>
@@ -363,7 +382,7 @@ const SelectOptions = memo(function SelectOptions({ options }: ISelectOptions) {
         ))}
 
         {filteredOptions.length === 0 && (
-          <Select.NotFound>{t("SELECT.NOT_FOUND")}</Select.NotFound>
+          <Select.NotFound>{t("SELECT_NOT_FOUND")}</Select.NotFound>
         )}
       </Select.OptionsContainer>
     </Select.OptionsWrapper>

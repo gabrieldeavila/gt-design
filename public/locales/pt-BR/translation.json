@@ -1,37 +1,24 @@
 {
-  "EMAIL": {
-    "REQUIRED": "O campo e-mail é obrigatório."
-  },
-  "TEXT": {
-    "REQUIRED": "Por favor, preencha este campo.",
-    "NO_INITIAL_SPACE": "Este campo não pode começar com um espaço.",
-    "NO_TRAILING_SPACE": "Este campo não pode terminar com um espaço.",
-    "NO_SPACES": "Este campo não pode conter espaços.",
-    "USERNAME": "Este campo deve conter apenas letras minúsculas, números, hífens e sublinhados.",
-    "MAX_WORDS_BETWEEN": "Por favor, insira entre {{MIN}} e {{MAX}} palavras.",
-    "MAX_CHARS": "Entre {{MIN}} e {{MAX}} caracteres. Atual: {{CURR}}"
-  },
-  "MASK": {
-    "REQUIRED": "Este campo é obrigatório.",
-    "DOC_ALREADY_EXISTS": "Este documento já está cadastrado.",
-    "INVALID_CNPJ": "CNPJ inválido.",
-    "INVALID_CPF": "CPF inválido.",
-    "MIN": "Deve ser maior ou igual a {{MIN}}.",
-    "MAX": "Deve ser menor ou igual a {{MAX}}.",
-    "BETWEEN": "Deve estar entre {{MIN}} e {{MAX}}."
-  },
-  "PASSWORD": {
-    "REQUIRED": "Este campo é obrigatório.",
-    "EIGHT_LONG": "Deve ter pelo menos 8 caracteres.",
-    "ONE_NUMBER": "Deve conter pelo menos um número.",
-    "ONE_SPECIAL": "Deve conter pelo menos um caractere especial.",
-    "ONE_UPPERCASE": "Deve conter pelo menos uma letra maiúscula.",
-    "ONE_LOWERCASE": "Deve conter pelo menos uma letra minúscula.",
-    "PASSWORDS_NOT_MATCH": "As senhas não coincidem."
-  },
-  "SELECT": {
-    "NOT_FOUND": "Nenhum item encontrado 😪"
-  },
+  "NO_INITIAL_SPACE": "Este campo não pode começar com um espaço.",
+  "NO_TRAILING_SPACE": "Este campo não pode terminar com um espaço.",
+  "NO_SPACES": "Este campo não pode conter espaços.",
+  "USERNAME": "Este campo deve conter apenas letras minúsculas, números, hífens e sublinhados.",
+  "MAX_WORDS_BETWEEN": "Por favor, insira entre {{MIN}} e {{MAX}} palavras.",
+  "MAX_CHARS": "Entre {{MIN}} e {{MAX}} caracteres. Atual: {{CURR}}",
+  "REQUIRED": "Este campo é obrigatório.",
+  "DOC_ALREADY_EXISTS": "Este documento já está cadastrado.",
+  "INVALID_CNPJ": "CNPJ inválido.",
+  "INVALID_CPF": "CPF inválido.",
+  "MIN": "Deve ser maior ou igual a {{MIN}}.",
+  "MAX": "Deve ser menor ou igual a {{MAX}}.",
+  "BETWEEN": "Deve estar entre {{MIN}} e {{MAX}}.",
+  "EIGHT_LONG": "Deve ter pelo menos 8 caracteres.",
+  "ONE_NUMBER": "Deve conter pelo menos um número.",
+  "ONE_SPECIAL": "Deve conter pelo menos um caractere especial.",
+  "ONE_UPPERCASE": "Deve conter pelo menos uma letra maiúscula.",
+  "ONE_LOWERCASE": "Deve conter pelo menos uma letra minúscula.",
+  "PASSWORDS_NOT_MATCH": "As senhas não coincidem.",
+  "SELECT_NOT_FOUND": "Nenhum item encontrado 😪",
   "NUMBER": {
     "REQUIRED": "Este campo é obrigatório.",
     "MIN": "Deve ser maior ou igual a {{MIN}}.",
