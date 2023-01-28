@@ -38,7 +38,7 @@ const Template = () => {
               row={6}
               text="EXAMPLE.TEXT"
               title="EXAMPLE.TITLE"
-              label="Select"
+              label="EXAMPLE.SELECT"
               name="select"
               options={options}
             />

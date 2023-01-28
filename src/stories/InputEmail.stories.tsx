@@ -45,7 +45,7 @@ const Template = () => {
               row={6}
               text="щ(ʘ╻ʘ)щ"
               name="nickname"
-              label="TEMPLATE.LOGIN.EMAIL"
+              label="TEMPLATE.LOGIN.EMAIL_LABEL"
               onBlurValidate={handleBlurValidate}
             />
           </Input.Group>

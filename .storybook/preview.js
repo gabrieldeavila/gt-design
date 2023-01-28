@@ -84,6 +84,13 @@ export const parameters = {
     },
   },
   darkMode: {
-    current: 'dark'
+    current: "dark",
+  },
+  options: {
+    storySort: {
+      method: "",
+      order: ["Data Entry", ["Inputs", ["All", "Text", "Email", "Select", "NumericMask"], "Buttons", "Switch"]],
+      locales: "",
+    },
   },
 };

@@ -19,12 +19,6 @@
   "ONE_LOWERCASE": "Deve conter pelo menos uma letra minúscula.",
   "PASSWORDS_NOT_MATCH": "As senhas não coincidem.",
   "SELECT_NOT_FOUND": "Nenhum item encontrado 😪",
-  "NUMBER": {
-    "REQUIRED": "Este campo é obrigatório.",
-    "MIN": "Deve ser maior ou igual a {{MIN}}.",
-    "MAX": "Deve ser menor ou igual a {{MAX}}.",
-    "BETWEEN": "Deve estar entre {{MIN}} e {{MAX}}."
-  },
   "TEMPLATE": {
     "LOGIN": {
       "CREATE_TITLE": "Criar uma nova conta",
@@ -50,7 +44,9 @@
     "PHONE": "Telefone",
     "DOC": "CPF/CNPJ",
     "PERCENT": "Percentual",
-    "NUMBER": "Número"
+    "NUMBER": "Número",
+    "MONEY": "Dinheiro",
+    "SELECT": "Selecione"
   },
   "STORIES": {
     "TOOLTIP": {

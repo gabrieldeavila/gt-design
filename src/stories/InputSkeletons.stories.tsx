@@ -48,7 +48,7 @@ const Template = ({ isLoading }: { isLoading: boolean }) => {
               row={4}
               title="wow such charm 🐲"
               text="what"
-              label="Select"
+              label="EXAMPLE.SELECT"
               name="select"
               options={options}
             />

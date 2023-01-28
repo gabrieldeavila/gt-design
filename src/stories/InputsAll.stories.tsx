@@ -70,7 +70,7 @@ const Template = () => {
             <GTInput.Select
               row={6}
               title="🐲"
-              label="Select"
+              label="EXAMPLE.SELECT"
               name="select"
               options={options}
             />

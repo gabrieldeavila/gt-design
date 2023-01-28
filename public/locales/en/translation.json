@@ -16,11 +16,6 @@
   "ONE_LOWERCASE": "It must contain at least one lowercase letter.",
   "PASSWORDS_NOT_MATCH": "Passwords do not match.",
   "SELECT_NOT_FOUND": "No results found 😪",
-  "NUMBER": {
-    "REQUIRED": "Please enter a valid number.",
-    "MIN": "It must be greater than {{MIN}}.",
-    "MAX": "It must be less than {{MAX}}."
-  },
   "TEMPLATE": {
     "LOGIN": {
       "CREATE_TITLE": "Create an account",
@@ -46,7 +41,9 @@
     "PHONE": "Phone",
     "DOC": "Document",
     "PERCENT": "Percent",
-    "NUMBER": "Number"
+    "NUMBER": "Number",
+    "MONEY": "Money",
+    "SELECT": "Select"
   },
   "STORIES": {
     "TOOLTIP": {

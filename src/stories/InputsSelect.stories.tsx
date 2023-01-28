@@ -58,8 +58,8 @@ const Template = ({ position }: { position: "top" | "bottom" }) => {
               <GTInput.Select
                 row={6}
                 title="🐲"
-                label="Select"
                 name="select"
+                label="EXAMPLE.SELECT"
                 options={options}
               />
             </Input.Group>

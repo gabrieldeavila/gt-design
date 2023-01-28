@@ -44,7 +44,7 @@ const Template = () => {
               title="（⊙ｏ⊙）"
               row={5}
               name="price"
-              label="Money"
+              label="EXAMPLE.MONEY"
               mask={moneyMask}
               min={10}
             />

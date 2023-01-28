@@ -146,7 +146,7 @@ const Template = () => {
               title="（⊙ｏ⊙）"
               row={5}
               name="doc"
-              label="Doc"
+              label="EXAMPLE.DOC"
               mask={docMask}
               min={10}
               onBlurValidate={handleBlurValidate}
