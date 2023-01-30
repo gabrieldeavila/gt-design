@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import _ from "lodash";
 import { useCallback, useState } from "react";
-import { TBlurValidate } from "../../components/Input/Fields/interface";
+import {
+  TBlurValidate,
+  TChangeValidate,
+} from "../../components/Input/Fields/interface";
 import { useGTPageStateContextSetters } from "../../context/pageState";
 import { TValidateState } from "../validation/interface";
 import { THandleBlurErrors } from "./interface";
@@ -9,7 +12,11 @@ import { THandleBlurErrors } from "./interface";
 function useInputValues(
   name: string,
   validateState: TValidateState,
-  onBlurValidate?: TBlurValidate
+  setIsValid: React.Dispatch<React.SetStateAction<boolean>>,
+  setErrorMessage: React.Dispatch<React.SetStateAction<string>>,
+  setLocaleErrorsParams: React.Dispatch<React.SetStateAction<Object>>,
+  onBlurValidate?: TBlurValidate,
+  onChangeValidate?: TChangeValidate
 ) {
   const { pageStateRef, setErrors } = useGTPageStateContextSetters();
 
@@ -27,15 +34,32 @@ function useInputValues(
     }
   }, [value]);
 
+  const handleValidateOnChange = useCallback(
+    (value: string | number) => {
+      if (!onChangeValidate) return;
+
+      const [isValid, invalidMessage, errorsParams] = onChangeValidate(value);
+
+      if (isValid == null) return;
+
+      setIsValid(isValid);
+      setErrorMessage(invalidMessage);
+      setLocaleErrorsParams(errorsParams ?? {});
+    },
+    [onChangeValidate, setErrorMessage, setIsValid, setLocaleErrorsParams]
+  );
+
   // if has value, label is up
   const handleInputChange = useCallback(
-    (val: string) => {
+    (val: string | number) => {
       if (!_.isEmpty(val) && _.isEmpty(value)) {
         setLabelIsUp(true);
       }
       setValue(val);
+
+      handleValidateOnChange(val);
     },
-    [value]
+    [handleValidateOnChange, value]
   );
 
   const handleInputBlurErrors: THandleBlurErrors = useCallback(async () => {
@@ -48,17 +72,30 @@ function useInputValues(
 
     // if there is any error, don't validate the mask
     if (errors > 0) return;
-
     setIsValidatingOnBlur(true);
 
-    const [isValid, errorMessage = ""] = (await onBlurValidate?.(value)) ?? [];
-    if (isValid == null) return;
+    const [isValid, errorMessage = "", errorsParams] =
+      (await onBlurValidate?.(value)) ?? [];
 
-    validateState(isValid, value);
+    if (isValid != null) {
+      validateState(isValid, value);
+      setIsValidatingOnBlur(false);
+
+      setIsValid(isValid);
+      setErrorMessage(errorMessage);
+      setLocaleErrorsParams(errorsParams ?? {});
+    }
+
     setIsValidatingOnBlur(false);
-
-    return [isValid, errorMessage];
-  }, [onBlurValidate, setErrors, validateState, value]);
+  }, [
+    onBlurValidate,
+    setErrorMessage,
+    setErrors,
+    setIsValid,
+    setLocaleErrorsParams,
+    validateState,
+    value,
+  ]);
 
   return {
     value,

@@ -65,7 +65,7 @@ const i18nextStoryDecorator = (Story, context) => {
       i18next.options.react when initializing i18next */}
       <Suspense fallback={<div>loading translations...</div>}>
         <Story />
-        <I18nextProvider i18n={i18n}></I18nextProvider>
+        <I18nextProvider i18n={i18n} />
       </Suspense>
     </>
   );
@@ -89,7 +89,15 @@ export const parameters = {
   options: {
     storySort: {
       method: "",
-      order: ["Data Entry", ["Inputs", ["All", "Text", "Email", "Select", "NumericMask"], "Buttons", "Switch"]],
+      order: [
+        "Data Entry",
+        [
+          "Inputs",
+          ["All", "Text", "Email", "Select", "NumericMask"],
+          "Buttons",
+          "Switch",
+        ],
+      ],
       locales: "",
     },
   },

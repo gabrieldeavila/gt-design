@@ -17,6 +17,8 @@
   "ONE_SPECIAL": "Deve conter pelo menos um caractere especial.",
   "ONE_UPPERCASE": "Deve conter pelo menos uma letra maiúscula.",
   "ONE_LOWERCASE": "Deve conter pelo menos uma letra minúscula.",
+  "INVALID_NICKNAME": "Este apelido é inválido, tente digitar: \"{{NICKNAME}}\".",
+  "INVALID_EMAIL": "Este e-mail é inválido, tente digitar: \"{{EMAIL}}\".",
   "PASSWORDS_NOT_MATCH": "As senhas não coincidem.",
   "SELECT_NOT_FOUND": "Nenhum item encontrado 😪",
   "TEMPLATE": {

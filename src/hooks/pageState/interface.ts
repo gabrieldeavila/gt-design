@@ -1,1 +1,1 @@
-export type THandleBlurErrors = () => Promise<[boolean, string] | undefined>;
+export type THandleBlurErrors = () => Promise<void>;

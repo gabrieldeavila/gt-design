@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useCallback, useState } from "react";
 import { GTInput, Input, Space } from "../components";
+import { TChangeValidate } from "../components/Input/Fields/interface";
 import SectionContainer from "../components/Text/Template/SectionContainer";
 import GTPageStateProvider from "../context/pageState";
 import { GTBasic } from "../gt";
@@ -14,16 +15,18 @@ const Template = () => {
   const [pageState, setPageState] = useState({});
   const [errors, setErrors] = useState<string[]>([]);
 
-  const handleBlurValidate = useCallback(async (): Promise<
-    [boolean, string]
-  > => {
-    return await new Promise((resolve) => {
-      setTimeout(() => {
-        const isValid = Math.random() >= 0.5;
+  const handleChangeValidate: TChangeValidate = useCallback((value) => {
+    let isValid = true;
+    let errorMsg = "";
+    let errorParams = {};
 
-        resolve([isValid, "DOC_ALREADY_EXISTS"]);
-      }, 200);
-    });
+    if (value !== "gt") {
+      isValid = false;
+      errorMsg = "INVALID_NICKNAME";
+      errorParams = { NICKNAME: "gt" };
+    }
+
+    return [isValid, errorMsg, errorParams];
   }, []);
 
   return (
@@ -42,10 +45,9 @@ const Template = () => {
           <Input.Group>
             <GTInput.Text
               row={6}
-              text="щ(ʘ╻ʘ)щ"
-              name="nickname"
+                name="nickname"
               label="TEMPLATE.LOGIN.NICKNAME_LABEL"
-              onBlurValidate={handleBlurValidate}
+              onChangeValidate={handleChangeValidate}
             />
           </Input.Group>
         </Space.Horizontal>

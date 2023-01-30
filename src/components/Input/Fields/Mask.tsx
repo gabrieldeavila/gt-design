@@ -28,6 +28,7 @@ function GTInputMask({
   validations,
   defaultValidation,
   onChange,
+  onChangeValidate,
   text,
   title,
   row,
@@ -38,6 +39,9 @@ function GTInputMask({
   const alterFieldRef = useRef<boolean>(true);
 
   const { isLoading } = useGTPageStateContextSetters();
+  const [isValid, setIsValid] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [localeErrorsParams, setLocaleErrorsParams] = useState({});
 
   const inputValidations = useMemo(() => {
     if (defaultValidation) {
@@ -56,16 +60,21 @@ function GTInputMask({
     handleInputBlur,
     handleInputBlurErrors,
     handleInputFocus,
-  } = useInputValues(name, validateState, onBlurValidate);
+  } = useInputValues(
+    name,
+    validateState,
+    setIsValid,
+    setErrorMessage,
+    setLocaleErrorsParams,
+    onBlurValidate,
+    onChangeValidate
+  );
 
   const inpRef = useRef<HTMLInputElement>(null);
 
   const { maskedValue, unMask } = useMask(value, mask, inpRef);
 
   const { validateMask } = useValidateMask(mask);
-  const [isValidMask, setIsValidMask] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [localeErrorsParams, setLocaleErrorsParams] = useState({});
 
   useEffect(() => {
     const chars = value.toString();
@@ -73,7 +82,7 @@ function GTInputMask({
 
     const { isValid, invalidMessage } = validateMask(chars, inputValidations);
 
-    setIsValidMask(isValid);
+    setIsValid(isValid);
     setErrorMessage(invalidMessage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -88,12 +97,12 @@ function GTInputMask({
       );
 
       validateState(isValid, unMaskedVal);
-      setIsValidMask(isValid);
+      setIsValid(isValid);
       setErrorMessage(invalidMessage);
       setLocaleErrorsParams(errorsVar);
       handleInputChange(unMaskedVal.toString());
 
-      onChange(e);
+      onChange?.(e);
       alterFieldRef.current = true;
     },
     [
@@ -127,26 +136,15 @@ function GTInputMask({
     }
   }, [handleInputFocus, mask]);
 
-  const handleMaskBlurErrors = useCallback(async () => {
-    const [isValid, errorMessage = ""] = (await handleInputBlurErrors()) ?? [];
-
-    if (isValid == null) {
-      return;
-    }
-
-    setIsValidMask(isValid);
-    setErrorMessage(errorMessage);
-  }, [handleInputBlurErrors]);
-
   const handleBlur = useCallback(() => {
     handleInputBlur();
 
     if (alterFieldRef.current) {
-      handleMaskBlurErrors().catch((e) => console.error(e));
+      handleInputBlurErrors().catch((e) => console.error(e));
     }
 
     alterFieldRef.current = false;
-  }, [handleInputBlur, handleMaskBlurErrors]);
+  }, [handleInputBlur, handleInputBlurErrors]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -174,7 +172,7 @@ function GTInputMask({
           />
         </Input.FieldWrapper>
 
-        {!isValidMask && (
+        {!isValid && (
           <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
         )}
 

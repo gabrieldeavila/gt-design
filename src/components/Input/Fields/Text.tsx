@@ -34,9 +34,14 @@ function GTInputText({
   title,
   row,
   onBlurValidate,
+  onChangeValidate,
 }: IGTInputText) {
   const { t } = useTranslation();
   const alterFieldRef = useRef<boolean>(true);
+
+  const [isValid, setIsValid] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [localeErrorsParams, setLocaleErrorsParams] = useState({});
 
   const inputValidations = useMemo(() => {
     if (defaultValidation) {
@@ -50,13 +55,21 @@ function GTInputText({
 
   const {
     value,
-    isValidatingOnBlur,
     labelIsUp,
+    isValidatingOnBlur,
     handleInputChange,
     handleInputBlur,
     handleInputBlurErrors,
     handleInputFocus,
-  } = useInputValues(name, validateState, onBlurValidate);
+  } = useInputValues(
+    name,
+    validateState,
+    setIsValid,
+    setErrorMessage,
+    setLocaleErrorsParams,
+    onBlurValidate,
+    onChangeValidate
+  );
 
   const { validateText, validateMinAndMax } = useValidateText(
     minWords,
@@ -64,17 +77,13 @@ function GTInputText({
     minChars,
     maxChars
   );
-  const [isValidText, setIsValidText] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [localeErrorsParams, setLocaleErrorsParams] = useState({});
-
   useEffect(() => {
     const chars = value.toString();
     if (chars.length === 0) return;
 
     const { isValid, invalidMessage } = validateText(chars, inputValidations);
 
-    setIsValidText(isValid);
+    setIsValid(isValid);
     setErrorMessage(invalidMessage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -91,12 +100,12 @@ function GTInputText({
 
       validateState(isAllValid, iVal);
       setErrorMessage(invalidAllMessage);
-      setIsValidText(isAllValid);
+      setIsValid(isAllValid);
       setLocaleErrorsParams(errorsVars);
       handleInputChange(iVal);
       alterFieldRef.current = true;
 
-      onChange(e);
+      onChange?.(e);
     },
     [
       onChange,
@@ -108,26 +117,15 @@ function GTInputText({
     ]
   );
 
-  const handleTextBlurErrors = useCallback(async () => {
-    const [isValid, errorMessage = ""] = (await handleInputBlurErrors()) ?? [];
-
-    if (isValid == null) {
-      return;
-    }
-
-    setIsValidText(isValid);
-    setErrorMessage(errorMessage);
-  }, [handleInputBlurErrors]);
-
   const handleBlur = useCallback(() => {
     handleInputBlur();
 
     if (alterFieldRef.current) {
-      handleTextBlurErrors().catch((e) => console.error(e));
+      handleInputBlurErrors().catch((e) => console.error(e));
     }
 
     alterFieldRef.current = false;
-  }, [handleInputBlur, handleTextBlurErrors]);
+  }, [handleInputBlur, handleInputBlurErrors]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -141,7 +139,7 @@ function GTInputText({
     <>
       <Input.Container row={row}>
         <Input.FieldWrapper>
-          <Input.Label isWrong={!isValidText} up={labelIsUp} htmlFor={name}>
+          <Input.Label isWrong={!isValid} up={labelIsUp} htmlFor={name}>
             {t(label)}
           </Input.Label>
           <Input.Field
@@ -155,7 +153,7 @@ function GTInputText({
           />
         </Input.FieldWrapper>
 
-        {!isValidText && (
+        {!isValid && (
           <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
         )}
 

@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useCallback, useState } from "react";
 import { GTInput, Input, Space } from "../components";
+import { TBlurValidate } from "../components/Input/Fields/interface";
 import SectionContainer from "../components/Text/Template/SectionContainer";
 import GTPageStateProvider from "../context/pageState";
 import { GTBasic } from "../gt";
@@ -14,18 +15,15 @@ const Template = () => {
   const [pageState, setPageState] = useState({});
   const [errors, setErrors] = useState<string[]>([]);
 
-  const handleBlurValidate = useCallback(
-    async (value: string | number): Promise<[boolean, string]> => {
-      return await new Promise((resolve) => {
-        setTimeout(() => {
-          const isValid = value === "gt@design.com";
+  const handleBlurValidate: TBlurValidate = useCallback(async (value) => {
+    return await new Promise((resolve) => {
+      setTimeout(() => {
+        const isValid = value === "gt@design.com";
 
-          resolve([isValid, "TENTA DIGITAR gt@design.com"]);
-        }, 200);
-      });
-    },
-    []
-  );
+        resolve([isValid, "INVALID_EMAIL"]);
+      }, 200);
+    });
+  }, []);
 
   return (
     <GTBasic>

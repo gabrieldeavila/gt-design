@@ -13,6 +13,7 @@ import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateEmail from "../../../hooks/validation/useValidateEmail";
 import useValidateState from "../../../hooks/validation/useValidateState";
+import Loader from "../../Loader";
 import GTTooltip from "../../Tooltip/Tooltip";
 import Input from "../Input";
 import { IGTInput } from "./interface";
@@ -29,9 +30,14 @@ function GTInputEmail({
   title,
   row,
   onBlurValidate,
+  onChangeValidate,
 }: IGTInput): JSX.Element {
   const { t } = useTranslation();
   const alterFieldRef = useRef<boolean>(true);
+
+  const [isValid, setIsValid] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [localeErrorsParams, setLocaleErrorsParams] = useState({});
 
   const { isLoading } = useGTPageStateContextSetters();
 
@@ -46,17 +52,23 @@ function GTInputEmail({
   const { validateState } = useValidateState(name, inputValidations);
 
   const {
-    labelIsUp,
     value,
+    labelIsUp,
+    isValidatingOnBlur,
     handleInputChange,
     handleInputBlur,
     handleInputBlurErrors,
     handleInputFocus,
-  } = useInputValues(name, validateState, onBlurValidate);
-
+  } = useInputValues(
+    name,
+    validateState,
+    setIsValid,
+    setErrorMessage,
+    setLocaleErrorsParams,
+    onBlurValidate,
+    onChangeValidate
+  );
   const { validateEmail } = useValidateEmail();
-  const [isValidEmail, setIsValidEmail] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const chars = value.toString();
@@ -64,7 +76,7 @@ function GTInputEmail({
 
     const { isValid, invalidMessage } = validateEmail(chars, inputValidations);
 
-    setIsValidEmail(isValid);
+    setIsValid(isValid);
     setErrorMessage(invalidMessage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -78,12 +90,12 @@ function GTInputEmail({
       );
 
       validateState(isValid, emailVal);
-      setIsValidEmail(isValid);
+      setIsValid(isValid);
       setErrorMessage(invalidMessage);
       handleInputChange(emailVal);
       alterFieldRef.current = true;
 
-      onChange(e);
+      onChange?.(e);
     },
     [
       validateEmail,
@@ -94,26 +106,15 @@ function GTInputEmail({
     ]
   );
 
-  const handleEmailBlurErrors = useCallback(async () => {
-    const [isValid, errorMessage = ""] = (await handleInputBlurErrors()) ?? [];
-
-    if (isValid == null) {
-      return;
-    }
-
-    setIsValidEmail(isValid);
-    setErrorMessage(errorMessage);
-  }, [handleInputBlurErrors]);
-
   const handleBlur = useCallback(() => {
     handleInputBlur();
 
     if (alterFieldRef.current) {
-      handleEmailBlurErrors().catch((e) => console.error(e));
+      handleInputBlurErrors().catch((e) => console.error(e));
     }
 
     alterFieldRef.current = false;
-  }, [handleInputBlur, handleEmailBlurErrors]);
+  }, [handleInputBlur, handleInputBlurErrors]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -125,7 +126,7 @@ function GTInputEmail({
     <>
       <Input.Container row={row}>
         <Input.FieldWrapper>
-          <Input.Label isWrong={!isValidEmail} up={labelIsUp} htmlFor={name}>
+          <Input.Label isWrong={!isValid} up={labelIsUp} htmlFor={name}>
             {t(label)}
           </Input.Label>
           <Input.Field
@@ -139,12 +140,20 @@ function GTInputEmail({
           />
         </Input.FieldWrapper>
 
-        {!isValidEmail && <Input.Error>{t(errorMessage)}</Input.Error>}
+        {!isValid && (
+          <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
+        )}
 
         <Input.FeedbackWrapper>
           {(title != null || text != null) && (
             <Input.IconWrapper ref={containerRef}>
               <Icon.Info size={15} className="svg-no-active" />
+            </Input.IconWrapper>
+          )}
+
+          {isValidatingOnBlur && (
+            <Input.IconWrapper showOpacity>
+              <Loader.Simple size="sm" />
             </Input.IconWrapper>
           )}
         </Input.FeedbackWrapper>

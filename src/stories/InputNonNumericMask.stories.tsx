@@ -2,7 +2,11 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useCallback, useState } from "react";
 import { GTInput, Input, Space } from "../components";
-import { INonNumericMask } from "../components/Input/Fields/interface";
+import {
+  INonNumericMask,
+  TBlurValidate,
+  TChangeValidate,
+} from "../components/Input/Fields/interface";
 import SectionContainer from "../components/Text/Template/SectionContainer";
 import GTPageStateProvider from "../context/pageState";
 import { GTBasic } from "../gt";
@@ -92,38 +96,40 @@ const Template = () => {
   const [pageState, setPageState] = useState({});
   const [errors, setErrors] = useState<string[]>([]);
 
-  const handleDocChange = useCallback((value: string) => {
-    let isValidMask = true;
-    let invalidMessageMask = "";
+  const handleDocChange: TChangeValidate = useCallback(
+    (value: string | number) => {
+      const valueString = value.toString();
 
-    // if the values is bigger than 11 it's a CNPJ, otherwise it's a CPF (brazilian docs)
-    if (value.length <= 11) {
-      // checks if it is a valid cpf
-      isValidMask = testCPF(value);
-      invalidMessageMask = !isValidMask ? "INVALID_CPF" : "";
-    } else {
-      // checks if it is a valid cnpj
-      isValidMask = testCNPJ(value);
-      invalidMessageMask = !isValidMask ? "INVALID_CNPJ" : "";
-    }
+      let isValidMask = true;
+      let invalidMessageMask = "";
 
-    return { isValidMask, invalidMessageMask };
-  }, []);
+      // if the values is bigger than 11 it's a CNPJ, otherwise it's a CPF (brazilian docs)
+      if (valueString.length <= 11) {
+        // checks if it is a valid cpf
+        isValidMask = testCPF(valueString);
+        invalidMessageMask = !isValidMask ? "INVALID_CPF" : "";
+      } else {
+        // checks if it is a valid cnpj
+        isValidMask = testCNPJ(valueString);
+        invalidMessageMask = !isValidMask ? "INVALID_CNPJ" : "";
+      }
+
+      return [isValidMask, invalidMessageMask];
+    },
+    []
+  );
 
   const docMask: INonNumericMask = {
     options: ["999.999.999-99", "99.999.999/9999-99"],
     type: "non_numeric_mask",
-    onMaskChange: handleDocChange,
   };
 
-  const handleBlurValidate = useCallback(async (): Promise<
-    [boolean, string]
-  > => {
+  const handleBlurValidate: TBlurValidate = useCallback(async (value) => {
     return await new Promise((resolve) => {
       setTimeout(() => {
         const isValid = Math.random() >= 0.5;
 
-        resolve([isValid, "DOC_ALREADY_EXISTS"]);
+        resolve([isValid, "DOC_ALREADY_EXISTS", {}]);
       }, 200);
     });
   }, []);
@@ -150,6 +156,7 @@ const Template = () => {
               mask={docMask}
               min={10}
               onBlurValidate={handleBlurValidate}
+              onChangeValidate={handleDocChange}
             />
           </Input.Group>
         </Space.Horizontal>

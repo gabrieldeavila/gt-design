@@ -1,13 +1,21 @@
+/* eslint-disable @typescript-eslint/indent */
+type TBlurValidateResult = [boolean, string] | [boolean, string, Object];
+
 export type TBlurValidate = (
   value: string | number
-) => [boolean, string] | Promise<[boolean, string]>;
+) => TBlurValidateResult | Promise<TBlurValidateResult>;
+
+export type TChangeValidate = (
+  value: string | number
+) => [boolean, string] | [boolean, string, Object];
 
 export interface IGTInput {
   name: string;
   label: string;
   validations: string[];
   defaultValidation: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeValidate?: TChangeValidate;
   title?: string;
   text?: string;
   row?: number;
@@ -43,10 +51,6 @@ export interface INumericMask {
 export interface INonNumericMask {
   type: "non_numeric_mask";
   options: string[];
-  onMaskChange?: (value: string) => {
-    isValidMask: boolean;
-    invalidMessageMask: string;
-  };
 }
 
 export type TNumericOptions = INumericMask | INonNumericMask;
