@@ -10,6 +10,8 @@
   "INVALID_CNPJ": "CNPJ inválido.",
   "INVALID_CPF": "CPF inválido.",
   "MIN": "Deve ser maior ou igual a {{MIN}}.",
+  "INVALID_NUMBER": "Este número é inválido. Tente digitar: \"{{NUMBER}}\".",
+  "OPS": "Ops! Alguém acabou de digitar o mesmo numéro que você. Tente novamente!",
   "MAX": "Deve ser menor ou igual a {{MAX}}.",
   "BETWEEN": "Deve estar entre {{MIN}} e {{MAX}}.",
   "EIGHT_LONG": "Deve ter pelo menos 8 caracteres.",

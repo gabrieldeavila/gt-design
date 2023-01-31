@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import _ from "lodash";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import {
   TBlurValidate,
   TChangeValidate,
 } from "../../components/Input/Fields/interface";
 import { useGTPageStateContextSetters } from "../../context/pageState";
 import { TValidateState } from "../validation/interface";
-import { THandleBlurErrors } from "./interface";
+import { THandleBlurErrors, THandleInputChange } from "./interface";
 
 function useInputValues(
   name: string,
@@ -18,7 +18,11 @@ function useInputValues(
   onBlurValidate?: TBlurValidate,
   onChangeValidate?: TChangeValidate
 ) {
-  const { pageStateRef, setErrors } = useGTPageStateContextSetters();
+  const alterFieldRef = useRef<boolean>(true);
+
+  const { pageStateRef } = useGTPageStateContextSetters();
+  // it only validates on blur if the other validations are valid
+  const isInputValid = useRef<boolean>(true);
 
   const [value, setValue] = useState(pageStateRef?.current?.[name] ?? "");
   const [labelIsUp, setLabelIsUp] = useState(!!pageStateRef?.current?.[name]);
@@ -28,54 +32,52 @@ function useInputValues(
     setLabelIsUp(true);
   }, []);
 
-  const handleInputBlur = useCallback(() => {
-    if (_.isEmpty(value)) {
-      setLabelIsUp(false);
-    }
-  }, [value]);
+  const handleValidateOnChange: THandleInputChange = useCallback(
+    (newValue, isValid, invalidMessage, errorsVar) => {
+      let isValidTemp = isValid;
+      let invalidMessageTemp = invalidMessage;
+      let errorsTemp = errorsVar;
 
-  const handleValidateOnChange = useCallback(
-    (value: string | number) => {
-      if (!onChangeValidate) return;
+      if (onChangeValidate && isValid) {
+        const [isValidChange, invalidMessageChange, errorsParams] =
+          onChangeValidate(newValue);
 
-      const [isValid, invalidMessage, errorsParams] = onChangeValidate(value);
+        isValidTemp = isValidChange;
+        errorsTemp = errorsParams ?? {};
+        invalidMessageTemp = invalidMessageChange;
+      }
 
-      if (isValid == null) return;
-
-      setIsValid(isValid);
-      setErrorMessage(invalidMessage);
-      setLocaleErrorsParams(errorsParams ?? {});
+      isInputValid.current = isValidTemp;
+      setIsValid(isValidTemp);
+      setErrorMessage(invalidMessageTemp);
+      setLocaleErrorsParams(errorsTemp);
     },
     [onChangeValidate, setErrorMessage, setIsValid, setLocaleErrorsParams]
   );
 
   // if has value, label is up
-  const handleInputChange = useCallback(
-    (val: string | number) => {
-      if (!_.isEmpty(val) && _.isEmpty(value)) {
+  const handleInputChange: THandleInputChange = useCallback(
+    (newVal: string | number, isValid, invalidMessage, errorsVar) => {
+      if (!_.isEmpty(newVal) && _.isEmpty(value)) {
         setLabelIsUp(true);
       }
-      setValue(val);
+      setValue(newVal);
 
-      handleValidateOnChange(val);
+      alterFieldRef.current = true;
+
+      handleValidateOnChange(newVal, isValid, invalidMessage, errorsVar);
     },
     [handleValidateOnChange, value]
   );
 
   const handleInputBlurErrors: THandleBlurErrors = useCallback(async () => {
-    let errors = 0;
-
-    await setErrors((prev) => {
-      errors = prev.length;
-      return prev;
-    });
+    if (!onBlurValidate || !isInputValid.current) return;
 
     // if there is any error, don't validate the mask
-    if (errors > 0) return;
     setIsValidatingOnBlur(true);
 
     const [isValid, errorMessage = "", errorsParams] =
-      (await onBlurValidate?.(value)) ?? [];
+      (await onBlurValidate(value)) ?? [];
 
     if (isValid != null) {
       validateState(isValid, value);
@@ -90,12 +92,22 @@ function useInputValues(
   }, [
     onBlurValidate,
     setErrorMessage,
-    setErrors,
     setIsValid,
     setLocaleErrorsParams,
     validateState,
     value,
   ]);
+
+  const handleInputBlur = useCallback(() => {
+    if (_.isEmpty(value)) {
+      setLabelIsUp(false);
+    }
+
+    if (alterFieldRef.current) {
+      handleInputBlurErrors().catch((e) => console.error(e));
+      alterFieldRef.current = false;
+    }
+  }, [handleInputBlurErrors, value]);
 
   return {
     value,

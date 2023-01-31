@@ -14,6 +14,7 @@ import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateNumber from "../../../hooks/validation/useValidateNumber";
 import useValidateState from "../../../hooks/validation/useValidateState";
+import Loader from "../../Loader";
 import GTTooltip from "../../Tooltip/Tooltip";
 import Input from "../Input";
 import { IGTInputNumber } from "./interface";
@@ -32,11 +33,14 @@ function GTInputNumber({
   min,
   max,
   onBlurValidate,
+  onChangeValidate,
 }: IGTInputNumber) {
   const { t } = useTranslation();
-  const alterFieldRef = useRef<boolean>(true);
 
   const { isLoading } = useGTPageStateContextSetters();
+  const [isValid, setIsValid] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [localeErrorsParams, setLocaleErrorsParams] = useState({});
 
   const inputValidations = useMemo(() => {
     if (defaultValidation) {
@@ -51,16 +55,21 @@ function GTInputNumber({
   const {
     labelIsUp,
     value,
+    isValidatingOnBlur,
     handleInputChange,
     handleInputBlur,
-    handleInputBlurErrors,
     handleInputFocus,
-  } = useInputValues(name, validateState, onBlurValidate);
+  } = useInputValues(
+    name,
+    validateState,
+    setIsValid,
+    setErrorMessage,
+    setLocaleErrorsParams,
+    onBlurValidate,
+    onChangeValidate
+  );
 
   const { validateNumber } = useValidateNumber(min, max);
-  const [isValidNumber, setIsValidNumber] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [localeErrorsParams, setLocaleErrorsParams] = useState({});
 
   useEffect(() => {
     const chars = value.toString();
@@ -68,7 +77,7 @@ function GTInputNumber({
 
     const { isValid, invalidMessage } = validateNumber(chars, inputValidations);
 
-    setIsValidNumber(isValid);
+    setIsValid(isValid);
     setErrorMessage(invalidMessage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -81,44 +90,12 @@ function GTInputNumber({
         inputValidations
       );
 
-      validateState(isValid, iVal);
-      setIsValidNumber(isValid);
-      setErrorMessage(invalidMessage);
-      setLocaleErrorsParams(errorsVar);
-      handleInputChange(iVal);
-      alterFieldRef.current = true;
+      handleInputChange(iVal, isValid, invalidMessage, errorsVar);
 
-      onChange(e);
+      onChange?.(e);
     },
-    [
-      validateNumber,
-      inputValidations,
-      validateState,
-      handleInputChange,
-      onChange,
-    ]
+    [validateNumber, inputValidations, handleInputChange, onChange]
   );
-
-  const handleNumberBlurErrors = useCallback(async () => {
-    const [isValid, errorMessage = ""] = (await handleInputBlurErrors()) ?? [];
-
-    if (isValid == null) {
-      return;
-    }
-
-    setIsValidNumber(isValid);
-    setErrorMessage(errorMessage);
-  }, [handleInputBlurErrors]);
-
-  const handleBlur = useCallback(() => {
-    handleInputBlur();
-
-    if (alterFieldRef.current) {
-      handleNumberBlurErrors().catch((e) => console.error(e));
-    }
-
-    alterFieldRef.current = false;
-  }, [handleInputBlur, handleNumberBlurErrors]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -130,14 +107,14 @@ function GTInputNumber({
     <>
       <Input.Container row={row}>
         <Input.FieldWrapper>
-          <Input.Label isWrong={!isValidNumber} up={labelIsUp} htmlFor={name}>
+          <Input.Label isWrong={!isValid} up={labelIsUp} htmlFor={name}>
             {t(label)}
           </Input.Label>
           <Input.Field
             type="number"
             value={value}
             onChange={handleChange}
-            onBlur={handleBlur}
+            onBlur={handleInputBlur}
             onFocus={handleInputFocus}
             id={name}
             name={name}
@@ -145,7 +122,7 @@ function GTInputNumber({
           />
         </Input.FieldWrapper>
 
-        {!isValidNumber && (
+        {!isValid && (
           <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
         )}
 
@@ -153,6 +130,12 @@ function GTInputNumber({
           {(title != null || text != null) && (
             <Input.IconWrapper ref={containerRef}>
               <Icon.Info size={15} className="svg-no-active" />
+            </Input.IconWrapper>
+          )}
+
+          {isValidatingOnBlur && (
+            <Input.IconWrapper showOpacity>
+              <Loader.Simple size="sm" />
             </Input.IconWrapper>
           )}
         </Input.FeedbackWrapper>
