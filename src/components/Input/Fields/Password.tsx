@@ -15,6 +15,7 @@ import { useGTPageStateContext } from "../../../context/pageState";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidatePassword from "../../../hooks/validation/useValidatePassword";
 import useValidateState from "../../../hooks/validation/useValidateState";
+import Loader from "../../Loader";
 import GTTooltip from "../../Tooltip/Tooltip";
 import Input from "../Input";
 import { IGTInputPassword } from "./interface";
@@ -39,15 +40,18 @@ function GTInputPassword({
   text,
   row,
   onBlurValidate,
+  onChangeValidate,
 }: IGTInputPassword) {
   const { t } = useTranslation();
-  const alterFieldRef = useRef<boolean>(true);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const inpRef = useRef<HTMLInputElement>(null);
 
   // state to keep track of all the inputs
   const { pageState, isLoading } = useGTPageStateContext();
+  const [isValid, setIsValid] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [localeErrorsParams, setLocaleErrorsParams] = useState({});
 
   // validations that are passed to the input
   const inputValidations = useMemo(() => {
@@ -65,16 +69,22 @@ function GTInputPassword({
   const {
     labelIsUp,
     value,
+    isValidatingOnBlur,
     handleInputChange,
     handleInputBlur,
-    handleInputBlurErrors,
     handleInputFocus,
-  } = useInputValues(name, validateState, onBlurValidate);
+  } = useInputValues(
+    name,
+    validateState,
+    setIsValid,
+    setErrorMessage,
+    setLocaleErrorsParams,
+    onBlurValidate,
+    onChangeValidate
+  );
 
   // password validation
   const { validatePassword } = useValidatePassword();
-  const [isValidPassword, setIsValidPassword] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -92,7 +102,7 @@ function GTInputPassword({
       inputValidations
     );
 
-    setIsValidPassword(isValid);
+    setIsValid(isValid);
     setErrorMessage(invalidMessage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -111,28 +121,18 @@ function GTInputPassword({
 
   const handleChange = useCallback(
     (e: any) => {
-      const { value: pswVal } = e.target;
+      const { value: iVal } = e.target;
       const { isValid, invalidMessage } = validatePassword(
-        pswVal,
+        iVal,
         inputValidations,
         sameAs
       );
 
-      validateState(isValid, pswVal);
-      setIsValidPassword(isValid);
-      setErrorMessage(invalidMessage);
-      handleInputChange(pswVal);
+      handleInputChange(iVal, isValid, invalidMessage);
 
-      onChange(e);
+      onChange?.(e);
     },
-    [
-      handleInputChange,
-      inputValidations,
-      onChange,
-      sameAs,
-      validatePassword,
-      validateState,
-    ]
+    [handleInputChange, inputValidations, onChange, sameAs, validatePassword]
   );
 
   const sameAsValue = useMemo(() => {
@@ -150,27 +150,6 @@ function GTInputPassword({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sameAsValue]);
 
-  const handlePasswordBlurErrors = useCallback(async () => {
-    const [isValid, errorMessage = ""] = (await handleInputBlurErrors()) ?? [];
-
-    if (isValid == null) {
-      return;
-    }
-
-    setIsValidPassword(isValid);
-    setErrorMessage(errorMessage);
-  }, [handleInputBlurErrors]);
-
-  const handleBlur = useCallback(() => {
-    handleInputBlur();
-
-    if (alterFieldRef.current) {
-      handlePasswordBlurErrors().catch((e) => console.error(e));
-    }
-
-    alterFieldRef.current = false;
-  }, [handleInputBlur, handlePasswordBlurErrors]);
-
   if (isLoading ?? false) {
     return <Input.Container row={row} isLoading />;
   }
@@ -179,14 +158,14 @@ function GTInputPassword({
     <>
       <Input.Container row={row}>
         <Input.FieldWrapper>
-          <Input.Label isWrong={!isValidPassword} up={labelIsUp} htmlFor={name}>
+          <Input.Label isWrong={!isValid} up={labelIsUp} htmlFor={name}>
             {t(label)}
           </Input.Label>
           <Input.Field
             ref={inpRef}
             type={type}
             onChange={handleChange}
-            onBlur={handleBlur}
+            onBlur={handleInputBlur}
             value={value}
             onFocus={handleInputFocus}
             id={name}
@@ -194,7 +173,7 @@ function GTInputPassword({
           />
         </Input.FieldWrapper>
 
-        {!isValidPassword && <Input.Error>{t(errorMessage)}</Input.Error>}
+        <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
 
         <Input.FeedbackWrapper>
           {(title != null || text != null) && (
@@ -207,6 +186,12 @@ function GTInputPassword({
             <Icon.Eye onClick={handleShowPassword} />
           ) : (
             <Icon.EyeOff onClick={handleShowPassword} />
+          )}
+
+          {isValidatingOnBlur && (
+            <Input.IconWrapper showOpacity>
+              <Loader.Simple size="sm" />
+            </Input.IconWrapper>
           )}
         </Input.FeedbackWrapper>
       </Input.Container>

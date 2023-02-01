@@ -49,8 +49,8 @@ function useInputValues(
 
       isInputValid.current = isValidTemp;
       setIsValid(isValidTemp);
-      setErrorMessage(invalidMessageTemp);
-      setLocaleErrorsParams(errorsTemp);
+      setErrorMessage(invalidMessageTemp ?? "");
+      setLocaleErrorsParams(errorsTemp ?? {});
     },
     [onChangeValidate, setErrorMessage, setIsValid, setLocaleErrorsParams]
   );

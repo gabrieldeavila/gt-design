@@ -18,6 +18,7 @@ import useOnClickOutside from "../../../hooks/helpers/useOnClickOutside";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import wordFilter from "../../../utils/wordFilter";
+import Loader from "../../Loader";
 import GTTooltip from "../../Tooltip/Tooltip";
 import Input, { Select } from "../Input";
 import {
@@ -39,26 +40,36 @@ function GTInputSelect({
   text,
   title,
   row,
+  onChange,
   onBlurValidate,
+  onChangeValidate,
 }: IGTInputSelect): JSX.Element {
   const { t } = useTranslation();
-  const alterFieldRef = useRef<boolean>(true);
 
   const { isLoading } = useGTPageStateContextSetters();
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [isValidSelect, setIsValidSelect] = useState(true);
+  const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [localeErrorsParams, setLocaleErrorsParams] = useState({});
 
   const { validateState } = useValidateState(name, []);
 
   const {
     labelIsUp,
+    isValidatingOnBlur,
     handleInputChange,
     handleInputBlur,
-    handleInputBlurErrors,
     handleInputFocus,
-  } = useInputValues(name, validateState, onBlurValidate);
+  } = useInputValues(
+    name,
+    validateState,
+    setIsValid,
+    setErrorMessage,
+    setLocaleErrorsParams,
+    onBlurValidate,
+    onChangeValidate
+  );
 
   const containerRef = useRef<HTMLDivElement>(null);
   const iconRef = useRef<HTMLDivElement>(null);
@@ -92,12 +103,14 @@ function GTInputSelect({
   // change the value of the input
   const handleChange = useCallback(
     (e: any) => {
-      const { value: val } = e.target;
-      setSearchTerm(val);
+      const { value: iVal } = e.target;
+      setSearchTerm(iVal);
 
-      handleInputChange(selectedLabel ?? val);
+      handleInputChange(iVal, isValid);
+
+      onChange?.(e);
     },
-    [handleInputChange, selectedLabel]
+    [handleInputChange, isValid, onChange]
   );
 
   const handleShowOptions = useCallback(() => {
@@ -115,7 +128,7 @@ function GTInputSelect({
     (option: SelectionOptions, selectedIndex: number) => {
       validateState(true, option.value);
       setSearchTerm(option.label);
-      handleInputChange(option.label);
+      handleInputChange(option.label, true);
       setSelected(option.value);
 
       selectedIndexRef.current = selectedIndex;
@@ -137,27 +150,6 @@ function GTInputSelect({
       return !prev;
     });
   }, []);
-
-  const handlePasswordBlurErrors = useCallback(async () => {
-    const [isValid, errorMessage = ""] = (await handleInputBlurErrors()) ?? [];
-
-    if (isValid == null) {
-      return;
-    }
-
-    setIsValidSelect(isValid);
-    setErrorMessage(errorMessage);
-  }, [handleInputBlurErrors]);
-
-  const handleBlur = useCallback(() => {
-    handleInputBlur();
-
-    if (alterFieldRef.current) {
-      handlePasswordBlurErrors().catch((e) => console.error(e));
-    }
-
-    alterFieldRef.current = false;
-  }, [handleInputBlur, handlePasswordBlurErrors]);
 
   const handleKey = useCallback(() => {
     // if it is not showing the options, open it
@@ -207,7 +199,7 @@ function GTInputSelect({
           isUp={showOptions}
         >
           <Input.FieldWrapper>
-            <Input.Label isWrong={!isValidSelect} up={labelIsUp} htmlFor={name}>
+            <Input.Label isWrong={!isValid} up={labelIsUp} htmlFor={name}>
               {t(label)}
             </Input.Label>
             <Input.Field
@@ -216,7 +208,7 @@ function GTInputSelect({
               onChange={handleChange}
               value={searchTerm}
               placeholder={selectedLabel}
-              onBlur={handleBlur}
+              onBlur={handleInputBlur}
               onFocus={handleInputFocus}
               id={name}
               name={name}
@@ -225,7 +217,9 @@ function GTInputSelect({
             />
           </Input.FieldWrapper>
 
-          {!isValidSelect && <Input.Error>{t(errorMessage)}</Input.Error>}
+          {!isValid && (
+            <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
+          )}
 
           <Input.FeedbackWrapper>
             {(title != null || text != null) && (
@@ -237,6 +231,12 @@ function GTInputSelect({
             <Input.IconWrapper showOpacity onClick={handleChevClick}>
               <ChevronDown />
             </Input.IconWrapper>
+
+            {isValidatingOnBlur && (
+              <Input.IconWrapper showOpacity>
+                <Loader.Simple size="sm" />
+              </Input.IconWrapper>
+            )}
           </Input.FeedbackWrapper>
           {showOptions && <SelectOptions options={options} />}
         </Input.Container>

@@ -36,7 +36,6 @@ function GTInputMask({
   onBlurValidate,
 }: IGTInputMask) {
   const { t } = useTranslation();
-  const alterFieldRef = useRef<boolean>(true);
 
   const { isLoading } = useGTPageStateContextSetters();
   const [isValid, setIsValid] = useState(true);
@@ -58,7 +57,6 @@ function GTInputMask({
     isValidatingOnBlur,
     handleInputChange,
     handleInputBlur,
-    handleInputBlurErrors,
     handleInputFocus,
   } = useInputValues(
     name,
@@ -96,23 +94,11 @@ function GTInputMask({
         inputValidations
       );
 
-      validateState(isValid, unMaskedVal);
-      setIsValid(isValid);
-      setErrorMessage(invalidMessage);
-      setLocaleErrorsParams(errorsVar);
-      handleInputChange(unMaskedVal.toString());
+      handleInputChange(unMaskedVal, isValid, invalidMessage, errorsVar);
 
       onChange?.(e);
-      alterFieldRef.current = true;
     },
-    [
-      unMask,
-      validateMask,
-      inputValidations,
-      validateState,
-      handleInputChange,
-      onChange,
-    ]
+    [unMask, validateMask, inputValidations, handleInputChange, onChange]
   );
 
   const handleFocus = useCallback(() => {
@@ -136,16 +122,6 @@ function GTInputMask({
     }
   }, [handleInputFocus, mask]);
 
-  const handleBlur = useCallback(() => {
-    handleInputBlur();
-
-    if (alterFieldRef.current) {
-      handleInputBlurErrors().catch((e) => console.error(e));
-    }
-
-    alterFieldRef.current = false;
-  }, [handleInputBlur, handleInputBlurErrors]);
-
   const containerRef = useRef<HTMLDivElement>(null);
 
   if (isLoading ?? false) {
@@ -164,7 +140,7 @@ function GTInputMask({
             type="text"
             value={maskedValue}
             onChange={handleChange}
-            onBlur={handleBlur}
+            onBlur={handleInputBlur}
             onFocus={handleFocus}
             id={name}
             name={name}

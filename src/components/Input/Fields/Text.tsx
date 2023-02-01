@@ -98,12 +98,7 @@ function GTInputText({
         iVal
       );
 
-      validateState(isAllValid, iVal);
-      setErrorMessage(invalidAllMessage);
-      setIsValid(isAllValid);
-      setLocaleErrorsParams(errorsVars);
-      handleInputChange(iVal);
-      alterFieldRef.current = true;
+      handleInputChange(iVal, isAllValid, invalidAllMessage, errorsVars);
 
       onChange?.(e);
     },
@@ -112,7 +107,6 @@ function GTInputText({
       validateText,
       inputValidations,
       validateMinAndMax,
-      validateState,
       handleInputChange,
     ]
   );

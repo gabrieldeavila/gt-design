@@ -33,7 +33,6 @@ function GTInputEmail({
   onChangeValidate,
 }: IGTInput): JSX.Element {
   const { t } = useTranslation();
-  const alterFieldRef = useRef<boolean>(true);
 
   const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -52,12 +51,11 @@ function GTInputEmail({
   const { validateState } = useValidateState(name, inputValidations);
 
   const {
-    value,
     labelIsUp,
+    value,
     isValidatingOnBlur,
     handleInputChange,
     handleInputBlur,
-    handleInputBlurErrors,
     handleInputFocus,
   } = useInputValues(
     name,
@@ -68,6 +66,7 @@ function GTInputEmail({
     onBlurValidate,
     onChangeValidate
   );
+
   const { validateEmail } = useValidateEmail();
 
   useEffect(() => {
@@ -83,38 +82,15 @@ function GTInputEmail({
 
   const handleChange = useCallback(
     (e: any) => {
-      const { value: emailVal } = e.target;
-      const { isValid, invalidMessage } = validateEmail(
-        emailVal,
-        inputValidations
-      );
+      const { value: iVal } = e.target;
+      const { isValid, invalidMessage } = validateEmail(iVal, inputValidations);
 
-      validateState(isValid, emailVal);
-      setIsValid(isValid);
-      setErrorMessage(invalidMessage);
-      handleInputChange(emailVal);
-      alterFieldRef.current = true;
+      handleInputChange(iVal, isValid, invalidMessage);
 
       onChange?.(e);
     },
-    [
-      validateEmail,
-      inputValidations,
-      validateState,
-      handleInputChange,
-      onChange,
-    ]
+    [validateEmail, inputValidations, handleInputChange, onChange]
   );
-
-  const handleBlur = useCallback(() => {
-    handleInputBlur();
-
-    if (alterFieldRef.current) {
-      handleInputBlurErrors().catch((e) => console.error(e));
-    }
-
-    alterFieldRef.current = false;
-  }, [handleInputBlur, handleInputBlurErrors]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -133,7 +109,7 @@ function GTInputEmail({
             type="email"
             onChange={handleChange}
             value={value}
-            onBlur={handleBlur}
+            onBlur={handleInputBlur}
             onFocus={handleInputFocus}
             id={name}
             name={name}
