@@ -54,7 +54,7 @@ function getUnMaskedNonNumeric(
   // removes the mask characters
   unMask.forEach((char) => {
     // if it is a letter or number, adds it to the new value
-    if (/[0-9a-z]/i.test(char) || char === "_") {
+    if (/[0-9a-z]/i.test(char)) {
       newValue += char;
     }
   });
@@ -69,7 +69,7 @@ function getUnMaskedNonNumeric(
   const prevValueOnlyChars = value.toString().replace(/[^0-9a-z]/gi, "");
 
   isDeleting.current = prevValueOnlyChars.length > newValueOnlyChars.length;
-
+  console.log(newValue);
   return newValue;
 }
 

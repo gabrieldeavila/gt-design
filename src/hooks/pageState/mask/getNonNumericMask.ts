@@ -23,6 +23,12 @@ function getNonNumericMask(
 
   // now masks the value
   let index = 0;
+  for (const val of valueChars) {
+    // finds the position of the val in the bestMask
+    const position = bestMask.indexOf(val, index);
+    console.log(position, val);
+  }
+  console.log("valueChars", valueChars);
   for (const char of bestMask.split("")) {
     if (!/[0-9a-z]/i.test(char)) {
       newMask += char;
