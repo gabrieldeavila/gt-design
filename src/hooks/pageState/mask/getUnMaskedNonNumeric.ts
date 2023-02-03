@@ -64,12 +64,12 @@ function getUnMaskedNonNumeric(
     newValue = newValue.slice(0, -1);
   }
 
-  // if value has less chars than valToUnMask, it means that the user is removing chars
+  // if the value has less chars than the valToUnMask, it means that the user is removing chars
   const newValueOnlyChars = newValue.replace(/[^0-9a-z]/gi, "");
   const prevValueOnlyChars = value.toString().replace(/[^0-9a-z]/gi, "");
 
   isDeleting.current = prevValueOnlyChars.length > newValueOnlyChars.length;
-  console.log(newValue);
+
   return newValue;
 }
 

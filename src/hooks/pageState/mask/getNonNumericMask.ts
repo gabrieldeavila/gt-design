@@ -23,12 +23,30 @@ function getNonNumericMask(
 
   // now masks the value
   let index = 0;
+
+  let maskIndex = 0;
+  let mask = "";
   for (const val of valueChars) {
-    // finds the position of the val in the bestMask
-    const position = bestMask.indexOf(val, index);
-    console.log(position, val);
+    // checks if the mask char is a special or a number/letter
+    let isSpecial = true;
+
+    while (isSpecial) {
+      // if it's a special character, adds it to the mask
+      if (!/[0-9a-z]/i.test(bestMask[maskIndex])) {
+        mask += bestMask[maskIndex];
+        maskIndex += 1;
+      } else {
+        // if it's not, breaks the loop
+        isSpecial = false;
+      }
+    }
+
+    mask += val;
+
+    maskIndex += 1;
   }
-  console.log("valueChars", valueChars);
+  return mask;
+
   for (const char of bestMask.split("")) {
     if (!/[0-9a-z]/i.test(char)) {
       newMask += char;
@@ -54,7 +72,7 @@ function getNonNumericMask(
       index += 1;
     }
   }
-
+  console.log(newMask);
   return newMask;
 }
 
