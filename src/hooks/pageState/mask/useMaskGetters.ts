@@ -23,7 +23,8 @@ function useMaskGetters(
   inpRef: React.RefObject<HTMLInputElement>,
   currPosition: React.MutableRefObject<null | number>,
   isDeleting: React.MutableRefObject<boolean>,
-  setForceReset: React.Dispatch<React.SetStateAction<boolean>>
+  setForceReset: React.Dispatch<React.SetStateAction<boolean>>,
+  isGuided?: boolean
 ) {
   // prevents the cursor from going to wrong position
   const handleRightPosition = useCallback(
@@ -50,7 +51,7 @@ function useMaskGetters(
 
       if (!bestMask) return value;
 
-      const newMask = getNonNumericMask(value, bestMask, setForceReset);
+      const newMask = getNonNumericMask(value, bestMask, setForceReset, isGuided);
 
       const currInpPosition = inpRef.current?.selectionStart ?? 0;
       const currMaskPosition = newMask[currInpPosition - 1];
@@ -67,7 +68,7 @@ function useMaskGetters(
 
       return newMask;
     },
-    [currPosition, handleRightPosition, inpRef, setForceReset]
+    [currPosition, handleRightPosition, inpRef, setForceReset, isGuided]
   );
 
   // it handles the mask

@@ -55,7 +55,7 @@ function GTInputText({
 
   const {
     value,
-    labelIsUp,
+    isLabelUp,
     isValidatingOnBlur,
     handleInputChange,
     handleInputBlur,
@@ -133,7 +133,7 @@ function GTInputText({
     <>
       <Input.Container row={row}>
         <Input.FieldWrapper>
-          <Input.Label isWrong={!isValid} up={labelIsUp} htmlFor={name}>
+          <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={name}>
             {t(label)}
           </Input.Label>
           <Input.Field

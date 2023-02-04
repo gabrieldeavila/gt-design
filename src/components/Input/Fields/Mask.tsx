@@ -34,6 +34,7 @@ function GTInputMask({
   row,
   mask,
   onBlurValidate,
+  isGuided,
 }: IGTInputMask) {
   const { t } = useTranslation();
 
@@ -53,6 +54,7 @@ function GTInputMask({
   const { validateState } = useValidateState(name, inputValidations);
 
   const {
+    isLabelUp,
     value,
     isValidatingOnBlur,
     handleInputChange,
@@ -70,7 +72,7 @@ function GTInputMask({
 
   const inpRef = useRef<HTMLInputElement>(null);
 
-  const { maskedValue, unMask } = useMask(value, mask, inpRef);
+  const { maskedValue, unMask } = useMask(value, mask, inpRef, isGuided);
 
   const { validateMask } = useValidateMask(mask);
 
@@ -124,6 +126,12 @@ function GTInputMask({
 
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const isUp = useMemo(() => {
+    if (isGuided) return true;
+
+    return isLabelUp;
+  }, [isGuided, isLabelUp]);
+
   if (isLoading ?? false) {
     return <Input.Container row={row} isLoading />;
   }
@@ -132,7 +140,7 @@ function GTInputMask({
     <>
       <Input.Container row={row}>
         <Input.FieldWrapper>
-          <Input.Label isWrong={false} up htmlFor={name}>
+          <Input.Label isWrong={false} up={isUp} htmlFor={name}>
             {t(label)}
           </Input.Label>
           <Input.Field

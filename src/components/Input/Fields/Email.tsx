@@ -51,7 +51,7 @@ function GTInputEmail({
   const { validateState } = useValidateState(name, inputValidations);
 
   const {
-    labelIsUp,
+    isLabelUp,
     value,
     isValidatingOnBlur,
     handleInputChange,
@@ -102,7 +102,7 @@ function GTInputEmail({
     <>
       <Input.Container row={row}>
         <Input.FieldWrapper>
-          <Input.Label isWrong={!isValid} up={labelIsUp} htmlFor={name}>
+          <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={name}>
             {t(label)}
           </Input.Label>
           <Input.Field

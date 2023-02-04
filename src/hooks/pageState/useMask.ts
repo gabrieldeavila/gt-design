@@ -17,7 +17,8 @@ import useUnMaskGetters from "./mask/useUnMaskGetters";
 function useMask(
   value: string | number,
   mask: TNumericOptions,
-  inpRef: React.RefObject<HTMLInputElement>
+  inpRef: React.RefObject<HTMLInputElement>,
+  isGuided?: boolean
 ) {
   const currPosition = useRef<null | number>(0);
   const isDeleting = useRef(false);
@@ -27,7 +28,8 @@ function useMask(
     inpRef,
     currPosition,
     isDeleting,
-    setForceReset
+    setForceReset,
+    isGuided
   );
 
   // masks the value, example: 1234567.89 => $1,234,567.89

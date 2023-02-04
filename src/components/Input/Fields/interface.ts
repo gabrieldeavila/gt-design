@@ -57,6 +57,7 @@ export type TNumericOptions = INumericMask | INonNumericMask;
 
 export interface IGTInputMask extends IGTInput {
   mask: TNumericOptions;
+  isGuided?: boolean;
   min?: number | string;
   max?: number | string;
 }

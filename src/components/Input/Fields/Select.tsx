@@ -56,7 +56,7 @@ function GTInputSelect({
   const { validateState } = useValidateState(name, []);
 
   const {
-    labelIsUp,
+    isLabelUp,
     isValidatingOnBlur,
     handleInputChange,
     handleInputBlur,
@@ -199,7 +199,7 @@ function GTInputSelect({
           isUp={showOptions}
         >
           <Input.FieldWrapper>
-            <Input.Label isWrong={!isValid} up={labelIsUp} htmlFor={name}>
+            <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={name}>
               {t(label)}
             </Input.Label>
             <Input.Field

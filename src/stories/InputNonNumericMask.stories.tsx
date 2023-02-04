@@ -13,6 +13,15 @@ import { GTBasic } from "../gt";
 
 export default {
   title: "Data Entry/Inputs/NonNumericMask",
+  args: {
+    isGuided: false,
+  },
+  argTypes: {
+    isGuided: {
+      control: "boolean",
+      default: false,
+    },
+  },
 };
 
 function testCPF(strCPF: string) {
@@ -92,7 +101,7 @@ function testCNPJ(value: string) {
   return digit1 === digits[1];
 }
 
-const Template = () => {
+const Template = ({ isGuided }: { isGuided: boolean }) => {
   const [pageState, setPageState] = useState({});
   const [errors, setErrors] = useState<string[]>([]);
 
@@ -154,7 +163,7 @@ const Template = () => {
               name="doc"
               label="EXAMPLE.DOC"
               mask={docMask}
-              min={10}
+              isGuided={isGuided}
               onBlurValidate={handleBlurValidate}
               onChangeValidate={handleDocChange}
             />
