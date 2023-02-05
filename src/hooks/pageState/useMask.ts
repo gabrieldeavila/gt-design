@@ -18,6 +18,7 @@ function useMask(
   value: string | number,
   mask: TNumericOptions,
   inpRef: React.RefObject<HTMLInputElement>,
+  isFirstChange: boolean,
   isGuided?: boolean
 ) {
   const currPosition = useRef<null | number>(0);
@@ -33,10 +34,13 @@ function useMask(
   );
 
   // masks the value, example: 1234567.89 => $1,234,567.89
-  const maskedValue = useMemo(
-    () => handleMaskValue(value, mask),
-    [handleMaskValue, mask, value]
-  );
+  const maskedValue = useMemo(() => {
+    if (isFirstChange && !(isGuided ?? false)) {
+      return value;
+    }
+
+    return handleMaskValue(value, mask);
+  }, [handleMaskValue, isFirstChange, isGuided, mask, value]);
 
   // prevents the cursor from going to wrong position
   useEffect(() => {

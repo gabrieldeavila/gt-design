@@ -25,11 +25,11 @@ function useInputValues(
   const isInputValid = useRef<boolean>(true);
 
   const [value, setValue] = useState(pageStateRef?.current?.[name] ?? "");
-  const [isLabelUp, setisLabelUp] = useState(!!pageStateRef?.current?.[name]);
+  const [isLabelUp, setIsLabelUp] = useState(!!pageStateRef?.current?.[name]);
   const [isValidatingOnBlur, setIsValidatingOnBlur] = useState(false);
 
   const handleInputFocus = useCallback(() => {
-    setisLabelUp(true);
+    setIsLabelUp(true);
   }, []);
 
   const handleValidateOnChange: THandleInputChange = useCallback(
@@ -58,8 +58,11 @@ function useInputValues(
   // if has value, label is up
   const handleInputChange: THandleInputChange = useCallback(
     (newVal: string | number, isValid, invalidMessage, errorsVar) => {
-      if (!_.isEmpty(newVal) && _.isEmpty(value)) {
-        setisLabelUp(true);
+      const valueTemp = value.toString();
+      const newValTemp = newVal.toString();
+
+      if (!_.isEmpty(newValTemp) && _.isEmpty(valueTemp)) {
+        setIsLabelUp(true);
       }
       setValue(newVal);
 
@@ -99,8 +102,8 @@ function useInputValues(
   ]);
 
   const handleInputBlur = useCallback(() => {
-    if (_.isEmpty(value)) {
-      setisLabelUp(false);
+    if (_.isEmpty(value.toString())) {
+      setIsLabelUp(false);
     }
 
     if (alterFieldRef.current) {

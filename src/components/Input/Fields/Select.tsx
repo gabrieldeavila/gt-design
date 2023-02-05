@@ -56,7 +56,6 @@ function GTInputSelect({
   const { validateState } = useValidateState(name, []);
 
   const {
-    isLabelUp,
     isValidatingOnBlur,
     handleInputChange,
     handleInputBlur,
@@ -156,7 +155,7 @@ function GTInputSelect({
     const hasFocus =
       containerRef.current?.contains(document.activeElement) ?? false;
     if (!showOptions && hasFocus) {
-      // discovers if ref has focus
+      // discovers if the ref has focus
       setShowOptions(true);
     }
   }, [showOptions]);
@@ -172,6 +171,11 @@ function GTInputSelect({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const isSelectUp = useMemo(
+    () => showOptions || selected !== "",
+    [showOptions, selected]
+  );
 
   useOnClickOutside(containerRef, null, handleCloseSelect);
 
@@ -199,7 +203,7 @@ function GTInputSelect({
           isUp={showOptions}
         >
           <Input.FieldWrapper>
-            <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={name}>
+            <Input.Label isWrong={!isValid} up={isSelectUp} htmlFor={name}>
               {t(label)}
             </Input.Label>
             <Input.Field

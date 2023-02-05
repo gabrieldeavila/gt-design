@@ -71,8 +71,15 @@ function GTInputMask({
   );
 
   const inpRef = useRef<HTMLInputElement>(null);
+  const isFirstChange = useRef<boolean>(true);
 
-  const { maskedValue, unMask } = useMask(value, mask, inpRef, isGuided);
+  const { maskedValue, unMask } = useMask(
+    value,
+    mask,
+    inpRef,
+    isFirstChange.current,
+    isGuided
+  );
 
   const { validateMask } = useValidateMask(mask);
 
@@ -95,6 +102,7 @@ function GTInputMask({
         unMaskedVal.toString(),
         inputValidations
       );
+      isFirstChange.current = false;
 
       handleInputChange(unMaskedVal, isValid, invalidMessage, errorsVar);
 
@@ -140,7 +148,7 @@ function GTInputMask({
     <>
       <Input.Container row={row}>
         <Input.FieldWrapper>
-          <Input.Label isWrong={false} up={isUp} htmlFor={name}>
+          <Input.Label isWrong={!isValid} up={isUp} htmlFor={name}>
             {t(label)}
           </Input.Label>
           <Input.Field
