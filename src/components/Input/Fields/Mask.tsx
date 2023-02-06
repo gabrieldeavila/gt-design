@@ -94,10 +94,32 @@ function GTInputMask({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const currKey = useRef<string>("");
+
+  useEffect(() => {
+    if (inpRef.current == null) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // gets the key pressed
+      currKey.current = e.key;
+    };
+
+    const inpt = inpRef.current;
+
+    // add event listener to the input
+    inpt.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      inpt?.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   const handleChange = useCallback(
-    (e: any) => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value: iVal } = e.target;
-      const unMaskedVal = unMask(iVal);
+
+      const unMaskedVal = unMask(iVal, currKey.current);
+
       const { isValid, invalidMessage, errorsVar } = validateMask(
         unMaskedVal.toString(),
         inputValidations
@@ -110,27 +132,6 @@ function GTInputMask({
     },
     [unMask, validateMask, inputValidations, handleInputChange, onChange]
   );
-
-  const handleFocus = useCallback(() => {
-    const { type } = mask;
-
-    handleInputFocus();
-
-    if (inpRef.current == null) return;
-
-    if (type === "numeric_mask") {
-      // selection range is in the end of the input
-      inpRef.current.setSelectionRange(
-        inpRef.current.value.length,
-        inpRef.current.value.length
-      );
-      return;
-    }
-
-    if (type === "non_numeric_mask") {
-      inpRef.current.setSelectionRange(0, 0);
-    }
-  }, [handleInputFocus, mask]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -157,7 +158,7 @@ function GTInputMask({
             value={maskedValue}
             onChange={handleChange}
             onBlur={handleInputBlur}
-            onFocus={handleFocus}
+            onFocus={handleInputFocus}
             id={name}
             name={name}
             autoComplete="off"

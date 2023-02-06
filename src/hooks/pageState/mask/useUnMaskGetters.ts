@@ -20,8 +20,8 @@ function useUnMaskGetters(
   isDeleting: React.MutableRefObject<boolean>
 ) {
   const unMaskNumeric = useCallback(
-    (valToUnMask: number | string, mask: INumericMask) => {
-      const unMaskedNumeric = getUnMaskedNumeric(valToUnMask, mask);
+    (valToUnMask: number | string, mask: INumericMask, currKey: string) => {
+      const unMaskedNumeric = getUnMaskedNumeric(valToUnMask, mask, currKey);
 
       return unMaskedNumeric;
     },

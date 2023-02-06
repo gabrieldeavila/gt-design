@@ -37,16 +37,22 @@ function getNumericMask(value: string | number, mask: INumericMask) {
     thousandsSeparatorSymbol
   );
 
+  let isNegative = "";
+
   // if the value is negative, it adds the negative symbol
   if (allowNegative && currValue.includes("-")) {
     // removes the negative symbol from the value
     newInteger = newInteger.replace("-", "");
+    isNegative = "-";
+  }
 
-    return `-${prefix}${newInteger}${decimalSymbol}${newDecimal}${suffix}`;
+  // prevents the return of a value like 1.00, when the value is 1
+  if (decimalLimit <= 0) {
+    return `${isNegative}${prefix}${newInteger}${suffix}`;
   }
 
   // otherwise, it returns the masked value
-  return `${prefix}${newInteger}${decimalSymbol}${newDecimal}${suffix}`;
+  return `${isNegative}${prefix}${newInteger}${decimalSymbol}${newDecimal}${suffix}`;
 }
 
 export default getNumericMask;

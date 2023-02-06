@@ -62,9 +62,9 @@ function useMask(
   // it receives the masked value and returns the unmasked value
   // example: $1,234,567.89 => 1234567.89
   const unMask = useCallback(
-    (valToUnMask: number | string) => {
+    (valToUnMask: number | string, currKey: string) => {
       if (mask.type === "numeric_mask") {
-        return unMaskNumeric(valToUnMask, mask);
+        return unMaskNumeric(valToUnMask, mask, currKey);
       }
 
       if (mask.type === "non_numeric_mask") {
