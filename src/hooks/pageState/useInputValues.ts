@@ -46,13 +46,14 @@ function useInputValues(
         errorsTemp = errorsParams ?? {};
         invalidMessageTemp = invalidMessageChange;
       }
+      validateState(isValidTemp, newValue);
 
       isInputValid.current = isValidTemp;
       setIsValid(isValidTemp);
       setErrorMessage(invalidMessageTemp ?? "");
       setLocaleErrorsParams(errorsTemp ?? {});
     },
-    [onChangeValidate, setErrorMessage, setIsValid, setLocaleErrorsParams]
+    [onChangeValidate, setErrorMessage, setIsValid, setLocaleErrorsParams, validateState]
   );
 
   // if has value, label is up
