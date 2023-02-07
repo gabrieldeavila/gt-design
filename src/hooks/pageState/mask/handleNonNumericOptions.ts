@@ -54,6 +54,16 @@ export function nonNumericDefault(bestMask: string, valueChars: string[]) {
         isSpecial = false;
       }
     }
+    const isNumber = /[0-9]/.test(val);
+    const isLetter = /[a-z]/i.test(val);
+    const isFollowingMaskOrder =
+      (/[0-9]/.test(bestMask[maskIndex]) && isNumber) ||
+      (/[a-z]/i.test(bestMask[maskIndex]) && isLetter);
+
+    if (!isFollowingMaskOrder) {
+      maskIndex += 1;
+      continue;
+    }
 
     mask += val;
 

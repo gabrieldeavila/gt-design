@@ -53,6 +53,9 @@ export const ResetBtn = styled.button<IButton>`
   width: ${({ fitContent }) =>
     fitContent ? "fit-content" : "-webkit-fill-available;"};
 
+  white-space: ${({ fitContent }) =>
+    fitContent ? "pre;" : "unset;"};
+
   /* if it's disabled */
   ${({ disabled, isLoading }) =>
     disabled &&

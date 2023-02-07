@@ -48,17 +48,16 @@ function getUnMaskedNonNumeric(
   let newValue = "";
 
   let bestMask = getBestNonNumericMask(valToUnMask.toString(), options);
-  // only keeps letters and numbers
-  bestMask = bestMask.replace(/[^0-9a-z]/gi, "");
 
   // removes the mask characters
-  unMask.forEach((char) => {
-    // if it is a letter or number, adds it to the new value
+  unMask.forEach((char, index) => {
     if (/[0-9a-z]/i.test(char)) {
       newValue += char;
     }
   });
 
+  // only keeps letters and numbers
+  bestMask = bestMask.replace(/[^0-9a-z]/gi, "");
   // if the value is bigger than the mask, removes the last char
   if (newValue.length > bestMask.length) {
     newValue = newValue.slice(0, -1);
