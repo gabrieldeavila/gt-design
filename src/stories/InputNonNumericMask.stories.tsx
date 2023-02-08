@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { GTInput, Input, Space } from "../components";
 import {
   INonNumericMask,
@@ -142,6 +142,10 @@ const Template = ({ isGuided }: { isGuided: boolean }) => {
       }, 200);
     });
   }, []);
+
+  useEffect(() => {
+    // console.log(pageState);
+  }, [pageState]);
 
   return (
     <GTBasic>

@@ -2,6 +2,8 @@
 import { INonNumericMask } from "../../../components/Input/Fields/interface";
 import getBestNonNumericMask from "./getBestNonNumericMask";
 
+let timeout: ReturnType<typeof setTimeout>;
+
 /**
  * It unmasks a non numeric mask
  * @param valToUnMask - the value to be unmasked
@@ -48,16 +50,42 @@ function getUnMaskedNonNumeric(
   let newValue = "";
 
   let bestMask = getBestNonNumericMask(valToUnMask.toString(), options);
+  // only keeps letters and numbers
+  bestMask = bestMask.replace(/[^0-9a-z]/gi, "");
+
+  let correctIndex = 0;
 
   // removes the mask characters
   unMask.forEach((char, index) => {
-    if (/[0-9a-z]/i.test(char)) {
-      newValue += char;
+    if (!/[0-9a-z]/i.test(char)) {
+      return;
     }
+
+    const maskChar = bestMask[correctIndex];
+    if (!maskChar) {
+      correctIndex += 1;
+
+      return;
+    }
+
+    const maskIsLetter = /[a-z]/i.test(maskChar);
+    const charIsLetter = /[a-z]/i.test(char);
+
+    const maskIsNumber = /[0-9]/.test(maskChar);
+    const charIsNumber = /[0-9]/.test(char);
+
+    if ((maskIsLetter && charIsLetter) || (maskIsNumber && charIsNumber)) {
+      clearTimeout(timeout);
+      newValue += char;
+    } else {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        inpRef.current?.setSelectionRange(index, index);
+      });
+    }
+    correctIndex += 1;
   });
 
-  // only keeps letters and numbers
-  bestMask = bestMask.replace(/[^0-9a-z]/gi, "");
   // if the value is bigger than the mask, removes the last char
   if (newValue.length > bestMask.length) {
     newValue = newValue.slice(0, -1);
