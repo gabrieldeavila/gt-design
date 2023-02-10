@@ -28,6 +28,7 @@ const darkThemeStyle = {
   buttonSuccess2: "#264348",
   buttonError1: "#8b0000",
   buttonError2: "#7c4848",
+  switchNormalBackground: "#808080",
 };
 
 function GTBasic({

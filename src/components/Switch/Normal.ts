@@ -1,26 +1,52 @@
+import { transparentize } from "polished";
 import styled from "styled-components";
-import { transitions } from "../../utils";
+import { shadows, transitions } from "../../utils";
+import { INormalSwitchSlider } from "./interface";
 
-const NormalSwitchSlider = styled.div`
+const NormalSwitchSlider = styled.div<INormalSwitchSlider>`
   position: absolute;
   height: 1.2rem;
   width: 1.2rem;
-  border-radius: 1rem;
-  background: #696969;
+  inset-inline-start: ${({ isChecked }) =>
+    isChecked ?? false ? "calc(100% - 1.2rem)" : "0"};
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    inset-inline-start: 0;
+    inset-inline-end: 0;
+    border-radius: 1rem;
+    background: ${({ theme }) => transparentize(0.1, theme.switchSlider)};
+    ${transitions.basic};
+
+    ${shadows.basic}
+  }
+
   ${transitions.basic};
 `;
 
-const NormalSwitchContainer = styled.div`
-  background: #e7feff;
+const NormalSwitchContainer = styled.div<INormalSwitchSlider>`
+  background: ${({ theme }) =>
+    transparentize(0.5, theme.switchNormalBackground)};
   overflow: hidden;
   display: flex;
   align-items: center;
   cursor: pointer;
   border-radius: 1rem;
 
-  &:active ${NormalSwitchSlider} {
-    width: 1.5rem;
+  &:active ${NormalSwitchSlider}::before {
+    inset-inline-end: ${({ isChecked }) => (isChecked ?? false ? "0" : "-5px")};
+    inset-inline-start: ${({ isChecked }) =>
+      isChecked ?? false ? "-5px" : ""};
   }
+
+  &:hover {
+    background: ${({ theme }) => theme.switchNormalBackground};
+  }
+
+  ${transitions.basic};
 `;
 
 const NormalSwitchWrapper = styled.div`

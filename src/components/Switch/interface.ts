@@ -14,3 +14,7 @@ export interface IGTActiveSwitch {
   isChecked?: boolean;
   onChange?: (newValue: boolean) => void;
 }
+
+export interface INormalSwitchSlider {
+  isChecked?: boolean;
+}

@@ -20,6 +20,8 @@ export interface GTTheme {
   containerSecondary?: string;
   outline?: string;
   switchOn?: string;
+  switchNormalBackground?: string;
+  switchSlider?: string;
   labelPrimary?: string;
   labelSecondary?: string;
   buttonSuccess1?: string;
