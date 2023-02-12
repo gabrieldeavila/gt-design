@@ -53,7 +53,13 @@ function useInputValues(
       setErrorMessage(invalidMessageTemp ?? "");
       setLocaleErrorsParams(errorsTemp ?? {});
     },
-    [onChangeValidate, setErrorMessage, setIsValid, setLocaleErrorsParams, validateState]
+    [
+      onChangeValidate,
+      setErrorMessage,
+      setIsValid,
+      setLocaleErrorsParams,
+      validateState,
+    ]
   );
 
   // if has value, label is up
@@ -113,6 +119,13 @@ function useInputValues(
     }
   }, [handleInputBlurErrors, value]);
 
+  const handleInputClear = useCallback(() => {
+    validateState(isValidTemp, newValue);
+
+    setValue("");
+    setIsLabelUp(false);
+  }, [validateState]);
+
   return {
     value,
     isValidatingOnBlur,
@@ -121,6 +134,7 @@ function useInputValues(
     handleInputChange,
     handleInputBlur,
     handleInputFocus,
+    handleInputClear,
     handleInputBlurErrors,
   };
 }

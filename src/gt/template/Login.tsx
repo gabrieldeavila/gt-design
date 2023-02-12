@@ -31,6 +31,10 @@ const GTLogin = memo(function GTLogin({
   const heightRef = useRef<HTMLDivElement>(null);
   const canSave = useMemo(() => errors.length === 0, [errors]);
 
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
+
   const [isFirstRender, setIsFirstRender] = useState(true);
 
   useEffect(() => {

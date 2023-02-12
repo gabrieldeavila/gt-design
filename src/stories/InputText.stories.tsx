@@ -27,7 +27,7 @@ const Template = () => {
     }
 
     return [isValid, errorMsg, errorParams];
-  }, []);
+}, []);
 
   return (
     <GTBasic>
@@ -39,7 +39,7 @@ const Template = () => {
       >
         <Space.Horizontal>
           <SectionContainer
-            title="Select"
+            title="Text"
             subtitle="STORIES.INPUTS.TEXT.SUBTITLE"
           />
           <Input.Group>

@@ -77,6 +77,7 @@ function GTInputText({
     minChars,
     maxChars
   );
+
   useEffect(() => {
     const chars = value.toString();
     if (chars.length === 0) return;
@@ -163,6 +164,9 @@ function GTInputText({
               <Loader.Simple size="sm" />
             </Input.IconWrapper>
           )}
+          <Input.IconWrapper>
+            <Icon.X />
+          </Input.IconWrapper>
         </Input.FeedbackWrapper>
       </Input.Container>
 
