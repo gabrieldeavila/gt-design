@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable operator-linebreak */
+import _ from "lodash";
 import PropTypes from "prop-types";
 import React, {
   useCallback,
@@ -57,6 +59,7 @@ function GTInputEmail({
     handleInputChange,
     handleInputBlur,
     handleInputFocus,
+    handleInputClear,
   } = useInputValues(
     name,
     validateState,
@@ -64,7 +67,8 @@ function GTInputEmail({
     setErrorMessage,
     setLocaleErrorsParams,
     onBlurValidate,
-    onChangeValidate
+    onChangeValidate,
+    inputValidations
   );
 
   const { validateEmail } = useValidateEmail();
@@ -130,6 +134,12 @@ function GTInputEmail({
           {isValidatingOnBlur && (
             <Input.IconWrapper showOpacity>
               <Loader.Simple size="sm" />
+            </Input.IconWrapper>
+          )}
+
+          {!_.isEmpty(value) && (
+            <Input.IconWrapper onClick={handleInputClear}>
+              <Icon.X size={15} className="svg-no-active cursor" />
             </Input.IconWrapper>
           )}
         </Input.FeedbackWrapper>

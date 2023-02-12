@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable operator-linebreak */
+import _ from "lodash";
 import PropTypes from "prop-types";
 import React, {
   useCallback,
@@ -61,6 +63,7 @@ function GTInputText({
     handleInputBlur,
     handleInputBlurErrors,
     handleInputFocus,
+    handleInputClear,
   } = useInputValues(
     name,
     validateState,
@@ -68,7 +71,8 @@ function GTInputText({
     setErrorMessage,
     setLocaleErrorsParams,
     onBlurValidate,
-    onChangeValidate
+    onChangeValidate,
+    inputValidations
   );
 
   const { validateText, validateMinAndMax } = useValidateText(
@@ -164,9 +168,12 @@ function GTInputText({
               <Loader.Simple size="sm" />
             </Input.IconWrapper>
           )}
-          <Input.IconWrapper>
-            <Icon.X />
-          </Input.IconWrapper>
+
+          {!_.isEmpty(value) && (
+            <Input.IconWrapper onClick={handleInputClear}>
+              <Icon.X size={15} className="svg-no-active cursor" />
+            </Input.IconWrapper>
+          )}
         </Input.FeedbackWrapper>
       </Input.Container>
 

@@ -82,6 +82,10 @@ const InputContainer = styled.div<IInputContainer>`
     `}
   }
 
+  svg.cursor {
+    cursor: pointer;
+  }
+
   ${shadows.simple};
 
   ${({ isLoading }) => (isLoading ?? false) && loadingInput}

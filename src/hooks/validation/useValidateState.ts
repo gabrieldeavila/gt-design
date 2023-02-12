@@ -2,12 +2,14 @@
 import { useCallback, useEffect } from "react";
 import { useGTPageStateContextSetters } from "../../context/pageState";
 import { TValidateState } from "./interface";
+import useInitialErrors from "./useInitialErrors";
 
 function useValidateState(name: string, inputValidations: string[]) {
   const { setPageState, setErrors } = useGTPageStateContextSetters();
+  const { handleInitialErrors } = useInitialErrors({ name, inputValidations });
 
   useEffect(() => {
-    let inputVal = {};
+    let inputVal: string | number = "";
 
     setPageState((prevState) => {
       // if already has a value, keep it
@@ -19,24 +21,8 @@ function useValidateState(name: string, inputValidations: string[]) {
       return newState;
     });
 
-    // if it has a required validation, add a key to the errors obj
-    if (inputValidations.includes("required")) {
-      setErrors((prevErrors) => {
-        // the value is valid, so it should not be in the errors obj
-        if (inputVal) {
-          const newState = prevErrors.filter((error) => error !== name);
-          return newState;
-        }
-
-        // if it already has a value, don't add a repeat key
-        if (prevErrors.includes(name)) {
-          return prevErrors;
-        }
-
-        const newState = [...prevErrors, name];
-        return newState;
-      });
-    }
+    // validate the initial value
+    handleInitialErrors(inputVal);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

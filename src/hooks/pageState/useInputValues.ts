@@ -7,6 +7,7 @@ import {
 } from "../../components/Input/Fields/interface";
 import { useGTPageStateContextSetters } from "../../context/pageState";
 import { TValidateState } from "../validation/interface";
+import useInitialErrors from "../validation/useInitialErrors";
 import { THandleBlurErrors, THandleInputChange } from "./interface";
 
 function useInputValues(
@@ -16,11 +17,14 @@ function useInputValues(
   setErrorMessage: React.Dispatch<React.SetStateAction<string>>,
   setLocaleErrorsParams: React.Dispatch<React.SetStateAction<Object>>,
   onBlurValidate?: TBlurValidate,
-  onChangeValidate?: TChangeValidate
+  onChangeValidate?: TChangeValidate,
+  inputValidations?: string[]
 ) {
   const alterFieldRef = useRef<boolean>(true);
 
   const { pageStateRef } = useGTPageStateContextSetters();
+  const { handleInitialErrors } = useInitialErrors({ name, inputValidations });
+
   // it only validates on blur if the other validations are valid
   const isInputValid = useRef<boolean>(true);
 
@@ -119,12 +123,29 @@ function useInputValues(
     }
   }, [handleInputBlurErrors, value]);
 
-  const handleInputClear = useCallback(() => {
-    validateState(isValidTemp, newValue);
+  const handleInputClear = useCallback(async () => {
+    const newValue = "";
+    const isValid = await handleInitialErrors(newValue);
+    validateState(isValid, newValue);
 
     setValue("");
     setIsLabelUp(false);
-  }, [validateState]);
+
+    if (isValid) {
+      setIsValid(true);
+      setErrorMessage("");
+      setLocaleErrorsParams({});
+    } else {
+      setIsValid(false);
+      setErrorMessage("REQUIRED");
+    }
+  }, [
+    handleInitialErrors,
+    setErrorMessage,
+    setIsValid,
+    setLocaleErrorsParams,
+    validateState,
+  ]);
 
   return {
     value,
