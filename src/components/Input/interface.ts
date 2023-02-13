@@ -8,6 +8,7 @@ export interface IInputContainer {
   isUp?: boolean;
   row?: number;
   isLoading?: boolean;
+  isWrong?: boolean;
 }
 
 export interface ISelectValue {

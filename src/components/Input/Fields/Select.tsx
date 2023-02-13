@@ -10,7 +10,7 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState
+  useState,
 } from "react";
 import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
@@ -27,7 +27,7 @@ import {
   ISelectContext,
   ISelectOption,
   ISelectOptions,
-  SelectionOptions
+  SelectionOptions,
 } from "./interface";
 
 const defaultValidationObj = ["required"];
@@ -211,6 +211,7 @@ function GTInputSelect({
           onFocus={handleShowOptions}
           ref={containerRef}
           isUp={showOptions}
+          isWrong={!isValid}
         >
           <Input.FieldWrapper>
             <Input.Label isWrong={!isValid} up={isSelectUp} htmlFor={name}>

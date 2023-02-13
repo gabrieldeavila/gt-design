@@ -157,7 +157,7 @@ function GTInputMask({
 
   return (
     <>
-      <Input.Container row={row}>
+      <Input.Container isWrong={!isValid} row={row}>
         <Input.FieldWrapper>
           <Input.Label isWrong={!isValid} up={isUp} htmlFor={name}>
             {t(label)}

@@ -109,7 +109,7 @@ function GTInputNumber({
 
   return (
     <>
-      <Input.Container row={row}>
+      <Input.Container isWrong={!isValid} row={row}>
         <Input.FieldWrapper>
           <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={name}>
             {t(label)}

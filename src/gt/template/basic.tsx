@@ -30,6 +30,7 @@ const darkThemeStyle = {
   buttonError2: "#7c4848",
   switchNormalBackground: "#808080",
   switchNormalActive: "#2a52be",
+  outlineError: "#e34234",
 };
 
 function GTBasic({

@@ -25,6 +25,7 @@ const defaultTheme = {
   containerMain: "#f0f8ff",
   containerSecondary: "#f0fff0",
   outline: "#80daeb",
+  outlineError: "#ffa07a",
   switchOn: "#76ff7a",
   switchNormalBackground: "#708090",
   switchNormalActive: "#002e63",

@@ -51,17 +51,20 @@ const InputContainer = styled.div<IInputContainer>`
   background: ${(props) => transparentize(0.2, props.theme.primary)};
 
   &:focus-within {
-    outline: 2px solid ${(props) => props.theme.outline};
+    outline: 2px solid
+      ${({ theme, isWrong }) =>
+        isWrong ?? false ? theme.outlineError : theme.outline};
     outline-offset: 0.15rem;
+    box-shadow: 0 0 0 0.25rem
+      ${({ theme, isWrong }) =>
+        transparentize(
+          0.5,
+          isWrong ?? false ? theme.outlineError : theme.outline
+        )};
   }
 
   border-radius: 0.25rem;
   box-shadow: 0 0 0 0.15rem ${(props) => transparentize(1, props.theme.outline)};
-
-  &:focus-within {
-    box-shadow: 0 0 0 0.25rem
-      ${(props) => transparentize(0.5, props.theme.outline)};
-  }
 
   &:hover ${InputIconWrapper} {
     opacity: 1;
