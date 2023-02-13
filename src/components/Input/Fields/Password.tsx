@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable operator-linebreak */
+import _ from "lodash";
 import PropTypes from "prop-types";
 import React, {
   useCallback,
@@ -73,6 +75,7 @@ function GTInputPassword({
     handleInputChange,
     handleInputBlur,
     handleInputFocus,
+    handleInputClear,
   } = useInputValues(
     name,
     validateState,
@@ -80,7 +83,8 @@ function GTInputPassword({
     setErrorMessage,
     setLocaleErrorsParams,
     onBlurValidate,
-    onChangeValidate
+    onChangeValidate,
+    inputValidations
   );
 
   // password validation
@@ -179,6 +183,12 @@ function GTInputPassword({
           {(title != null || text != null) && (
             <Input.IconWrapper ref={containerRef}>
               <Icon.Info size={15} className="svg-no-active" />
+            </Input.IconWrapper>
+          )}
+
+          {!_.isEmpty(value) && (
+            <Input.IconWrapper onClick={handleInputClear}>
+              <Icon.X size={15} className="svg-no-active cursor" />
             </Input.IconWrapper>
           )}
 

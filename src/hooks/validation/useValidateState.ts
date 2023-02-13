@@ -22,7 +22,7 @@ function useValidateState(name: string, inputValidations: string[]) {
     });
 
     // validate the initial value
-    handleInitialErrors(inputVal);
+    void handleInitialErrors(inputVal);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

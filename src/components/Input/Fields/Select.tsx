@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable operator-linebreak */
 import { t } from "i18next";
+import _ from "lodash";
 import PropTypes from "prop-types";
 import React, {
   memo,
@@ -8,10 +10,9 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState,
+  useState
 } from "react";
 import * as Icon from "react-feather";
-import { ChevronDown } from "react-feather";
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useOnClickOutside from "../../../hooks/helpers/useOnClickOutside";
@@ -26,7 +27,7 @@ import {
   ISelectContext,
   ISelectOption,
   ISelectOptions,
-  SelectionOptions,
+  SelectionOptions
 } from "./interface";
 
 const defaultValidationObj = ["required"];
@@ -56,10 +57,12 @@ function GTInputSelect({
   const { validateState } = useValidateState(name, []);
 
   const {
+    value,
     isValidatingOnBlur,
     handleInputChange,
     handleInputBlur,
     handleInputFocus,
+    handleInputClear,
   } = useInputValues(
     name,
     validateState,
@@ -172,6 +175,13 @@ function GTInputSelect({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleSelectClear = useCallback(async () => {
+    await handleInputClear();
+
+    setSelected("");
+    setSearchTerm("");
+  }, [handleInputClear]);
+
   const isSelectUp = useMemo(
     () => showOptions || selected !== "",
     [showOptions, selected]
@@ -232,8 +242,14 @@ function GTInputSelect({
               </Input.IconWrapper>
             )}
 
+            {!_.isEmpty(value) && (
+              <Input.IconWrapper onClick={handleSelectClear}>
+                <Icon.X size={15} className="svg-no-active cursor" />
+              </Input.IconWrapper>
+            )}
+
             <Input.IconWrapper showOpacity onClick={handleChevClick}>
-              <ChevronDown />
+              <Icon.ChevronDown size={15} className="svg-no-active cursor" />
             </Input.IconWrapper>
 
             {isValidatingOnBlur && (

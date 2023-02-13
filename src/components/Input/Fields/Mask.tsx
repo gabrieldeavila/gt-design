@@ -137,6 +137,12 @@ function GTInputMask({
     [unMask, validateMask, inputValidations, handleInputChange, onChange]
   );
 
+  const handleMaskClear = useCallback(async () => {
+    isFirstChange.current = true;
+
+    await handleInputClear();
+  }, [handleInputClear]);
+
   const containerRef = useRef<HTMLDivElement>(null);
 
   const isUp = useMemo(() => {
@@ -185,8 +191,9 @@ function GTInputMask({
               <Loader.Simple size="sm" />
             </Input.IconWrapper>
           )}
+
           {(!_.isEmpty(value) || value > 0) && (
-            <Input.IconWrapper onClick={handleInputClear}>
+            <Input.IconWrapper onClick={handleMaskClear}>
               <Icon.X size={15} className="svg-no-active cursor" />
             </Input.IconWrapper>
           )}
