@@ -46,7 +46,20 @@ function getUnMaskedNonNumeric(
       .slice(0, -1)}`;
   }
 
-  const unMask = valToUnMask.toString().split("");
+  // const tempUnMask = valToUnMask.toString().replace(/[^0-9a-z]/gi, "");
+  const tempUnMask = valToUnMask.toString();
+  // it puts the new value in the correct position, if the position is 21 and it already has a number,
+  // it removes the previous number
+
+  const positionToAdd = inpRef.current?.selectionStart ?? 0;
+  // changes the value to the correct position
+  // if the tempToUnMask is 031, the
+  const newValue1 = `${tempUnMask.slice(0, positionToAdd)}${tempUnMask.slice(
+    positionToAdd + 1
+  )}`;
+
+  const unMask = newValue1.split("");
+
   let newValue = "";
 
   let bestMask = getBestNonNumericMask(valToUnMask.toString(), options);
