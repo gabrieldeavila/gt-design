@@ -56,7 +56,8 @@ function useMask(
   const { unMaskNumeric, unMaskNonNumeric } = useUnMaskGetters(
     value,
     inpRef,
-    isDeleting
+    isDeleting,
+    isGuided
   );
 
   // it receives the masked value and returns the unmasked value

@@ -17,7 +17,8 @@ import getUnMaskedNumeric from "./getUnMaskedNumeric";
 function useUnMaskGetters(
   value: string | number,
   inpRef: React.RefObject<HTMLInputElement>,
-  isDeleting: React.MutableRefObject<boolean>
+  isDeleting: React.MutableRefObject<boolean>,
+  isGuided?: boolean
 ) {
   const unMaskNumeric = useCallback(
     (valToUnMask: number | string, mask: INumericMask, currKey: string) => {
@@ -35,12 +36,13 @@ function useUnMaskGetters(
         mask,
         value,
         inpRef,
-        isDeleting
+        isDeleting,
+        isGuided
       );
 
       return unMaskedNonNumeric;
     },
-    [inpRef, isDeleting, value]
+    [inpRef, isDeleting, isGuided, value]
   );
 
   return { unMaskNumeric, unMaskNonNumeric };

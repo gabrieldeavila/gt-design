@@ -151,6 +151,17 @@ function GTInputMask({
     return isLabelUp;
   }, [isGuided, isLabelUp]);
 
+  const handleFocus = useCallback(() => {
+    handleInputFocus();
+
+    // adds the cursor to the beginning of the input
+    setTimeout(() => {
+      if (inpRef.current == null) return;
+
+      inpRef.current.selectionStart = 0;
+    }, 0);
+  }, [handleInputFocus]);
+
   if (isLoading ?? false) {
     return <Input.Container row={row} isLoading />;
   }
@@ -168,7 +179,7 @@ function GTInputMask({
             value={maskedValue}
             onChange={handleChange}
             onBlur={handleInputBlur}
-            onFocus={handleInputFocus}
+            onFocus={handleFocus}
             id={name}
             name={name}
             autoComplete="off"
