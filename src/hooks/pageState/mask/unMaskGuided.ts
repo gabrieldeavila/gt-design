@@ -43,7 +43,6 @@ function unMaskGuided(
     // if the char is a number, it checks if the maskChar is a number
     const maskIsNumber = /[0-9]/.test(maskChar);
     const charIsNumber = /[0-9]/.test(char);
-    console.log(maskChar, char, index, correctMaskIndex);
 
     if (
       (maskIsLetter && charIsLetter) ||

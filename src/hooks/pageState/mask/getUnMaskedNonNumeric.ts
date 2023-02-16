@@ -51,10 +51,20 @@ function getUnMaskedNonNumeric(
   const tempUnMask = valToUnMask.toString();
   // it puts the new value in the correct position, if the position is 21 and it already has a number,
   // it removes the previous number
+  let positionToAdd = inpRef.current?.selectionStart ?? 0;
 
-  const positionToAdd = inpRef.current?.selectionStart ?? 0;
-  // changes the value to the correct position
-  // if the tempToUnMask is 031, the
+  let isNotChar = true;
+
+  while (isNotChar) {
+    const pos = tempUnMask[positionToAdd];
+
+    if (!/[0-9a-z]/i.test(pos) && pos !== "_") {
+      positionToAdd += 1;
+    } else {
+      isNotChar = false;
+    }
+  }
+  // it changes the value to the correct position
   const unMask = `${tempUnMask.slice(0, positionToAdd)}${tempUnMask.slice(
     positionToAdd + 1
   )}`;

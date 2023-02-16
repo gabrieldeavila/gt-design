@@ -130,6 +130,7 @@ const Template = () => {
               name="phone"
               label="EXAMPLE.PHONE"
               mask={phoneMask}
+              // isGuided
             />
           </Input.Group>
         </Space.Horizontal>
