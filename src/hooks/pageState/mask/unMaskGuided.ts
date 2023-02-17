@@ -1,40 +1,26 @@
-
 let timeout: ReturnType<typeof setTimeout>;
 
 function unMaskGuided(
   bestMask: string,
   unMask: string,
-  inpRef: React.RefObject<HTMLInputElement>
+  inpRef: React.RefObject<HTMLInputElement>,
+  isDeletingMask: boolean
 ) {
   let newValue = "";
-
   let correctMaskIndex = 0;
+  unMask = unMask.toString().replace(/[^0-9a-z_]/gi, "");
+
+  if (isDeletingMask) {
+    return unMask;
+  }
+
   bestMask.split("").forEach((char, index) => {
     if (!/[0-9a-z]/i.test(char) && char !== "_") {
       return;
     }
 
     // current char of the mask
-    let maskChar = unMask[correctMaskIndex] ?? "_";
-
-    let isIncorrect = true;
-
-    while (isIncorrect) {
-      const currBestMask = bestMask[correctMaskIndex];
-
-      if (
-        !/[0-9a-z]/i.test(currBestMask) &&
-        currBestMask !== "_" &&
-        /[0-9a-z]/i.test(maskChar)
-      ) {
-        correctMaskIndex += 1;
-      } else if (!/[0-9a-z]/i.test(maskChar) && maskChar !== "_") {
-        correctMaskIndex += 1;
-        maskChar = unMask[correctMaskIndex];
-      } else {
-        isIncorrect = false;
-      }
-    }
+    const maskChar = unMask[correctMaskIndex] ?? "_";
 
     // if the char is a letter, it checks if the maskChar is a letter
     const maskIsLetter = /[a-z]/i.test(maskChar);

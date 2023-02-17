@@ -64,17 +64,26 @@ function getUnMaskedNonNumeric(
       isNotChar = false;
     }
   }
+
+  const isDeletingMask = findIfIsDeleting(tempUnMask, value);
+  isDeleting.current = isDeletingMask;
+
   // it changes the value to the correct position
-  const unMask = `${tempUnMask.slice(0, positionToAdd)}${tempUnMask.slice(
+  let unMask = `${tempUnMask.slice(0, positionToAdd)}${tempUnMask.slice(
     positionToAdd + 1
   )}`;
+
+  if ((isDeletingMask && isGuided)) {
+    // adds the "_" char to the position that was deleted
+    unMask = `${tempUnMask.slice(0, positionToAdd)}_${tempUnMask.slice(positionToAdd)}`;
+  }
 
   let newValue = "";
 
   const bestMask = getBestNonNumericMask(unMask.toString(), options);
 
   if (isGuided) {
-    newValue = unMaskGuided(bestMask, unMask, inpRef);
+    newValue = unMaskGuided(bestMask, unMask, inpRef, isDeletingMask);
   } else {
     newValue = unMaskDefault(bestMask, unMask, inpRef);
   }
@@ -84,13 +93,17 @@ function getUnMaskedNonNumeric(
     newValue = newValue.slice(0, -1);
   }
 
-  // if the value has less chars than the valToUnMask, it means that the user is removing chars
-  const newValueOnlyChars = newValue.replace(/[^0-9a-z]/gi, "");
-  const prevValueOnlyChars = value.toString().replace(/[^0-9a-z]/gi, "");
-
-  isDeleting.current = prevValueOnlyChars.length > newValueOnlyChars.length;
-  // console.log(newValue);
   return newValue;
 }
 
 export default getUnMaskedNonNumeric;
+
+function findIfIsDeleting(valueToUnMask: string, value: string | number) {
+  const newValueOnlyChars = valueToUnMask
+    .toString()
+    .replace(/[^0-9a-z_]/gi, "");
+
+  const prevValueOnlyChars = value.toString().replace(/[^0-9a-z_]/gi, "");
+
+  return newValueOnlyChars.length < prevValueOnlyChars.length;
+}

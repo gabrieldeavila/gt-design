@@ -60,6 +60,7 @@ function useMaskGetters(
 
       const currInpPosition = inpRef.current?.selectionStart ?? 0;
       const currMaskPosition = newMask[currInpPosition - 1];
+
       // if the currMaskPosition is not a number or a letter, it shall move the cursor to the next position
       const isNumberOrLetter = /[0-9a-z]/i.test(currMaskPosition);
 

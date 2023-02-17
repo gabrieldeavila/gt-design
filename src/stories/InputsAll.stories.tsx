@@ -122,6 +122,7 @@ const Template = () => {
               name="doc"
               label="EXAMPLE.DOC"
               mask={docMask}
+              isGuided
             />
 
             <GTInput.Mask
@@ -130,7 +131,7 @@ const Template = () => {
               name="phone"
               label="EXAMPLE.PHONE"
               mask={phoneMask}
-              // isGuided
+              isGuided
             />
           </Input.Group>
         </Space.Horizontal>
