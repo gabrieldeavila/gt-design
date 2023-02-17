@@ -1,11 +1,11 @@
 import React, { useCallback } from "react";
-import { Space } from "../components";
-import { GTActiveSwitch } from "../components/Switch";
-import SectionContainer from "../components/Text/Template/SectionContainer";
-import { GTBasic } from "../gt";
+import { Space } from "../../../components";
+import { GTActiveSwitch } from "../../../components/Switch";
+import SectionContainer from "../../../components/Text/Template/SectionContainer";
+import { GTBasic } from "../../../gt";
 
 export default {
-  title: "Data Entry/Switch",
+  title: "Data Entry/Switch/Active",
 };
 
 const Template = () => {
@@ -25,4 +25,4 @@ const Template = () => {
   );
 };
 
-export const Switch = Template.bind({});
+export const Active = Template.bind({});

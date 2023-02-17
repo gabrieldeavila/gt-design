@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { GTInput, Input, Space } from "../components";
-import { INumericMask } from "../components/Input/Fields/interface";
-import SectionContainer from "../components/Text/Template/SectionContainer";
-import GTPageStateProvider from "../context/pageState";
-import { GTBasic } from "../gt";
+import { GTInput, Input, Space } from "../../../components";
+import { INumericMask } from "../../../components/Input/Fields/interface";
+import SectionContainer from "../../../components/Text/Template/SectionContainer";
+import GTPageStateProvider from "../../../context/pageState";
+import { GTBasic } from "../../../gt";
 
 export default {
   title: "Data Entry/Inputs/NumericMask",

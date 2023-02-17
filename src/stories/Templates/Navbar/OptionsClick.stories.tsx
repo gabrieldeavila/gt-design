@@ -7,13 +7,13 @@ import {
   NavbarMobile,
   Popup,
   Text,
-} from "../components";
+} from "../../../components";
 import {
   GTNavbarOption,
   GTNavbarOptions,
-} from "../components/Navbar/Template/Navbar";
-import GTSymbolPopup from "../components/Popup/Template/BasicPopup";
-import { GTBasic } from "../gt";
+} from "../../../components/Navbar/Template/Navbar";
+import GTSymbolPopup from "../../../components/Popup/Template/BasicPopup";
+import { GTBasic } from "../../../gt";
 
 export default {
   title: "Templates/Navbars/Options Click",

@@ -1,11 +1,11 @@
 import React from "react";
-import { Space } from "../components";
-import GTNormalSwitch from "../components/Switch/Template/Normal";
-import SectionContainer from "../components/Text/Template/SectionContainer";
-import { GTBasic } from "../gt";
+import { Space } from "../../../components";
+import GTNormalSwitch from "../../../components/Switch/Template/Normal";
+import SectionContainer from "../../../components/Text/Template/SectionContainer";
+import { GTBasic } from "../../../gt";
 
 export default {
-  title: "Data Entry/Switch/Modern Switch",
+  title: "Data Entry/Switch/Modern",
 };
 
 const Template = () => {
@@ -24,4 +24,4 @@ const Template = () => {
   );
 };
 
-export const ModernSwitch = Template.bind({});
+export const Modern = Template.bind({});

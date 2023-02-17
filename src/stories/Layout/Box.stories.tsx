@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 import React, { useMemo } from "react";
-import { Box, MotionBox, Space, Text } from "../components";
-import SectionContainer from "../components/Text/Template/SectionContainer";
-import { GTBasic } from "../gt";
-import { randomNumber } from "../utils";
+import { Box, MotionBox, Space, Text } from "../../components";
+import SectionContainer from "../../components/Text/Template/SectionContainer";
+import { GTBasic } from "../../gt";
+import { randomNumber } from "../../utils";
 
 export default {
   title: "Layout/Boxs",

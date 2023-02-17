@@ -1,8 +1,8 @@
 import React from "react";
-import { Space } from "../components";
-import BoxLoadingGroup from "../components/Box/Template/BoxLoadingGroup";
-import SectionContainer from "../components/Text/Template/SectionContainer";
-import { GTBasic } from "../gt";
+import { Space } from "../../../components";
+import BoxLoadingGroup from "../../../components/Box/Template/BoxLoadingGroup";
+import SectionContainer from "../../../components/Text/Template/SectionContainer";
+import { GTBasic } from "../../../gt";
 
 export default {
   title: "Feedback/Skeletons/Boxes",

@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React, { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Space } from "../components";
-import { IModalData } from "../components/Modal/interface";
-import GTModalBasic from "../components/Modal/Template/Basic";
-import SectionContainer from "../components/Text/Template/SectionContainer";
-import { GTBasic } from "../gt";
-import { randomNumber } from "../utils";
+import { Button, Space } from "../../../components";
+import { IModalData } from "../../../components/Modal/interface";
+import GTModalBasic from "../../../components/Modal/Template/Basic";
+import SectionContainer from "../../../components/Text/Template/SectionContainer";
+import { GTBasic } from "../../../gt";
+import { randomNumber } from "../../../utils";
 
 export default {
   title: "Feedback/Modals/Basic",

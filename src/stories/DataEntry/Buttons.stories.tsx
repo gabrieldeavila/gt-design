@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 import React from "react";
-import { Button, Space, Text } from "../components";
-import SectionContainer from "../components/Text/Template/SectionContainer";
-import { GTBasic } from "../gt";
+import { Button, Space, Text } from "../../components";
+import SectionContainer from "../../components/Text/Template/SectionContainer";
+import { GTBasic } from "../../gt";
 
 export default {
   title: "Data Entry/Buttons",

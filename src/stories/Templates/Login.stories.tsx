@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
-import { GTBasic } from "../gt";
-import { GTLogin } from "../gt/Template";
+import { GTBasic } from "../../gt";
+import { GTLogin } from "../../gt/Template";
 
 export default {
   title: "Templates/Login",

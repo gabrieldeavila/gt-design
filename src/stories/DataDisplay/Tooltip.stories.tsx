@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { GTInput, Input, Space } from "../components";
-import SectionContainer from "../components/Text/Template/SectionContainer";
-import GTPageStateProvider from "../context/pageState";
-import { GTBasic } from "../gt";
+import { GTInput, Input, Space } from "../../components";
+import SectionContainer from "../../components/Text/Template/SectionContainer";
+import GTPageStateProvider from "../../context/pageState";
+import { GTBasic } from "../../gt";
 
 export default {
   title: "Data Display/Tooltips",
