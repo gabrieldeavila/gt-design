@@ -145,12 +145,6 @@ function GTInputMask({
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const isUp = useMemo(() => {
-    if (isGuided) return true;
-
-    return isLabelUp;
-  }, [isGuided, isLabelUp]);
-
   const handleFocus = useCallback(() => {
     handleInputFocus();
 
@@ -159,8 +153,9 @@ function GTInputMask({
       if (inpRef.current == null) return;
 
       inpRef.current.selectionStart = 0;
+      inpRef.current.selectionEnd = maskedValue.toString()?.length ?? 0;
     }, 0);
-  }, [handleInputFocus]);
+  }, [handleInputFocus, maskedValue]);
 
   if (isLoading ?? false) {
     return <Input.Container row={row} isLoading />;
@@ -170,7 +165,7 @@ function GTInputMask({
     <>
       <Input.Container isWrong={!isValid} row={row}>
         <Input.FieldWrapper>
-          <Input.Label isWrong={!isValid} up={isUp} htmlFor={name}>
+          <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={name}>
             {t(label)}
           </Input.Label>
           <Input.Field

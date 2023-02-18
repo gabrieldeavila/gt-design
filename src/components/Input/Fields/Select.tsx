@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useOnClickOutside from "../../../hooks/helpers/useOnClickOutside";
 import useInputValues from "../../../hooks/pageState/useInputValues";
+import useValidateSelect from "../../../hooks/validation/useValidateSelect";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import wordFilter from "../../../utils/wordFilter";
 import Loader from "../../Loader";
@@ -37,6 +38,8 @@ const SelectContext = React.createContext<ISelectContext>({ preSelected: 0 });
 function GTInputSelect({
   name,
   label,
+  defaultValidation,
+  validations,
   options,
   text,
   title,
@@ -49,10 +52,21 @@ function GTInputSelect({
 
   const { isLoading } = useGTPageStateContextSetters();
 
+  const isTouched = useRef<boolean>(false);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [localeErrorsParams, setLocaleErrorsParams] = useState({});
+
+  // validations that are passed to the input
+  const inputValidations = useMemo(() => {
+    if (defaultValidation) {
+      return [...defaultValidationObj, ...validations];
+    }
+
+    return validations;
+  }, [defaultValidation, validations]);
 
   const { validateState } = useValidateState(name, []);
 
@@ -73,6 +87,8 @@ function GTInputSelect({
     onChangeValidate
   );
 
+  const { validateSelect } = useValidateSelect();
+
   const containerRef = useRef<HTMLDivElement>(null);
   const iconRef = useRef<HTMLDivElement>(null);
 
@@ -91,16 +107,34 @@ function GTInputSelect({
   // uses the index of the options array to keep track of the option that can be selected
   const [preSelected, setPreSelected] = useState<number>(0);
 
+  const handleValidation = useCallback(
+    (selectedValue: string) => {
+      const { isValid, invalidMessage } = validateSelect(
+        selectedValue,
+        inputValidations
+      );
+
+      setIsValid(isValid);
+      setErrorMessage(invalidMessage);
+    },
+    [inputValidations, validateSelect]
+  );
+
   // the selected option label
   const selectedLabel = useMemo(() => {
     const selectedOption = options.find((option) => option.value === selected);
+    let selectedValue = "";
 
     if (selectedOption != null) {
-      return selectedOption.label;
+      selectedValue = selectedOption.label;
     }
 
-    return "";
-  }, [options, selected]);
+    if (isTouched.current) {
+      handleValidation(selectedValue);
+    }
+
+    return selectedValue;
+  }, [handleValidation, options, selected]);
 
   // change the value of the input
   const handleChange = useCallback(
@@ -119,6 +153,12 @@ function GTInputSelect({
     setShowOptions(true);
   }, []);
 
+  const handleBlur = useCallback(() => {
+    isTouched.current = true;
+
+    handleInputBlur();
+  }, [handleInputBlur]);
+
   const handleCloseSelect = useCallback(() => {
     setSearchTerm("");
     setPreSelected(selectedIndexRef.current);
@@ -130,7 +170,7 @@ function GTInputSelect({
     (option: SelectionOptions, selectedIndex: number) => {
       validateState(true, option.value);
       setSearchTerm(option.label);
-      handleInputChange(option.label, true);
+      handleInputChange(option.value, true);
       setSelected(option.value);
 
       selectedIndexRef.current = selectedIndex;
@@ -223,7 +263,7 @@ function GTInputSelect({
               onChange={handleChange}
               value={searchTerm}
               placeholder={selectedLabel}
-              onBlur={handleInputBlur}
+              onBlur={handleBlur}
               onFocus={handleInputFocus}
               id={name}
               name={name}

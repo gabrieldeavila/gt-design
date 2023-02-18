@@ -35,12 +35,12 @@ function useMask(
 
   // masks the value, example: 1234567.89 => $1,234,567.89
   const maskedValue = useMemo(() => {
-    if (isFirstChange && !(isGuided ?? false)) {
+    if (isFirstChange) {
       return value;
     }
 
     return handleMaskValue(value, mask);
-  }, [handleMaskValue, isFirstChange, isGuided, mask, value]);
+  }, [handleMaskValue, isFirstChange, mask, value]);
 
   // prevents the cursor from going to wrong position
   useEffect(() => {
