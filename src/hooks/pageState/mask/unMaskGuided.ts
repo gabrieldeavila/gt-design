@@ -4,7 +4,7 @@ function unMaskGuided(
   bestMask: string,
   unMask: string,
   inpRef: React.RefObject<HTMLInputElement>,
-  isDeletingMask: boolean
+  isDeletingMask: boolean,
 ) {
   let newValue = "";
   let correctMaskIndex = 0;
@@ -39,6 +39,7 @@ function unMaskGuided(
       newValue += maskChar;
     } else {
       clearTimeout(timeout);
+
       // adds the char to the correct position
       timeout = setTimeout(() => {
         inpRef.current?.setSelectionRange(index, index);

@@ -73,9 +73,13 @@ function getUnMaskedNonNumeric(
     positionToAdd + 1
   )}`;
 
-  if ((isDeletingMask && isGuided)) {
+  if (isDeletingMask && isGuided) {
     // adds the "_" char to the position that was deleted
-    unMask = `${tempUnMask.slice(0, positionToAdd)}_${tempUnMask.slice(positionToAdd)}`;
+    unMask = `${tempUnMask.slice(0, positionToAdd)}_${tempUnMask.slice(
+      positionToAdd
+    )}`;
+  } else if (isDeletingMask) {
+    unMask = tempUnMask;
   }
 
   let newValue = "";
@@ -85,12 +89,20 @@ function getUnMaskedNonNumeric(
   if (isGuided) {
     newValue = unMaskGuided(bestMask, unMask, inpRef, isDeletingMask);
   } else {
-    newValue = unMaskDefault(bestMask, unMask, inpRef);
+    newValue = unMaskDefault(bestMask, unMask, inpRef, isDeletingMask);
   }
 
   // if the value is bigger than the mask, removes the last char
   if (newValue.length > bestMask.length) {
     newValue = newValue.slice(0, -1);
+  }
+
+  // prevents the cursor from moving to the end of the input
+  if (value === newValue) {
+    const pos = (inpRef.current?.selectionStart ?? 0) - 1;
+    setTimeout(() => {
+      inpRef.current?.setSelectionRange(pos, pos);
+    });
   }
 
   return newValue;

@@ -4,12 +4,19 @@ let timeout: ReturnType<typeof setTimeout>;
 function unMaskDefault(
   bestMask: string,
   unMask: string,
-  inpRef: React.RefObject<HTMLInputElement>
+  inpRef: React.RefObject<HTMLInputElement>,
+  isDeletingMask: boolean
 ) {
   let newValue = "";
 
   bestMask = bestMask.replace(/[^0-9a-z]/gi, "");
   const unMaskArr = unMask.split("");
+
+  if (isDeletingMask) {
+    console.log(unMask.replace(/[^0-9a-z_]/gi, ""));
+    // console.log();
+    return unMask.replace(/[^0-9a-z_]/gi, "");
+  }
 
   let correctIndex = 0;
 
