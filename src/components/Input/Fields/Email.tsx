@@ -20,7 +20,7 @@ import GTTooltip from "../../Tooltip/Tooltip";
 import Input from "../Input";
 import { IGTInput } from "./interface";
 
-const defaultValidationObj = ["required"];
+const defaultValidationObj = ["required", "email"];
 
 function GTInputEmail({
   name,

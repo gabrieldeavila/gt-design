@@ -3,8 +3,12 @@ import useInputValidation from "./useInputValidation";
 
 const options = {
   required: {
-    regex: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+    regex: /^.{1,}$/,
     message: "REQUIRED",
+  },
+  email: {
+    regex: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+    message: "EMAIL",
   },
 };
 
