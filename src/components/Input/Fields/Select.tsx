@@ -107,6 +107,9 @@ function GTInputSelect({
   // uses the index of the options array to keep track of the option that can be selected
   const [preSelected, setPreSelected] = useState<number>(0);
 
+  const isFirstChange = useRef<boolean>(true);
+  const firstValue = useRef<string | number>(value);
+
   const handleValidation = useCallback(
     (selectedValue: string) => {
       const { isValid, invalidMessage } = validateSelect(
@@ -129,6 +132,11 @@ function GTInputSelect({
       selectedValue = selectedOption.label;
     }
 
+    if (selectedValue === "" && !isTouched.current) {
+      selectedValue = firstValue.current.toString();
+      setSelected(firstValue.current);
+    }
+
     if (isTouched.current) {
       handleValidation(selectedValue);
     }
@@ -141,7 +149,6 @@ function GTInputSelect({
     (e: any) => {
       const { value: iVal } = e.target;
       setSearchTerm(iVal);
-
       handleInputChange(iVal, isValid);
 
       onChange?.(e);
@@ -158,6 +165,12 @@ function GTInputSelect({
 
     handleInputBlur();
   }, [handleInputBlur]);
+
+  const handleFocus = useCallback(() => {
+    isFirstChange.current = false;
+
+    handleInputFocus();
+  }, [handleInputFocus]);
 
   const handleCloseSelect = useCallback(() => {
     setSearchTerm("");
@@ -264,7 +277,7 @@ function GTInputSelect({
               value={searchTerm}
               placeholder={selectedLabel}
               onBlur={handleBlur}
-              onFocus={handleInputFocus}
+              onFocus={handleFocus}
               id={name}
               name={name}
               autoComplete="off"

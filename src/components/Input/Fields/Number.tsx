@@ -79,10 +79,11 @@ function GTInputNumber({
     const chars = value.toString();
     if (chars.length === 0) return;
 
-    const { isValid, invalidMessage } = validateNumber(chars, inputValidations);
+    const { isValid, invalidMessage, errorsVar } = validateNumber(chars, inputValidations);
 
     setIsValid(isValid);
     setErrorMessage(invalidMessage);
+    setLocaleErrorsParams(errorsVar);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

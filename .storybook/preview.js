@@ -93,7 +93,7 @@ export const parameters = {
         "Data Entry",
         [
           "Inputs",
-          ["All", "Text", "Email", "Select", "NumericMask"],
+          ["All", "All With Prev Values", "Text", "Email", "Select", "NumericMask"],
           "Buttons",
           "Switch",
         ],

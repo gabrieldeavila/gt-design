@@ -91,10 +91,11 @@ function GTInputMask({
     const chars = value.toString();
     if (chars.length === 0) return;
 
-    const { isValid, invalidMessage } = validateMask(chars, inputValidations);
+    const { isValid, invalidMessage, errorsVar } = validateMask(chars, inputValidations);
 
     setIsValid(isValid);
     setErrorMessage(invalidMessage);
+    setLocaleErrorsParams(errorsVar);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

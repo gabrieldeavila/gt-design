@@ -10,7 +10,7 @@ import GTPageStateProvider from "../../../context/pageState";
 import { GTBasic } from "../../../gt";
 
 export default {
-  title: "Data Entry/Inputs/All",
+  title: "Data Entry/Inputs/All With Prev Values",
 };
 
 const moneyMask: INumericMask = {
@@ -54,8 +54,19 @@ const Template = () => {
     { value: "I", label: "Ice cream 🍦" },
   ];
 
-  const [pageState, setPageState] = useState<IPageStateValues>({});
+  const [pageState, setPageState] = useState<IPageStateValues>({
+    select: "G",
+    NUMBER: "24",
+    doc: "3_333___2_2",
+    email: "myemail@gmail.com",
+    nickname: "2222",
+    percent: 69,
+    phone: "5_7_99_3_5",
+    price: 0.55,
+  });
   const [errors, setErrors] = useState<string[]>([]);
+
+  console.log(pageState);
 
   return (
     <GTBasic>
@@ -141,4 +152,4 @@ const Template = () => {
   );
 };
 
-export const All = Template.bind({});
+export const AllWithPrevValues = Template.bind({});
