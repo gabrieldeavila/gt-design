@@ -66,8 +66,6 @@ const Template = () => {
   });
   const [errors, setErrors] = useState<string[]>([]);
 
-  console.log(pageState);
-
   return (
     <GTBasic>
       <GTPageStateProvider

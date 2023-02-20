@@ -6,6 +6,8 @@
   "USERNAME": "It can only have letters and numbers.",
   "MAX_WORDS_BETWEEN": "It must have between {{MIN}} and {{MAX}} words.",
   "MAX_CHARS": "Between {{MIN}} and {{MAX}} characters. You have: {{CURR}}",
+  "MAX": "It must be less than {{MAX}}.",
+  "MIN": "It must be greater than {{MIN}}.",
   "EMAIL": "Invalid email.",
   "DOC_ALREADY_EXISTS": "This document already exists.",
   "INVALID_CPF": "Invalid CPF.",

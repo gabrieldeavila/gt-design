@@ -102,6 +102,14 @@ const InputGroup = styled.form`
   flex-direction: row;
 `;
 
+const InputGrid = styled.form`
+  width: -webkit-fill-available;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-gap: 1.75rem;
+`;
+
 const InputField = styled.input<IInputField>`
   width: -webkit-fill-available;
   height: 2.5rem;
@@ -198,6 +206,7 @@ const InputFeedbackWrapper = styled.div`
 
 const Input = {
   Group: InputGroup,
+  Grid: InputGrid,
   Container: InputContainer,
   Field: InputField,
   Label: InputLabel,
