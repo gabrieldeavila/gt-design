@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { TNumericOptions } from "../../components/Input/Fields/interface";
 import useMaskGetters from "./mask/useMaskGetters";
@@ -35,7 +36,7 @@ function useMask(
 
   // masks the value, example: 1234567.89 => $1,234,567.89
   const maskedValue = useMemo(() => {
-    if (isFirstChange) {
+    if (isFirstChange && _.isEmpty(value.toString())) {
       return value;
     }
 

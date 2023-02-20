@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GTInput, Input, Space } from "../../../components";
 import {
   INonNumericMask,
@@ -65,6 +65,10 @@ const Template = () => {
     price: 0.55,
   });
   const [errors, setErrors] = useState<string[]>([]);
+
+  useEffect(() => {
+    console.log(pageState);
+  }, [pageState]);
 
   return (
     <GTBasic>

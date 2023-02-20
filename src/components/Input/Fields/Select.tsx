@@ -231,6 +231,7 @@ function GTInputSelect({
   const handleSelectClear = useCallback(async () => {
     await handleInputClear();
 
+    isTouched.current = true;
     setSelected("");
     setSearchTerm("");
   }, [handleInputClear]);
