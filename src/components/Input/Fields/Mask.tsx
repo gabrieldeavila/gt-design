@@ -14,6 +14,7 @@ import React, {
 import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
+import useUniqueName from "../../../hooks/helpers/useUniqueName";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useMask from "../../../hooks/pageState/useMask";
 import useValidateMask from "../../../hooks/validation/useValidateMask";
@@ -39,6 +40,7 @@ function GTInputMask({
   isGuided,
 }: IGTInputMask) {
   const { t } = useTranslation();
+  const uniqueName = useUniqueName({ name });
 
   const { isLoading } = useGTPageStateContextSetters();
   const [isValid, setIsValid] = useState(true);
@@ -91,7 +93,10 @@ function GTInputMask({
     const chars = value.toString();
     if (chars.length === 0) return;
 
-    const { isValid, invalidMessage, errorsVar } = validateMask(chars, inputValidations);
+    const { isValid, invalidMessage, errorsVar } = validateMask(
+      chars,
+      inputValidations
+    );
 
     setIsValid(isValid);
     setErrorMessage(invalidMessage);
@@ -166,7 +171,7 @@ function GTInputMask({
     <>
       <Input.Container isWrong={!isValid} row={row}>
         <Input.FieldWrapper>
-          <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={name}>
+          <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={uniqueName}>
             {t(label)}
           </Input.Label>
           <Input.Field
@@ -176,8 +181,8 @@ function GTInputMask({
             onChange={handleChange}
             onBlur={handleInputBlur}
             onFocus={handleFocus}
-            id={name}
-            name={name}
+            id={uniqueName}
+            name={uniqueName}
             autoComplete="off"
           />
         </Input.FieldWrapper>

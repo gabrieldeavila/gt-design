@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { GTInput, Input, Space } from "../../../components";
 import {
   INonNumericMask,
-  INumericMask,
+  INumericMask
 } from "../../../components/Input/Fields/interface";
 import SectionContainer from "../../../components/Text/Template/SectionContainer";
 import { IPageStateValues } from "../../../context/interface";
@@ -65,10 +65,6 @@ const Template = () => {
     price: 0.55,
   });
   const [errors, setErrors] = useState<string[]>([]);
-
-  useEffect(() => {
-    console.log(pageState);
-  }, [pageState]);
 
   return (
     <GTBasic>

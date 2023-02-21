@@ -16,6 +16,7 @@ import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useOnClickOutside from "../../../hooks/helpers/useOnClickOutside";
+import useUniqueName from "../../../hooks/helpers/useUniqueName";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateSelect from "../../../hooks/validation/useValidateSelect";
 import useValidateState from "../../../hooks/validation/useValidateState";
@@ -49,6 +50,7 @@ function GTInputSelect({
   onChangeValidate,
 }: IGTInputSelect): JSX.Element {
   const { t } = useTranslation();
+  const uniqueName = useUniqueName({ name });
 
   const { isLoading } = useGTPageStateContextSetters();
 
@@ -268,7 +270,7 @@ function GTInputSelect({
           isWrong={!isValid}
         >
           <Input.FieldWrapper>
-            <Input.Label isWrong={!isValid} up={isSelectUp} htmlFor={name}>
+            <Input.Label isWrong={!isValid} up={isSelectUp} htmlFor={uniqueName}>
               {t(label)}
             </Input.Label>
             <Input.Field
@@ -279,8 +281,8 @@ function GTInputSelect({
               placeholder={selectedLabel}
               onBlur={handleBlur}
               onFocus={handleFocus}
-              id={name}
-              name={name}
+              id={uniqueName}
+              name={uniqueName}
               autoComplete="off"
               isLabel
             />

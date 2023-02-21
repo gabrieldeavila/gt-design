@@ -13,6 +13,7 @@ import React, {
 import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
+import useUniqueName from "../../../hooks/helpers/useUniqueName";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import useValidateText from "../../../hooks/validation/useValidateText";
@@ -39,6 +40,7 @@ function GTInputText({
   onChangeValidate,
 }: IGTInputText) {
   const { t } = useTranslation();
+  const uniqueName = useUniqueName({ name });
   const alterFieldRef = useRef<boolean>(true);
 
   const [isValid, setIsValid] = useState(true);
@@ -138,7 +140,7 @@ function GTInputText({
     <>
       <Input.Container row={row} isWrong={!isValid}>
         <Input.FieldWrapper>
-          <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={name}>
+          <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={uniqueName}>
             {t(label)}
           </Input.Label>
           <Input.Field
@@ -147,8 +149,8 @@ function GTInputText({
             onChange={handleChange}
             onBlur={handleBlur}
             onFocus={handleInputFocus}
-            id={name}
-            name={name}
+            id={uniqueName}
+            name={uniqueName}
           />
         </Input.FieldWrapper>
 

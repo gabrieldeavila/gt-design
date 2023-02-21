@@ -5,14 +5,14 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 import React, {
   useCallback,
-  useEffect,
-  useMemo,
+  useEffect, useMemo,
   useRef,
-  useState,
+  useState
 } from "react";
 import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
+import useUniqueName from "../../../hooks/helpers/useUniqueName";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateNumber from "../../../hooks/validation/useValidateNumber";
 import useValidateState from "../../../hooks/validation/useValidateState";
@@ -38,6 +38,7 @@ function GTInputNumber({
   onChangeValidate,
 }: IGTInputNumber) {
   const { t } = useTranslation();
+  const uniqueName = useUniqueName({ name });
 
   const { isLoading } = useGTPageStateContextSetters();
   const [isValid, setIsValid] = useState(true);
@@ -79,7 +80,10 @@ function GTInputNumber({
     const chars = value.toString();
     if (chars.length === 0) return;
 
-    const { isValid, invalidMessage, errorsVar } = validateNumber(chars, inputValidations);
+    const { isValid, invalidMessage, errorsVar } = validateNumber(
+      chars,
+      inputValidations
+    );
 
     setIsValid(isValid);
     setErrorMessage(invalidMessage);
@@ -112,7 +116,7 @@ function GTInputNumber({
     <>
       <Input.Container isWrong={!isValid} row={row}>
         <Input.FieldWrapper>
-          <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={name}>
+          <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={uniqueName}>
             {t(label)}
           </Input.Label>
           <Input.Field
@@ -121,8 +125,8 @@ function GTInputNumber({
             onChange={handleChange}
             onBlur={handleInputBlur}
             onFocus={handleInputFocus}
-            id={name}
-            name={name}
+            id={uniqueName}
+            name={uniqueName}
             autoComplete="off"
           />
         </Input.FieldWrapper>

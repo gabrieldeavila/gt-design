@@ -12,6 +12,7 @@ import React, {
 import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
+import useUniqueName from "../../../hooks/helpers/useUniqueName";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateEmail from "../../../hooks/validation/useValidateEmail";
 import useValidateState from "../../../hooks/validation/useValidateState";
@@ -35,6 +36,7 @@ function GTInputEmail({
   onChangeValidate,
 }: IGTInput): JSX.Element {
   const { t } = useTranslation();
+  const uniqueName = useUniqueName({ name });
 
   const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -106,7 +108,7 @@ function GTInputEmail({
     <>
       <Input.Container row={row} isWrong={!isValid}>
         <Input.FieldWrapper>
-          <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={name}>
+          <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={uniqueName}>
             {t(label)}
           </Input.Label>
           <Input.Field
@@ -115,8 +117,8 @@ function GTInputEmail({
             value={value}
             onBlur={handleInputBlur}
             onFocus={handleInputFocus}
-            id={name}
-            name={name}
+            id={uniqueName}
+            name={uniqueName}
           />
         </Input.FieldWrapper>
 
