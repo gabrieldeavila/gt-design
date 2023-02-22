@@ -29,28 +29,28 @@ const Template = () => {
             subtitle="STORIES.INPUTS.TEXT.SUBTITLE"
           />
           <Grid.Form>
-            <Grid.Item>
+            <Grid.Item col={2}>
               <GTInput.Number
                 text="щ(ʘ╻ʘ)щ"
                 name="nickname"
                 label="EXAMPLE.NUMBER"
               />
             </Grid.Item>
-            <Grid.Item>
+            <Grid.Item col={3}>
               <GTInput.Number
                 text="щ(ʘ╻ʘ)щ"
                 name="nickname"
                 label="EXAMPLE.NUMBER"
               />
             </Grid.Item>
-            <Grid.Item>
+            <Grid.Item col={5}>
               <GTInput.Number
                 text="щ(ʘ╻ʘ)щ"
                 name="nickname"
                 label="EXAMPLE.NUMBER"
               />
             </Grid.Item>
-            <Grid.Item>
+            <Grid.Item col={2}>
               <GTInput.Number
                 text="щ(ʘ╻ʘ)щ"
                 name="nickname"
