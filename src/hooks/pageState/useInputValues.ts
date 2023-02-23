@@ -22,6 +22,8 @@ function useInputValues(
 ) {
   const alterFieldRef = useRef<boolean>(true);
 
+  const [showFeedback, setShowFeedback] = useState(false);
+
   const { pageStateRef } = useGTPageStateContextSetters();
   const { handleInitialErrors } = useInitialErrors({ name, inputValidations });
 
@@ -147,16 +149,27 @@ function useInputValues(
     validateState,
   ]);
 
+  const handleMouseEnter = useCallback(() => {
+    setShowFeedback(true);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setShowFeedback(false);
+  }, []);
+
   return {
     value,
     isValidatingOnBlur,
     isLabelUp,
+    showFeedback,
     setValue,
     handleInputChange,
     handleInputBlur,
     handleInputFocus,
     handleInputClear,
     handleInputBlurErrors,
+    handleMouseEnter,
+    handleMouseLeave,
   };
 }
 

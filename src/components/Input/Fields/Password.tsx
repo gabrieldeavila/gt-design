@@ -74,10 +74,13 @@ function GTInputPassword({
     isLabelUp,
     value,
     isValidatingOnBlur,
+    showFeedback,
     handleInputChange,
     handleInputBlur,
     handleInputFocus,
     handleInputClear,
+    handleMouseEnter,
+    handleMouseLeave,
   } = useInputValues(
     name,
     validateState,
@@ -162,7 +165,12 @@ function GTInputPassword({
 
   return (
     <>
-      <Input.Container row={row} isWrong={!isValid}>
+      <Input.Container
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        row={row}
+        isWrong={!isValid}
+      >
         <Input.FieldWrapper>
           <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={uniqueName}>
             {t(label)}
@@ -182,13 +190,13 @@ function GTInputPassword({
         <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
 
         <Input.FeedbackWrapper>
-          {(title != null || text != null) && (
+          {(title != null || text != null) && showFeedback && (
             <Input.IconWrapper ref={containerRef}>
               <Icon.Info size={15} className="svg-no-active" />
             </Input.IconWrapper>
           )}
 
-          {!_.isEmpty(value) && (
+          {!_.isEmpty(value) && showFeedback && (
             <Input.IconWrapper onClick={handleInputClear}>
               <Icon.X size={15} className="svg-no-active cursor" />
             </Input.IconWrapper>

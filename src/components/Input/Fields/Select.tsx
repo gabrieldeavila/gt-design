@@ -75,10 +75,13 @@ function GTInputSelect({
   const {
     value,
     isValidatingOnBlur,
+    showFeedback,
     handleInputChange,
     handleInputBlur,
     handleInputFocus,
     handleInputClear,
+    handleMouseEnter,
+    handleMouseLeave,
   } = useInputValues(
     name,
     validateState,
@@ -187,11 +190,11 @@ function GTInputSelect({
       setSearchTerm(option.label);
       handleInputChange(option.value, true);
       setSelected(option.value);
-
+      handleMouseLeave();
       selectedIndexRef.current = selectedIndex;
       handleCloseSelect();
     },
-    [handleCloseSelect, handleInputChange, validateState]
+    [handleCloseSelect, handleInputChange, handleMouseLeave, validateState]
   );
 
   const handleChevClick = useCallback(() => {
@@ -268,9 +271,15 @@ function GTInputSelect({
           ref={containerRef}
           isUp={showOptions}
           isWrong={!isValid}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <Input.FieldWrapper>
-            <Input.Label isWrong={!isValid} up={isSelectUp} htmlFor={uniqueName}>
+            <Input.Label
+              isWrong={!isValid}
+              up={isSelectUp}
+              htmlFor={uniqueName}
+            >
               {t(label)}
             </Input.Label>
             <Input.Field
@@ -293,13 +302,13 @@ function GTInputSelect({
           )}
 
           <Input.FeedbackWrapper>
-            {(title != null || text != null) && (
+            {(title != null || text != null) && showFeedback && (
               <Input.IconWrapper ref={iconRef} onClick={handleChevClick}>
                 <Icon.Info size={15} className="svg-no-active" />
               </Input.IconWrapper>
             )}
 
-            {!_.isEmpty(value) && (
+            {!_.isEmpty(value) && showFeedback && (
               <Input.IconWrapper onClick={handleSelectClear}>
                 <Icon.X size={15} className="svg-no-active cursor" />
               </Input.IconWrapper>

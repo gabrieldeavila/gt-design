@@ -61,10 +61,13 @@ function GTInputMask({
     isLabelUp,
     value,
     isValidatingOnBlur,
+    showFeedback,
     handleInputChange,
     handleInputBlur,
     handleInputFocus,
     handleInputClear,
+    handleMouseEnter,
+    handleMouseLeave,
   } = useInputValues(
     name,
     validateState,
@@ -169,7 +172,12 @@ function GTInputMask({
 
   return (
     <>
-      <Input.Container isWrong={!isValid} row={row}>
+      <Input.Container
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        isWrong={!isValid}
+        row={row}
+      >
         <Input.FieldWrapper>
           <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={uniqueName}>
             {t(label)}
@@ -191,25 +199,27 @@ function GTInputMask({
           <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
         )}
 
-        <Input.FeedbackWrapper>
-          {(title != null || text != null) && (
-            <Input.IconWrapper ref={containerRef}>
-              <Icon.Info size={15} className="svg-no-active" />
-            </Input.IconWrapper>
-          )}
+        {showFeedback && (
+          <Input.FeedbackWrapper>
+            {(title != null || text != null) && (
+              <Input.IconWrapper ref={containerRef}>
+                <Icon.Info size={15} className="svg-no-active" />
+              </Input.IconWrapper>
+            )}
 
-          {isValidatingOnBlur && (
-            <Input.IconWrapper showOpacity>
-              <Loader.Simple size="sm" />
-            </Input.IconWrapper>
-          )}
+            {isValidatingOnBlur && (
+              <Input.IconWrapper showOpacity>
+                <Loader.Simple size="sm" />
+              </Input.IconWrapper>
+            )}
 
-          {(!_.isEmpty(value) || value > 0) && (
-            <Input.IconWrapper onClick={handleMaskClear}>
-              <Icon.X size={15} className="svg-no-active cursor" />
-            </Input.IconWrapper>
-          )}
-        </Input.FeedbackWrapper>
+            {(!_.isEmpty(value) || value > 0) && (
+              <Input.IconWrapper onClick={handleMaskClear}>
+                <Icon.X size={15} className="svg-no-active cursor" />
+              </Input.IconWrapper>
+            )}
+          </Input.FeedbackWrapper>
+        )}
       </Input.Container>
 
       {(title != null || text != null) && (

@@ -58,10 +58,13 @@ function GTInputEmail({
     isLabelUp,
     value,
     isValidatingOnBlur,
+    showFeedback,
     handleInputChange,
     handleInputBlur,
     handleInputFocus,
     handleInputClear,
+    handleMouseEnter,
+    handleMouseLeave,
   } = useInputValues(
     name,
     validateState,
@@ -106,7 +109,12 @@ function GTInputEmail({
 
   return (
     <>
-      <Input.Container row={row} isWrong={!isValid}>
+      <Input.Container
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        row={row}
+        isWrong={!isValid}
+      >
         <Input.FieldWrapper>
           <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={uniqueName}>
             {t(label)}
@@ -126,25 +134,27 @@ function GTInputEmail({
           <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
         )}
 
-        <Input.FeedbackWrapper>
-          {(title != null || text != null) && (
-            <Input.IconWrapper ref={containerRef}>
-              <Icon.Info size={15} className="svg-no-active" />
-            </Input.IconWrapper>
-          )}
+        {showFeedback && (
+          <Input.FeedbackWrapper>
+            {(title != null || text != null) && (
+              <Input.IconWrapper ref={containerRef}>
+                <Icon.Info size={15} className="svg-no-active" />
+              </Input.IconWrapper>
+            )}
 
-          {isValidatingOnBlur && (
-            <Input.IconWrapper showOpacity>
-              <Loader.Simple size="sm" />
-            </Input.IconWrapper>
-          )}
+            {isValidatingOnBlur && (
+              <Input.IconWrapper showOpacity>
+                <Loader.Simple size="sm" />
+              </Input.IconWrapper>
+            )}
 
-          {!_.isEmpty(value) && (
-            <Input.IconWrapper onClick={handleInputClear}>
-              <Icon.X size={15} className="svg-no-active cursor" />
-            </Input.IconWrapper>
-          )}
-        </Input.FeedbackWrapper>
+            {!_.isEmpty(value) && (
+              <Input.IconWrapper onClick={handleInputClear}>
+                <Icon.X size={15} className="svg-no-active cursor" />
+              </Input.IconWrapper>
+            )}
+          </Input.FeedbackWrapper>
+        )}
       </Input.Container>
 
       {(title != null || text != null) && (

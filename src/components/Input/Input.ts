@@ -103,7 +103,7 @@ const InputGroup = styled.form`
 `;
 
 const InputField = styled.input<IInputField>`
-  width: -webkit-fill-available;
+  width: 100%;
   height: 2.5rem;
   outline: none;
   border-radius: 0.25rem;
