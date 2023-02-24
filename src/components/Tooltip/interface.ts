@@ -7,15 +7,15 @@ export interface IGTTooltip {
 }
 
 export interface ITooltipWrapper {
-  top: number;
-  left: number;
+  // top: number;
+  // left: number;
   theme: GTTheme;
-  show: boolean;
-  isFirstRender: boolean;
-  isAboveParent: boolean;
-  zIndex: number;
+  // show: boolean;
+  // isFirstRender: boolean;
+  // isAboveParent: boolean;
+  // zIndex: number;
 }
 
 export interface ITooltipContainer {
-  isAboveParent: boolean;
+  isAboveParent?: boolean;
 }

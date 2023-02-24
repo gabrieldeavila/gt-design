@@ -247,7 +247,7 @@ const SelectOptionsContainer = styled.div`
 const SelectValue = styled.div<ISelectValue>`
   width: -webkit-fill-available;
   max-width: 100%;
-  max-height: 1rem;
+  max-height: fit-content;
   font-size: 0.75rem;
   padding: 1rem;
   background: ${(props) => props.theme.secondary};

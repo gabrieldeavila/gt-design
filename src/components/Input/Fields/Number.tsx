@@ -122,6 +122,7 @@ function GTInputNumber({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         isWrong={!isValid}
+        ref={containerRef}
         row={row}
       >
         <Input.FieldWrapper>
@@ -144,32 +145,32 @@ function GTInputNumber({
           <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
         )}
 
-        {showFeedback && (
-          <Input.FeedbackWrapper>
-            {(title != null || text != null) && (
-              <Input.IconWrapper ref={containerRef}>
-                <Icon.Info size={15} className="svg-no-active" />
-              </Input.IconWrapper>
-            )}
+        <Input.FeedbackWrapper>
+          {/* {(title != null || text != null) && (
+            <Input.IconWrapper ref={containerRef}>
+              <Icon.Info size={15} className="svg-no-active" />
+            </Input.IconWrapper>
+          )} */}
 
-            {isValidatingOnBlur && (
-              <Input.IconWrapper showOpacity>
-                <Loader.Simple size="sm" />
-              </Input.IconWrapper>
-            )}
+          {isValidatingOnBlur && (
+            <Input.IconWrapper showOpacity>
+              <Loader.Simple size="sm" />
+            </Input.IconWrapper>
+          )}
 
-            {(!_.isEmpty(value) || value > 0) && (
-              <Input.IconWrapper onClick={handleInputClear}>
-                <Icon.X size={15} className="svg-no-active cursor" />
-              </Input.IconWrapper>
-            )}
-          </Input.FeedbackWrapper>
-        )}
+          {(!_.isEmpty(value) || value > 0) && showFeedback && (
+            <Input.IconWrapper onClick={handleInputClear}>
+              <Icon.X size={15} className="svg-no-active cursor" />
+            </Input.IconWrapper>
+          )}
+        </Input.FeedbackWrapper>
+
+        <GTTooltip parentRef={containerRef} title={title} text={text} />
       </Input.Container>
 
-      {(title != null || text != null) && (
+      {/* {(title != null || text != null) && (
         <GTTooltip parentRef={containerRef} title={title} text={text} />
-      )}
+      )} */}
     </>
   );
 }
