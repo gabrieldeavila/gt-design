@@ -93,6 +93,8 @@ export const DividerWrapper = styled.div<ITextDividerWrapper>`
   display: flex;
   border-block-start: 0 rgba(253, 253, 253, 0.12);
   align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 
   &:after,
   &:before {
@@ -118,6 +120,7 @@ export const DividerWrapper = styled.div<ITextDividerWrapper>`
 
 export const DividerText = styled(H2)`
   padding: 0 0.5rem;
+  white-space: pre;
 `;
 
 const Text = { P, H1, H2, Btn: memo(TextBtn), Strong, Divider: memo(Divider) };

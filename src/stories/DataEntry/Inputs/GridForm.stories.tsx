@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useState } from "react";
-import { GTInput, Space } from "../../../components";
+import { GTInput, Space, Text } from "../../../components";
 import Grid from "../../../components/Grid";
 import { INumericMask } from "../../../components/Input/Fields/interface";
 import SectionContainer from "../../../components/Text/Template/SectionContainer";
@@ -49,7 +49,7 @@ const Template = () => {
             subtitle="STORIES.INPUTS.TEXT.SUBTITLE"
           />
           <Grid.Form>
-            <Grid.Item col={1}>
+            <Grid.Item col={12}>
               <GTInput.Number
                 text="щ(ʘ╻ʘ)щ"
                 name="nickname"
@@ -71,7 +71,7 @@ const Template = () => {
                 mask={moneyMask}
               />
             </Grid.Item>
-            <Grid.Item col={4}>
+            <Grid.Item col={6}>
               <GTInput.Email
                 text="(￣、￣)"
                 name="email"
@@ -79,7 +79,7 @@ const Template = () => {
               />
             </Grid.Item>
 
-            <Grid.Item col={4}>
+            <Grid.Item col={3}>
               <GTInput.Password
                 text="←_←"
                 name="password"
@@ -87,12 +87,39 @@ const Template = () => {
               />
             </Grid.Item>
 
-            <Grid.Item col={4}>
+            <Grid.Item col={3}>
               <GTInput.Select
                 title="🐲"
                 label="EXAMPLE.SELECT"
                 name="select"
                 options={options}
+              />
+            </Grid.Item>
+          </Grid.Form>
+          <Text.Divider>
+            Mobile Grid
+          </Text.Divider>
+          <Grid.Form>
+            <Grid.Item col={4} mobileCol={1}>
+              <GTInput.Number
+                text="щ(ʘ╻ʘ)щ"
+                name="nickname"
+                label="EXAMPLE.NUMBER"
+              />
+            </Grid.Item>
+            <Grid.Item col={6} mobileCol={2}>
+              <GTInput.Text
+                text="щ(ʘ╻ʘ)щ"
+                name="nickname"
+                label="EXAMPLE.TEXT"
+              />
+            </Grid.Item>
+
+            <Grid.Item col={2} mobileCol={3}>
+              <GTInput.Text
+                text="щ(ʘ╻ʘ)щ"
+                name="nickname"
+                label="EXAMPLE.TEXT"
               />
             </Grid.Item>
           </Grid.Form>
