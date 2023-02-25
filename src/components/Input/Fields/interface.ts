@@ -1,3 +1,5 @@
+import { IGTTooltipRef } from "../../Tooltip/interface";
+
 /* eslint-disable @typescript-eslint/indent */
 type TBlurValidateResult = [boolean, string] | [boolean, string, Object];
 
@@ -93,4 +95,5 @@ export interface ISelectContext {
   preSelected: number;
   setPreSelected?: React.Dispatch<React.SetStateAction<number>>;
   containerRef?: React.RefObject<HTMLDivElement>;
+  tooltipRef?: React.RefObject<IGTTooltipRef>;
 }

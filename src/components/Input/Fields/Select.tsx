@@ -22,6 +22,7 @@ import useValidateSelect from "../../../hooks/validation/useValidateSelect";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import wordFilter from "../../../utils/wordFilter";
 import Loader from "../../Loader";
+import { IGTTooltipRef } from "../../Tooltip/interface";
 import GTTooltip from "../../Tooltip/Tooltip";
 import Input, { Select } from "../Input";
 import {
@@ -93,6 +94,7 @@ function GTInputSelect({
   );
 
   const { validateSelect } = useValidateSelect();
+  const tooltipRef = useRef<IGTTooltipRef>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -262,6 +264,7 @@ function GTInputSelect({
           preSelected,
           setPreSelected,
           containerRef,
+          tooltipRef,
         }}
       >
         <Input.Container
@@ -317,7 +320,12 @@ function GTInputSelect({
               </Input.IconWrapper>
             )}
 
-            <GTTooltip parentRef={containerRef} title={title} text={text} />
+            <GTTooltip
+              ref={tooltipRef}
+              parentRef={containerRef}
+              title={title}
+              text={text}
+            />
           </Input.FeedbackWrapper>
           {showOptions && <SelectOptions options={options} />}
         </Input.Container>
@@ -350,6 +358,7 @@ const SelectOptions = memo(function SelectOptions({ options }: ISelectOptions) {
     setPreSelected,
     handleSelect,
     containerRef,
+    tooltipRef,
   } = useContext<ISelectContext>(SelectContext);
 
   const filteredOptions = useMemo(
@@ -445,7 +454,7 @@ const SelectOptions = memo(function SelectOptions({ options }: ISelectOptions) {
   if (isTop === undefined) return null;
 
   return (
-    <Select.OptionsWrapper isTop={isTop}>
+    <Select.OptionsWrapper isTop={isTop} onMouseOver={tooltipRef?.current?.hide}>
       <Select.OptionsContainer ref={selectRef}>
         {filteredOptions.map((option, index) => (
           <SelectOption

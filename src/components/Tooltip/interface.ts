@@ -16,6 +16,11 @@ export interface ITooltipWrapper {
   // zIndex: number;
 }
 
+export interface IGTTooltipRef {
+  show: () => void;
+  hide: () => void;
+}
+
 export interface ITooltipContainer {
   isAboveParent?: boolean;
 }

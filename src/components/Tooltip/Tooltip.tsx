@@ -1,21 +1,55 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import React, { memo, useCallback, useEffect, useRef } from "react";
+import React, {
+  forwardRef,
+  memo,
+  Ref,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+} from "react";
 import { useTranslation } from "react-i18next";
-import { IGTTooltip } from "./interface";
+import { IGTTooltip, IGTTooltipRef } from "./interface";
 import Tooltip from "./style";
 
-function GTTooltip({ title, text, parentRef }: IGTTooltip) {
+const GTTooltip = forwardRef((props: IGTTooltip, ref?: Ref<IGTTooltipRef>) => {
+  const { title, text, parentRef }: IGTTooltip = props;
+
   const { t } = useTranslation();
   const [show, setShow] = React.useState(false);
 
-  const handleMouseOverParent = useCallback(() => {
-    if (parentRef.current) {
-      setShow(true);
-    }
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        // this is the function that will be called by the parent element
+        // to show the tooltip
+        show: () => {
+          setShow(true);
+        },
+        // this is the function that will be called by the parent element
+        // to hide the tooltip
+        hide: () => {
+          setShow(false);
+        },
+      };
+    },
+    [setShow]
+  );
+
+  const handleMouseOverParent = useMemo(() => {
+    return () => {
+      if (parentRef.current) {
+        setShow(true);
+      }
+    };
   }, [parentRef]);
 
-  const handleMouseOutParent = useCallback(() => {
-    setShow(false);
+  const handleMouseOutParent = useMemo(() => {
+    return () => {
+      setShow(false);
+    };
   }, []);
 
   useEffect(() => {
@@ -56,6 +90,8 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
       </Tooltip.Wrapper>
     </Tooltip.Content>
   );
-}
+});
+
+GTTooltip.displayName = "GTTooltip";
 
 export default memo(GTTooltip);
