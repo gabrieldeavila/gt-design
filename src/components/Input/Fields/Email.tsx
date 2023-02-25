@@ -18,6 +18,7 @@ import useValidateEmail from "../../../hooks/validation/useValidateEmail";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import Loader from "../../Loader";
 import GTTooltip from "../../Tooltip/Tooltip";
+import ErrorMessage from "../Extras/ErrorMessage";
 import Input from "../Input";
 import { IGTInput } from "./interface";
 
@@ -131,9 +132,11 @@ function GTInputEmail({
           />
         </Input.FieldWrapper>
 
-        {!isValid && (
-          <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
-        )}
+        <ErrorMessage
+          message={errorMessage}
+          params={localeErrorsParams}
+          isWrong={!isValid}
+        />
 
         <Input.FeedbackWrapper>
           {isValidatingOnBlur && showFeedback && (

@@ -24,6 +24,7 @@ import wordFilter from "../../../utils/wordFilter";
 import Loader from "../../Loader";
 import { IGTTooltipRef } from "../../Tooltip/interface";
 import GTTooltip from "../../Tooltip/Tooltip";
+import ErrorMessage from "../Extras/ErrorMessage";
 import Input, { Select } from "../Input";
 import {
   IGTInputSelect,
@@ -299,9 +300,11 @@ function GTInputSelect({
             />
           </Input.FieldWrapper>
 
-          {!isValid && (
-            <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
-          )}
+          <ErrorMessage
+            message={errorMessage}
+            params={localeErrorsParams}
+            isWrong={!isValid}
+          />
 
           <Input.FeedbackWrapper>
             {!_.isEmpty(value) && showFeedback && (
@@ -454,7 +457,10 @@ const SelectOptions = memo(function SelectOptions({ options }: ISelectOptions) {
   if (isTop === undefined) return null;
 
   return (
-    <Select.OptionsWrapper isTop={isTop} onMouseOver={tooltipRef?.current?.hide}>
+    <Select.OptionsWrapper
+      isTop={isTop}
+      onMouseOver={tooltipRef?.current?.hide}
+    >
       <Select.OptionsContainer ref={selectRef}>
         {filteredOptions.map((option, index) => (
           <SelectOption

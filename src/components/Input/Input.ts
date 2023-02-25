@@ -171,18 +171,28 @@ const InputLabel = styled.label<IInputLabel>`
   box-decoration-break: clone;
 `;
 
+const InputErrorWrapper = styled.div`
+  position: absolute;
+  top: 98%;
+  left: 0;
+  right: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: ${(props) => props.theme.errorColor};
+  padding: 0 0.5rem;
+  display: flex;
+`;
+
 const InputError = styled.span`
   user-select: none;
   cursor: text;
-  position: absolute;
   font-size: 0.65rem;
   height: 1rem;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
   color: ${(props) => props.theme.errorColor};
-  top: 98%;
   margin-top: 0.15rem;
-  padding: 0 0.5rem;
 `;
 
 const InputFieldWrapper = styled.div`
@@ -204,6 +214,7 @@ const Input = {
   Container: InputContainer,
   Field: InputField,
   Label: InputLabel,
+  ErrorWrapper: InputErrorWrapper,
   Error: InputError,
   FieldWrapper: InputFieldWrapper,
   FeedbackWrapper: InputFeedbackWrapper,

@@ -20,6 +20,7 @@ import useValidatePassword from "../../../hooks/validation/useValidatePassword";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import Loader from "../../Loader";
 import GTTooltip from "../../Tooltip/Tooltip";
+import ErrorMessage from "../Extras/ErrorMessage";
 import Input from "../Input";
 import { IGTInputPassword } from "./interface";
 
@@ -188,7 +189,11 @@ function GTInputPassword({
           />
         </Input.FieldWrapper>
 
-        <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
+        <ErrorMessage
+          message={errorMessage}
+          params={localeErrorsParams}
+          isWrong={!isValid}
+        />
 
         <Input.FeedbackWrapper>
           {!_.isEmpty(value) && showFeedback && (

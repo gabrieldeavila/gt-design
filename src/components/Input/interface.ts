@@ -29,3 +29,13 @@ export interface IInputLabel {
 export interface ISelectOptionWrapper {
   isTop?: boolean;
 }
+
+interface errorParams {
+  [key: string]: string;
+}
+
+export interface IErrorMessage {
+  message: string;
+  isWrong: boolean;
+  params?: errorParams;
+}

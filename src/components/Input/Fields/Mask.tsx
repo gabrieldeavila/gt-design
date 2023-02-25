@@ -21,6 +21,7 @@ import useValidateMask from "../../../hooks/validation/useValidateMask";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import Loader from "../../Loader";
 import GTTooltip from "../../Tooltip/Tooltip";
+import ErrorMessage from "../Extras/ErrorMessage";
 import Input from "../Input";
 import { IGTInputMask } from "./interface";
 
@@ -196,9 +197,11 @@ function GTInputMask({
           />
         </Input.FieldWrapper>
 
-        {!isValid && (
-          <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
-        )}
+        <ErrorMessage
+          message={errorMessage}
+          params={localeErrorsParams}
+          isWrong={!isValid}
+        />
 
         <Input.FeedbackWrapper>
           {isValidatingOnBlur && showFeedback && (
@@ -213,7 +216,6 @@ function GTInputMask({
             </Input.IconWrapper>
           )}
         </Input.FeedbackWrapper>
-
         {_.isEmpty(errorMessage) && (
           <GTTooltip parentRef={containerRef} title={title} text={text} />
         )}

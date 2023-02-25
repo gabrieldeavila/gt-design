@@ -19,6 +19,7 @@ import useValidateNumber from "../../../hooks/validation/useValidateNumber";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import Loader from "../../Loader";
 import GTTooltip from "../../Tooltip/Tooltip";
+import ErrorMessage from "../Extras/ErrorMessage";
 import Input from "../Input";
 import { IGTInputNumber } from "./interface";
 
@@ -141,9 +142,11 @@ function GTInputNumber({
           />
         </Input.FieldWrapper>
 
-        {!isValid && (
-          <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
-        )}
+        <ErrorMessage
+          message={errorMessage}
+          params={localeErrorsParams}
+          isWrong={!isValid}
+        />
 
         <Input.FeedbackWrapper>
           {isValidatingOnBlur && (
@@ -162,7 +165,6 @@ function GTInputNumber({
         {_.isEmpty(errorMessage) && (
           <GTTooltip parentRef={containerRef} title={title} text={text} />
         )}
-
       </Input.Container>
     </>
   );
