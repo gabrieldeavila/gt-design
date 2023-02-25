@@ -208,8 +208,11 @@ function GTInputPassword({
               <Loader.Simple size="sm" />
             </Input.IconWrapper>
           )}
-          <GTTooltip parentRef={containerRef} title={title} text={text} />
         </Input.FeedbackWrapper>
+
+        {_.isEmpty(errorMessage) && (
+          <GTTooltip parentRef={containerRef} title={title} text={text} />
+        )}
       </Input.Container>
     </>
   );

@@ -147,9 +147,11 @@ function GTInputEmail({
               <Icon.X size={15} className="svg-no-active cursor" />
             </Input.IconWrapper>
           )}
-
-          <GTTooltip parentRef={containerRef} title={title} text={text} />
         </Input.FeedbackWrapper>
+
+        {_.isEmpty(errorMessage) && (
+          <GTTooltip parentRef={containerRef} title={title} text={text} />
+        )}
       </Input.Container>
     </>
   );

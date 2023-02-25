@@ -501,7 +501,6 @@ const SelectOption = memo(function SelectOption({
       selectRef.current?.scrollTo({
         left: 0,
         top: (optionRef.current?.offsetTop ?? 0) - 70,
-        behavior: "smooth",
       });
     }
   }, [isSelected, selectRef, isPreSelected]);

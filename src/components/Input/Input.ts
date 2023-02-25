@@ -176,6 +176,9 @@ const InputError = styled.span`
   cursor: text;
   position: absolute;
   font-size: 0.65rem;
+  height: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: ${(props) => props.theme.errorColor};
   top: 98%;
   margin-top: 0.15rem;

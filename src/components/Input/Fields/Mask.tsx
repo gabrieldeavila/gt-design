@@ -212,15 +212,12 @@ function GTInputMask({
               <Icon.X size={15} className="svg-no-active cursor" />
             </Input.IconWrapper>
           )}
-
-          <GTTooltip parentRef={containerRef} title={title} text={text} />
         </Input.FeedbackWrapper>
-      </Input.Container>
 
-      {/*
-      {(title != null || text != null) && (
-        <GTTooltip parentRef={containerRef} title={title} text={text} />
-      )} */}
+        {_.isEmpty(errorMessage) && (
+          <GTTooltip parentRef={containerRef} title={title} text={text} />
+        )}
+      </Input.Container>
     </>
   );
 }

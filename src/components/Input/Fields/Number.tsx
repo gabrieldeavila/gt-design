@@ -159,7 +159,10 @@ function GTInputNumber({
           )}
         </Input.FeedbackWrapper>
 
-        <GTTooltip parentRef={containerRef} title={title} text={text} />
+        {_.isEmpty(errorMessage) && (
+          <GTTooltip parentRef={containerRef} title={title} text={text} />
+        )}
+
       </Input.Container>
     </>
   );
