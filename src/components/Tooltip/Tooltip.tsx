@@ -35,6 +35,10 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
     };
   }, [handleMouseOutParent, handleMouseOverParent, parentRef]);
 
+  const handleMouseOverTooltip = useCallback(() => {
+    setShow(false);
+  }, []);
+
   // ref to the tooltip element
   const tooltipRef = useRef<HTMLDivElement>(null);
 
@@ -42,7 +46,7 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
   if (!title && !text) return null;
 
   return (
-    <Tooltip.Content show={show}>
+    <Tooltip.Content show={show} onMouseOver={handleMouseOverTooltip}>
       <Tooltip.Wrapper ref={tooltipRef}>
         <Tooltip.Container>
           {title != null && <Tooltip.Title> {t(title)} </Tooltip.Title>}
