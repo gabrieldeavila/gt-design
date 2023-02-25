@@ -170,6 +170,7 @@ function GTInputPassword({
         onMouseLeave={handleMouseLeave}
         row={row}
         isWrong={!isValid}
+        ref={containerRef}
       >
         <Input.FieldWrapper>
           <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={uniqueName}>
@@ -190,12 +191,6 @@ function GTInputPassword({
         <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
 
         <Input.FeedbackWrapper>
-          {(title != null || text != null) && showFeedback && (
-            <Input.IconWrapper ref={containerRef}>
-              <Icon.Info size={15} className="svg-no-active" />
-            </Input.IconWrapper>
-          )}
-
           {!_.isEmpty(value) && showFeedback && (
             <Input.IconWrapper onClick={handleInputClear}>
               <Icon.X size={15} className="svg-no-active cursor" />
@@ -213,12 +208,9 @@ function GTInputPassword({
               <Loader.Simple size="sm" />
             </Input.IconWrapper>
           )}
+          <GTTooltip parentRef={containerRef} title={title} text={text} />
         </Input.FeedbackWrapper>
       </Input.Container>
-
-      {(title != null || text != null) && (
-        <GTTooltip parentRef={containerRef} title={title} text={text} />
-      )}
     </>
   );
 }

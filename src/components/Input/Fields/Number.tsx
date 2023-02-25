@@ -146,12 +146,6 @@ function GTInputNumber({
         )}
 
         <Input.FeedbackWrapper>
-          {/* {(title != null || text != null) && (
-            <Input.IconWrapper ref={containerRef}>
-              <Icon.Info size={15} className="svg-no-active" />
-            </Input.IconWrapper>
-          )} */}
-
           {isValidatingOnBlur && (
             <Input.IconWrapper showOpacity>
               <Loader.Simple size="sm" />
@@ -167,10 +161,6 @@ function GTInputNumber({
 
         <GTTooltip parentRef={containerRef} title={title} text={text} />
       </Input.Container>
-
-      {/* {(title != null || text != null) && (
-        <GTTooltip parentRef={containerRef} title={title} text={text} />
-      )} */}
     </>
   );
 }

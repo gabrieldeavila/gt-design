@@ -49,21 +49,21 @@ const Template = () => {
             subtitle="STORIES.INPUTS.TEXT.SUBTITLE"
           />
           <Grid.Form>
-            <Grid.Item col={1}>
+            <Grid.Item col={12}>
               <GTInput.Number
                 text="щ(ʘ╻ʘ)щ"
                 name="nickname"
                 label="EXAMPLE.NUMBER"
               />
             </Grid.Item>
-            <Grid.Item col={3}>
+            <Grid.Item col={6}>
               <GTInput.Text
                 text="щ(ʘ╻ʘ)щ"
                 name="nickname"
                 label="EXAMPLE.TEXT"
               />
             </Grid.Item>
-            <Grid.Item>
+            <Grid.Item col={6}>
               <GTInput.Mask
                 title="（⊙ｏ⊙）"
                 name="price"
@@ -71,7 +71,7 @@ const Template = () => {
                 mask={moneyMask}
               />
             </Grid.Item>
-            <Grid.Item col={2}>
+            <Grid.Item col={4}>
               <GTInput.Email
                 text="(￣、￣)"
                 name="email"
@@ -79,7 +79,7 @@ const Template = () => {
               />
             </Grid.Item>
 
-            <Grid.Item>
+            <Grid.Item col={4}>
               <GTInput.Password
                 text="←_←"
                 name="password"
@@ -87,7 +87,7 @@ const Template = () => {
               />
             </Grid.Item>
 
-            <Grid.Item>
+            <Grid.Item col={4}>
               <GTInput.Select
                 title="🐲"
                 label="EXAMPLE.SELECT"

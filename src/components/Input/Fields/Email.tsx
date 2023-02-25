@@ -114,6 +114,7 @@ function GTInputEmail({
         onMouseLeave={handleMouseLeave}
         row={row}
         isWrong={!isValid}
+        ref={containerRef}
       >
         <Input.FieldWrapper>
           <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={uniqueName}>
@@ -134,32 +135,22 @@ function GTInputEmail({
           <Input.Error>{t(errorMessage, localeErrorsParams)}</Input.Error>
         )}
 
-        {showFeedback && (
-          <Input.FeedbackWrapper>
-            {(title != null || text != null) && (
-              <Input.IconWrapper ref={containerRef}>
-                <Icon.Info size={15} className="svg-no-active" />
-              </Input.IconWrapper>
-            )}
+        <Input.FeedbackWrapper>
+          {isValidatingOnBlur && showFeedback && (
+            <Input.IconWrapper showOpacity>
+              <Loader.Simple size="sm" />
+            </Input.IconWrapper>
+          )}
 
-            {isValidatingOnBlur && (
-              <Input.IconWrapper showOpacity>
-                <Loader.Simple size="sm" />
-              </Input.IconWrapper>
-            )}
+          {!_.isEmpty(value) && showFeedback && (
+            <Input.IconWrapper onClick={handleInputClear}>
+              <Icon.X size={15} className="svg-no-active cursor" />
+            </Input.IconWrapper>
+          )}
 
-            {!_.isEmpty(value) && (
-              <Input.IconWrapper onClick={handleInputClear}>
-                <Icon.X size={15} className="svg-no-active cursor" />
-              </Input.IconWrapper>
-            )}
-          </Input.FeedbackWrapper>
-        )}
+          <GTTooltip parentRef={containerRef} title={title} text={text} />
+        </Input.FeedbackWrapper>
       </Input.Container>
-
-      {(title != null || text != null) && (
-        <GTTooltip parentRef={containerRef} title={title} text={text} />
-      )}
     </>
   );
 }

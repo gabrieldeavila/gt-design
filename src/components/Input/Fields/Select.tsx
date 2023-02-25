@@ -95,7 +95,6 @@ function GTInputSelect({
   const { validateSelect } = useValidateSelect();
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const iconRef = useRef<HTMLDivElement>(null);
 
   // it is used to point the preSelected option
   const selectedIndexRef = useRef<number>(0);
@@ -302,12 +301,6 @@ function GTInputSelect({
           )}
 
           <Input.FeedbackWrapper>
-            {(title != null || text != null) && showFeedback && (
-              <Input.IconWrapper ref={iconRef} onClick={handleChevClick}>
-                <Icon.Info size={15} className="svg-no-active" />
-              </Input.IconWrapper>
-            )}
-
             {!_.isEmpty(value) && showFeedback && (
               <Input.IconWrapper onClick={handleSelectClear}>
                 <Icon.X size={15} className="svg-no-active cursor" />
@@ -323,16 +316,12 @@ function GTInputSelect({
                 <Loader.Simple size="sm" />
               </Input.IconWrapper>
             )}
+
+            <GTTooltip parentRef={containerRef} title={title} text={text} />
           </Input.FeedbackWrapper>
           {showOptions && <SelectOptions options={options} />}
         </Input.Container>
       </SelectContext.Provider>
-
-      {(title != null || text != null) && (
-        <>
-          <GTTooltip parentRef={iconRef} title={title} text={text} />
-        </>
-      )}
     </>
   );
 }

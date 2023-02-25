@@ -19,3 +19,7 @@ export interface ITooltipWrapper {
 export interface ITooltipContainer {
   isAboveParent?: boolean;
 }
+
+export interface ITooltipContent {
+  show: boolean;
+}

@@ -1,9 +1,13 @@
 import styled, { css } from "styled-components";
 import { animations, flex, shadows } from "../../utils";
-import { ITooltipContainer, ITooltipWrapper } from "./interface";
+import {
+  ITooltipContainer,
+  ITooltipContent,
+  ITooltipWrapper,
+} from "./interface";
 
 const TooltipWrapper = styled.div<ITooltipWrapper>`
-  position: absolute;
+  position: relative;
   min-width: 1rem;
   max-width: 7rem;
   height: fit-content;
@@ -14,7 +18,6 @@ const TooltipWrapper = styled.div<ITooltipWrapper>`
   display: flex;
   justify-content: center;
   align-items: center;
-  top: calc(100% + 9px);
   /* opacity: 0; */
   z-index: 1;
 
@@ -69,7 +72,21 @@ const TooltipText = styled.p`
   font-weight: 200;
 `;
 
+const TooltipContent = styled.div<ITooltipContent>`
+  position: absolute;
+  transition: 0.25s ease;
+  transform: ${({ show }) =>
+    show ? "translateY(0px) scale(1)" : "translateY(-1.5rem) scale(0)"};
+  z-index: 12;
+  top: calc(100% + 9px);
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+`;
+
 const Tooltip = {
+  Content: TooltipContent,
   Wrapper: TooltipWrapper,
   Container: TooltipContainer,
   Title: TooltipTitle,

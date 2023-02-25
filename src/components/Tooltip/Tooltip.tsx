@@ -1,15 +1,39 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import React, { memo, useRef } from "react";
+import React, { memo, useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { IGTTooltip } from "./interface";
 import Tooltip from "./style";
 
 function GTTooltip({ title, text, parentRef }: IGTTooltip) {
   const { t } = useTranslation();
+  const [show, setShow] = React.useState(false);
 
-  const parentWidth = parentRef?.current?.offsetWidth ?? 0;
+  const handleMouseOverParent = useCallback(() => {
+    if (parentRef.current) {
+      setShow(true);
+    }
+  }, [parentRef]);
 
-  console.log(parentWidth);
+  const handleMouseOutParent = useCallback(() => {
+    setShow(false);
+  }, []);
+
+  useEffect(() => {
+    // gets when the mouse is over the parent element for more than 0.5 seconds
+    // add event listener to the parent element
+    const parentElement = parentRef.current;
+
+    if (!parentElement) return;
+
+    parentElement.addEventListener("mouseover", handleMouseOverParent);
+
+    parentElement.addEventListener("mouseout", handleMouseOutParent);
+
+    return () => {
+      parentElement.removeEventListener("mouseover", handleMouseOverParent);
+      parentElement.removeEventListener("mouseout", handleMouseOutParent);
+    };
+  }, [handleMouseOutParent, handleMouseOverParent, parentRef]);
 
   // ref to the tooltip element
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -18,19 +42,15 @@ function GTTooltip({ title, text, parentRef }: IGTTooltip) {
   if (!title && !text) return null;
 
   return (
-    <Tooltip.Wrapper
-      // zIndex={zIndex}
-      ref={tooltipRef}
-      // isAboveParent={isAboveParent}
-      // left={left}
-      // top={tooltipTop}
-    >
-      <Tooltip.Container>
-        {title != null && <Tooltip.Title> {t(title)} </Tooltip.Title>}
+    <Tooltip.Content show={show}>
+      <Tooltip.Wrapper ref={tooltipRef}>
+        <Tooltip.Container>
+          {title != null && <Tooltip.Title> {t(title)} </Tooltip.Title>}
 
-        {text != null && <Tooltip.Text>{t(text)}</Tooltip.Text>}
-      </Tooltip.Container>
-    </Tooltip.Wrapper>
+          {text != null && <Tooltip.Text>{t(text)}</Tooltip.Text>}
+        </Tooltip.Container>
+      </Tooltip.Wrapper>
+    </Tooltip.Content>
   );
 }
 
