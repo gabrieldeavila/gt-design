@@ -153,8 +153,8 @@ const Template = ({ isGuided }: { isGuided: boolean }) => {
       >
         <Space.Horizontal>
           <SectionContainer
-            title="Select"
-            subtitle="STORIES.INPUTS.NUMERIC_MASK.SUBTITLE"
+            title="Non Numeric Mask"
+            subtitle="STORIES.INPUTS.NON_NUMERIC_MASK.SUBTITLE"
           />
           <Input.Group>
             <GTInput.Mask

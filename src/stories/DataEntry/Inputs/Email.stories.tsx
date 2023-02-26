@@ -35,13 +35,13 @@ const Template = () => {
       >
         <Space.Horizontal>
           <SectionContainer
-            title="Select"
-            subtitle="STORIES.INPUTS.TEXT.SUBTITLE"
+            title="STORIES.INPUTS.EMAIL.TITLE"
+            subtitle="STORIES.INPUTS.EMAIL.SUBTITLE"
           />
           <Input.Group>
             <GTInput.Email
               row={6}
-              text="щ(ʘ╻ʘ)щ"
+              text="Yeah, you can read"
               name="nickname"
               label="TEMPLATE.LOGIN.EMAIL_LABEL"
               onBlurValidate={handleBlurValidate}

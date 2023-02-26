@@ -50,7 +50,7 @@ const Template = ({ position }: { position: "top" | "bottom" }) => {
       >
         <Space.Horizontal>
           <SectionContainer
-            title="Select"
+            title="STORIES.INPUTS.SELECT.TITLE"
             subtitle="STORIES.INPUTS.SELECT.SUBTITLE"
           />
           <Space.Modifiers mt={currPos} addOns={["middle"]}>

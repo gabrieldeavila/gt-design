@@ -36,7 +36,7 @@ const Template = () => {
       >
         <Space.Horizontal>
           <SectionContainer
-            title="Select"
+            title="Numeric Mask"
             subtitle="STORIES.INPUTS.NUMERIC_MASK.SUBTITLE"
           />
           <Input.Group>

@@ -59,13 +59,14 @@ const Template = () => {
       >
         <Space.Horizontal>
           <SectionContainer
-            title="Select"
-            subtitle="STORIES.INPUTS.TEXT.SUBTITLE"
+            title="STORIES.INPUTS.NUMBER.TITLE"
+            subtitle="STORIES.INPUTS.NUMBER.SUBTITLE"
           />
           <Input.Group>
             <GTInput.Number
               row={6}
-              text="щ(ʘ╻ʘ)щ"
+              title="Just read it!"
+              text="Something"
               name="nickname"
               label="EXAMPLE.NUMBER"
               onBlurValidate={handleBlurValidate}

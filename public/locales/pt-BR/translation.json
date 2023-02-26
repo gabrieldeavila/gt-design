@@ -72,9 +72,38 @@
       "SUBTITLE": "Você pode adicionar qualquer componente dentro do Box."
     },
     "INPUTS": {
-      "SUBTITLE": "Com um GTPageStateProvider, o único passo necessário é definir o nome e a etiqueta do input. Ele cuidará do resto automaticamente."
+      "SUBTITLE": "Com um GTPageStateProvider, o único passo necessário é definir o nome e a label do input. Ele cuidará do resto automaticamente.",
+      "NUMBER": {
+        "TITLE": "Número",
+        "SUBTITLE": "Pode ser usado para representar números inteiros ou decimais."
+      },
+      "NON_NUMERIC_MASK": {
+        "TITLE": "Máscara não numérica",
+        "SUBTITLE": "Pode ser usado para representar números com uma máscara. Como um CPF ou um CNPJ."
+      },
+      "NUMERIC_MASK": {
+        "TITLE": "Máscara numérica",
+        "SUBTITLE": "Pode ser usado para representar números com uma máscara. Como preços, por exemplo."
+      },
+      "TEXT": {
+        "TITLE": "Texto",
+        "SUBTITLE": "Pode ser usado para representar qualquer texto."
+      },
+      "GRID": {
+        "TITLE": "Grid de input",
+        "SUBTITLE": "Você pode criar um grid de input."
+      },
+      "SELECT": {
+        "TITLE": "Seleção",
+        "SUBTITLE": "Pode ser usado para representar uma lista de opções."
+      },
+      "EMAIL": {
+        "TITLE": "E-mail",
+        "SUBTITLE": "Pode ser usado para representar um e-mail."
+      }
     },
     "BUTTONS": {
+      "TITLE": "Botões",
       "SUBTITLE": "O botão foi projetado para funcionar otimamente tanto em dispositivos desktop quanto smartphones."
     },
     "SPACE": {

@@ -12,7 +12,7 @@ const Template = () => {
   return (
     <GTBasic>
       <Space.Horizontal>
-        <SectionContainer title="Buttons" subtitle="STORIES.BUTTONS.SUBTITLE" />
+        <SectionContainer title="STORIES.BUTTONS.TITLE" subtitle="STORIES.BUTTONS.SUBTITLE" />
 
         <Text.Divider position="left">Normal</Text.Divider>
 

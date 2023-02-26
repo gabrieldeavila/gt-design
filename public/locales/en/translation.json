@@ -71,9 +71,34 @@
       "SUBTITLE": "You can add any component inside the box."
     },
     "INPUTS": {
-      "SUBTITLE": "With a GTPageStateProvider, the only required step is to set the name and label of the input. It will handle the rest automatically."
+      "SUBTITLE": "With a GTPageStateProvider, the only required step is to set the name and label of the input. It will handle the rest automatically.",
+      "NUMBER": {
+        "TITLE": "Number",
+        "SUBTITLE": "It can be used to represent whole or decimal numbers."
+      },
+      "NON_NUMERIC_MASK": {
+        "TITLE": "Non-Numeric Mask",
+        "SUBTITLE": "It can be used to represent numbers with a mask. For example, a phone number."
+      },
+      "NUMERIC_MASK": {
+        "TITLE": "Numeric Mask",
+        "SUBTITLE": "It can be used to represent numbers with a mask. For example, prices."
+      },
+      "GRID": {
+        "TITLE": "Grid",
+        "SUBTITLE": "You can create a grid of inputs by wrapping them in a GRID component."
+      },
+      "SELECT": {
+        "TITLE": "Select",
+        "SUBTITLE": "It can be used to represent a list of options."
+      },
+      "EMAIL": {
+        "TITLE": "Email",
+        "SUBTITLE": "It can be used to represent an email address."
+      }
     },
     "BUTTONS": {
+      "TITLE": "Buttons",
       "SUBTITLE": "The button is designed to function optimally on both desktop and mobile devices."
     },
     "SPACE": {

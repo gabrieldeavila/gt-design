@@ -45,8 +45,8 @@ const Template = () => {
       >
         <Space.Horizontal>
           <SectionContainer
-            title="Select"
-            subtitle="STORIES.INPUTS.TEXT.SUBTITLE"
+            title="STORIES.INPUTS.GRID.TITLE"
+            subtitle="STORIES.INPUTS.GRID.SUBTITLE"
           />
           <Grid.Form>
             <Grid.Item col={12}>
