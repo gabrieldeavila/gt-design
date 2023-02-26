@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { GTInput, Input, Space } from "../../../components";
 import {
   TBlurValidate,
-  TChangeValidate,
+  TChangeValidate
 } from "../../../components/Input/Fields/interface";
 import SectionContainer from "../../../components/Text/Template/SectionContainer";
 import GTPageStateProvider from "../../../context/pageState";
@@ -34,20 +34,15 @@ const Template = () => {
     return [isValid, errorMsg, errorParams];
   }, []);
 
-  const handleBlurValidate: TBlurValidate = useCallback(async () => {
+  const handleBlurValidate: TBlurValidate = useCallback(async (value) => {
     return await new Promise((resolve) => {
       setTimeout(() => {
         const rand = Math.random() * 10;
         const isValid = rand > 5;
-
         resolve([isValid, "OPS"]);
       }, 200);
     });
   }, []);
-
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
 
   return (
     <GTBasic>

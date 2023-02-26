@@ -322,14 +322,17 @@ function GTInputSelect({
                 <Loader.Simple size="sm" />
               </Input.IconWrapper>
             )}
+          </Input.FeedbackWrapper>
 
+          {_.isEmpty(errorMessage) && (
             <GTTooltip
               ref={tooltipRef}
               parentRef={containerRef}
               title={title}
               text={text}
             />
-          </Input.FeedbackWrapper>
+          )}
+
           {showOptions && <SelectOptions options={options} />}
         </Input.Container>
       </SelectContext.Provider>

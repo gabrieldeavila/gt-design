@@ -68,12 +68,12 @@ function useInputValues(
     ]
   );
 
-  // if has value, label is up
   const handleInputChange: THandleInputChange = useCallback(
     (newVal: string | number, isValid, invalidMessage, errorsVar) => {
       const valueTemp = value.toString();
       const newValTemp = newVal.toString();
 
+      // if it has value, label is up
       if (!_.isEmpty(newValTemp) && _.isEmpty(valueTemp)) {
         setIsLabelUp(true);
       }
@@ -89,7 +89,6 @@ function useInputValues(
   const handleInputBlurErrors: THandleBlurErrors = useCallback(async () => {
     if (!onBlurValidate || !isInputValid.current) return;
 
-    // if there is any error, don't validate the mask
     setIsValidatingOnBlur(true);
 
     const [isValid, errorMessage = "", errorsParams] =
@@ -115,15 +114,21 @@ function useInputValues(
   ]);
 
   const handleInputBlur = useCallback(() => {
+    let isEmpty = false;
+
     if (_.isEmpty(value.toString())) {
       setIsLabelUp(false);
+
+      isEmpty = true;
+      setIsValid(false);
+      setErrorMessage("REQUIRED");
     }
 
-    if (alterFieldRef.current) {
+    if (alterFieldRef.current && !isEmpty) {
       handleInputBlurErrors().catch((e) => console.error(e));
       alterFieldRef.current = false;
     }
-  }, [handleInputBlurErrors, value]);
+  }, [handleInputBlurErrors, setErrorMessage, setIsValid, value]);
 
   const handleInputClear = useCallback(async () => {
     const newValue = "";
