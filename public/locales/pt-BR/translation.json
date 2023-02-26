@@ -51,7 +51,8 @@
     "PERCENT": "Percentual",
     "NUMBER": "Número",
     "MONEY": "Dinheiro",
-    "SELECT": "Selecione"
+    "SELECT": "Selecione",
+    "SWITCH": "Ativar"
   },
   "STORIES": {
     "TOOLTIP": {

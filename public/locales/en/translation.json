@@ -50,7 +50,8 @@
     "PERCENT": "Percent",
     "NUMBER": "Number",
     "MONEY": "Money",
-    "SELECT": "Select"
+    "SELECT": "Select",
+    "SWITCH": "Active"
   },
   "STORIES": {
     "TOOLTIP": {

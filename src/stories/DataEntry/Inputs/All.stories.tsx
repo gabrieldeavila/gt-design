@@ -68,6 +68,8 @@ const Template = () => {
         <Space.Horizontal>
           <SectionContainer title="Inputs" subtitle="STORIES.INPUTS.SUBTITLE" />
           <Input.Group>
+            <GTInput.Switch label="EXAMPLE.SWITCH" name="selected" />
+
             <GTInput.Select
               row={6}
               title="🐲"

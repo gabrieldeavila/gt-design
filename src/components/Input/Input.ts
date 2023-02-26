@@ -94,6 +94,10 @@ const InputContainer = styled.div<IInputContainer>`
   ${({ isLoading }) => (isLoading ?? false) && loadingInput}
 `;
 
+const InputNormalizedContainer = styled(InputContainer)`
+  background: transparent;
+`;
+
 const InputGroup = styled.form`
   width: -webkit-fill-available;
 
@@ -212,6 +216,7 @@ const InputFeedbackWrapper = styled.div`
 const Input = {
   Group: InputGroup,
   Container: InputContainer,
+  NormalizedContainer: InputNormalizedContainer,
   Field: InputField,
   Label: InputLabel,
   ErrorWrapper: InputErrorWrapper,
