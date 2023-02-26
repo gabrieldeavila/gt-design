@@ -46,7 +46,7 @@ const GTTooltip = forwardRef((props: IGTTooltip, ref?: Ref<IGTTooltipRef>) => {
         // gets the position of the parent element
         const pos = parentRef.current.getBoundingClientRect();
         const isAtTheBottom = pos.top + 100 > window.innerHeight;
-        console.log(isAtTheBottom);
+
         setIsAboveParent(isAtTheBottom);
         setShow(true);
       }

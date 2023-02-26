@@ -27,11 +27,11 @@ const GridForm = styled.form`
   /* create a grid display with max 12 cols */
   display: grid;
   grid-gap: 1.5rem 1rem;
-  grid-template-columns: repeat(12, calc(8.33vw - 1.25rem));
+  grid-template-columns: repeat(12, 12fr);
 
   /* when it's mobile */
   @media (max-width: 768px) {
-    grid-template-columns: repeat(3, calc(33vw - 1.45rem));
+    grid-template-columns: repeat(3, 3fr);
   }
 `;
 

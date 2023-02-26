@@ -14,7 +14,7 @@ const GTContext = createContext<IGTContext | undefined>(defaultValues);
 export function useGTContext() {
   const context = useContext(GTContext);
   if (context === undefined) {
-    throw new Error("useTodoContext must be within GTProvider");
+    throw new Error("useGTContext must be within GTProvider");
   }
 
   return context;
