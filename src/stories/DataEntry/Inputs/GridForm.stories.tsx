@@ -49,7 +49,7 @@ const Template = () => {
             subtitle="STORIES.INPUTS.TEXT.SUBTITLE"
           />
           <Grid.Form>
-            <Grid.Item col={26}>
+            <Grid.Item col={12}>
               <GTInput.Number
                 text="щ(ʘ╻ʘ)щ"
                 name="nickname"

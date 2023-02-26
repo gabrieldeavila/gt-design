@@ -12,7 +12,7 @@ export interface ITooltipWrapper {
   theme: GTTheme;
   // show: boolean;
   // isFirstRender: boolean;
-  // isAboveParent: boolean;
+  isAboveParent: boolean;
   // zIndex: number;
 }
 
@@ -22,9 +22,10 @@ export interface IGTTooltipRef {
 }
 
 export interface ITooltipContainer {
-  isAboveParent?: boolean;
+  isAboveParent: boolean;
 }
 
 export interface ITooltipContent {
   show: boolean;
+  isAboveParent: boolean;
 }

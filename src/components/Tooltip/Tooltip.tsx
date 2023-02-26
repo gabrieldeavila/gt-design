@@ -8,6 +8,7 @@ import React, {
   useImperativeHandle,
   useMemo,
   useRef,
+  useState,
 } from "react";
 import { useTranslation } from "react-i18next";
 import { IGTTooltip, IGTTooltipRef } from "./interface";
@@ -17,7 +18,8 @@ const GTTooltip = forwardRef((props: IGTTooltip, ref?: Ref<IGTTooltipRef>) => {
   const { title, text, parentRef }: IGTTooltip = props;
 
   const { t } = useTranslation();
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
+  const [isAboveParent, setIsAboveParent] = useState(false);
 
   useImperativeHandle(
     ref,
@@ -41,6 +43,11 @@ const GTTooltip = forwardRef((props: IGTTooltip, ref?: Ref<IGTTooltipRef>) => {
   const handleMouseOverParent = useMemo(() => {
     return () => {
       if (parentRef.current) {
+        // gets the position of the parent element
+        const pos = parentRef.current.getBoundingClientRect();
+        const isAtTheBottom = pos.top + 100 > window.innerHeight;
+        console.log(isAtTheBottom);
+        setIsAboveParent(isAtTheBottom);
         setShow(true);
       }
     };
@@ -80,9 +87,13 @@ const GTTooltip = forwardRef((props: IGTTooltip, ref?: Ref<IGTTooltipRef>) => {
   if (!title && !text) return null;
 
   return (
-    <Tooltip.Content show={show} onMouseOver={handleMouseOverTooltip}>
-      <Tooltip.Wrapper ref={tooltipRef}>
-        <Tooltip.Container>
+    <Tooltip.Content
+      isAboveParent={isAboveParent}
+      show={show}
+      onMouseOver={handleMouseOverTooltip}
+    >
+      <Tooltip.Wrapper isAboveParent={isAboveParent} ref={tooltipRef}>
+        <Tooltip.Container isAboveParent={isAboveParent}>
           {title != null && <Tooltip.Title> {t(title)} </Tooltip.Title>}
 
           {text != null && <Tooltip.Text>{t(text)}</Tooltip.Text>}

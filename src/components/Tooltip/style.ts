@@ -18,7 +18,6 @@ const TooltipWrapper = styled.div<ITooltipWrapper>`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* opacity: 0; */
   z-index: 1;
 
   ${animations.simple}
@@ -34,7 +33,7 @@ const TooltipContainer = styled.div<ITooltipContainer>`
     content: "";
     position: absolute;
     left: 50%;
-    top: 0;
+    top: ${({ isAboveParent }) => (isAboveParent ? "100%" : "0")};
     transform: translateX(-40%) translatey(-50%) rotate(45deg);
     background: ${({ theme }) => theme.primary};
     border: 5px solid ${({ theme }) => theme.primary};
@@ -46,7 +45,7 @@ const TooltipContainer = styled.div<ITooltipContainer>`
     position: absolute;
     left: 45%;
     right: 0;
-    top: 10px;
+    top: ${({ isAboveParent }) => (isAboveParent ? "100%" : "10px")};
     transform: translateX(-40%) translatey(-100%);
     background: ${({ theme }) => theme.primary};
     border: 5px solid ${({ theme }) => theme.primary};
@@ -78,7 +77,16 @@ const TooltipContent = styled.div<ITooltipContent>`
   transform: ${({ show }) =>
     show ? "translateY(0px) scale(1)" : "translateY(-1.5rem) scale(0)"};
   z-index: 12;
-  top: calc(100% + 9px);
+
+  /* if is above parent do something diff */
+  ${({ isAboveParent }) =>
+    isAboveParent
+      ? css`
+          bottom: calc(100% + 9px);
+        `
+      : css`
+          top: calc(100% + 9px);
+        `}
   right: 0;
   left: 0;
   display: flex;
