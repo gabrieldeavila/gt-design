@@ -9,7 +9,12 @@ const handleCol = (col: number | string | undefined, isMobile?: boolean) => {
 
   const colNumber = Number(col);
 
+  if (colNumber / colLength === 1) return colLength;
+
   if (colNumber > colLength) {
+    const diff = colNumber % colLength;
+    if (diff === 0) return colLength;
+
     return (colNumber % colLength) + 1;
   }
 
@@ -26,7 +31,7 @@ const GridForm = styled.form`
 
   /* when it's mobile */
   @media (max-width: 768px) {
-    grid-template-columns: repeat(3, calc(33vw - 1.25rem));
+    grid-template-columns: repeat(3, calc(33vw - 1.45rem));
   }
 `;
 
