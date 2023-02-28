@@ -94,8 +94,14 @@ const InputContainer = styled.div<IInputContainer>`
   ${({ isLoading }) => (isLoading ?? false) && loadingInput}
 `;
 
-const InputNormalizedContainer = styled(InputContainer)`
-  background: transparent;
+const InputNormalizedContainer = styled.label<IInputContainer>`
+  ${getRowWidth}
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: ${({ flexJustify }) => flexJustify ?? "flex-start"};
 `;
 
 const InputGroup = styled.form`
@@ -175,6 +181,12 @@ const InputLabel = styled.label<IInputLabel>`
   box-decoration-break: clone;
 `;
 
+const InputNormalizedLabel = styled(InputLabel)`
+  position: unset;
+  left: unset;
+  cursor: pointer;
+`;
+
 const InputErrorWrapper = styled.div`
   position: absolute;
   top: 98%;
@@ -219,6 +231,7 @@ const Input = {
   NormalizedContainer: InputNormalizedContainer,
   Field: InputField,
   Label: InputLabel,
+  NormalizedLabel: InputNormalizedLabel,
   ErrorWrapper: InputErrorWrapper,
   Error: InputError,
   FieldWrapper: InputFieldWrapper,

@@ -5,7 +5,7 @@ export interface IGTContext {
 }
 
 export interface IPageStateValues {
-  [key: string | number]: string | number;
+  [key: string | number]: string | number | boolean;
 }
 
 export interface IGTPageState {

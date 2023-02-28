@@ -9,6 +9,7 @@ export interface IInputContainer {
   row?: number;
   isLoading?: boolean;
   isWrong?: boolean;
+  flexJustify?: string;
 }
 
 export interface ISelectValue {

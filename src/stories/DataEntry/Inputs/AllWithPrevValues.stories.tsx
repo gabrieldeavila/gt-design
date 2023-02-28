@@ -63,7 +63,9 @@ const Template = () => {
     percent: 69,
     phone: "5_7_99_3_5",
     price: 0.55,
+    selected: true,
   });
+
   const [errors, setErrors] = useState<string[]>([]);
 
   return (
@@ -77,6 +79,13 @@ const Template = () => {
         <Space.Horizontal>
           <SectionContainer title="Inputs" subtitle="STORIES.INPUTS.SUBTITLE" />
           <Input.Group>
+            <GTInput.Switch
+              title="nickname"
+              label="EXAMPLE.SWITCH"
+              name="selected"
+              flexJustify="space-between"
+            />
+
             <GTInput.Select
               row={6}
               title="🐲"

@@ -4,11 +4,11 @@ import { IGTTooltipRef } from "../../Tooltip/interface";
 type TBlurValidateResult = [boolean, string] | [boolean, string, Object];
 
 export type TBlurValidate = (
-  value: string | number
+  value: string | number | boolean
 ) => TBlurValidateResult | Promise<TBlurValidateResult>;
 
 export type TChangeValidate = (
-  value: string | number
+  value: string | number | boolean
 ) => [boolean, string] | [boolean, string, Object];
 
 export interface IGTInput {
@@ -30,6 +30,10 @@ export interface IGTInputText extends IGTInput {
   maxWords?: number | string;
   minChars?: number | string;
   maxChars?: number | string;
+}
+
+export interface IGTInputSwitch extends IGTInput {
+  flexJustify?: string;
 }
 
 export interface IGTInputNumber extends IGTInput {

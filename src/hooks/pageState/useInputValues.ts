@@ -69,7 +69,7 @@ function useInputValues(
   );
 
   const handleInputChange: THandleInputChange = useCallback(
-    (newVal: string | number, isValid, invalidMessage, errorsVar) => {
+    (newVal: string | number | boolean, isValid, invalidMessage, errorsVar) => {
       const valueTemp = value.toString();
       const newValTemp = newVal.toString();
 

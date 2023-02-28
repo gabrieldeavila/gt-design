@@ -1,22 +1,25 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable operator-linebreak */
 import _ from "lodash";
 import PropTypes from "prop-types";
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import * as Icon from "react-feather";
+import React, {
+  useCallback, useMemo,
+  useRef,
+  useState
+} from "react";
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useUniqueName from "../../../hooks/helpers/useUniqueName";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateState from "../../../hooks/validation/useValidateState";
-import useValidateText from "../../../hooks/validation/useValidateText";
 import Loader from "../../Loader";
 import GTNormalSwitch from "../../Switch/Template/Normal";
 import GTTooltip from "../../Tooltip/Tooltip";
 import ErrorMessage from "../Extras/ErrorMessage";
 import Input from "../Input";
-import { IGTInputText } from "./interface";
+import { IGTInputSwitch } from "./interface";
 
 const defaultValidationObj = ["required"];
 function GTInputSwitch({
@@ -24,17 +27,13 @@ function GTInputSwitch({
   label,
   validations,
   defaultValidation,
-  minWords,
-  maxWords,
-  minChars,
-  maxChars,
-  onChange,
+  flexJustify,
   text,
   title,
   row,
   onBlurValidate,
   onChangeValidate,
-}: IGTInputText) {
+}: IGTInputSwitch) {
   const { t } = useTranslation();
   const uniqueName = useUniqueName({ name });
 
@@ -56,9 +55,9 @@ function GTInputSwitch({
     value,
     isValidatingOnBlur,
     showFeedback,
-    handleInputClear,
     handleMouseEnter,
     handleMouseLeave,
+    handleInputChange,
   } = useInputValues(
     name,
     validateState,
@@ -70,23 +69,12 @@ function GTInputSwitch({
     inputValidations
   );
 
-  const { validateText } = useValidateText(
-    minWords,
-    maxWords,
-    minChars,
-    maxChars
+  const handleChange = useCallback(
+    (val: boolean) => {
+      handleInputChange(val, isValid);
+    },
+    [handleInputChange, isValid]
   );
-
-  useEffect(() => {
-    const chars = value.toString();
-    if (chars.length === 0) return;
-
-    const { isValid, invalidMessage } = validateText(chars, inputValidations);
-
-    setIsValid(isValid);
-    setErrorMessage(invalidMessage);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -101,16 +89,23 @@ function GTInputSwitch({
       <Input.NormalizedContainer
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        flexJustify={flexJustify}
         row={row}
         isWrong={!isValid}
         ref={containerRef}
       >
-        <Input.FieldWrapper>
-          <GTNormalSwitch />
-          <Input.Label isWrong={!isValid} up={false} htmlFor={uniqueName}>
-            {t(label)}
-          </Input.Label>
-        </Input.FieldWrapper>
+        <GTNormalSwitch
+          onSwitchChange={handleChange}
+          isChecked={!!value}
+          name={uniqueName}
+        />
+        <Input.NormalizedLabel
+          isWrong={!isValid}
+          up={false}
+          htmlFor={uniqueName}
+        >
+          {t(label)}
+        </Input.NormalizedLabel>
 
         <ErrorMessage
           message={errorMessage}
@@ -118,23 +113,17 @@ function GTInputSwitch({
           isWrong={!isValid}
         />
 
-        <Input.FeedbackWrapper>
-          {isValidatingOnBlur && showFeedback && (
+        {isValidatingOnBlur && showFeedback && (
+          <Input.FeedbackWrapper>
             <Input.IconWrapper showOpacity>
               <Loader.Simple size="sm" />
             </Input.IconWrapper>
-          )}
+          </Input.FeedbackWrapper>
+        )}
 
-          {!_.isEmpty(value) && showFeedback && (
-            <Input.IconWrapper onClick={handleInputClear}>
-              <Icon.X size={15} className="svg-no-active cursor" />
-            </Input.IconWrapper>
-          )}
-
-          {_.isEmpty(errorMessage) && (
-            <GTTooltip parentRef={containerRef} title={title} text={text} />
-          )}
-        </Input.FeedbackWrapper>
+        {_.isEmpty(errorMessage) && (
+          <GTTooltip parentRef={containerRef} title={title} text={text} />
+        )}
       </Input.NormalizedContainer>
     </>
   );

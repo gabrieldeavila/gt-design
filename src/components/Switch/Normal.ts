@@ -27,13 +27,15 @@ const NormalSwitchSlider = styled.div<INormalSwitchSlider>`
   ${transitions.basic};
 `;
 
-const NormalSwitchContainer = styled.div<INormalSwitchSlider>`
+const NormalSwitchContainer = styled.button<INormalSwitchSlider>`
+  padding: 0;
   background: ${({ isChecked, theme }) =>
     isChecked ?? false
       ? theme.switchNormalActive
       : transparentize(0.5, theme.switchNormalBackground)};
   overflow: hidden;
   display: flex;
+  border: none;
   align-items: center;
   cursor: pointer;
   border-radius: 1rem;

@@ -18,3 +18,9 @@ export interface IGTActiveSwitch {
 export interface INormalSwitchSlider {
   isChecked?: boolean;
 }
+
+export interface IGTNormalSwitch {
+  name: string;
+  isChecked: boolean;
+  onSwitchChange: (newValue: boolean) => void;
+}
