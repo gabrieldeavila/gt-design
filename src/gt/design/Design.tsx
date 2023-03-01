@@ -32,6 +32,7 @@ const defaultTheme = {
   switchSlider: "#ffffff",
   labelPrimary: "#002366",
   labelSecondary: "#66ddaa",
+  labelRequired: "#543550",
   buttonSuccess1: "#9ab973",
   buttonSuccess2: "#98fb98",
   buttonError1: "#8b0000",

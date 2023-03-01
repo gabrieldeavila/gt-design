@@ -55,6 +55,11 @@ function GTInputNumber({
     return validations;
   }, [defaultValidation, validations]);
 
+  const isRequired = useMemo(
+    () => inputValidations.includes("required"),
+    [inputValidations]
+  );
+
   const { validateState } = useValidateState(name, inputValidations);
 
   const {
@@ -127,7 +132,12 @@ function GTInputNumber({
         row={row}
       >
         <Input.FieldWrapper>
-          <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={uniqueName}>
+          <Input.Label
+            isRequired={isRequired}
+            isWrong={!isValid}
+            up={isLabelUp}
+            htmlFor={uniqueName}
+          >
             {t(label)}
           </Input.Label>
           <Input.Field

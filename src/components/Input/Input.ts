@@ -102,6 +102,7 @@ const InputNormalizedContainer = styled.label<IInputContainer>`
   gap: 0.5rem;
   align-items: center;
   justify-content: ${({ flexJustify }) => flexJustify ?? "flex-start"};
+  cursor: pointer;
 `;
 
 const InputGroup = styled.form`
@@ -128,12 +129,21 @@ const InputField = styled.input<IInputField>`
   }
 `;
 
+const getRightColor = ({ theme, isWrong, isRequired }: IInputLabel) => {
+  console.log(isRequired);
+
+  if (isWrong) return theme.errorColor;
+
+  if (isRequired) return theme.labelRequired;
+
+  return theme.labelPrimary;
+};
+
 const wrongCss = css<IInputLabel>`
   background: -webkit-linear-gradient(
     300deg,
     ${({ theme }) => theme.labelSecondary},
-    ${({ theme, isWrong }) => (isWrong ? theme.errorColor : theme.labelPrimary)}
-      90%
+    ${(props) => getRightColor(props)} 90%
   );
 `;
 

@@ -24,6 +24,7 @@ export interface GTTheme {
   switchSlider?: string;
   labelPrimary?: string;
   labelSecondary?: string;
+  labelRequired?: string;
   buttonSuccess1?: string;
   buttonSuccess2?: string;
   buttonError1?: string;

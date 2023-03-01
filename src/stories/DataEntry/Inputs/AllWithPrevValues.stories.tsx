@@ -83,7 +83,6 @@ const Template = () => {
               title="nickname"
               label="EXAMPLE.SWITCH"
               name="selected"
-              flexJustify="space-between"
             />
 
             <GTInput.Select
