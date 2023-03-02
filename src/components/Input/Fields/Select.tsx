@@ -76,6 +76,7 @@ function GTInputSelect({
 
   const {
     value,
+    isRequired,
     isValidatingOnBlur,
     showFeedback,
     handleInputChange,
@@ -91,7 +92,8 @@ function GTInputSelect({
     setErrorMessage,
     setLocaleErrorsParams,
     onBlurValidate,
-    onChangeValidate
+    onChangeValidate,
+    inputValidations
   );
 
   const { validateSelect } = useValidateSelect();
@@ -282,6 +284,7 @@ function GTInputSelect({
               isWrong={!isValid}
               up={isSelectUp}
               htmlFor={uniqueName}
+              isRequired={isRequired}
             >
               {t(label)}
             </Input.Label>

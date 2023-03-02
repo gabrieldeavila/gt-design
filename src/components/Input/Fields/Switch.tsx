@@ -4,11 +4,7 @@
 /* eslint-disable operator-linebreak */
 import _ from "lodash";
 import PropTypes from "prop-types";
-import React, {
-  useCallback, useMemo,
-  useRef,
-  useState
-} from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useUniqueName from "../../../hooks/helpers/useUniqueName";
@@ -52,6 +48,7 @@ function GTInputSwitch({
   const { validateState } = useValidateState(name, inputValidations);
 
   const {
+    isRequired,
     value,
     isValidatingOnBlur,
     showFeedback,
@@ -103,6 +100,7 @@ function GTInputSwitch({
           isWrong={!isValid}
           up={false}
           htmlFor={uniqueName}
+          isRequired={isRequired}
         >
           {t(label)}
         </Input.NormalizedLabel>

@@ -55,14 +55,10 @@ function GTInputNumber({
     return validations;
   }, [defaultValidation, validations]);
 
-  const isRequired = useMemo(
-    () => inputValidations.includes("required"),
-    [inputValidations]
-  );
-
   const { validateState } = useValidateState(name, inputValidations);
 
   const {
+    isRequired,
     isLabelUp,
     value,
     isValidatingOnBlur,

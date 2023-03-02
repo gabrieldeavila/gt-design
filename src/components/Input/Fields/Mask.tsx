@@ -59,6 +59,7 @@ function GTInputMask({
   const { validateState } = useValidateState(name, inputValidations);
 
   const {
+    isRequired,
     isLabelUp,
     value,
     isValidatingOnBlur,
@@ -181,7 +182,12 @@ function GTInputMask({
         ref={containerRef}
       >
         <Input.FieldWrapper>
-          <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={uniqueName}>
+          <Input.Label
+            isRequired={isRequired}
+            isWrong={!isValid}
+            up={isLabelUp}
+            htmlFor={uniqueName}
+          >
             {t(label)}
           </Input.Label>
           <Input.Field

@@ -129,21 +129,20 @@ const InputField = styled.input<IInputField>`
   }
 `;
 
-const getRightColor = ({ theme, isWrong, isRequired }: IInputLabel) => {
-  console.log(isRequired);
-
-  if (isWrong) return theme.errorColor;
-
-  if (isRequired) return theme.labelRequired;
-
-  return theme.labelPrimary;
-};
-
 const wrongCss = css<IInputLabel>`
   background: -webkit-linear-gradient(
     300deg,
     ${({ theme }) => theme.labelSecondary},
-    ${(props) => getRightColor(props)} 90%
+    ${({ theme, isWrong }) => (isWrong ? theme.errorColor : theme.labelPrimary)}
+      90%
+  );
+`;
+
+const requiredCss = css<IInputLabel>`
+  background: -webkit-linear-gradient(
+    300deg,
+    ${({ theme }) => theme.labelSecondary},
+    ${({ theme }) => theme.labelRequired} 70%
   );
 `;
 
@@ -154,6 +153,14 @@ const correctCss = css`
     ${({ theme }) => theme.labelPrimary} 70%
   );
 `;
+
+const handleRightCss = ({ isWrong, isRequired }: IInputLabel) => {
+  if (isWrong) return wrongCss;
+
+  if (isRequired) return requiredCss;
+
+  return correctCss;
+};
 
 const handleLabelFirstRender = (up: boolean) => {
   if (up) {
@@ -181,7 +188,7 @@ const InputLabel = styled.label<IInputLabel>`
     ${({ theme }) => theme.labelPrimary} 70%
   );
 
-  ${({ isWrong }) => (isWrong ? wrongCss : correctCss)}
+  ${(props) => handleRightCss(props)}
   ${({ up }) => handleLabelFirstRender(up)};
   ${transitions.basic};
 

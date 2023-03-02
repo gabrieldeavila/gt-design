@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import _ from "lodash";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import {
   TBlurValidate,
   TChangeValidate,
@@ -33,6 +33,11 @@ function useInputValues(
   const [value, setValue] = useState(pageStateRef?.current?.[name] ?? "");
   const [isLabelUp, setIsLabelUp] = useState(!!pageStateRef?.current?.[name]);
   const [isValidatingOnBlur, setIsValidatingOnBlur] = useState(false);
+
+  const isRequired = useMemo(
+    () => inputValidations?.includes("required") && _.isEmpty(value.toString()),
+    [inputValidations, value]
+  );
 
   const handleInputFocus = useCallback(() => {
     setIsLabelUp(true);
@@ -165,6 +170,7 @@ function useInputValues(
   return {
     value,
     isValidatingOnBlur,
+    isRequired,
     isLabelUp,
     showFeedback,
     setValue,

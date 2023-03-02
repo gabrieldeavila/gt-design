@@ -72,6 +72,7 @@ function GTInputPassword({
 
   // shows the label up or down
   const {
+    isRequired,
     isLabelUp,
     value,
     isValidatingOnBlur,
@@ -174,7 +175,12 @@ function GTInputPassword({
         ref={containerRef}
       >
         <Input.FieldWrapper>
-          <Input.Label isWrong={!isValid} up={isLabelUp} htmlFor={uniqueName}>
+          <Input.Label
+            isRequired={isRequired}
+            isWrong={!isValid}
+            up={isLabelUp}
+            htmlFor={uniqueName}
+          >
             {t(label)}
           </Input.Label>
           <Input.Field
