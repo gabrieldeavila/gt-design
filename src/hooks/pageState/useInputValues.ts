@@ -10,6 +10,15 @@ import { TValidateState } from "../validation/interface";
 import useInitialErrors from "../validation/useInitialErrors";
 import { THandleBlurErrors, THandleInputChange } from "./interface";
 
+const checkToBoolean = (value: string | number | boolean) => {
+  // checks if the value is a boolean
+  if (typeof value === "boolean") {
+    return value.toString();
+  }
+
+  return value;
+};
+
 function useInputValues(
   name: string,
   validateState: TValidateState,
@@ -30,7 +39,9 @@ function useInputValues(
   // it only validates on blur if the other validations are valid
   const isInputValid = useRef<boolean>(true);
 
-  const [value, setValue] = useState(pageStateRef?.current?.[name] ?? "");
+  const [value, setValue] = useState(
+    checkToBoolean(pageStateRef?.current?.[name] ?? "")
+  );
   const [isLabelUp, setIsLabelUp] = useState(!!pageStateRef?.current?.[name]);
   const [isValidatingOnBlur, setIsValidatingOnBlur] = useState(false);
 
@@ -74,7 +85,7 @@ function useInputValues(
   );
 
   const handleInputChange: THandleInputChange = useCallback(
-    (newVal: string | number | boolean, isValid, invalidMessage, errorsVar) => {
+    (newVal, isValid, invalidMessage, errorsVar) => {
       const valueTemp = value.toString();
       const newValTemp = newVal.toString();
 

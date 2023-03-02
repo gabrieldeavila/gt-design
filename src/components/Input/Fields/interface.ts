@@ -4,11 +4,11 @@ import { IGTTooltipRef } from "../../Tooltip/interface";
 type TBlurValidateResult = [boolean, string] | [boolean, string, Object];
 
 export type TBlurValidate = (
-  value: string | number | boolean
+  value: string | number
 ) => TBlurValidateResult | Promise<TBlurValidateResult>;
 
 export type TChangeValidate = (
-  value: string | number | boolean
+  value: string | number
 ) => [boolean, string] | [boolean, string, Object];
 
 export interface IGTInput {

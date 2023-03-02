@@ -24,9 +24,9 @@ export interface IIconWrapper {
 
 export interface IInputLabel {
   theme: GTTheme;
-  isWrong: boolean;
+  isWrong?: boolean;
   up: boolean;
-  isRequired: boolean;
+  isRequired?: boolean;
 }
 
 export interface ISelectOptionWrapper {

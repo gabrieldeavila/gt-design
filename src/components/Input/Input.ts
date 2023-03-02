@@ -198,7 +198,7 @@ const InputLabel = styled.label<IInputLabel>`
   box-decoration-break: clone;
 `;
 
-const InputNormalizedLabel = styled(InputLabel)`
+const InputNormalizedLabel = styled(InputLabel)<IInputLabel>`
   position: unset;
   left: unset;
   cursor: pointer;

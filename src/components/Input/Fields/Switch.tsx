@@ -2,18 +2,14 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable operator-linebreak */
-import _ from "lodash";
 import PropTypes from "prop-types";
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useUniqueName from "../../../hooks/helpers/useUniqueName";
-import useInputValues from "../../../hooks/pageState/useInputValues";
-import useValidateState from "../../../hooks/validation/useValidateState";
-import Loader from "../../Loader";
+import useSwitchValues from "../../../hooks/pageState/useSwitchValues";
 import GTNormalSwitch from "../../Switch/Template/Normal";
 import GTTooltip from "../../Tooltip/Tooltip";
-import ErrorMessage from "../Extras/ErrorMessage";
 import Input from "../Input";
 import { IGTInputSwitch } from "./interface";
 
@@ -33,10 +29,6 @@ function GTInputSwitch({
   const { t } = useTranslation();
   const uniqueName = useUniqueName({ name });
 
-  const [isValid, setIsValid] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [localeErrorsParams, setLocaleErrorsParams] = useState({});
-
   const inputValidations = useMemo(() => {
     if (defaultValidation) {
       return [...defaultValidationObj, ...validations];
@@ -45,35 +37,22 @@ function GTInputSwitch({
     return validations;
   }, [defaultValidation, validations]);
 
-  const { validateState } = useValidateState(name, inputValidations);
-
   const {
     isRequired,
     value,
-    isValidatingOnBlur,
-    showFeedback,
     handleMouseEnter,
     handleMouseLeave,
     handleInputChange,
-  } = useInputValues(
-    name,
-    validateState,
-    setIsValid,
-    setErrorMessage,
-    setLocaleErrorsParams,
-    onBlurValidate,
-    onChangeValidate,
-    inputValidations
-  );
+  } = useSwitchValues(name, inputValidations);
 
   const handleChange = useCallback(
     (val: boolean) => {
-      handleInputChange(val, isValid);
+      handleInputChange(val);
     },
-    [handleInputChange, isValid]
+    [handleInputChange]
   );
 
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLLabelElement>(null);
 
   const { isLoading } = useGTPageStateContextSetters();
 
@@ -88,7 +67,6 @@ function GTInputSwitch({
         onMouseLeave={handleMouseLeave}
         flexJustify={flexJustify}
         row={row}
-        isWrong={!isValid}
         ref={containerRef}
       >
         <GTNormalSwitch
@@ -97,7 +75,6 @@ function GTInputSwitch({
           name={uniqueName}
         />
         <Input.NormalizedLabel
-          isWrong={!isValid}
           up={false}
           htmlFor={uniqueName}
           isRequired={isRequired}
@@ -105,23 +82,7 @@ function GTInputSwitch({
           {t(label)}
         </Input.NormalizedLabel>
 
-        <ErrorMessage
-          message={errorMessage}
-          params={localeErrorsParams}
-          isWrong={!isValid}
-        />
-
-        {isValidatingOnBlur && showFeedback && (
-          <Input.FeedbackWrapper>
-            <Input.IconWrapper showOpacity>
-              <Loader.Simple size="sm" />
-            </Input.IconWrapper>
-          </Input.FeedbackWrapper>
-        )}
-
-        {_.isEmpty(errorMessage) && (
-          <GTTooltip parentRef={containerRef} title={title} text={text} />
-        )}
+        <GTTooltip parentRef={containerRef} title={title} text={text} />
       </Input.NormalizedContainer>
     </>
   );
