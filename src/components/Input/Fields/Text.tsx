@@ -34,6 +34,7 @@ function GTInputText({
   minChars,
   maxChars,
   onChange,
+  disabled,
   text,
   title,
   row,
@@ -148,6 +149,7 @@ function GTInputText({
         onMouseLeave={handleMouseLeave}
         row={row}
         isWrong={!isValid}
+        disabled={disabled}
         ref={containerRef}
       >
         <Input.FieldWrapper>
@@ -163,6 +165,7 @@ function GTInputText({
             type="text"
             value={value}
             onChange={handleChange}
+            disabled={disabled}
             onBlur={handleBlur}
             onFocus={handleInputFocus}
             id={uniqueName}
@@ -183,7 +186,7 @@ function GTInputText({
             </Input.IconWrapper>
           )}
 
-          {!_.isEmpty(value) && showFeedback && (
+          {!_.isEmpty(value) && showFeedback && !(disabled ?? false) && (
             <Input.IconWrapper onClick={handleInputClear}>
               <Icon.X size={15} className="svg-no-active cursor" />
             </Input.IconWrapper>

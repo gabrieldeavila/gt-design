@@ -39,6 +39,7 @@ function GTInputPassword({
   defaultValidation,
   validations,
   onChange,
+  disabled,
   sameAs,
   title,
   text,
@@ -170,6 +171,7 @@ function GTInputPassword({
       <Input.Container
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        disabled={disabled}
         row={row}
         isWrong={!isValid}
         ref={containerRef}
@@ -190,6 +192,7 @@ function GTInputPassword({
             onBlur={handleInputBlur}
             value={value}
             onFocus={handleInputFocus}
+            disabled={disabled}
             id={uniqueName}
             name={uniqueName}
           />
@@ -202,7 +205,7 @@ function GTInputPassword({
         />
 
         <Input.FeedbackWrapper>
-          {!_.isEmpty(value) && showFeedback && (
+          {!_.isEmpty(value) && showFeedback && !(disabled ?? false) && (
             <Input.IconWrapper onClick={handleInputClear}>
               <Icon.X size={15} className="svg-no-active cursor" />
             </Input.IconWrapper>

@@ -44,6 +44,7 @@ function GTInputSelect({
   defaultValidation,
   validations,
   options,
+  disabled,
   text,
   title,
   row,
@@ -271,6 +272,7 @@ function GTInputSelect({
         }}
       >
         <Input.Container
+          disabled={disabled}
           row={row}
           onFocus={handleShowOptions}
           ref={containerRef}
@@ -300,6 +302,7 @@ function GTInputSelect({
               name={uniqueName}
               autoComplete="off"
               isLabel
+              disabled={disabled}
             />
           </Input.FieldWrapper>
 
@@ -309,23 +312,25 @@ function GTInputSelect({
             isWrong={!isValid}
           />
 
-          <Input.FeedbackWrapper>
-            {!_.isEmpty(value) && showFeedback && (
-              <Input.IconWrapper onClick={handleSelectClear}>
-                <Icon.X size={15} className="svg-no-active cursor" />
-              </Input.IconWrapper>
-            )}
+          {!(disabled ?? false) && (
+            <Input.FeedbackWrapper>
+              {!_.isEmpty(value) && showFeedback && (
+                <Input.IconWrapper onClick={handleSelectClear}>
+                  <Icon.X size={15} className="svg-no-active cursor" />
+                </Input.IconWrapper>
+              )}
 
-            <Input.IconWrapper showOpacity onClick={handleChevClick}>
-              <Icon.ChevronDown size={15} className="svg-no-active cursor" />
-            </Input.IconWrapper>
-
-            {isValidatingOnBlur && (
-              <Input.IconWrapper showOpacity>
-                <Loader.Simple size="sm" />
+              <Input.IconWrapper showOpacity onClick={handleChevClick}>
+                <Icon.ChevronDown size={15} className="svg-no-active cursor" />
               </Input.IconWrapper>
-            )}
-          </Input.FeedbackWrapper>
+
+              {isValidatingOnBlur && (
+                <Input.IconWrapper showOpacity>
+                  <Loader.Simple size="sm" />
+                </Input.IconWrapper>
+              )}
+            </Input.FeedbackWrapper>
+          )}
 
           {_.isEmpty(errorMessage) && (
             <GTTooltip

@@ -36,6 +36,7 @@ function GTInputNumber({
   row,
   min,
   max,
+  disabled,
   onBlurValidate,
   onChangeValidate,
 }: IGTInputNumber) {
@@ -125,6 +126,7 @@ function GTInputNumber({
         onMouseLeave={handleMouseLeave}
         isWrong={!isValid}
         ref={containerRef}
+        disabled={disabled}
         row={row}
       >
         <Input.FieldWrapper>
@@ -138,6 +140,7 @@ function GTInputNumber({
           </Input.Label>
           <Input.Field
             type="number"
+            disabled={disabled}
             value={value}
             onChange={handleChange}
             onBlur={handleInputBlur}
@@ -161,10 +164,12 @@ function GTInputNumber({
             </Input.IconWrapper>
           )}
 
-          {(!_.isEmpty(value) || value > 0) && showFeedback && (
-            <Input.IconWrapper onClick={handleInputClear}>
-              <Icon.X size={15} className="svg-no-active cursor" />
-            </Input.IconWrapper>
+          {(!_.isEmpty(value) || value > 0) &&
+            !(disabled ?? false) &&
+            showFeedback && (
+              <Input.IconWrapper onClick={handleInputClear}>
+                <Icon.X size={15} className="svg-no-active cursor" />
+              </Input.IconWrapper>
           )}
         </Input.FeedbackWrapper>
 

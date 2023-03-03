@@ -27,6 +27,7 @@ import { IGTInputMask } from "./interface";
 
 const defaultValidationObj = ["required"];
 function GTInputMask({
+  disabled,
   name,
   label,
   validations,
@@ -178,6 +179,7 @@ function GTInputMask({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         isWrong={!isValid}
+        disabled={disabled}
         row={row}
         ref={containerRef}
       >
@@ -193,6 +195,7 @@ function GTInputMask({
           <Input.Field
             ref={inpRef}
             type="text"
+            disabled={disabled}
             value={maskedValue}
             onChange={handleChange}
             onBlur={handleInputBlur}
@@ -216,10 +219,12 @@ function GTInputMask({
             </Input.IconWrapper>
           )}
 
-          {(!_.isEmpty(value) || value > 0) && showFeedback && (
-            <Input.IconWrapper onClick={handleMaskClear}>
-              <Icon.X size={15} className="svg-no-active cursor" />
-            </Input.IconWrapper>
+          {(!_.isEmpty(value) || value > 0) &&
+            !(disabled ?? false) &&
+            showFeedback && (
+              <Input.IconWrapper onClick={handleMaskClear}>
+                <Icon.X size={15} className="svg-no-active cursor" />
+              </Input.IconWrapper>
           )}
         </Input.FeedbackWrapper>
         {_.isEmpty(errorMessage) && (

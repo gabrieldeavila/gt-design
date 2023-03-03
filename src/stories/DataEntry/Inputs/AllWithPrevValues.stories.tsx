@@ -91,6 +91,7 @@ const Template = () => {
               label="EXAMPLE.SELECT"
               name="select"
               options={options}
+              disabled
             />
 
             <GTInput.Text
@@ -99,6 +100,7 @@ const Template = () => {
               validations={["noSpaces"]}
               name="nickname"
               label="TEMPLATE.LOGIN.NICKNAME_LABEL"
+              disabled
             />
 
             <GTInput.Email

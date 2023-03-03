@@ -23,6 +23,7 @@ function GTInputSwitch({
   text,
   title,
   row,
+  disabled,
   onBlurValidate,
   onChangeValidate,
 }: IGTInputSwitch) {
@@ -67,12 +68,14 @@ function GTInputSwitch({
         onMouseLeave={handleMouseLeave}
         flexJustify={flexJustify}
         row={row}
+        disabled={disabled}
         ref={containerRef}
       >
         <GTNormalSwitch
           onSwitchChange={handleChange}
           isChecked={!!value}
           name={uniqueName}
+          disabled={disabled}
         />
         <Input.NormalizedLabel
           up={false}

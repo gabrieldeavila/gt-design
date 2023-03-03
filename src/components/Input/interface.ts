@@ -10,6 +10,7 @@ export interface IInputContainer {
   isLoading?: boolean;
   isWrong?: boolean;
   flexJustify?: string;
+  disabled?: boolean;
 }
 
 export interface ISelectValue {

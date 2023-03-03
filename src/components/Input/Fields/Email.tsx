@@ -29,6 +29,7 @@ function GTInputEmail({
   label,
   validations,
   defaultValidation,
+  disabled,
   onChange,
   text,
   title,
@@ -115,6 +116,7 @@ function GTInputEmail({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         row={row}
+        disabled={disabled}
         isWrong={!isValid}
         ref={containerRef}
       >
@@ -130,6 +132,7 @@ function GTInputEmail({
           <Input.Field
             type="email"
             onChange={handleChange}
+            disabled={disabled}
             value={value}
             onBlur={handleInputBlur}
             onFocus={handleInputFocus}
@@ -151,7 +154,7 @@ function GTInputEmail({
             </Input.IconWrapper>
           )}
 
-          {!_.isEmpty(value) && showFeedback && (
+          {!_.isEmpty(value) && showFeedback && !(disabled ?? false) && (
             <Input.IconWrapper onClick={handleInputClear}>
               <Icon.X size={15} className="svg-no-active cursor" />
             </Input.IconWrapper>

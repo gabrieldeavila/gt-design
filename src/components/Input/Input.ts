@@ -39,6 +39,62 @@ const InputIconWrapper = styled.div<IIconWrapper>`
   opacity: ${({ showOpacity }) => (showOpacity ?? false ? 1 : 0)};
 `;
 
+const wrongCss = css<IInputLabel>`
+  background: -webkit-linear-gradient(
+    300deg,
+    ${({ theme }) => theme.labelSecondary},
+    ${({ theme, isWrong }) =>
+        isWrong ?? false ? theme.errorColor : theme.labelPrimary}
+      90%
+  );
+`;
+
+const requiredCss = css<IInputLabel>`
+  background: -webkit-linear-gradient(
+    300deg,
+    ${({ theme }) => theme.labelSecondary},
+    ${({ theme }) => theme.labelRequired} 70%
+  );
+`;
+
+const correctCss = css`
+  background: -webkit-linear-gradient(
+    300deg,
+    ${({ theme }) => theme.labelSecondary},
+    ${({ theme }) => theme.labelPrimary} 70%
+  );
+`;
+
+const handleRightCss = ({ isWrong, isRequired }: IInputLabel) => {
+  if (isWrong ?? false) return wrongCss;
+
+  if (isRequired ?? false) return requiredCss;
+
+  return correctCss;
+};
+
+const InputLabel = styled.label<IInputLabel>`
+  user-select: none;
+  cursor: text;
+  position: absolute;
+  left: 0.5rem;
+  /* creates color with gradient */
+  background: -webkit-linear-gradient(
+    300deg,
+    ${({ theme }) => theme.labelSecondary},
+    ${({ theme }) => theme.labelPrimary} 70%
+  );
+
+  ${(props) => handleRightCss(props)}
+  ${({ up }) => handleLabelFirstRender(up)};
+  ${transitions.basic};
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  box-decoration-break: clone;
+`;
+
 const InputContainer = styled.div<IInputContainer>`
   ${getRowWidth}
   display: flex;
@@ -49,6 +105,31 @@ const InputContainer = styled.div<IInputContainer>`
   outline-offset: 2px;
   border-radius: 0.25rem;
   background: ${(props) => transparentize(0.2, props.theme.primary)};
+
+  ${({ disabled }) =>
+    (disabled ?? false) &&
+    css`
+      background: ${(props) => transparentize(0.8, props.theme.primary)};
+
+      ${InputLabel} {
+        /* creates color with gradient */
+        background: -webkit-linear-gradient(
+          300deg,
+          ${({ theme }) => theme.primary},
+          ${({ theme }) => transparentize(0.1, theme.contrast)} 70%
+        );
+
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        box-decoration-break: clone;
+      }
+
+      &,
+      & * {
+        cursor: not-allowed !important;
+      }
+    `}
 
   &:focus-within {
     outline: 2px solid
@@ -129,39 +210,6 @@ const InputField = styled.input<IInputField>`
   }
 `;
 
-const wrongCss = css<IInputLabel>`
-  background: -webkit-linear-gradient(
-    300deg,
-    ${({ theme }) => theme.labelSecondary},
-    ${({ theme, isWrong }) => (isWrong ? theme.errorColor : theme.labelPrimary)}
-      90%
-  );
-`;
-
-const requiredCss = css<IInputLabel>`
-  background: -webkit-linear-gradient(
-    300deg,
-    ${({ theme }) => theme.labelSecondary},
-    ${({ theme }) => theme.labelRequired} 70%
-  );
-`;
-
-const correctCss = css`
-  background: -webkit-linear-gradient(
-    300deg,
-    ${({ theme }) => theme.labelSecondary},
-    ${({ theme }) => theme.labelPrimary} 70%
-  );
-`;
-
-const handleRightCss = ({ isWrong, isRequired }: IInputLabel) => {
-  if (isWrong) return wrongCss;
-
-  if (isRequired) return requiredCss;
-
-  return correctCss;
-};
-
 const handleLabelFirstRender = (up: boolean) => {
   if (up) {
     return css`
@@ -175,28 +223,6 @@ const handleLabelFirstRender = (up: boolean) => {
     font-size: 0.85rem;
   `;
 };
-
-const InputLabel = styled.label<IInputLabel>`
-  user-select: none;
-  cursor: text;
-  position: absolute;
-  left: 0.5rem;
-  /* creates color with gradient */
-  background: -webkit-linear-gradient(
-    300deg,
-    ${({ theme }) => theme.labelSecondary},
-    ${({ theme }) => theme.labelPrimary} 70%
-  );
-
-  ${(props) => handleRightCss(props)}
-  ${({ up }) => handleLabelFirstRender(up)};
-  ${transitions.basic};
-
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  box-decoration-break: clone;
-`;
 
 const InputNormalizedLabel = styled(InputLabel)<IInputLabel>`
   position: unset;
