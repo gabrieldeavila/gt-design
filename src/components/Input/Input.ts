@@ -95,6 +95,22 @@ const InputLabel = styled.label<IInputLabel>`
   box-decoration-break: clone;
 `;
 
+const InputField = styled.input<IInputField>`
+  width: 100%;
+  height: 2.5rem;
+  outline: none;
+  border-radius: 0.25rem;
+  padding-top: 1rem;
+  border: none;
+  color: ${(props) => props.theme.contrast};
+  background-color: transparent;
+
+  /* changes the placeholder color */
+  &::placeholder {
+    color: ${(props) => props.theme.contrast};
+  }
+`;
+
 const InputContainer = styled.div<IInputContainer>`
   ${getRowWidth}
   display: flex;
@@ -123,6 +139,11 @@ const InputContainer = styled.div<IInputContainer>`
         background-clip: text;
         -webkit-text-fill-color: transparent;
         box-decoration-break: clone;
+      }
+
+      ${InputField}:disabled, ${InputField}::placeholder  {
+        color: ${(props) =>
+          transparentize(0.5, props.theme.contrast)};
       }
 
       &,
@@ -192,22 +213,6 @@ const InputGroup = styled.form`
   ${flex.wrapGap};
   gap: 1.75rem;
   flex-direction: row;
-`;
-
-const InputField = styled.input<IInputField>`
-  width: 100%;
-  height: 2.5rem;
-  outline: none;
-  border-radius: 0.25rem;
-  padding-top: 1rem;
-  border: none;
-  color: ${(props) => props.theme.contrast};
-  background-color: transparent;
-
-  /* changes the placeholder color */
-  &::placeholder {
-    color: ${(props) => props.theme.contrast};
-  }
 `;
 
 const handleLabelFirstRender = (up: boolean) => {
