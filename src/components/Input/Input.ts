@@ -201,11 +201,15 @@ const InputContainer = styled.div<IInputContainer>`
 `;
 
 const disabledNormalized = css<IInputContainer>`
-  background: transparent;
+  ${({ disabled }) =>
+    (disabled ?? false) &&
+    css`
+      background: transparent;
 
-  ${NormalSwitch.Container} {
-    filter: grayscale(1);
-  }
+      ${NormalSwitch.Container} {
+        filter: grayscale(1);
+      }
+    `}
 `;
 
 const InputNormalizedLabel = styled(InputLabel)<IInputLabel>`
