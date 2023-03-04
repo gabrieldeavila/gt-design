@@ -52,7 +52,10 @@
     "NUMBER": "Número",
     "MONEY": "Dinheiro",
     "SELECT": "Selecione",
-    "SWITCH": "Ativar"
+    "SWITCH": "Ativar",
+    "AWARD": "Prêmio",
+    "AWARD_DESCRIPTION": "Você é incrível!",
+    "MOUSE_OVER": "Passe o mouse em mim!"
   },
   "STORIES": {
     "TOOLTIP": {

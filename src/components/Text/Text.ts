@@ -93,7 +93,6 @@ export const DividerWrapper = styled.div<ITextDividerWrapper>`
   display: flex;
   border-block-start: 0 rgba(253, 253, 253, 0.12);
   align-items: center;
-  margin-top: 2rem;
   margin-bottom: 1rem;
 
   &:after,

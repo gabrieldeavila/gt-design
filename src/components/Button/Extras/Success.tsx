@@ -1,24 +1,10 @@
-import React, { useMemo } from "react";
-import Loader from "../../Loader";
+import React from "react";
 import { ExtraSuccess } from "../Button";
 import { IGTButton } from "../interface";
+import DefaultBtn from "./default";
 
-function ButtonSuccess({ children, isLoading, disabled, ...props }: IGTButton) {
-  const verifyDisabled = useMemo(
-    () => disabled ?? isLoading,
-    [disabled, isLoading]
-  );
-
-  return (
-    // @ts-expect-error
-    <ExtraSuccess disabled={verifyDisabled} isLoading={isLoading} {...props}>
-      <div className="extra-title">
-        {(isLoading ?? false) && <Loader.Simple />}
-
-        <span className="extra-title-children">{children}</span>
-      </div>
-    </ExtraSuccess>
-  );
+function ButtonSuccess(props: IGTButton) {
+  return <DefaultBtn component={<ExtraSuccess />} {...props} />;
 }
 
 export default ButtonSuccess;

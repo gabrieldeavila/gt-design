@@ -51,7 +51,10 @@
     "NUMBER": "Number",
     "MONEY": "Money",
     "SELECT": "Select",
-    "SWITCH": "Active"
+    "SWITCH": "Active",
+    "AWARD": "Award",
+    "AWARD_DESCRIPTION": "You are awesome!",
+    "MOUSE_OVER": "Hover me!"
   },
   "STORIES": {
     "TOOLTIP": {

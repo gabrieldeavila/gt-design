@@ -1,28 +1,10 @@
-import React, { useMemo } from "react";
-import Loader from "../../Loader";
+import React from "react";
 import { ExtraContrast } from "../Button";
 import { IGTButton } from "../interface";
+import DefaultBtn from "./default";
 
-function ButtonContrast({
-  children,
-  isLoading,
-  disabled,
-  ...props
-}: IGTButton) {
-  const verifyDisabled = useMemo(
-    () => disabled ?? isLoading,
-    [disabled, isLoading]
-  );
-
-  return (
-    // @ts-expect-error
-    <ExtraContrast disabled={verifyDisabled} isLoading={isLoading} {...props}>
-      <span className="extra-title">
-        {(isLoading ?? false) && <Loader.Simple />}
-        <span className="extra-title-children">{children}</span>
-      </span>
-    </ExtraContrast>
-  );
+function ButtonContrast(props: IGTButton) {
+  return <DefaultBtn component={<ExtraContrast />} {...props} />;
 }
 
 export default ButtonContrast;

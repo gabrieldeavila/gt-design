@@ -1,6 +1,6 @@
 import { ColorProps, LayoutProps, SpaceProps } from "styled-system";
 
-type addOns =
+export type TAddOns =
   | "center"
   | "middle"
   | "full-space"
@@ -98,8 +98,7 @@ type addOns =
   | "py-5";
 
 export interface ISpace extends SpaceProps, ColorProps, LayoutProps {
-  addOns?: addOns[];
-  teste?: addOns;
+  addOns?: TAddOns[];
 }
 
 export interface ISpaceModifiers extends ISpace {

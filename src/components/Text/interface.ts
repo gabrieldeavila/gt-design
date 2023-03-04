@@ -18,8 +18,10 @@ export interface ISectionContainer {
 
 export interface ITextDivider {
   children?: React.ReactNode | JSX.Element[];
+  text?: string;
   color?: string;
   position?: "left" | "right" | "center";
+  hasMarginTop?: boolean;
 }
 
 interface DividerWrapperProps {

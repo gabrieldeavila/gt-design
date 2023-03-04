@@ -66,7 +66,6 @@ const Template = () => {
               label="EXAMPLE.NUMBER"
               onBlurValidate={handleBlurValidate}
               onChangeValidate={handleChangeValidate}
-              disabled
             />
           </Input.Group>
         </Space.Horizontal>

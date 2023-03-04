@@ -40,6 +40,7 @@ const sizesOpts: sizes = {
 };
 
 export const ResetBtn = styled.button<IButton>`
+  position: relative;
   background: none;
   border: none;
   padding: 0;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GTInput, Input, Space } from "../../components";
+import { Button, GTInput, Input, Space, Text } from "../../components";
 import SectionContainer from "../../components/Text/Template/SectionContainer";
 import GTPageStateProvider from "../../context/pageState";
 import { GTBasic } from "../../gt";
@@ -33,6 +33,8 @@ const Template = () => {
             title="Tooltips"
             subtitle="STORIES.TOOLTIP.SUBTITLE"
           />
+
+          <Text.Divider hasMarginTop={false} position="left" text="Inputs" />
           <Input.Group>
             <GTInput.Select
               row={6}
@@ -76,6 +78,13 @@ const Template = () => {
               label="Number"
             />
           </Input.Group>
+
+          <Text.Divider position="left" text="STORIES.BUTTONS.TITLE" />
+          <Button.Normal
+            title="EXAMPLE.AWARD"
+            text="EXAMPLE.AWARD_DESCRIPTION"
+            content="EXAMPLE.MOUSE_OVER"
+          />
         </Space.Horizontal>
       </GTPageStateProvider>
     </GTBasic>

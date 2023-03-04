@@ -25,7 +25,7 @@ export type onKeyPressType = (
 ) => void | Promise<void>;
 
 export interface IGTHandlers {
-  children: React.ReactNode | JSX.Element[];
+  children?: React.ReactNode | JSX.Element[];
   onClick?: onClickType;
   onChange?: onChangeType;
   onFocus?: onFocusType;

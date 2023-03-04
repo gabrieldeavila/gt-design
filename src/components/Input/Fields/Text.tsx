@@ -8,7 +8,7 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState,
+  useState
 } from "react";
 import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";

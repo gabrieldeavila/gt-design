@@ -1,28 +1,10 @@
-import React, { useMemo } from "react";
-import Loader from "../../Loader";
+import React from "react";
 import { ResetBtn } from "../Button";
 import { IGTButton } from "../interface";
+import DefaultBtn from "./default";
 
-function ButtonTransparent({
-  children,
-  isLoading,
-  disabled,
-  ...props
-}: IGTButton) {
-  const verifyDisabled = useMemo(
-    () => disabled ?? isLoading,
-    [disabled, isLoading]
-  );
-
-  return (
-    // @ts-expect-error
-    <ResetBtn disabled={verifyDisabled} isLoading={isLoading} {...props}>
-      <span className="extra-title">
-        {(isLoading ?? false) && <Loader.Simple />}
-        <span className="extra-title-children">{children}</span>
-      </span>
-    </ResetBtn>
-  );
+function ButtonTransparent(props: IGTButton) {
+  return <DefaultBtn component={<ResetBtn />} {...props} />;
 }
 
 export default ButtonTransparent;
