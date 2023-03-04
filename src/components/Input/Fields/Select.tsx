@@ -177,11 +177,14 @@ function GTInputSelect({
     handleInputBlur();
   }, [handleInputBlur]);
 
-  const handleFocus = useCallback(() => {
-    isFirstChange.current = false;
+  const handleFocus = useCallback(
+    (e: React.FocusEvent<HTMLInputElement>) => {
+      isFirstChange.current = false;
 
-    handleInputFocus();
-  }, [handleInputFocus]);
+      handleInputFocus(e);
+    },
+    [handleInputFocus]
+  );
 
   const handleCloseSelect = useCallback(() => {
     setSearchTerm("");

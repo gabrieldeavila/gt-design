@@ -51,9 +51,27 @@ function useInputValues(
     [inputValidations, value]
   );
 
-  const handleInputFocus = useCallback(() => {
-    setIsLabelUp(true);
-  }, []);
+  const handleInputFocus = useCallback(
+    (e: React.FocusEvent<HTMLInputElement>) => {
+      // adds the selection range to the input
+      // if it's type is number, first changes to string
+
+      setTimeout(() => {
+        // changes the input type to text
+        let isInvalid: boolean | string = false;
+        if (e.target.type !== "text") {
+          isInvalid = e.target.type;
+          e.target.type = "text";
+        }
+        e.target.setSelectionRange(0, e.target.value.length);
+
+        // returns to the original type
+        if (isInvalid) e.target.type = isInvalid;
+      });
+      setIsLabelUp(true);
+    },
+    []
+  );
 
   const handleValidateOnChange: THandleInputChange = useCallback(
     (newValue, isValid, invalidMessage, errorsVar) => {
