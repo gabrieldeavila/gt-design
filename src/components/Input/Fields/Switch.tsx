@@ -39,7 +39,6 @@ function GTInputSwitch({
   }, [defaultValidation, validations]);
 
   const {
-    isRequired,
     value,
     handleMouseEnter,
     handleMouseLeave,
@@ -80,7 +79,6 @@ function GTInputSwitch({
         <Input.NormalizedLabel
           up={false}
           htmlFor={uniqueName}
-          isRequired={isRequired}
         >
           {t(label)}
         </Input.NormalizedLabel>

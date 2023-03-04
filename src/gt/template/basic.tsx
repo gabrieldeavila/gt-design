@@ -23,6 +23,7 @@ const darkThemeStyle = {
   preSelectColor: "#414a4c",
   labelPrimary: "#00ced1",
   labelSecondary: "#2a52be",
+  labelRequired: "#00fa9a",
   glowShadow: "#44d7a8",
   buttonSuccess1: "#00ff00",
   buttonSuccess2: "#264348",

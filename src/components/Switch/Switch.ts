@@ -43,8 +43,8 @@ const SwitchSlider = styled.span`
   }
 `;
 
+/* if the slider is checked, add custom background to the label */
 const activeLabel = css<ISwitch>`
-  /* if slider is checked, add custom background to the label */
   filter: contrast();
   background: ${({ checked, theme }) =>
     checked ?? false
