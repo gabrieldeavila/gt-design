@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable operator-linebreak */
@@ -78,7 +79,8 @@ function GTInputNumber({
     setLocaleErrorsParams,
     onBlurValidate,
     onChangeValidate,
-    inputValidations
+    inputValidations,
+    disabled
   );
 
   const { validateNumber } = useValidateNumber(min, max);
@@ -170,7 +172,7 @@ function GTInputNumber({
               <Input.IconWrapper onClick={handleInputClear}>
                 <Icon.X size={15} className="svg-no-active cursor" />
               </Input.IconWrapper>
-          )}
+            )}
         </Input.FeedbackWrapper>
 
         {_.isEmpty(errorMessage) && (

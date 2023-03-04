@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/space-before-function-paren */
@@ -79,7 +80,8 @@ function GTInputMask({
     setLocaleErrorsParams,
     onBlurValidate,
     onChangeValidate,
-    inputValidations
+    inputValidations,
+    disabled
   );
 
   const inpRef = useRef<HTMLInputElement>(null);
@@ -225,7 +227,7 @@ function GTInputMask({
               <Input.IconWrapper onClick={handleMaskClear}>
                 <Icon.X size={15} className="svg-no-active cursor" />
               </Input.IconWrapper>
-          )}
+            )}
         </Input.FeedbackWrapper>
         {_.isEmpty(errorMessage) && (
           <GTTooltip parentRef={containerRef} title={title} text={text} />

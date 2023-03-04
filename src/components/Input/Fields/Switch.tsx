@@ -44,7 +44,7 @@ function GTInputSwitch({
     handleMouseEnter,
     handleMouseLeave,
     handleInputChange,
-  } = useSwitchValues(name, inputValidations);
+  } = useSwitchValues(name, inputValidations, disabled);
 
   const handleChange = useCallback(
     (val: boolean) => {

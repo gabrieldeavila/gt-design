@@ -94,7 +94,8 @@ function GTInputSelect({
     setLocaleErrorsParams,
     onBlurValidate,
     onChangeValidate,
-    inputValidations
+    inputValidations,
+    disabled
   );
 
   const { validateSelect } = useValidateSelect();
@@ -341,7 +342,9 @@ function GTInputSelect({
             />
           )}
 
-          {showOptions && <SelectOptions options={options} />}
+          {showOptions && !(disabled ?? false) && (
+            <SelectOptions options={options} />
+          )}
         </Input.Container>
       </SelectContext.Provider>
     </>

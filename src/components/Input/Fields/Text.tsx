@@ -80,7 +80,8 @@ function GTInputText({
     setLocaleErrorsParams,
     onBlurValidate,
     onChangeValidate,
-    inputValidations
+    inputValidations,
+    disabled
   );
 
   const { validateText, validateMinAndMax } = useValidateText(

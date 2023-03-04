@@ -92,7 +92,8 @@ function GTInputPassword({
     setLocaleErrorsParams,
     onBlurValidate,
     onChangeValidate,
-    inputValidations
+    inputValidations,
+    disabled
   );
 
   // password validation

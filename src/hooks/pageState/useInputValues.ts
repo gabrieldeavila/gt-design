@@ -27,7 +27,8 @@ function useInputValues(
   setLocaleErrorsParams: React.Dispatch<React.SetStateAction<Object>>,
   onBlurValidate?: TBlurValidate,
   onChangeValidate?: TChangeValidate,
-  inputValidations?: string[]
+  inputValidations?: string[],
+  disabled?: boolean
 ) {
   const alterFieldRef = useRef<boolean>(true);
 
@@ -86,6 +87,8 @@ function useInputValues(
 
   const handleInputChange: THandleInputChange = useCallback(
     (newVal, isValid, invalidMessage, errorsVar) => {
+      if (disabled ?? false) return;
+
       const valueTemp = value.toString();
       const newValTemp = newVal.toString();
 
@@ -99,7 +102,7 @@ function useInputValues(
 
       handleValidateOnChange(newVal, isValid, invalidMessage, errorsVar);
     },
-    [handleValidateOnChange, value]
+    [disabled, handleValidateOnChange, value]
   );
 
   const handleInputBlurErrors: THandleBlurErrors = useCallback(async () => {

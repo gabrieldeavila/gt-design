@@ -2,7 +2,12 @@ import React, { useCallback, useEffect, useState } from "react";
 import { IGTNormalSwitch } from "../interface";
 import NormalSwitch from "../Normal";
 
-function GTNormalSwitch({ isChecked, name, onSwitchChange }: IGTNormalSwitch) {
+function GTNormalSwitch({
+  isChecked,
+  name,
+  onSwitchChange,
+  disabled,
+}: IGTNormalSwitch) {
   const [checked, setChecked] = useState<boolean>(isChecked);
 
   useEffect(() => {
@@ -22,6 +27,7 @@ function GTNormalSwitch({ isChecked, name, onSwitchChange }: IGTNormalSwitch) {
 
   return (
     <NormalSwitch.Container
+      disabled={disabled}
       type="button"
       id={name}
       name={name}

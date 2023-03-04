@@ -76,7 +76,8 @@ function GTInputEmail({
     setLocaleErrorsParams,
     onBlurValidate,
     onChangeValidate,
-    inputValidations
+    inputValidations,
+    disabled
   );
 
   const { validateEmail } = useValidateEmail();

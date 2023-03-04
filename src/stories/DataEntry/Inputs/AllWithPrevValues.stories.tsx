@@ -83,6 +83,7 @@ const Template = () => {
               title="nickname"
               label="EXAMPLE.SWITCH"
               name="selected"
+              disabled
             />
 
             <GTInput.Select

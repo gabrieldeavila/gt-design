@@ -5,6 +5,7 @@ import styled, { css } from "styled-components";
 import { hovers, scrolls, shadows, transitions } from "../../utils";
 import flex from "../../utils/flex";
 import skeletons from "../../utils/skeletons";
+import NormalSwitch from "../Switch/Normal";
 import {
   IIconWrapper,
   IInputContainer,
@@ -111,17 +112,7 @@ const InputField = styled.input<IInputField>`
   }
 `;
 
-const InputContainer = styled.div<IInputContainer>`
-  ${getRowWidth}
-  display: flex;
-
-  flex-grow: 1;
-  position: relative;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  border-radius: 0.25rem;
-  background: ${(props) => transparentize(0.2, props.theme.primary)};
-
+const disabledInput = css<IInputContainer>`
   ${({ disabled }) =>
     (disabled ?? false) &&
     css`
@@ -141,9 +132,8 @@ const InputContainer = styled.div<IInputContainer>`
         box-decoration-break: clone;
       }
 
-      ${InputField}:disabled, ${InputField}::placeholder  {
-        color: ${(props) =>
-          transparentize(0.5, props.theme.contrast)};
+      ${InputField}:disabled, ${InputField}::placeholder {
+        color: ${(props) => transparentize(0.5, props.theme.contrast)};
       }
 
       &,
@@ -151,6 +141,20 @@ const InputContainer = styled.div<IInputContainer>`
         cursor: not-allowed !important;
       }
     `}
+`;
+
+const InputContainer = styled.div<IInputContainer>`
+  ${getRowWidth}
+  display: flex;
+
+  flex-grow: 1;
+  position: relative;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+  background: ${(props) => transparentize(0.2, props.theme.primary)};
+
+  ${disabledInput};
 
   &:focus-within {
     outline: 2px solid
@@ -196,7 +200,24 @@ const InputContainer = styled.div<IInputContainer>`
   ${({ isLoading }) => (isLoading ?? false) && loadingInput}
 `;
 
+const disabledNormalized = css<IInputContainer>`
+  background: transparent;
+
+  ${NormalSwitch.Container} {
+    filter: grayscale(1);
+  }
+`;
+
+const InputNormalizedLabel = styled(InputLabel)<IInputLabel>`
+  position: unset;
+  left: unset;
+  cursor: pointer;
+`;
+
 const InputNormalizedContainer = styled.label<IInputContainer>`
+  ${disabledInput};
+  ${disabledNormalized};
+
   ${getRowWidth}
   position: relative;
   display: flex;
@@ -228,12 +249,6 @@ const handleLabelFirstRender = (up: boolean) => {
     font-size: 0.85rem;
   `;
 };
-
-const InputNormalizedLabel = styled(InputLabel)<IInputLabel>`
-  position: unset;
-  left: unset;
-  cursor: pointer;
-`;
 
 const InputErrorWrapper = styled.div`
   position: absolute;

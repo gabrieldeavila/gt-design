@@ -23,4 +23,5 @@ export interface IGTNormalSwitch {
   name: string;
   isChecked: boolean;
   onSwitchChange: (newValue: boolean) => void;
+  disabled?: boolean;
 }

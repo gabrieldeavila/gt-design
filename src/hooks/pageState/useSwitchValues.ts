@@ -4,7 +4,11 @@ import { useCallback, useMemo, useState } from "react";
 import { useGTPageStateContextSetters } from "../../context/pageState";
 import { THandleSwitch } from "./interface";
 
-function useSwitchValues(name: string, inputValidations?: string[]) {
+function useSwitchValues(
+  name: string,
+  inputValidations?: string[],
+  disabled?: boolean
+) {
   const [showFeedback, setShowFeedback] = useState(false);
 
   const { pageStateRef } = useGTPageStateContextSetters();
@@ -17,8 +21,10 @@ function useSwitchValues(name: string, inputValidations?: string[]) {
   );
 
   const handleInputChange: THandleSwitch = useCallback((newVal: boolean) => {
+    if (!disabled) return;
+
     setValue(newVal);
-  }, []);
+  }, [disabled]);
 
   const handleMouseEnter = useCallback(() => {
     setShowFeedback(true);
