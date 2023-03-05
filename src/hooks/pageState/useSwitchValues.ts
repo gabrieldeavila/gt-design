@@ -10,6 +10,7 @@ function useSwitchValues(
   disabled?: boolean
 ) {
   const [showFeedback, setShowFeedback] = useState(false);
+  const { setPageState } = useGTPageStateContextSetters();
 
   const { pageStateRef } = useGTPageStateContextSetters();
 
@@ -20,11 +21,19 @@ function useSwitchValues(
     [inputValidations, value]
   );
 
-  const handleInputChange: THandleSwitch = useCallback((newVal: boolean) => {
-    if (!disabled) return;
+  const handleInputChange: THandleSwitch = useCallback(
+    (newVal: boolean) => {
+      if (disabled ?? false) return;
 
-    setValue(newVal);
-  }, [disabled]);
+      setPageState((prevState) => ({
+        ...prevState,
+        [name]: newVal,
+      }));
+
+      setValue(newVal);
+    },
+    [disabled, name, setPageState]
+  );
 
   const handleMouseEnter = useCallback(() => {
     setShowFeedback(true);

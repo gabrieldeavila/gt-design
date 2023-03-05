@@ -55,7 +55,8 @@
     "SWITCH": "Ativar",
     "AWARD": "Prêmio",
     "AWARD_DESCRIPTION": "Você é incrível!",
-    "MOUSE_OVER": "Passe o mouse em mim!"
+    "MOUSE_OVER": "Passe o mouse em mim!",
+    "DISABLED": "Desabilitado"
   },
   "STORIES": {
     "TOOLTIP": {
@@ -104,6 +105,10 @@
       "EMAIL": {
         "TITLE": "E-mail",
         "SUBTITLE": "Pode ser usado para representar um e-mail."
+      },
+      "DISABLED": {
+        "TITLE": "Desabilitado",
+        "SUBTITLE": "Você pode desabilitar qualquer input. Tente."
       }
     },
     "BUTTONS": {

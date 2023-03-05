@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
+import _ from "lodash";
 import { useCallback, useEffect } from "react";
 import { useGTPageStateContextSetters } from "../../context/pageState";
 import { TValidateState } from "./interface";
@@ -14,7 +15,11 @@ function useValidateState(name: string, inputValidations: string[]) {
     setPageState((prevState) => {
       // if already has a value, keep it
       const prevVal = prevState[name] ?? "";
-      inputVal = prevVal;
+      if (_.isBoolean(prevVal)) {
+        inputVal = prevVal.toString();
+      } else {
+        inputVal = prevVal;
+      }
 
       // add a key to the obj
       const newState = { ...prevState, [name]: prevVal };

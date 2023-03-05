@@ -54,7 +54,8 @@
     "SWITCH": "Active",
     "AWARD": "Award",
     "AWARD_DESCRIPTION": "You are awesome!",
-    "MOUSE_OVER": "Hover me!"
+    "MOUSE_OVER": "Hover me!",
+    "DISABLED": "Disabled"
   },
   "STORIES": {
     "TOOLTIP": {
@@ -99,6 +100,10 @@
       "EMAIL": {
         "TITLE": "Email",
         "SUBTITLE": "It can be used to represent an email address."
+      },
+      "DISABLED": {
+        "TITLE": "Disabled",
+        "SUBTITLE": "It can be used to represent a disabled input."
       }
     },
     "BUTTONS": {
