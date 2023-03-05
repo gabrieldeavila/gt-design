@@ -14,10 +14,13 @@
     "rollup": "rollup -c",
     "test": "jest",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "chromatic": "npx chromatic --project-token=080a8bbe9b98"
   },
   "lint": "eslint .",
-  "author": "gabrieldeavila",
+  "author": {
+    "name": "gabrieldeavila"
+  },
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.16.0",
@@ -46,6 +49,7 @@
     "babel-core": "^6.26.3",
     "babel-jest": "^27.3.1",
     "babel-loader": "^8.2.3",
+    "chromatic": "^6.17.1",
     "css-loader": "^6.5.1",
     "eslint": "^8.28.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -104,5 +108,10 @@
     "gt-design",
     "gt",
     "design-system"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/gabrieldeavila/gt-design/issues"
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "@geavila/gt-design@0.1.10"
 }

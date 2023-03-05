@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React, { useMemo, useState } from "react";
-import { GTInput, Input, Space } from "../../../../components";
+import { GTInput, Input, Space } from "../../../components";
 import {
   INonNumericMask,
   INumericMask,
-} from "../../../../components/Input/Fields/interface";
-import SectionContainer from "../../../../components/Text/Template/SectionContainer";
-import { IPageStateValues } from "../../../../context/interface";
-import GTPageStateProvider from "../../../../context/pageState";
-import { GTBasic } from "../../../../gt";
+} from "../../../components/Input/Fields/interface";
+import SectionContainer from "../../../components/Text/Template/SectionContainer";
+import { IPageStateValues } from "../../../context/interface";
+import GTPageStateProvider from "../../../context/pageState";
+import { GTBasic } from "../../../gt";
 
 export default {
   title: "Data Entry/Inputs/Disabled",
