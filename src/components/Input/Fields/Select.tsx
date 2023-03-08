@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable operator-linebreak */
 import { t } from "i18next";
@@ -49,8 +50,10 @@ function GTInputSelect({
   title,
   row,
   onChange,
+  onSelect,
   onBlurValidate,
   onChangeValidate,
+  disableClearable,
 }: IGTInputSelect): JSX.Element {
   const { t } = useTranslation();
   const uniqueName = useUniqueName({ name });
@@ -162,7 +165,9 @@ function GTInputSelect({
       setSearchTerm(iVal);
       handleInputChange(iVal, isValid);
 
-      onChange?.(e);
+      onChange?.(e)?.catch((err) => {
+        console.error(err);
+      });
     },
     [handleInputChange, isValid, onChange]
   );
@@ -202,8 +207,18 @@ function GTInputSelect({
       handleMouseLeave();
       selectedIndexRef.current = selectedIndex;
       handleCloseSelect();
+
+      onSelect?.(option)?.catch((err) => {
+        console.error(err);
+      });
     },
-    [handleCloseSelect, handleInputChange, handleMouseLeave, validateState]
+    [
+      handleCloseSelect,
+      handleInputChange,
+      handleMouseLeave,
+      onSelect,
+      validateState,
+    ]
   );
 
   const handleChevClick = useCallback(() => {
@@ -318,11 +333,13 @@ function GTInputSelect({
 
           {!(disabled ?? false) && (
             <Input.FeedbackWrapper>
-              {!_.isEmpty(value) && showFeedback && (
-                <Input.IconWrapper onClick={handleSelectClear}>
-                  <Icon.X size={15} className="svg-no-active cursor" />
-                </Input.IconWrapper>
-              )}
+              {!_.isEmpty(value) &&
+                !(disableClearable ?? false) &&
+                showFeedback && (
+                  <Input.IconWrapper onClick={handleSelectClear}>
+                    <Icon.X size={15} className="svg-no-active cursor" />
+                  </Input.IconWrapper>
+                )}
 
               <Input.IconWrapper showOpacity onClick={handleChevClick}>
                 <Icon.ChevronDown size={15} className="svg-no-active cursor" />

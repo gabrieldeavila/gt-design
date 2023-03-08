@@ -58,7 +58,14 @@
     "MOUSE_OVER": "Passe o mouse em mim!",
     "DISABLED": "Desabilitado"
   },
+  "TRANSLATE": {
+    "LANGUAGE": "Linguagem"
+  },
   "STORIES": {
+    "TRANSLATE": {
+      "TITLE": "Tradução",
+      "SUBTITLE": "Altere o valor no select para mudar a linguagem."
+    },
     "TOOLTIP": {
       "SUBTITLE": "Passe o mouse sobre o input para ver o ícone 'i' e sobre ele para ver o tooltip."
     },

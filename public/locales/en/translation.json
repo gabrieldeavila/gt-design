@@ -42,6 +42,9 @@
       "FORGOT_PASSWORD": "Forgot password?"
     }
   },
+  "TRANSLATE": {
+    "LANGUAGE": "Language"
+  },
   "EXAMPLE": {
     "TITLE": "Example",
     "TEXT": "Text",
@@ -58,6 +61,10 @@
     "DISABLED": "Disabled"
   },
   "STORIES": {
+    "TRANSLATE": {
+      "TITLE": "Translate",
+      "SUBTITLE": "By changing the value in the select, you'll alter the application's language."
+    },
     "TOOLTIP": {
       "SUBTITLE": "Hover the input to see the icon 'i' and hover it to see the tooltip."
     },

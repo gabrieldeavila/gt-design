@@ -16,8 +16,9 @@ export interface IGTInput {
   label: string;
   validations: string[];
   defaultValidation: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void | Promise<void>;
   onChangeValidate?: TChangeValidate;
+  disableClearable?: boolean;
   title?: string;
   text?: string;
   row?: number;
@@ -79,6 +80,7 @@ export interface SelectionOptions {
 
 export interface IGTInputSelect extends IGTInput {
   options: SelectionOptions[];
+  onSelect?: (option: SelectionOptions) => void | Promise<void>;
 }
 
 export interface ISelectOptions {
