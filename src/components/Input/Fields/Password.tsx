@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
@@ -34,6 +35,7 @@ const defaultValidationObj = [
 ];
 
 function GTInputPassword({
+  disableClearable,
   name,
   label,
   defaultValidation,
@@ -143,7 +145,9 @@ function GTInputPassword({
 
       handleInputChange(iVal, isValid, invalidMessage);
 
-      onChange?.(e);
+      onChange?.(e)?.catch((err) => {
+        console.error(err);
+      });
     },
     [handleInputChange, inputValidations, onChange, sameAs, validatePassword]
   );
@@ -206,11 +210,14 @@ function GTInputPassword({
         />
 
         <Input.FeedbackWrapper>
-          {!_.isEmpty(value) && showFeedback && !(disabled ?? false) && (
-            <Input.IconWrapper onClick={handleInputClear}>
-              <Icon.X size={15} className="svg-no-active cursor" />
-            </Input.IconWrapper>
-          )}
+          {!_.isEmpty(value) &&
+            showFeedback &&
+            !(disableClearable ?? false) &&
+            !(disabled ?? false) && (
+              <Input.IconWrapper onClick={handleInputClear}>
+                <Icon.X size={15} className="svg-no-active cursor" />
+              </Input.IconWrapper>
+            )}
 
           {showPassword ? (
             <Icon.Eye onClick={handleShowPassword} />

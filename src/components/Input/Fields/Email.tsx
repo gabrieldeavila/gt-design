@@ -30,6 +30,7 @@ function GTInputEmail({
   validations,
   defaultValidation,
   disabled,
+  disableClearable,
   onChange,
   text,
   title,
@@ -100,7 +101,9 @@ function GTInputEmail({
 
       handleInputChange(iVal, isValid, invalidMessage);
 
-      onChange?.(e);
+      onChange?.(e)?.catch((err) => {
+        console.error(err);
+      });
     },
     [validateEmail, inputValidations, handleInputChange, onChange]
   );
@@ -155,7 +158,7 @@ function GTInputEmail({
             </Input.IconWrapper>
           )}
 
-          {!_.isEmpty(value) && showFeedback && !(disabled ?? false) && (
+          {!_.isEmpty(value) && showFeedback && !(disableClearable ?? false) && !(disabled ?? false) && (
             <Input.IconWrapper onClick={handleInputClear}>
               <Icon.X size={15} className="svg-no-active cursor" />
             </Input.IconWrapper>

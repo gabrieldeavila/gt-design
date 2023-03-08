@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable operator-linebreak */
@@ -8,7 +9,7 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState
+  useState,
 } from "react";
 import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
@@ -25,6 +26,7 @@ import { IGTInputText } from "./interface";
 
 const defaultValidationObj = ["required", "noInitialSpace", "noEndingSpaces"];
 function GTInputText({
+  disableClearable,
   name,
   label,
   validations,
@@ -114,7 +116,9 @@ function GTInputText({
 
       handleInputChange(iVal, isAllValid, invalidAllMessage, errorsVars);
 
-      onChange?.(e);
+      onChange?.(e)?.catch((err) => {
+        console.error(err);
+      });
     },
     [
       onChange,
@@ -187,11 +191,14 @@ function GTInputText({
             </Input.IconWrapper>
           )}
 
-          {!_.isEmpty(value) && showFeedback && !(disabled ?? false) && (
-            <Input.IconWrapper onClick={handleInputClear}>
-              <Icon.X size={15} className="svg-no-active cursor" />
-            </Input.IconWrapper>
-          )}
+          {!_.isEmpty(value) &&
+            !(disableClearable ?? false) &&
+            showFeedback &&
+            !(disabled ?? false) && (
+              <Input.IconWrapper onClick={handleInputClear}>
+                <Icon.X size={15} className="svg-no-active cursor" />
+              </Input.IconWrapper>
+            )}
 
           {_.isEmpty(errorMessage) && (
             <GTTooltip parentRef={containerRef} title={title} text={text} />

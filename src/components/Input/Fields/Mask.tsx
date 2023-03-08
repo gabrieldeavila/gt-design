@@ -32,6 +32,7 @@ function GTInputMask({
   name,
   label,
   validations,
+  disableClearable,
   defaultValidation,
   onChange,
   onChangeValidate,
@@ -146,7 +147,9 @@ function GTInputMask({
 
       handleInputChange(unMaskedVal, isValid, invalidMessage, errorsVar);
 
-      onChange?.(e);
+      onChange?.(e)?.catch((err) => {
+        console.error(err);
+      });
     },
     [unMask, validateMask, inputValidations, handleInputChange, onChange]
   );
@@ -210,6 +213,7 @@ function GTInputMask({
           )}
 
           {(!_.isEmpty(value) || value > 0) &&
+            !(disableClearable ?? false) &&
             !(disabled ?? false) &&
             showFeedback && (
               <Input.IconWrapper onClick={handleMaskClear}>

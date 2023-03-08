@@ -27,6 +27,7 @@ import { IGTInputNumber } from "./interface";
 const defaultValidationObj = ["required"];
 
 function GTInputNumber({
+  disableClearable,
   name,
   label,
   validations,
@@ -110,7 +111,9 @@ function GTInputNumber({
 
       handleInputChange(iVal, isValid, invalidMessage, errorsVar);
 
-      onChange?.(e);
+      onChange?.(e)?.catch((err) => {
+        console.error(err);
+      });
     },
     [validateNumber, inputValidations, handleInputChange, onChange]
   );
@@ -167,6 +170,7 @@ function GTInputNumber({
           )}
 
           {(!_.isEmpty(value) || value > 0) &&
+            !(disableClearable ?? false) &&
             !(disabled ?? false) &&
             showFeedback && (
               <Input.IconWrapper onClick={handleInputClear}>
