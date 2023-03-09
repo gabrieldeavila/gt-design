@@ -1,4 +1,14 @@
-import { ColorProps, LayoutProps, SpaceProps } from "styled-system";
+/* eslint-disable @typescript-eslint/indent */
+import {
+  BackgroundProps,
+  BorderProps,
+  ColorProps,
+  FlexboxProps,
+  LayoutProps,
+  PositionProps,
+  ShadowProps,
+  SpaceProps,
+} from "styled-system";
 
 export type TAddOns =
   | "center"
@@ -108,3 +118,13 @@ export interface ISpaceModifiers extends ISpace {
 export interface IAddOns {
   [key: string]: string;
 }
+
+export interface IDefaultAddOns
+  extends ColorProps,
+    SpaceProps,
+    LayoutProps,
+    FlexboxProps,
+    BackgroundProps,
+    BorderProps,
+    PositionProps,
+    ShadowProps {}

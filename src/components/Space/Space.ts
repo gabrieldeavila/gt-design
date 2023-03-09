@@ -2,7 +2,7 @@ import { transparentize } from "polished";
 import styled from "styled-components";
 import { color, layout, space } from "styled-system";
 import flex from "../../utils/flex";
-import addOnsCss from "./addOns/addOns";
+import addOnsCss, { defaultAddOns } from "./addOns/addOns";
 import { ISpace, ISpaceModifiers } from "./interface";
 
 const SpaceBase = styled.div<ISpace>`
@@ -55,6 +55,7 @@ const MiddleCenter = styled(SpaceBase)`
 
   flex-direction: column;
   gap: 1rem;
+  ${defaultAddOns};
 `;
 
 const SpaceMain = styled(SpaceBase)`
@@ -62,6 +63,7 @@ const SpaceMain = styled(SpaceBase)`
   padding-top: 5rem;
 
   width: -webkit-fill-available;
+  ${defaultAddOns};
 `;
 
 const SpaceDashed = styled(SpaceBase)<ISpaceModifiers>`
@@ -69,12 +71,14 @@ const SpaceDashed = styled(SpaceBase)<ISpaceModifiers>`
   border: 1px dashed ${(props) => transparentize(0.6, props.theme.contrast)};
 
   ${({ addOns, type }) => addOnsCss(addOns, type)}
+  ${defaultAddOns};
 `;
 
 const SpaceModifiers = styled(SpaceBase)<ISpaceModifiers>`
   flex-direction: ${(props) => props.type ?? "row"};
 
   ${({ addOns, type }) => addOnsCss(addOns, type)}
+  ${defaultAddOns};
 `;
 
 export default {

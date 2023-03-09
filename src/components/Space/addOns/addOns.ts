@@ -1,4 +1,15 @@
-import { IAddOns } from "../interface";
+import { css } from "styled-components";
+import {
+  background,
+  border,
+  color,
+  flexbox,
+  layout,
+  position,
+  shadow,
+  space
+} from "styled-system";
+import { IAddOns, IDefaultAddOns } from "../interface";
 
 const centerColumn = "align-items: center;";
 
@@ -10,6 +21,17 @@ const middleColumn = "justify-content: center;";
 
 const fullSpace =
   "width: -webkit-fill-available; height: -webkit-fill-available; * { width: -webkit-fill-available; }";
+
+export const defaultAddOns = css<IDefaultAddOns>`
+  ${color};
+  ${space};
+  ${layout};
+  ${flexbox};
+  ${background};
+  ${border};
+  ${position};
+  ${shadow};
+`;
 
 const addOnsOptions: IAddOns = {
   centerColumn,
