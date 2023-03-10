@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/indent */
+import { FlattenSimpleInterpolation } from "styled-components";
 import {
   BackgroundProps,
   BorderProps,

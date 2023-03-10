@@ -7,7 +7,7 @@ import {
   layout,
   position,
   shadow,
-  space
+  space,
 } from "styled-system";
 import { IAddOns, IDefaultAddOns } from "../interface";
 
@@ -152,6 +152,21 @@ const addOnsOptions: IAddOns = {
   "flex-grow": "flex-grow: 1;",
 };
 
+const mobile100 = css`
+  @media (max-width: 800px) {
+    width: 50%;
+  }
+`;
+
+const backgroundTest = css`
+  background-color: red;
+`;
+
+const myTest: IAddOns = {
+  "mobile-100": mobile100,
+  "background-test": backgroundTest,
+};
+
 const addOnsCss = (addOns?: string[], type?: "row" | "column") => {
   type = type ?? "column";
 
@@ -168,7 +183,14 @@ const addOnsCss = (addOns?: string[], type?: "row" | "column") => {
     }
   }
 
-  return addOnsCss;
+  const keys = ["mobile-100", "background-test"];
+
+  const a = css`
+    ${keys.map((key) => myTest[key])}
+  `;
+
+  console.log(a);
+  return a;
 };
 
 export default addOnsCss;
