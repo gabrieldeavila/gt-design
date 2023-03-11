@@ -4,6 +4,7 @@ import {
   border,
   color,
   flexbox,
+  fontSize,
   grid,
   layout,
   position,
@@ -34,6 +35,7 @@ export const defaultAddOns = css<IDefaultAddOns>`
   ${position};
   ${shadow};
   ${grid};
+  ${fontSize};
 `;
 
 // const addOnsOptions: IAddOns = {
