@@ -6,6 +6,7 @@ import GTInputPassword from "./Fields/Password";
 import GTInputSelect from "./Fields/Select";
 import GTInputText from "./Fields/Text";
 import GTInputSwitch from "./Fields/Switch";
+import GTInputDate from "./Fields/Date";
 
 const GTInput = {
   Text: memo(GTInputText),
@@ -15,6 +16,7 @@ const GTInput = {
   Number: memo(GTInputNumber),
   Mask: memo(GTInputMask),
   Switch: memo(GTInputSwitch),
+  Date: memo(GTInputDate),
 };
 
 export default GTInput;
