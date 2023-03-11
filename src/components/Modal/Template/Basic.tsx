@@ -116,50 +116,48 @@ function GTModalBasic({ show, setShow, data }: IGTModal) {
       currOrientationY={data.orientationY}
     >
       <Modal.Wrapper ref={ref} isOpen={isOpen}>
-        {/* <Modal.Container> */}
-          <Modal.Header>
-            <Text.H1>{t(data.title)}</Text.H1>
-            {(data.closable ?? true) && (
-              <Modal.Close onClick={() => handleClose()}>
-                <Icon.X />
-              </Modal.Close>
-            )}
-          </Modal.Header>
-
-          <Modal.Main>
-            <Modal.MainWrapper>
-              <Text.P>{t(data.content)}</Text.P>
-            </Modal.MainWrapper>
-          </Modal.Main>
-
-          {(data.cancelText != null || data.confirmText != null) && (
-            <Modal.Footer>
-              <Space.Modifiers addOns={["flex-end", "gap-1"]}>
-                {data.cancelText != null && (
-                  <Button.Error
-                    isLoading={isLoadingCancel}
-                    fitContent
-                    size="sm"
-                    onClick={handleCancel}
-                  >
-                    {t(data.cancelText)}
-                  </Button.Error>
-                )}
-
-                {data.confirmText != null && (
-                  <Button.Success
-                    isLoading={isLoadingConfirm}
-                    fitContent
-                    size="sm"
-                    onClick={handleConfirm}
-                  >
-                    {t(data.confirmText)}
-                  </Button.Success>
-                )}
-              </Space.Modifiers>
-            </Modal.Footer>
+        <Modal.Header>
+          <Text.H1>{t(data.title)}</Text.H1>
+          {(data.closable ?? true) && (
+            <Modal.Close onClick={() => handleClose()}>
+              <Icon.X />
+            </Modal.Close>
           )}
-        {/* </Modal.Container> */}
+        </Modal.Header>
+
+        <Modal.Main>
+          <Modal.MainWrapper>
+            <Text.P>{t(data.content)}</Text.P>
+          </Modal.MainWrapper>
+        </Modal.Main>
+
+        {(data.cancelText != null || data.confirmText != null) && (
+          <Modal.Footer>
+            <Space.Modifiers alignItems="flex-end" gridGap="1rem">
+              {data.cancelText != null && (
+                <Button.Error
+                  isLoading={isLoadingCancel}
+                  fitContent
+                  size="sm"
+                  onClick={handleCancel}
+                >
+                  {t(data.cancelText)}
+                </Button.Error>
+              )}
+
+              {data.confirmText != null && (
+                <Button.Success
+                  isLoading={isLoadingConfirm}
+                  fitContent
+                  size="sm"
+                  onClick={handleConfirm}
+                >
+                  {t(data.confirmText)}
+                </Button.Success>
+              )}
+            </Space.Modifiers>
+          </Modal.Footer>
+        )}
       </Modal.Wrapper>
     </Modal.Content>
   );

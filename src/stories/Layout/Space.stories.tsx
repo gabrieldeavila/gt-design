@@ -15,7 +15,7 @@ const Template = () => {
         <SectionContainer title="Space" subtitle="STORIES.SPACE.SUBTITLE" />
 
         <Text.Divider position="left">Flex</Text.Divider>
-        <Space.Modifiers addOns={["mt-1", "mb-2"]}>
+        <Space.Modifiers mt="1rem" mb="2rem">
           <Space.Flex bg="#87ceeb">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
             voluptates, quod, quia, voluptate quae voluptatem quibusdam.
@@ -23,7 +23,7 @@ const Template = () => {
         </Space.Modifiers>
 
         <Text.Divider position="left">Center</Text.Divider>
-        <Space.Modifiers addOns={["mt-1", "mb-2"]}>
+        <Space.Modifiers mt="1rem" mb="2rem">
           <Space.Center bg="#87ceeb">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
             voluptates, quod, quia, voluptate quae voluptatem quibusdam.
@@ -31,37 +31,45 @@ const Template = () => {
         </Space.Modifiers>
 
         <Text.Divider position="left">Dashed</Text.Divider>
-        <Space.Modifiers addOns={["mt-1", "mb-2", "full-space"]}>
+        <Space.Modifiers mt="1rem" mb="2rem" addOns={["full-space"]}>
           <Space.Dashed />
         </Space.Modifiers>
 
         <Text.Divider position="left">MiddleCenter</Text.Divider>
-        <Space.Modifiers height={320} addOns={["mt-1", "mb-2", "w-100"]}>
+        <Space.Modifiers height="320px" mt="1rem" mb="2rem" width="100%">
           <Space.MiddleCenter bg="#87ceeb">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
           </Space.MiddleCenter>
         </Space.Modifiers>
 
         <Text.Divider position="left">Main</Text.Divider>
-        <Space.Modifiers addOns={["mt-1", "mb-2", "w-100"]}>
+        <Space.Modifiers mt="1rem" mb="2rem" width="100%">
           <Space.Main bg="#87ceeb">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
           </Space.Main>
         </Space.Modifiers>
 
         <Text.Divider position="left">Horizontal</Text.Divider>
-        <Space.Modifiers addOns={["mt-1", "mb-2", "w-100"]}>
+        <Space.Modifiers mt="1rem" mb="2rem" width="100%">
           <Space.Horizontal bg="#87ceeb">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
           </Space.Horizontal>
         </Space.Modifiers>
 
         <Text.Divider position="left">Modifiers</Text.Divider>
-        <Space.Modifiers
-          addOns={["mt-2", "mb-5", "px-5", "py-2", "w-80"]}
-          bg="#87ceeb"
-        >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+        <Space.Modifiers height="300px" position="relative">
+          <Space.Modifiers
+            position="absolute"
+            right="0"
+            mb="1rem"
+            mt="5rem"
+            px="1rem"
+            py="5rem"
+            width="fit-content"
+            bg="#87ceeb"
+          >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+          </Space.Modifiers>
         </Space.Modifiers>
       </Space.Horizontal>
     </GTBasic>

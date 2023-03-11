@@ -27,7 +27,9 @@ function GTSymbolPopup({ img, alt, children }: IGTSymbolPopup) {
         ) : (
           <Space.Modifiers
             onClick={handleClose}
-            addOns={["middle", "center", "full-space"]}
+            addOns={["full-space"]}
+            alignItems="center"
+            justifyContent="center"
           >
             <Icon.X />
           </Space.Modifiers>
@@ -70,7 +72,9 @@ const BestSymbolOptions = memo(function BestSymbolOptions({
     return (
       <Space.Modifiers
         onClick={handleOpen}
-        addOns={["middle", "center", "full-space"]}
+        addOns={["full-space"]}
+        alignItems="center"
+        justifyContent="center"
       >
         <Symbol.Text>{symbolName}</Symbol.Text>
       </Space.Modifiers>

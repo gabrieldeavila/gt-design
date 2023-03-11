@@ -178,8 +178,13 @@ const Template = () => {
           title="Modal Basic"
           subtitle="STORIES.MODAL_BASIC.SUBTITLE"
         />
-        <Space.Modifiers addOns={["middle"]}>
-          <Space.Modifiers addOns={["middle", "px-5", "gap-2", "flex-wrap"]}>
+        <Space.Modifiers justifyContent="center">
+          <Space.Modifiers
+            justifyContent="center"
+            flexWrap="wrap"
+            gridGap="2rem"
+            px="5rem"
+          >
             <Button.Normal fitContent onClick={handleBasicOpen}>
               Modal Basic
             </Button.Normal>

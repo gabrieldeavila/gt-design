@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import Space from "../../Space";
-import { TAddOns } from "../../Space/interface";
 import { ITextDivider } from "../interface";
 import { DividerText, DividerWrapper } from "../Text";
 
@@ -31,16 +30,16 @@ function TextDivider({ children, position, text, hasMarginTop }: ITextDivider) {
     return widths[position];
   }, [position]);
 
-  const addOns: TAddOns[] = useMemo(() => {
+  const marginTop = useMemo(() => {
     if (hasMarginTop ?? true) {
-      return ["full-space", "mt-2"];
+      return "2rem";
     }
 
-    return ["full-space"];
+    return "auto";
   }, [hasMarginTop]);
 
   return (
-    <Space.Modifiers addOns={addOns}>
+    <Space.Modifiers addOns={["full-space"]} mt={marginTop}>
       <DividerWrapper currWidth={width}>
         <DividerText>{children ?? t(text ?? "")}</DividerText>
       </DividerWrapper>

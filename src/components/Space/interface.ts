@@ -5,6 +5,7 @@ import {
   BorderProps,
   ColorProps,
   FlexboxProps,
+  GridProps,
   LayoutProps,
   PositionProps,
   ShadowProps,
@@ -109,15 +110,7 @@ export type TAddOns =
   | "py-5";
 
 export interface ISpace extends SpaceProps, ColorProps, LayoutProps {
-  addOns?: TAddOns[];
-}
-
-export interface ISpaceModifiers extends ISpace {
-  type?: "column" | "row";
-}
-
-export interface IAddOns {
-  [key: string]: string;
+  addOns?: TMobileAddOnsOptions[];
 }
 
 export interface IDefaultAddOns
@@ -128,4 +121,19 @@ export interface IDefaultAddOns
     BackgroundProps,
     BorderProps,
     PositionProps,
+    GridProps,
     ShadowProps {}
+
+export interface ISpaceModifiers extends ISpace, IDefaultAddOns {
+  type?: "column" | "row";
+}
+
+export interface IAddOns {
+  [key: string]: string;
+}
+
+export type TMobileAddOnsOptions = "mobile-100" | "full-space";
+
+export type IMobileAddOns = {
+  [key in TMobileAddOnsOptions]: FlattenSimpleInterpolation;
+};

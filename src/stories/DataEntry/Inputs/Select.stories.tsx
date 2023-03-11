@@ -53,7 +53,7 @@ const Template = ({ position }: { position: "top" | "bottom" }) => {
             title="STORIES.INPUTS.SELECT.TITLE"
             subtitle="STORIES.INPUTS.SELECT.SUBTITLE"
           />
-          <Space.Modifiers mt={currPos} addOns={["middle"]}>
+          <Space.Modifiers mt={currPos} justifyContent="center">
             <Input.Group>
               <GTInput.Select
                 row={6}

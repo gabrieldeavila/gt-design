@@ -70,14 +70,14 @@ const SpaceDashed = styled(SpaceBase)<ISpaceModifiers>`
   margin: 1rem 0;
   border: 1px dashed ${(props) => transparentize(0.6, props.theme.contrast)};
 
-  ${({ addOns, type }) => addOnsCss(addOns, type)}
+  ${({ addOns }) => addOnsCss(addOns)}
   ${defaultAddOns};
 `;
 
 const SpaceModifiers = styled(SpaceBase)<ISpaceModifiers>`
   flex-direction: ${(props) => props.type ?? "row"};
 
-  ${({ addOns, type }) => addOnsCss(addOns, type)}
+  ${({ addOns }) => addOnsCss(addOns)}
   ${defaultAddOns};
 `;
 
