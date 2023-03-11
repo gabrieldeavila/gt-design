@@ -5,6 +5,7 @@ import {
   BorderProps,
   ColorProps,
   FlexboxProps,
+  FontSizeProps,
   GridProps,
   LayoutProps,
   PositionProps,
@@ -122,6 +123,7 @@ export interface IDefaultAddOns
     BorderProps,
     PositionProps,
     GridProps,
+    FontSizeProps,
     ShadowProps {}
 
 export interface ISpaceModifiers extends ISpace, IDefaultAddOns {

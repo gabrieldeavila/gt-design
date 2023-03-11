@@ -1,4 +1,4 @@
-import { FontSizeProps, SpaceProps } from "styled-system";
+import { IDefaultAddOns } from "../Space/interface";
 
 export interface ITextBtn {
   children: React.ReactNode;
@@ -9,7 +9,7 @@ export interface ITextBtn {
   type?: "button" | "submit" | "reset";
 }
 
-export interface IText extends SpaceProps, FontSizeProps {}
+export interface IText extends IDefaultAddOns {}
 
 export interface ISectionContainer {
   title: string;

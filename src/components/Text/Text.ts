@@ -2,8 +2,8 @@
 import { transparentize } from "polished";
 import { memo } from "react";
 import styled, { css } from "styled-components";
-import { fontSize, space } from "styled-system";
 import { animations, transforms } from "../../utils";
+import { defaultAddOns } from "../Space/addOns/addOns";
 import TextBtn from "./Extras/Btn";
 import Divider from "./Extras/Divider";
 import { IText, ITextDividerWrapper } from "./interface";
@@ -13,15 +13,13 @@ const P = styled.p<IText>`
   font-weight: 300;
   text-align: justify;
 
-  ${space}
-  ${fontSize}
+  ${defaultAddOns};
 `;
 
 const h1Css = css`
   font-weight: 500;
   font-size: 1.5rem;
-  ${space}
-  ${fontSize}
+
   width: fit-content;
 
   background-image: linear-gradient(
@@ -32,6 +30,8 @@ const h1Css = css`
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+
+  ${defaultAddOns};
 `;
 
 const H1 = styled.h1<IText>`
@@ -80,11 +80,14 @@ export const TextBtnStyled = styled.button`
   }
 
   ${animations.underline}
+  ${defaultAddOns};
 `;
 
 const Strong = styled.strong`
   color: ${(props) => props.theme.contrast};
   font-weight: 500;
+
+  ${defaultAddOns};
 `;
 
 export const DividerStyled = styled.div``;
@@ -115,11 +118,15 @@ export const DividerWrapper = styled.div<ITextDividerWrapper>`
   &:before {
     width: ${(props) => props.currWidth.before};
   }
+
+  ${defaultAddOns};
 `;
 
 export const DividerText = styled(H2)`
   padding: 0 0.5rem;
   white-space: pre;
+
+  ${defaultAddOns};
 `;
 
 const Text = { P, H1, H2, Btn: memo(TextBtn), Strong, Divider: memo(Divider) };
