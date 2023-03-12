@@ -1,6 +1,7 @@
 import { GTTheme } from "../../gt/Design/interface";
+import { IDefaultAddOns } from "../Space/interface";
 
-export interface IInputField {
+export interface IInputField extends IDefaultAddOns {
   isLabel?: boolean;
 }
 

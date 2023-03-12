@@ -148,64 +148,63 @@ function GTInputDate({
   }
 
   return (
-    <>
-      <Input.Container
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        row={row}
-        isWrong={!isValid}
-        disabled={disabled}
-        ref={containerRef}
-      >
-        <Input.FieldWrapper>
-          <Input.Label
-            isRequired={isRequired}
-            isWrong={!isValid}
-            up={isLabelUp}
-            htmlFor={uniqueName}
-          >
-            {t(label)}
-          </Input.Label>
-          <Input.Field
-            type="date"
-            value={value}
-            onChange={handleChange}
-            disabled={disabled}
-            onBlur={handleBlur}
-            onFocus={handleInputFocus}
-            id={uniqueName}
-            name={uniqueName}
-          />
-        </Input.FieldWrapper>
-
-        <ErrorMessage
-          message={errorMessage}
-          params={localeErrorsParams}
+    <Input.Container
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      row={row}
+      isWrong={!isValid}
+      disabled={disabled}
+      ref={containerRef}
+    >
+      <Input.FieldWrapper>
+        <Input.Label
+          isRequired={isRequired}
           isWrong={!isValid}
+          up={isLabelUp}
+          htmlFor={uniqueName}
+        >
+          {t(label)}
+        </Input.Label>
+        <Input.Field
+          type="date"
+          value={value}
+          onChange={handleChange}
+          disabled={disabled}
+          onBlur={handleBlur}
+          onFocus={handleInputFocus}
+          id={uniqueName}
+          name={uniqueName}
+          color={!isLabelUp ? "transparent" : ""}
         />
+      </Input.FieldWrapper>
 
-        <Input.FeedbackWrapper>
-          {isValidatingOnBlur && showFeedback && (
-            <Input.IconWrapper showOpacity>
-              <Loader.Simple size="sm" />
+      <ErrorMessage
+        message={errorMessage}
+        params={localeErrorsParams}
+        isWrong={!isValid}
+      />
+
+      <Input.FeedbackWrapper>
+        {isValidatingOnBlur && showFeedback && (
+          <Input.IconWrapper showOpacity>
+            <Loader.Simple size="sm" />
+          </Input.IconWrapper>
+        )}
+
+        {!_.isEmpty(value) &&
+          !(disableClearable ?? false) &&
+          showFeedback &&
+          !(disabled ?? false) && (
+            <Input.IconWrapper onClick={handleInputClear}>
+              <Icon.X size={15} className="svg-no-active cursor" />
             </Input.IconWrapper>
           )}
 
-          {!_.isEmpty(value) &&
-            !(disableClearable ?? false) &&
-            showFeedback &&
-            !(disabled ?? false) && (
-              <Input.IconWrapper onClick={handleInputClear}>
-                <Icon.X size={15} className="svg-no-active cursor" />
-              </Input.IconWrapper>
-            )}
-
-          {_.isEmpty(errorMessage) && (
-            <GTTooltip parentRef={containerRef} title={title} text={text} />
-          )}
-        </Input.FeedbackWrapper>
-      </Input.Container>
-    </>
+        {_.isEmpty(errorMessage) && (
+          <GTTooltip parentRef={containerRef} title={title} text={text} />
+        )}
+      </Input.FeedbackWrapper>
+    </Input.Container>
   );
 }
 

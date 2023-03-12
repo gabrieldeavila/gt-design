@@ -59,6 +59,8 @@ function useInputValues(
       setTimeout(() => {
         // changes the input type to text
         let isInvalid: boolean | string = false;
+        if (e.target.type === "date") return;
+
         if (e.target.type !== "text") {
           isInvalid = e.target.type;
           e.target.type = "text";
