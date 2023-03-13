@@ -15,6 +15,7 @@ import {
   ISelectOptionWrapper,
   ISelectValue,
 } from "./interface";
+import DatePicker from "react-datepicker";
 
 const getRowWidth = ({ row }: IInputContainer) => {
   let cssSrc = "";
@@ -110,11 +111,6 @@ const InputField = styled.input<IInputField>`
   /* changes the placeholder color */
   &::placeholder {
     color: ${(props) => props.theme.contrast};
-  }
-
-  ::-webkit-calendar-picker-indicator {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23bbbbbb" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
-    margin-top: -0.75rem;
   }
 
   ${defaultAddOns};
@@ -300,6 +296,28 @@ const InputFeedbackWrapper = styled.div`
   gap: 0.5rem;
 `;
 
+const StyledDatePicker = styled(DatePicker)`
+  color: ${(props) => props.theme.contrast};
+  background: transparent;
+  border: none;
+
+  width: 100%;
+  height: 2.5rem;
+  outline: none;
+  border-radius: 0.25rem;
+  padding-top: 1rem;
+  border: none;
+  color: ${(props) => props.theme.contrast};
+  background-color: transparent;
+
+  /* changes the placeholder color */
+  &::placeholder {
+    color: ${(props) => props.theme.contrast};
+  }
+
+  ${defaultAddOns};
+`;
+
 const Input = {
   Group: InputGroup,
   Container: InputContainer,
@@ -312,6 +330,7 @@ const Input = {
   FieldWrapper: InputFieldWrapper,
   FeedbackWrapper: InputFeedbackWrapper,
   IconWrapper: InputIconWrapper,
+  DatePicker: StyledDatePicker,
 };
 
 export default Input;

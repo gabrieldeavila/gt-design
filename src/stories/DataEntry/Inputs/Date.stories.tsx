@@ -20,7 +20,12 @@ const Template = () => {
             subtitle="STORIES.INPUTS.DATE.SUBTITLE"
           />
           <Input.Group>
-            <GTInput.Date name="date" label="TEMPLATE.LOGIN.NICKNAME_LABEL" />
+            <GTInput.Date
+              min="2023-03-10"
+              max="2023-03-31"
+              name="date"
+              label="TEMPLATE.LOGIN.NICKNAME_LABEL"
+            />
           </Input.Group>
         </Space.Horizontal>
       </GTEasyState>

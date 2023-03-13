@@ -33,6 +33,11 @@ export interface IGTInputText extends IGTInput {
   maxChars?: number | string;
 }
 
+export interface IGTInputDate extends IGTInput {
+  min?: number | string;
+  max?: number | string;
+}
+
 export interface IGTInputSwitch extends IGTInput {
   flexJustify?: string;
 }

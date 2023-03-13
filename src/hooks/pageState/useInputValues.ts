@@ -52,14 +52,15 @@ function useInputValues(
   );
 
   const handleInputFocus = useCallback(
-    (e: React.FocusEvent<HTMLInputElement>) => {
+    (e: React.FocusEvent<HTMLInputElement>, avoidTimeOut?: boolean) => {
       // adds the selection range to the input
       // if it's type is number, first changes to string
 
       setTimeout(() => {
+        if (avoidTimeOut ?? false) return;
+
         // changes the input type to text
         let isInvalid: boolean | string = false;
-        if (e.target.type === "date") return;
 
         if (e.target.type !== "text") {
           isInvalid = e.target.type;

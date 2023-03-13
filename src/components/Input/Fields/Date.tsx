@@ -16,33 +16,32 @@ import { useTranslation } from "react-i18next";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useUniqueName from "../../../hooks/helpers/useUniqueName";
 import useInputValues from "../../../hooks/pageState/useInputValues";
+import useValidateDate from "../../../hooks/validation/useValidateDate";
 import useValidateState from "../../../hooks/validation/useValidateState";
-import useValidateText from "../../../hooks/validation/useValidateText";
 import Loader from "../../Loader";
 import GTTooltip from "../../Tooltip/Tooltip";
 import ErrorMessage from "../Extras/ErrorMessage";
 import Input from "../Input";
-import { IGTInputText } from "./interface";
+import { IGTInputDate } from "./interface";
+import "react-datepicker/dist/react-datepicker.css";
+import { format, parseISO } from "date-fns";
 
-const defaultValidationObj = ["required", "noInitialSpace", "noEndingSpaces"];
+const defaultValidationObj = ["required"];
 function GTInputDate({
   disableClearable,
   name,
   label,
   validations,
   defaultValidation,
-  minWords,
-  maxWords,
-  minChars,
-  maxChars,
-  onChange,
+  min,
+  max,
   disabled,
   text,
   title,
   row,
   onBlurValidate,
   onChangeValidate,
-}: IGTInputText) {
+}: IGTInputDate) {
   const { t } = useTranslation();
   const uniqueName = useUniqueName({ name });
   const alterFieldRef = useRef<boolean>(true);
@@ -64,7 +63,6 @@ function GTInputDate({
   const {
     isRequired,
     value,
-    isLabelUp,
     isValidatingOnBlur,
     showFeedback,
     handleInputChange,
@@ -86,18 +84,23 @@ function GTInputDate({
     disabled
   );
 
-  const { validateText, validateMinAndMax } = useValidateText(
-    minWords,
-    maxWords,
-    minChars,
-    maxChars
+  const currDate = useMemo(
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+    () => (value ?? false ? parseISO(value.toString()) : new Date()),
+    [value]
   );
+
+    useEffect(() => {
+    console.log(value, currDate);
+    }, [currDate, value]);
+
+  const { validateDate } = useValidateDate(min, max);
 
   useEffect(() => {
     const chars = value.toString();
     if (chars.length === 0) return;
 
-    const { isValid, invalidMessage } = validateText(chars, inputValidations);
+    const { isValid, invalidMessage } = validateDate(chars, inputValidations);
 
     setIsValid(isValid);
     setErrorMessage(invalidMessage);
@@ -105,28 +108,18 @@ function GTInputDate({
   }, []);
 
   const handleChange = useCallback(
-    (e: any) => {
-      const { value: iVal } = e.target;
-      const { isValid, invalidMessage } = validateText(iVal, inputValidations);
-      const { isAllValid, invalidAllMessage, errorsVars } = validateMinAndMax(
-        invalidMessage,
-        isValid,
-        iVal
+    (date: Date) => {
+      // gets the value from Date to yyyy-mm-dd, using date-fns
+      const newDate = format(date, "yyyy-MM-dd");
+
+      const { isValid, invalidMessage, errorsVars } = validateDate(
+        newDate,
+        inputValidations
       );
 
-      handleInputChange(iVal, isAllValid, invalidAllMessage, errorsVars);
-
-      onChange?.(e)?.catch((err) => {
-        console.error(err);
-      });
+      handleInputChange(newDate, isValid, invalidMessage, errorsVars);
     },
-    [
-      onChange,
-      validateText,
-      inputValidations,
-      validateMinAndMax,
-      handleInputChange,
-    ]
+    [validateDate, inputValidations, handleInputChange]
   );
 
   const handleBlur = useCallback(() => {
@@ -138,6 +131,13 @@ function GTInputDate({
 
     alterFieldRef.current = false;
   }, [handleInputBlur, handleInputBlurErrors]);
+
+  const handleFocus = useCallback(
+    (e: React.FocusEvent<HTMLInputElement>) => {
+      handleInputFocus(e, true);
+    },
+    [handleInputFocus]
+  );
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -160,21 +160,20 @@ function GTInputDate({
         <Input.Label
           isRequired={isRequired}
           isWrong={!isValid}
-          up={isLabelUp}
+          up={!_.isEmpty(value)}
           htmlFor={uniqueName}
         >
           {t(label)}
         </Input.Label>
-        <Input.Field
-          type="date"
-          value={value}
-          onChange={handleChange}
-          disabled={disabled}
-          onBlur={handleBlur}
-          onFocus={handleInputFocus}
-          id={uniqueName}
+
+        <Input.DatePicker
           name={uniqueName}
-          color={!isLabelUp ? "transparent" : ""}
+          id={uniqueName}
+          selected={currDate}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          color={_.isEmpty(value) ? "transparent" : ""}
         />
       </Input.FieldWrapper>
 

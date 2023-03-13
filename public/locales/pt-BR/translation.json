@@ -16,6 +16,8 @@
   "MAX": "Deve ser menor ou igual a {{MAX}}.",
   "BETWEEN": "Deve estar entre {{MIN}} e {{MAX}}.",
   "EIGHT_LONG": "Deve ter pelo menos 8 caracteres.",
+  "MAX_DATE": "Deve ser menor ou igual a {{MAX}}.",
+  "MIN_DATE": "Deve ser maior ou igual a {{MIN}}.",
   "ONE_NUMBER": "Deve conter pelo menos um número.",
   "ONE_SPECIAL": "Deve conter pelo menos um caractere especial.",
   "ONE_UPPERCASE": "Deve conter pelo menos uma letra maiúscula.",
