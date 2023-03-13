@@ -116,6 +116,7 @@
   "readme": "ERROR: No README data found!",
   "_id": "@geavila/gt-design@0.1.10",
   "dependencies": {
-    "date-fns": "^2.29.3"
+    "date-fns": "^2.29.3",
+    "react-datepicker": "^4.10.0"
   }
 }
