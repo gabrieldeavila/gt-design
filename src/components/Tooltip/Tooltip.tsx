@@ -6,7 +6,6 @@ import React, {
   useCallback,
   useEffect,
   useImperativeHandle,
-  useMemo,
   useRef,
   useState,
 } from "react";
@@ -14,9 +13,15 @@ import { useTranslation } from "react-i18next";
 import { IGTTooltip, IGTTooltipRef } from "./interface";
 import Tooltip from "./style";
 
+const clearTimeOut = (timeOut: NodeJS.Timeout | null) => {
+  if (timeOut) {
+    clearTimeout(timeOut);
+  }
+};
+
 const GTTooltip = forwardRef((props: IGTTooltip, ref?: Ref<IGTTooltipRef>) => {
   const { title, text, parentRef }: IGTTooltip = props;
-
+  const timeOut = useRef<NodeJS.Timeout | null>(null);
   const { t } = useTranslation();
   const [show, setShow] = useState(false);
   const [isAboveParent, setIsAboveParent] = useState(false);
@@ -40,23 +45,22 @@ const GTTooltip = forwardRef((props: IGTTooltip, ref?: Ref<IGTTooltipRef>) => {
     [setShow]
   );
 
-  const handleMouseOverParent = useMemo(() => {
-    return () => {
-      if (parentRef.current) {
-        // gets the position of the parent element
-        const pos = parentRef.current.getBoundingClientRect();
-        const isAtTheBottom = pos.top + 100 > window.innerHeight;
+  const handleMouseOverParent = useCallback(() => {
+    if (parentRef.current) {
+      // gets the position of the parent element
+      const pos = parentRef.current.getBoundingClientRect();
+      const isAtTheBottom = pos.top + 100 > window.innerHeight;
 
-        setIsAboveParent(isAtTheBottom);
+      setIsAboveParent(isAtTheBottom);
+      timeOut.current = setTimeout(() => {
         setShow(true);
-      }
-    };
+      }, 500);
+    }
   }, [parentRef]);
 
-  const handleMouseOutParent = useMemo(() => {
-    return () => {
-      setShow(false);
-    };
+  const handleMouseOutParent = useCallback(() => {
+    clearTimeOut(timeOut.current);
+    setShow(false);
   }, []);
 
   useEffect(() => {
