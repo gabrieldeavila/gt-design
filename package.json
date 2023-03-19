@@ -1,5 +1,5 @@
 {
-  "name": "@geavila/gt-design",
+  "name": "gt-design",
   "publishConfig": {
     "access": "public"
   },
@@ -24,9 +24,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/preset-env": "^7.16.4",
-    "@babel/preset-react": "^7.16.0",
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.16.0",
     "@mdx-js/react": "^2.1.2",
     "@rollup/plugin-babel": "^6.0.2",
@@ -49,9 +49,9 @@
     "@typescript-eslint/parser": "^5.42.1",
     "babel-core": "^6.26.3",
     "babel-jest": "^27.3.1",
-    "babel-loader": "^8.2.3",
+    "babel-loader": "^8.3.0",
     "chromatic": "^6.17.1",
-    "css-loader": "^6.5.1",
+    "css-loader": "^6.7.3",
     "eslint": "^8.28.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
@@ -76,8 +76,10 @@
     "sass": "^1.43.5",
     "sass-loader": "^12.3.0",
     "storybook-dark-mode": "^2.0.5",
-    "style-loader": "^3.3.1",
-    "typescript": "^4.9.3"
+    "style-loader": "^3.3.2",
+    "typescript": "^4.9.3",
+    "webpack": "^5.76.2",
+    "webpack-cli": "^5.0.1"
   },
   "main": "dist/esm/index.js",
   "module": "dist/esm/index.js",
@@ -117,6 +119,7 @@
   "_id": "@geavila/gt-design@0.1.10",
   "dependencies": {
     "date-fns": "^2.29.3",
-    "react-datepicker": "^4.10.0"
+    "react-datepicker": "^4.10.0",
+    "react-trigger-state": "^0.0.1"
   }
 }
