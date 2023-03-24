@@ -90,10 +90,6 @@ function GTInputDate({
     [value]
   );
 
-    useEffect(() => {
-    console.log(value, currDate);
-    }, [currDate, value]);
-
   const { validateDate } = useValidateDate(min, max);
 
   useEffect(() => {

@@ -49,6 +49,7 @@
   },
   "EXAMPLE": {
     "TITLE": "Example",
+    "DATE": "Date",
     "TEXT": "Text",
     "PHONE": "Phone",
     "DOC": "Document",

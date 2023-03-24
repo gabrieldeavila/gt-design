@@ -1,13 +1,18 @@
-import React, { forwardRef, useImperativeHandle, useState } from "react";
-import { IPageStateValues } from "../../context/interface";
+import React, {
+  forwardRef, useImperativeHandle,
+  useState
+} from "react";
+import { useTriggerState } from "react-trigger-state";
 import GTPageStateProvider from "../../context/pageState";
 import { IGTEasyState } from "./interface";
 
 const GTEasyState = forwardRef(
-  ({ children, starterState }: IGTEasyState, ref) => {
-    const [pageState, setPageState] = useState<IPageStateValues>(
-      starterState ?? {}
-    );
+  ({ children, initial, name }: IGTEasyState, ref) => {
+    const [pageState, setPageState] = useTriggerState({
+      name: name ?? `page_state_${new Date().getTime()}`,
+      initial: initial ?? {},
+    });
+
     const [errors, setErrors] = useState<string[]>([]);
 
     useImperativeHandle(
@@ -18,7 +23,7 @@ const GTEasyState = forwardRef(
         errors,
         setErrors,
       }),
-      [errors, pageState]
+      [errors, pageState, setPageState]
     );
 
     return (

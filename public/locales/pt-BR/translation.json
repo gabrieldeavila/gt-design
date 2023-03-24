@@ -49,6 +49,7 @@
     "TITLE": "Título!",
     "TEXT": "Texto",
     "PHONE": "Telefone",
+    "DATE": "Data",
     "DOC": "CPF/CNPJ",
     "PERCENT": "Percentual",
     "NUMBER": "Número",

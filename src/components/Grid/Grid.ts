@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { defaultAddOns } from "../Space/addOns/addOns";
 import { IGridItem } from "./interface";
 
 const handleCol = (col: number | string | undefined, isMobile?: boolean) => {
@@ -44,6 +45,8 @@ const GridItem = styled.div<IGridItem>`
     grid-column: span
       ${({ col, mobileCol }) => handleCol(mobileCol ?? col, true)};
   }
+
+  ${defaultAddOns}
 `;
 
 const Grid = {

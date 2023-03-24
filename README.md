@@ -3,7 +3,7 @@
   <h1>GT Design</h1>
 
   <h3>
-    A simple and beautiful design system for your next project.
+    The most complete design system for ReactJS
   </h3>
 </div>
 

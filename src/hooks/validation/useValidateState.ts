@@ -10,24 +10,34 @@ function useValidateState(name: string, inputValidations: string[]) {
   const { handleInitialErrors } = useInitialErrors({ name, inputValidations });
 
   useEffect(() => {
-    let inputVal: string | number = "";
+    async function setData() {
+      let inputVal: string | number = "";
+      let newState = {};
 
-    setPageState((prevState) => {
-      // if already has a value, keep it
-      const prevVal = prevState[name] ?? "";
-      if (_.isBoolean(prevVal)) {
-        inputVal = prevVal.toString();
-      } else {
-        inputVal = prevVal;
-      }
+      await setPageState((prevState) => {
+        // if already has a value, keep it
+        const prevVal = prevState[name] ?? "";
+        if (_.isBoolean(prevVal)) {
+          inputVal = prevVal.toString();
+        } else {
+          inputVal = prevVal;
+        }
 
-      // add a key to the obj
-      const newState = { ...prevState, [name]: prevVal };
-      return newState;
+        // add a key to the obj
+        newState = { ...prevState, [name]: prevVal };
+        return prevState;
+      });
+      // console.log("aquiii", newState);
+
+      setPageState(newState);
+
+      // validate the initial value
+      void handleInitialErrors(inputVal);
+    }
+
+    setData().catch((err) => {
+      console.error(err);
     });
-
-    // validate the initial value
-    void handleInitialErrors(inputVal);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

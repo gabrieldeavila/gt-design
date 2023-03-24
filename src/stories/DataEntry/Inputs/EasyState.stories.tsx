@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useTriggerState } from "react-trigger-state";
 import { GTInput, Input, Space } from "../../../components";
 import GTEasyState from "../../../components/EasyState/GTEasyState";
+import Grid from "../../../components/Grid";
 import {
   INonNumericMask,
-  INumericMask
+  INumericMask,
 } from "../../../components/Input/Fields/interface";
 import SectionContainer from "../../../components/Text/Template/SectionContainer";
 import { GTBasic } from "../../../gt";
@@ -45,6 +47,10 @@ const docMask: INonNumericMask = {
 };
 
 const Template = () => {
+  const [state] = useTriggerState({
+    name: "easy_state",
+  });
+
   const options = [
     { value: "B", label: "Bananas 🍌" },
     { value: "F", label: "Figs 🥝" },
@@ -53,81 +59,103 @@ const Template = () => {
     { value: "I", label: "Ice cream 🍦" },
   ];
 
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
+
   return (
     <GTBasic>
-      <GTEasyState>
+      <GTEasyState name="easy_state">
         <Space.Horizontal>
-          <SectionContainer title="Easy State" subtitle="STORIES.EASY_STATE.SUBTITLE" />
-          <Input.Group>
-            <GTInput.Switch label="EXAMPLE.SWITCH" name="selected" />
+          <SectionContainer
+            title="Easy State"
+            subtitle="STORIES.EASY_STATE.SUBTITLE"
+          />
+          <Grid.Form>
+            <Grid.Item col={1}>
+              <Space.Center height="57px">
+                <GTInput.Switch
+                  flexJustify="center"
+                  label="EXAMPLE.SWITCH"
+                  name="selected"
+                />
+              </Space.Center>
+            </Grid.Item>
 
-            <GTInput.Select
-              row={6}
-              title="🐲"
-              label="EXAMPLE.SELECT"
-              name="select"
-              options={options}
-            />
+            <Grid.Item col={5}>
+              <GTInput.Select
+                title="🐲"
+                label="EXAMPLE.SELECT"
+                name="select"
+                options={options}
+              />
+            </Grid.Item>
+            <Grid.Item col={6}>
+              <GTInput.Text
+                text="щ(ʘ╻ʘ)щ"
+                validations={["noSpaces"]}
+                name="nickname"
+                label="TEMPLATE.LOGIN.NICKNAME_LABEL"
+              />
+            </Grid.Item>
 
-            <GTInput.Text
-              row={6}
-              text="щ(ʘ╻ʘ)щ"
-              validations={["noSpaces"]}
-              name="nickname"
-              label="TEMPLATE.LOGIN.NICKNAME_LABEL"
-            />
+            <Grid.Item col={6}>
+              <GTInput.Email
+                text="(￣、￣)"
+                name="email"
+                label="TEMPLATE.LOGIN.EMAIL_LABEL"
+              />
+            </Grid.Item>
 
-            <GTInput.Email
-              row={20}
-              text="(￣、￣)"
-              name="email"
-              label="TEMPLATE.LOGIN.EMAIL_LABEL"
-            />
+            <Grid.Item col={6}>
+              <GTInput.Number
+                text="ಠ╭╮ಠ"
+                min={1}
+                max={5.2}
+                name="NUMBER"
+                label="EXAMPLE.NUMBER"
+              />
+            </Grid.Item>
 
-            <GTInput.Number
-              text="ಠ╭╮ಠ"
-              min={1}
-              max={5.2}
-              row={5}
-              name="NUMBER"
-              label="EXAMPLE.NUMBER"
-            />
+            <Grid.Item col={6}>
+              <GTInput.Mask
+                title="（⊙ｏ⊙）"
+                name="price"
+                label="Money"
+                mask={moneyMask}
+              />
+            </Grid.Item>
 
-            <GTInput.Mask
-              title="（⊙ｏ⊙）"
-              row={5}
-              name="price"
-              label="Money"
-              mask={moneyMask}
-            />
+            <Grid.Item col={6}>
+              <GTInput.Mask
+                text="←_←"
+                name="percent"
+                title="wowww"
+                label="EXAMPLE.PERCENT"
+                mask={percentMask}
+              />
+            </Grid.Item>
 
-            <GTInput.Mask
-              text="←_←"
-              row={5}
-              name="percent"
-              title="wowww"
-              label="EXAMPLE.PERCENT"
-              mask={percentMask}
-            />
+            <Grid.Item col={6}>
+              <GTInput.Mask
+                title="(((φ(◎ロ◎;)φ)))"
+                name="doc"
+                label="EXAMPLE.DOC"
+                mask={docMask}
+                isGuided
+              />
+            </Grid.Item>
 
-            <GTInput.Mask
-              title="(((φ(◎ロ◎;)φ)))"
-              row={5}
-              name="doc"
-              label="EXAMPLE.DOC"
-              mask={docMask}
-              isGuided
-            />
-
-            <GTInput.Mask
-              text="┌( ´_ゝ` )┐"
-              row={5}
-              name="phone"
-              label="EXAMPLE.PHONE"
-              mask={phoneMask}
-              isGuided
-            />
-          </Input.Group>
+            <Grid.Item col={6}>
+              <GTInput.Mask
+                text="┌( ´_ゝ` )┐"
+                name="phone"
+                label="EXAMPLE.PHONE"
+                mask={phoneMask}
+                isGuided
+              />
+            </Grid.Item>
+          </Grid.Form>
         </Space.Horizontal>
       </GTEasyState>
     </GTBasic>

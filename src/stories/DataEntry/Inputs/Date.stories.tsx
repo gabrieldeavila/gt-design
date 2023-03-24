@@ -24,7 +24,7 @@ const Template = () => {
               min="2023-03-10"
               max="2023-03-31"
               name="date"
-              label="TEMPLATE.LOGIN.NICKNAME_LABEL"
+              label="EXAMPLE.DATE"
             />
           </Input.Group>
         </Space.Horizontal>

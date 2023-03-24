@@ -12,7 +12,7 @@ function GTTranslate({ options }: ITranslate) {
 
   return (
     <GTEasyState
-      starterState={{
+      initial={{
         language: i18n.language,
       }}
     >
