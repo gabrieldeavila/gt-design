@@ -43,6 +43,7 @@
     "@testing-library/react": "^13.3.0",
     "@types/jest": "^28.1.6",
     "@types/react": "^18.0.15",
+    "@types/react-datepicker": "^4.10.0",
     "@types/styled-components": "^5.1.26",
     "@types/styled-system": "^5.1.15",
     "@typescript-eslint/eslint-plugin": "^5.44.0",
@@ -88,6 +89,7 @@
   ],
   "peerDependencies": {
     "@types/feather-icons": "^4.29.0",
+    "date-fns": "^2.29.3",
     "framer-motion": "^7.6.6",
     "i18next": "^22.0.6",
     "i18next-browser-languagedetector": "^7.0.1",
@@ -96,9 +98,11 @@
     "polished": "^4.2.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
+    "react-datepicker": "^4.10.0",
     "react-dom": "^18.2.0",
     "react-feather": "^2.0.10",
     "react-i18next": "^12.0.0",
+    "react-trigger-state": "0.0.7",
     "styled-components": "^5.3.6",
     "styled-reset": "^4.4.2",
     "styled-system": "^5.1.5"
@@ -116,10 +120,5 @@
     "url": "https://github.com/gabrieldeavila/gt-design/issues"
   },
   "readme": "ERROR: No README data found!",
-  "_id": "@geavila/gt-design@0.1.10",
-  "dependencies": {
-    "date-fns": "^2.29.3",
-    "react-datepicker": "^4.10.0",
-    "react-trigger-state": "^0.0.1"
-  }
+  "_id": "@geavila/gt-design@0.1.10"
 }
