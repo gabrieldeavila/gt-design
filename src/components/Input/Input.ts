@@ -16,6 +16,7 @@ import {
   ISelectValue,
 } from "./interface";
 import DatePicker from "react-datepicker";
+import { IDefaultAddOns } from "../Space/interface";
 
 const getRowWidth = ({ row }: IInputContainer) => {
   let cssSrc = "";
@@ -296,8 +297,7 @@ const InputFeedbackWrapper = styled.div`
   gap: 0.5rem;
 `;
 
-const StyledDatePicker = styled(DatePicker)`
-  color: ${(props) => props.theme.contrast};
+const StyledDatePicker = styled(DatePicker)<IDefaultAddOns>`
   background: transparent;
   border: none;
 

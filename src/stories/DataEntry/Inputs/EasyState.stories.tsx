@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useTriggerState } from "react-trigger-state";
-import { GTInput, Input, Space } from "../../../components";
+import { GTInput, Space } from "../../../components";
 import GTEasyState from "../../../components/EasyState/GTEasyState";
 import Grid from "../../../components/Grid";
 import {

@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable operator-linebreak */
+import { addDays, format } from "date-fns";
 import { useCallback } from "react";
+import useDateFormat from "../helpers/useDateFormat";
 import useInputValidation from "./useInputValidation";
-import { format, parseISO } from "date-fns";
 
 const options = {
   required: {
@@ -11,15 +12,23 @@ const options = {
   },
 };
 
-const formatDate = (dateString: string) => {
-  const dateObj = parseISO(dateString);
-  const formattedDate = format(dateObj, "dd/MM/yyyy");
-
-  return formattedDate;
-};
-
 function useValidateDate(min?: string | number, max?: string | number) {
   const { optionsValidation } = useInputValidation();
+  const dateFormat = useDateFormat();
+
+  // use the user date format to format the error message
+  const formatErrorData = useCallback(
+    (date: string | number) => {
+      const dateErr = new Date(date);
+
+      const preventDayRemoval = addDays(dateErr, 1);
+
+      const dateFormatted = format(preventDayRemoval, dateFormat);
+
+      return dateFormatted;
+    },
+    [dateFormat]
+  );
 
   const validateMinAndMax = useCallback(
     (value: string) => {
@@ -31,24 +40,28 @@ function useValidateDate(min?: string | number, max?: string | number) {
       if (min) {
         const minVal = new Date(min).getTime();
         if (time < minVal) {
+          const MIN = formatErrorData(min);
+
           isValid = false;
           invalidMessage = "MIN_DATE";
-          errorsVars = { MIN: formatDate(min.toString()) };
+          errorsVars = { MIN };
         }
       }
 
       if (max) {
         const maxVal = new Date(max).getTime();
         if (time > maxVal) {
+          const MAX = formatErrorData(max);
+
           isValid = false;
           invalidMessage = "MAX_DATE";
-          errorsVars = { MAX: formatDate(max.toString()) };
+          errorsVars = { MAX };
         }
       }
 
       return { isValid, invalidMessage, errorsVars };
     },
-    [max, min]
+    [formatErrorData, max, min]
   );
 
   const validateDate = useCallback(

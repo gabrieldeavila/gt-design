@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable operator-linebreak */
+import { format, parseISO } from "date-fns";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import React, {
@@ -11,9 +12,11 @@ import React, {
   useRef,
   useState,
 } from "react";
+import "react-datepicker/dist/react-datepicker.css";
 import * as Icon from "react-feather";
 import { useTranslation } from "react-i18next";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
+import useDateFormat from "../../../hooks/helpers/useDateFormat";
 import useUniqueName from "../../../hooks/helpers/useUniqueName";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateDate from "../../../hooks/validation/useValidateDate";
@@ -23,8 +26,6 @@ import GTTooltip from "../../Tooltip/Tooltip";
 import ErrorMessage from "../Extras/ErrorMessage";
 import Input from "../Input";
 import { IGTInputDate } from "./interface";
-import "react-datepicker/dist/react-datepicker.css";
-import { format, parseISO } from "date-fns";
 
 const defaultValidationObj = ["required"];
 function GTInputDate({
@@ -59,6 +60,8 @@ function GTInputDate({
   }, [defaultValidation, validations]);
 
   const { validateState } = useValidateState(name, inputValidations);
+
+  const userDefaultFormat = useDateFormat();
 
   const {
     isRequired,
@@ -168,6 +171,7 @@ function GTInputDate({
           selected={currDate}
           onChange={handleChange}
           onBlur={handleBlur}
+          dateFormat={userDefaultFormat}
           onFocus={handleFocus}
           color={_.isEmpty(value) ? "transparent" : ""}
         />
