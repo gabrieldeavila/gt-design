@@ -15,7 +15,7 @@
     "test": "jest",
     "storybook": "start-storybook -p 6006 -s public",
     "chromatic": "npx chromatic --project-token=080a8bbe9b98",
-    "build-storybook": "build-storybook -s public",
+    "build-storybook": "build-storybook -s public --debug",
     "serve-storybook": "serve storybook-static"
   },
   "lint": "eslint .",
