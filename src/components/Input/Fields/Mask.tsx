@@ -206,7 +206,7 @@ function GTInputMask({
         />
 
         <Input.FeedbackWrapper>
-          {isValidatingOnBlur && showFeedback && (
+          {isValidatingOnBlur && (
             <Input.IconWrapper showOpacity>
               <Loader.Simple size="sm" />
             </Input.IconWrapper>

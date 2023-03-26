@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { GTInput, Input, Space } from "../../../components";
 import {
   INonNumericMask,
-  INumericMask,
+  INumericMask
 } from "../../../components/Input/Fields/interface";
 import SectionContainer from "../../../components/Text/Template/SectionContainer";
 import { IPageStateValues } from "../../../context/interface";
 import GTPageStateProvider from "../../../context/pageState";
 import { GTBasic } from "../../../gt";
-import { useTriggerState } from "react-trigger-state";
 
 export default {
   title: "Data Entry/Inputs/All With Prev Values",
@@ -68,11 +67,7 @@ const Template = () => {
   });
 
   const [errors, setErrors] = useState<string[]>([]);
-  const [aaaa] = useTriggerState({
-    name: "easy_state",
-  });
 
-  console.log(aaaa, "pageState");
   return (
     <GTBasic>
       <GTPageStateProvider

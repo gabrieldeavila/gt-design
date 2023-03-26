@@ -139,7 +139,7 @@ const Template = ({ isGuided }: { isGuided: boolean }) => {
         const isValid = Math.random() >= 0.5;
 
         resolve([isValid, "DOC_ALREADY_EXISTS", {}]);
-      }, 200);
+      }, 500);
     });
   }, []);
 

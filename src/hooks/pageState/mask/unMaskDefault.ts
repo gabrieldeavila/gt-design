@@ -13,8 +13,6 @@ function unMaskDefault(
   const unMaskArr = unMask.split("");
 
   if (isDeletingMask) {
-    console.log(unMask.replace(/[^0-9a-z_]/gi, ""));
-    // console.log();
     return unMask.replace(/[^0-9a-z_]/gi, "");
   }
 
