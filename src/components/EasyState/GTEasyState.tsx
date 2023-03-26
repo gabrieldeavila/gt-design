@@ -15,7 +15,7 @@ const GTEasyState = ({ children, initial, name }: IGTEasyState) => {
     initial: [],
   });
 
-  const [canSave, setCanSave] = useTriggerState({
+  const [, setCanSave] = useTriggerState({
     name: `${name}_can_save`,
     initial: errors.length === 0,
   });
@@ -27,10 +27,6 @@ const GTEasyState = ({ children, initial, name }: IGTEasyState) => {
       setCanSave(errors.length === 0);
     });
   }, [errors.length, setCanSave]);
-
-  useEffect(() => {
-    console.log(canSave, window.REACT_TRIGGER_STATE);
-  }, [canSave]);
 
   return (
     <GTPageStateProvider
