@@ -1,5 +1,5 @@
 import React, { useMemo, useRef } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import Loader from "../../Loader";
 import GTTooltip from "../../Tooltip/Tooltip";
 import { IResetButton } from "../interface";
@@ -14,7 +14,6 @@ function DefaultBtn({
   component,
   ...props
 }: IResetButton) {
-  const { t } = useTranslation();
   const containerRef = useRef<HTMLButtonElement>(null);
 
   const verifyDisabled = useMemo(
@@ -34,7 +33,7 @@ function DefaultBtn({
       <span className="extra-title">
         {(isLoading ?? false) && <Loader.Simple />}
         <span className="extra-title-children">
-          {children ?? t(content ?? "")}
+          <Trans>{children ?? content ?? ""}</Trans>
         </span>
       </span>
       <GTTooltip parentRef={containerRef} title={title} text={text} />

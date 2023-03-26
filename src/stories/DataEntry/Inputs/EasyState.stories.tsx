@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React, { useEffect } from "react";
 import { useTriggerState } from "react-trigger-state";
-import { GTInput, Space } from "../../../components";
+import { Button, GTInput, Space } from "../../../components";
 import GTEasyState from "../../../components/EasyState/GTEasyState";
 import Grid from "../../../components/Grid";
 import {
@@ -48,7 +49,11 @@ const docMask: INonNumericMask = {
 
 const Template = () => {
   const [state] = useTriggerState({
-    name: "easy_state",
+    name: "story_easy_state",
+  });
+
+  const [canSave] = useTriggerState({
+    name: "story_easy_state_can_save",
   });
 
   const options = [
@@ -65,7 +70,7 @@ const Template = () => {
 
   return (
     <GTBasic>
-      <GTEasyState name="easy_state">
+      <GTEasyState name="story_easy_state">
         <Space.Horizontal>
           <SectionContainer
             title="Easy State"
@@ -156,6 +161,12 @@ const Template = () => {
               />
             </Grid.Item>
           </Grid.Form>
+
+          <Space.Modifiers mt="2rem">
+            <Button.Normal>
+              {canSave ? "EXAMPLE.CAN_SAVE" : "EXAMPLE.CANNOT_SAVE"}
+            </Button.Normal>
+          </Space.Modifiers>
         </Space.Horizontal>
       </GTEasyState>
     </GTBasic>

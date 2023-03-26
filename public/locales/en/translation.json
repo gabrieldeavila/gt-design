@@ -61,10 +61,12 @@
     "AWARD": "Award",
     "AWARD_DESCRIPTION": "You are awesome!",
     "MOUSE_OVER": "Hover me!",
-    "DISABLED": "Disabled"
+    "DISABLED": "Disabled",
+    "CAN_SAVE": "Can save",
+    "CANNOT_SAVE": "Cannot save"
   },
   "STORIES": {
-    "EASY_STATE":{
+    "EASY_STATE": {
       "SUBTITLE": "It allows you to manage the state of your application in a simple and intuitive way."
     },
     "TRANSLATE": {

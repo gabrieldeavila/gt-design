@@ -59,7 +59,9 @@
     "AWARD": "Prêmio",
     "AWARD_DESCRIPTION": "Você é incrível!",
     "MOUSE_OVER": "Passe o mouse em mim!",
-    "DISABLED": "Desabilitado"
+    "DISABLED": "Desabilitado",
+    "CAN_SAVE": "Pode salvar",
+    "CANNOT_SAVE": "Não pode salvar"
   },
   "TRANSLATE": {
     "LANGUAGE": "Linguagem"

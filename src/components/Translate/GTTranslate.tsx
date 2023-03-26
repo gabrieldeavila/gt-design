@@ -12,6 +12,7 @@ function GTTranslate({ options }: ITranslate) {
 
   return (
     <GTEasyState
+      name="gt_design_translate"
       initial={{
         language: i18n.language,
       }}
