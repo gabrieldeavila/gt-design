@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { useTranslation } from "react-i18next";
+import Text from "../temp";
 import { ISectionContainer } from "../interface";
-import Text from "../Text";
 
 const SectionContainer = memo(function SectionContainer({
   title,

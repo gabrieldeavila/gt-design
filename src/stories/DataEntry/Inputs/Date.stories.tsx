@@ -13,7 +13,7 @@ export default {
 const Template = () => {
   return (
     <GTBasic>
-      <GTEasyState>
+      <GTEasyState name="date">
         <Space.Horizontal>
           <SectionContainer
             title="Date"

@@ -21,7 +21,7 @@ export default {
 
 const Template = () => {
   // TO DO: REMOVE ANY FROM ALL EVENT HANDLERS
-  const handleClick = useCallback((e: any, name: string) => {
+  const handleClick = useCallback((_e: any, name: string) => {
     alert(name);
   }, []);
 

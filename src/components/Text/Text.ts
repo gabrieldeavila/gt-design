@@ -1,14 +1,11 @@
 /* eslint-disable operator-linebreak */
 import { transparentize } from "polished";
-import { memo } from "react";
 import styled, { css } from "styled-components";
 import { animations, transforms } from "../../utils";
 import { defaultAddOns } from "../Space/addOns/addOns";
-import TextBtn from "./Extras/Btn";
-import Divider from "./Extras/Divider";
 import { IText, ITextDividerWrapper } from "./interface";
 
-const P = styled.p<IText>`
+export const P = styled.p<IText>`
   color: ${(props) => props.theme.contrast};
   font-weight: 300;
   text-align: justify;
@@ -34,11 +31,11 @@ const h1Css = css`
   ${defaultAddOns};
 `;
 
-const H1 = styled.h1<IText>`
+export const H1 = styled.h1<IText>`
   ${h1Css}
 `;
 
-const H2 = styled.h2<IText>`
+export const H2 = styled.h2<IText>`
   ${h1Css}
 
   font-weight: 400;
@@ -83,7 +80,7 @@ export const TextBtnStyled = styled.button`
   ${defaultAddOns};
 `;
 
-const Strong = styled.strong`
+export const Strong = styled.strong`
   color: ${(props) => props.theme.contrast};
   font-weight: 500;
 
@@ -128,7 +125,3 @@ export const DividerText = styled(H2)`
 
   ${defaultAddOns};
 `;
-
-const Text = { P, H1, H2, Btn: memo(TextBtn), Strong, Divider: memo(Divider) };
-
-export default Text;

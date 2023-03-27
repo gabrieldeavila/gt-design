@@ -17,7 +17,13 @@ const Template = () => {
           subtitle="STORIES.SWITCH.SUBTITLE"
         />
         <Space.Center>
-          <GTNormalSwitch />
+          <GTNormalSwitch
+            isChecked
+            name="switch"
+            onSwitchChange={() => {
+              console.log("changed!");
+            }}
+          />
         </Space.Center>
       </Space.Horizontal>
     </GTBasic>

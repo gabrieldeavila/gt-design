@@ -32,10 +32,10 @@ function getNumericMask(value: string | number, mask: INumericMask) {
 
   // adds the thousands separator symbol
   // ex.: 1234567 => 1,234,567
-  let newInteger = currIntegerValue.replace(
+  let newInteger = currIntegerValue?.replace(
     /\B(?=(\d{3})+(?!\d))/g,
     thousandsSeparatorSymbol
-  );
+  ) ?? "0";
 
   let isNegative = "";
 

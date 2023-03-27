@@ -34,7 +34,7 @@ const Template = () => {
     return [isValid, errorMsg, errorParams];
   }, []);
 
-  const handleBlurValidate: TBlurValidate = useCallback(async (value) => {
+  const handleBlurValidate: TBlurValidate = useCallback(async () => {
     return await new Promise((resolve) => {
       setTimeout(() => {
         const rand = Math.random() * 10;

@@ -19,7 +19,7 @@ function getRightPosition(
   if (isDeleting.current) {
     // this for loop is to find where is the next number/letter, as we are deleting, we need to go to the left
     for (let i = currInpPosition; i >= 0; i--) {
-      if (/[0-9a-z]/i.test(maskedValue[i])) {
+      if (/[0-9a-z]/i.test(maskedValue?.[i] ?? "")) {
         newPosition = i;
         break;
       }
@@ -31,7 +31,7 @@ function getRightPosition(
   } else {
     // and here as we are adding, we need to go to the right
     for (let i = currInpPosition; i < maskedValue.length; i++) {
-      if (/[0-9a-z]/i.test(maskedValue[i])) {
+      if (/[0-9a-z]/i.test(maskedValue?.[i] ?? "")) {
         newPosition = i;
         break;
       }

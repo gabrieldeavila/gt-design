@@ -58,12 +58,12 @@ const BestSymbolOptions = memo(function BestSymbolOptions({
     // gets the first word
     const firstWord = words[0];
     // gets the first letter of the first word
-    const firstLetter = firstWord[0];
+    const firstLetter = firstWord?.[0] ?? "";
 
     // now we need to get the last word
     const lastWord = words[words.length - 1];
     // gets the first letter of the last word
-    const lastLetter = lastWord[0];
+    const lastLetter = lastWord?.[0] ?? "";
 
     return `${firstLetter}${lastLetter}`;
   }, [alt]);

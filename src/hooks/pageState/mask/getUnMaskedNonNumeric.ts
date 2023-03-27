@@ -58,7 +58,7 @@ function getUnMaskedNonNumeric(
   while (isNotChar) {
     const pos = tempUnMask[positionToAdd];
 
-    if (!/[0-9a-z]/i.test(pos) && pos !== "_") {
+    if (!/[0-9a-z]/i.test(pos ?? "") && pos !== "_") {
       positionToAdd += 1;
     } else {
       isNotChar = false;
@@ -84,7 +84,7 @@ function getUnMaskedNonNumeric(
 
   let newValue = "";
 
-  const bestMask = getBestNonNumericMask(unMask.toString(), options);
+  const bestMask = getBestNonNumericMask(unMask.toString(), options) ?? "";
 
   if (isGuided) {
     newValue = unMaskGuided(bestMask, unMask, inpRef, isDeletingMask);

@@ -409,7 +409,7 @@ const SelectOptions = memo(function SelectOptions({ options }: ISelectOptions) {
     // gets the pressed key
     const handleKey = (e: KeyboardEvent) => {
       setPreSelected?.((prev) => {
-        let newValue = prev;
+        let newValue = prev ?? 1;
 
         // if the key is down arrow
         if (e.key === "ArrowDown") {
@@ -436,8 +436,11 @@ const SelectOptions = memo(function SelectOptions({ options }: ISelectOptions) {
           e.preventDefault();
           // get the selected option
           const selectedOption = filteredOptions[newValue];
-          // sets the selected option
-          handleSelect?.(selectedOption, newValue);
+
+          if (selectedOption != null) {
+            // sets the selected option
+            handleSelect?.(selectedOption, newValue);
+          }
         }
 
         return newValue;

@@ -10,11 +10,6 @@ import hovers from "../../utils/hovers";
 import shadows from "../../utils/shadows";
 import transitions from "../../utils/transitions";
 import { LoaderWrapper } from "../Loader/Loader";
-import ButtonContrast from "./Extras/Contrast";
-import ButtonError from "./Extras/Error";
-import ButtonNormal from "./Extras/Normal";
-import ButtonSuccess from "./Extras/Success";
-import ButtonTransparent from "./Extras/Transparent";
 import { IButton } from "./interface";
 
 const sm = css`
@@ -105,7 +100,7 @@ export const ResetBtn = styled.button<IButton>`
   }}
 `;
 
-const ButtonWrapper = styled.div`
+export const ButtonWrapper = styled.div`
   ${flex.wrapGap};
   ${flexbox}
 `;
@@ -172,14 +167,3 @@ export const ExtraError = styled(ExtraSuccess)`
     background-position: 0px;
   }
 `;
-
-const Button = {
-  Wrapper: ButtonWrapper,
-  Normal: ButtonNormal,
-  Contrast: ButtonContrast,
-  Transparent: ButtonTransparent,
-  Success: ButtonSuccess,
-  Error: ButtonError,
-};
-
-export default Button;

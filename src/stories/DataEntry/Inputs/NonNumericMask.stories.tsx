@@ -72,7 +72,6 @@ function testCNPJ(value: string) {
   const numbers = Array.isArray(match) ? match.map(Number) : [];
 
   if (numbers.length !== 14) return false;
-  // @ts-expect-error
   const items = [...new Set(numbers)];
   if (items.length === 1) return false;
 
@@ -83,7 +82,7 @@ function testCNPJ(value: string) {
 
     for (let i = x; i >= 1; i--) {
       const n = slice[x - i];
-      sum += n * factor--;
+      sum += (n ?? 1) * factor--;
       if (factor < 2) factor = 9;
     }
 
@@ -133,7 +132,7 @@ const Template = ({ isGuided }: { isGuided: boolean }) => {
     type: "non_numeric_mask",
   };
 
-  const handleBlurValidate: TBlurValidate = useCallback(async (value) => {
+  const handleBlurValidate: TBlurValidate = useCallback(async () => {
     return await new Promise((resolve) => {
       setTimeout(() => {
         const isValid = Math.random() >= 0.5;

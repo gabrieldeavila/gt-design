@@ -17,8 +17,8 @@ export function nonNumericGuided(
     const isNumber = /[0-9]/.test(char);
     const isLetter = /[a-z]/i.test(char);
     const isFollowingMaskOrder =
-      (/[0-9]/.test(valueChars[index]) && isNumber) ||
-      (/[a-z]/i.test(valueChars[index]) && isLetter);
+      (/[0-9]/.test(valueChars[index] ?? "") && isNumber) ||
+      (/[a-z]/i.test(valueChars[index] ?? "") && isLetter);
 
     if (!isFollowingMaskOrder || char === "_") {
       newMask += "_";
@@ -46,7 +46,7 @@ export function nonNumericDefault(bestMask: string, valueChars: string[]) {
 
     while (isSpecial) {
       // if it's a special character, adds it to the mask
-      if (!/[0-9a-z]/i.test(bestMask[maskIndex])) {
+      if (!/[0-9a-z]/i.test(bestMask[maskIndex] ?? "")) {
         mask += bestMask[maskIndex];
         maskIndex += 1;
       } else {
@@ -57,8 +57,8 @@ export function nonNumericDefault(bestMask: string, valueChars: string[]) {
     const isNumber = /[0-9]/.test(val);
     const isLetter = /[a-z]/i.test(val);
     const isFollowingMaskOrder =
-      (/[0-9]/.test(bestMask[maskIndex]) && isNumber) ||
-      (/[a-z]/i.test(bestMask[maskIndex]) && isLetter);
+      (/[0-9]/.test(bestMask[maskIndex] ?? "") && isNumber) ||
+      (/[a-z]/i.test(bestMask[maskIndex] ?? "") && isLetter);
 
     if (!isFollowingMaskOrder) {
       maskIndex += 1;

@@ -15,7 +15,7 @@ function useInputValidation() {
       validations.every((validation) => {
         if (!options[validation]?.regex?.test?.(value)) {
           try {
-            invalidMessage = options[validation].message;
+            invalidMessage = options?.[validation]?.message ?? "";
             isValid = false;
 
             return false;

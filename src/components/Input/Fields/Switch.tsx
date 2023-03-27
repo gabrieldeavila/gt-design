@@ -24,8 +24,6 @@ function GTInputSwitch({
   title,
   row,
   disabled,
-  onBlurValidate,
-  onChangeValidate,
 }: IGTInputSwitch) {
   const { t } = useTranslation();
   const uniqueName = useUniqueName({ name });
