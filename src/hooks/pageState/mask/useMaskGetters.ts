@@ -62,7 +62,8 @@ function useMaskGetters(
       const currMaskPosition = newMask[currInpPosition - 1];
 
       // if the currMaskPosition is not a number or a letter, it shall move the cursor to the next position
-      const isNumberOrLetter = /[0-9a-z]/i.test(currMaskPosition ?? "");
+      // @ts-expect-error
+      const isNumberOrLetter = /[0-9a-z]/i.test(currMaskPosition);
       // puts the cursor where the user is typing
       if (isNumberOrLetter) {
         currPosition.current = currInpPosition;

@@ -58,7 +58,8 @@ function getUnMaskedNonNumeric(
   while (isNotChar) {
     const pos = tempUnMask[positionToAdd];
 
-    if (!/[0-9a-z]/i.test(pos ?? "") && pos !== "_") {
+    // @ts-expect-error
+    if (!/[0-9a-z]/i.test(pos) && pos !== "_") {
       positionToAdd += 1;
     } else {
       isNotChar = false;

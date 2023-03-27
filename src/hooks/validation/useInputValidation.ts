@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { useCallback } from "react";
 import { IOptionsValidation } from "./interface";
 

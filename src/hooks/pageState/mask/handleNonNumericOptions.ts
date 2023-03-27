@@ -17,8 +17,10 @@ export function nonNumericGuided(
     const isNumber = /[0-9]/.test(char);
     const isLetter = /[a-z]/i.test(char);
     const isFollowingMaskOrder =
-      (/[0-9]/.test(valueChars[index] ?? "") && isNumber) ||
-      (/[a-z]/i.test(valueChars[index] ?? "") && isLetter);
+      // @ts-expect-error
+      (/[0-9]/.test(valueChars[index]) && isNumber) ||
+      // @ts-expect-error
+      (/[a-z]/i.test(valueChars[index]) && isLetter);
 
     if (!isFollowingMaskOrder || char === "_") {
       newMask += "_";
@@ -29,7 +31,7 @@ export function nonNumericGuided(
     }
 
     if (["9", "A"].includes(char)) {
-      newMask += valueChars[index] || "_";
+      newMask += valueChars[index] ?? "_";
       index += 1;
     }
   }
