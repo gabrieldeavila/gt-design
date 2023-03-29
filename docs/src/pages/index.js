@@ -20,7 +20,7 @@ function HomepageHeader() {
             className="button button--secondary button--lg"
             to="/docs/intro"
           >
-            Docusaurus Tutorial - 5min ⏱️
+            Learn in less than 5 min!
           </Link>
         </div>
       </div>
@@ -29,11 +29,10 @@ function HomepageHeader() {
 }
 
 export default function Home() {
-  const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />"
+      title="The beginning"
+      description="GT Design is a design system for the web."
     >
       <HomepageHeader />
       <main>

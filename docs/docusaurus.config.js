@@ -30,14 +30,24 @@ const config = {
   i18n: {
     defaultLocale: "en",
     locales: ["en", "pt-BR"],
+    path: "i18n",
+    localeConfigs: {
+      en: {
+        label: "English",
+      },
+      "pt-BR": {
+        label: "Português (Brasil)",
+        path: "pt-BR",
+      },
+    },
   },
-
   presets: [
     [
       "classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          sidebarCollapsible: true,
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
@@ -49,7 +59,8 @@ const config = {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: "https://github.com/gabrieldeavila/gt-design/tree/master/docs/",
+          editUrl:
+            "https://github.com/gabrieldeavila/gt-design/tree/master/docs/",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -78,7 +89,11 @@ const config = {
           },
           { to: "/blog", label: "Blog", position: "left" },
           {
-            href: "https://github.com/facebook/docusaurus",
+            type: "localeDropdown",
+            position: "right",
+          },
+          {
+            href: "https://github.com/gabrieldeavila/gt-design",
             label: "GitHub",
             position: "right",
           },
@@ -96,23 +111,6 @@ const config = {
               },
             ],
           },
-          // {
-          //   title: "Community",
-          //   items: [
-          //     {
-          //       label: "Stack Overflow",
-          //       href: "https://stackoverflow.com/questions/tagged/docusaurus",
-          //     },
-          //     {
-          //       label: "Discord",
-          //       href: "https://discordapp.com/invite/docusaurus",
-          //     },
-          //     {
-          //       label: "Twitter",
-          //       href: "https://twitter.com/docusaurus",
-          //     },
-          //   ],
-          // },
           {
             title: "More",
             items: [
