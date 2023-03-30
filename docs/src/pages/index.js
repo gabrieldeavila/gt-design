@@ -1,10 +1,11 @@
 /* eslint-disable space-before-function-paren */
-import React from "react";
-import clsx from "clsx";
 import Link from "@docusaurus/Link";
+import Translate from "@docusaurus/Translate";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
+import Layout from "@theme/Layout";
+import clsx from "clsx";
+import React from "react";
 
 import styles from "./index.module.css";
 
@@ -14,13 +15,15 @@ function HomepageHeader() {
     <header className={clsx("hero hero--primary", styles.heroBanner)}>
       <div className="container">
         <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle">
+          <Translate>HOME.TAGLINE</Translate>
+        </p>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro"
           >
-            Learn in less than 5 min!
+            <Translate>HOME.5MIN_BUTTON</Translate>
           </Link>
         </div>
       </div>

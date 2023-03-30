@@ -1,0 +1,26 @@
+{
+  "HOME.TAGLINE": {
+    "message": "O Gerador de Formulários mais fácil de usar do mundo!"
+  },
+  "HOME.5MIN_BUTTON": {
+    "message": "Aprender em menos de 5 minutos!"
+  },
+  "HOME.REASON_1_TITLE": {
+    "message": "Alavanque o poder do seu design"
+  },
+  "HOME.REASON_1_DESCRIPTION": {
+    "message": "Você pode focar nas regras de negócio e deixar a criação de formulários esteticamente agradáveis por nossa conta."
+  },
+  "HOME.REASON_2_TITLE": {
+    "message": "Acelere o desenvolvimento"
+  },
+  "HOME.REASON_2_DESCRIPTION": {
+    "message": "O GT Design é construído em cima de um sistema flexível e altamente personalizável. Com ele, você atende às necessidades específicas do seu projeto."
+  },
+  "HOME.REASON_3_TITLE": {
+    "message": "Focado em Usabilidade"
+  },
+  "HOME.REASON_3_DESCRIPTION": {
+    "message": "Validações nativas e feedbacks de erro são apenas alguns dos recursos que garantem que o usuário final tenha uma experiência agradável."
+  }
+}

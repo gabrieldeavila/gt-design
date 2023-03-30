@@ -2,45 +2,30 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
-lamo
+# Intro
+Então, por qual razão GT Design é a melhor opção para o seu próximo projeto?
 
-## Getting Started
+## Nós sabemos o seu problema
+Formulários são a parte mais importante de qualquer aplicação web. 
 
-Get starte2d by **creating a new site**.
+Eles são a porta de entrada para o usuário interagir com o sistema.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+Porém, a maioria dos desenvolvedores não dão a devida atenção para a criação de formulários.
 
-### What you'll need
+Eles são criados de forma genérica, sem validações, sem feedbacks, sem estilos, sem nada. 
 
-- [Node.js](https://nodejs.org/en/download/) version 16.14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+E o pior, sem testes.
 
-## Generate a new site
+## Somos a sua solução
 
-Generate a new Docusaurus site using the **classic template**.
+O GT Design foi criado para resolver isso.
 
-The classic template will automatically be added to your project after you run the command:
+Ele é uma biblioteca de componentes de formulários, permitindo criá-los de forma rápida e fácil.
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+Além do mais, ele possui validações nativas, que cobrem cerca de 80% dos casos de uso.
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
+E o melhor, ele possui um tema padrão, que pode ser customizado para atender as necessidades do seu projeto.
 
-The command also installs all necessary dependencies you need to run Docusaurus.
+Não gostou do tema padrão? Não tem problema.  
 
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+Você pode criar o seu próprio tema, ou usar um dos temas disponíveis no GT Design. 
