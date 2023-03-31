@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
   * {
     color: ${({ theme }: IGLobalStyle) => theme.contrast};
     line-height: 1.5 !important;
+    font-family: 'Kanit', sans-serif !important;
   }
   
   input:-webkit-autofill { 

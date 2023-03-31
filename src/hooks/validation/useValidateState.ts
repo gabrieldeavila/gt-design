@@ -27,10 +27,9 @@ function useValidateState(name: string, inputValidations: string[]) {
         newState = { ...prevState, [name]: prevVal };
         return prevState;
       });
-      // console.log("aquiii", newState);
 
       setPageState(newState);
-
+      console.log(inputVal);
       // validate the initial value
       void handleInitialErrors(inputVal);
     }

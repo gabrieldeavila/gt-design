@@ -6,7 +6,7 @@ userDateFormat();
 
 function useDateFormat() {
   const userDefaultFormat = useMemo(
-    () => window["gt-design"].userDateFormat?.toString() ?? "MM/dd/yyyy",
+    () => window?.["gt-design"]?.userDateFormat?.toString() ?? "MM/dd/yyyy",
     []
   );
 

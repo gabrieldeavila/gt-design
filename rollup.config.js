@@ -5,6 +5,7 @@ import postcss from "rollup-plugin-postcss";
 import terser from "@rollup/plugin-terser";
 import { uglify } from "rollup-plugin-uglify";
 import babel from "rollup-plugin-babel";
+import dts from "rollup-plugin-dts";
 
 const packageJson = require("./package.json");
 
@@ -70,5 +71,11 @@ export default [
         ],
       }),
     ],
+  },
+  {
+    input: "dist/esm/types/src/index.d.ts",
+    output: [{ file: "dist/index.d.ts", format: "esm" }],
+    plugins: [dts()],
+    external: [/\.(css|less|scss)$/],
   },
 ];
