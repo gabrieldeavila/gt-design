@@ -1,0 +1,57 @@
+{
+  "server-component": {
+    "welcome": "Welcome"
+  },
+  "counter": {
+    "increment": "Increment",
+    "decrement": "Decrement"
+  },
+  "REQUIRED": "This field is required.",
+  "NO_INITIAL_SPACE": "It cannot start with a space.",
+  "NO_TRAILING_SPACE": "It cannot end with a space.",
+  "NO_SPACES": "It cannot contain spaces.",
+  "USERNAME": "It can only have letters and numbers.",
+  "MAX_WORDS_BETWEEN": "It must have between {{MIN}} and {{MAX}} words.",
+  "MAX_CHARS": "Between {{MIN}} and {{MAX}} characters. You have: {{CURR}}",
+  "MAX": "It must be less than {{MAX}}.",
+  "MIN": "It must be greater than {{MIN}}.",
+  "EMAIL": "Invalid email.",
+  "MAX_DATE": "It must be before {{MAX}}.",
+  "MIN_DATE": "It must be after {{MIN}}.",
+  "DOC_ALREADY_EXISTS": "This document already exists.",
+  "INVALID_CPF": "Invalid CPF.",
+  "INVALID_CNPJ": "Invalid CNPJ.",
+  "EIGHT_LONG": "It must be at least 8 characters long.",
+  "ONE_NUMBER": "It must contain at least one number.",
+  "ONE_SPECIAL": "It must contain at least one special character.",
+  "INVALID_NICKNAME": "Invalid nickname. Try \"{{NICKNAME}}\".",
+  "INVALID_EMAIL": "Invalid email. Try \"{{EMAIL}}\".",
+  "INVALID_NUMBER": "Invalid number. Try \"{{NUMBER}}\".",
+  "OPS": "Sorry, it seems like someone already chose that number. Please pick another.",
+  "ONE_UPPERCASE": "It must contain at least one uppercase letter.",
+  "ONE_LOWERCASE": "It must contain at least one lowercase letter.",
+  "PASSWORDS_NOT_MATCH": "Passwords do not match.",
+  "SELECT_NOT_FOUND": "No results found 😪",
+  "TEMPLATE": {
+    "LOGIN": {
+      "CREATE_TITLE": "Create an account",
+      "CREATE_SUBTITLE": "It's free and always will be.",
+      "NAME_LABEL": "Name",
+      "EMAIL_LABEL": "Email",
+      "PASSWORD_LABEL": "Password",
+      "CONFIRM_PASSWORD_LABEL": "Confirm Password",
+      "NICKNAME_LABEL": "Nickname",
+      "DATA_POLICY": "By clicking Sign Up, you agree to our Terms, Data Policy and Cookies Policy.",
+      "CREATE_BUTTON": "Create an account",
+      "ALREADY_HAVE_ACCOUNT": "Already have an account?",
+      "SIGN_IN_TITLE": "Sign in",
+      "SIGN_IN_SUBTITLE": "Welcome back!",
+      "SIGN_IN_BUTTON": "Let's go!",
+      "DONT_HAVE_ACCOUNT": "Don't have an account?",
+      "FORGOT_PASSWORD": "Forgot password?"
+    }
+  },
+  "TRANSLATE": {
+    "LANGUAGE": "Language"
+  }
+}

@@ -12,6 +12,8 @@ function GTNavbar({ children }: { children: React.ReactNode }) {
   // when scrolls down, hide the navbar, when scrolls up, show the navbar
   const [showNavbar, setShowNavbar] = useState(true);
   const handleScroll = useCallback(() => {
+    if(!window) return;
+
     if (window.scrollY > oldScroll.current) {
       setShowNavbar(false);
     } else {

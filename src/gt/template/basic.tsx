@@ -42,7 +42,7 @@ function GTBasic({
   noThemeChange?: boolean;
 }) {
   const [darkTheme, setDarkTheme] = useState(
-    localStorage.getItem("darkTheme") === "1"
+    localStorage?.getItem("darkTheme") === "1"
   );
 
   const theme = useMemo(() => darkTheme && darkThemeStyle, [darkTheme]);

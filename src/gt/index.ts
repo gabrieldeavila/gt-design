@@ -4,4 +4,4 @@ export { default as GTDesign } from "./Design";
 
 export { default as GlobalStyle } from "./Global";
 
-export { GTBasic } from "./Template";
+export * from "./Template";

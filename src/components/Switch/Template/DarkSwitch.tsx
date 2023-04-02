@@ -7,7 +7,7 @@ import Switch from "../Switch";
 function GTDarkSwitch({
   fixed,
   placeX,
-  placeY
+  placeY,
 }: {
   fixed: boolean;
   placeX: string;
@@ -17,6 +17,8 @@ function GTDarkSwitch({
 
   const handleTheme = useCallback(() => {
     setDarkTheme((prev: boolean) => {
+      if (!localStorage) return false;
+
       if (!prev) {
         localStorage.setItem("darkTheme", "1");
       } else {
@@ -41,13 +43,11 @@ function GTDarkSwitch({
         type="checkbox"
       />
       <Switch.Slider>
-        {!darkTheme
-          ? (
-            <Icon.Sun className="sun" />
-            )
-          : (
-            <Icon.Moon className="moon" />
-            )}
+        {!darkTheme ? (
+          <Icon.Sun className="sun" />
+        ) : (
+          <Icon.Moon className="moon" />
+        )}
       </Switch.Slider>
 
       <Switch.IconWrapper>
@@ -64,12 +64,12 @@ export default memo(GTDarkSwitch);
 GTDarkSwitch.propTypes = {
   fixed: PropTypes.bool,
   placeX: PropTypes.oneOf([null, "top", "bottom"]),
-  placeY: PropTypes.oneOf([null, "left", "right"])
+  placeY: PropTypes.oneOf([null, "left", "right"]),
 };
 
 // add default props
 GTDarkSwitch.defaultProps = {
   fixed: false,
   placeX: "bottom",
-  placeY: "right"
+  placeY: "right",
 };
