@@ -1,4 +1,4 @@
-export const darkThemeStyle = {
+export const darkCodeTheme = {
   primary: "#080808",
   secondary: "#242124",
   contrast: "#fffafa",
@@ -26,7 +26,7 @@ export const darkThemeStyle = {
   outlineError: "#e34234",
 };
 
-export const defaultTheme = {
+export const lightCodeTheme = {
   primary: "#ffffff",
   secondary: "#f8f8ff",
   contrast: "#000000",

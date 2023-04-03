@@ -2,8 +2,16 @@
 import PropTypes from "prop-types";
 import React, { memo, useCallback } from "react";
 import * as Icon from "react-feather";
-import { useGTContext } from "../../../context/gt";
+import { useTriggerState } from "react-trigger-state";
 import Switch from "../Switch";
+
+const initialTheme = () => {
+  try {
+    return localStorage?.getItem("darkTheme") === "1";
+  } catch (e) {
+    return false;
+  }
+};
 
 function GTDarkSwitch({
   fixed,
@@ -14,7 +22,7 @@ function GTDarkSwitch({
   placeX: string;
   placeY: string;
 }) {
-  const { darkTheme, setDarkTheme } = useGTContext();
+  const [isDarkTheme, setDarkTheme] = useTriggerState({ name: "changedTheme", initial: initialTheme() });
 
   const handleTheme = useCallback(() => {
     try {
@@ -24,7 +32,6 @@ function GTDarkSwitch({
         } else {
           localStorage.removeItem("darkTheme");
         }
-
         return !prev;
       });
     } catch (e) {
@@ -41,12 +48,12 @@ function GTDarkSwitch({
     >
       <Switch.Input
         id="darkId"
-        checked={darkTheme}
+        checked={isDarkTheme}
         onChange={handleTheme}
         type="checkbox"
       />
       <Switch.Slider>
-        {!darkTheme ? (
+        {!isDarkTheme ? (
           <Icon.Sun className="sun" />
         ) : (
           <Icon.Moon className="moon" />
