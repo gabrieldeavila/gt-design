@@ -29,7 +29,7 @@ function useValidateState(name: string, inputValidations: string[]) {
       });
 
       setPageState(newState);
-      console.log(inputVal);
+
       // validate the initial value
       void handleInitialErrors(inputVal);
     }

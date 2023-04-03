@@ -1,7 +1,6 @@
 import { getDictionary } from "../../get-dictionary";
-import { cookies } from 'next/headers';
 import Dunno from "./components/dunno";
-import { GetServerSideProps } from 'next';
+import "./style.css";
 
 // alter title
 // alter description
@@ -15,10 +14,10 @@ export default async function Home({
   params: { lang: "en" | "pt-BR" };
 }) {
   const dict = await getDictionary(lang);
- 
+
   return (
     <>
-      <div>{dict.NO_INITIAL_SPACE}</div>
+      <div className="test">{dict.NO_INITIAL_SPACE}</div>
       <Dunno />
     </>
   );

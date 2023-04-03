@@ -1,19 +1,30 @@
 "use client";
 
 import { GTBasic, GTLogin } from "@geavila/gt-design";
-import Cookies from "js-cookie";
-import React from "react";
+
+const MagicScriptTag = () => {
+  const codeToRunOnClient = `
+(function() {
+  const root = document.documentElement;
+
+  const colorMode = localStorage.getItem('darkTheme') ?? 'light';
+
+  root.style.setProperty(
+    '--color',
+    colorMode === 'light'
+    ? 'red' : 'blue'
+  );
+})()
+  `;
+  // eslint-disable-next-line react/no-danger
+  return <script dangerouslySetInnerHTML={{ __html: codeToRunOnClient }} />;
+};
 
 function Dunno() {
-  const [isState, setState] = React.useState(false);
-
-  React.useEffect(() => {
-    Cookies.set("name", "value");
-
-    console.log(isState);
-  }, [isState]);
-
   return (
+    // <>
+    //   <MagicScriptTag />
+    // </>
     <GTBasic>
       <GTLogin
         onPasswordForgot={() => {

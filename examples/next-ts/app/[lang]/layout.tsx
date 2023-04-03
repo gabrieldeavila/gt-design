@@ -29,17 +29,11 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { lang: string };
 }) {
-  (function () {
-    console.log("i dont give a fuck");
-    debugger;
-  })();
-
   return (
     <StyledComponentsRegistry>
       <html lang={params.lang} className={kanit.className}>
         <body>
           {children}
-          <script>alert('No UI for you!');</script>
         </body>
       </html>
     </StyledComponentsRegistry>

@@ -5,6 +5,7 @@ import DarkSwitch from "../../components/Switch/Template/DarkSwitch";
 import GTProvider from "../../context/gt";
 import GTDesign from "../Design/Design";
 import GlobalStyle from "../Global/style";
+import GTCssInjectionScript from "../Global/css-global-classes";
 
 const darkThemeStyle = {
   primary: "#080808",
@@ -55,13 +56,18 @@ function GTBasic({
   const theme = useMemo(() => darkTheme && darkThemeStyle, [darkTheme]);
 
   return (
-    <GTProvider darkTheme={darkTheme} setDarkTheme={setDarkTheme}>
-      <GTDesign theme={theme}>
-        <GlobalStyle />
-        {children}
-        {!noThemeChange && <DarkSwitch fixed />}
-      </GTDesign>
-    </GTProvider>
+    <>
+      <GTProvider darkTheme={darkTheme} setDarkTheme={setDarkTheme}>
+        <GTDesign theme={theme}>
+          <GlobalStyle />
+          {children}
+          {!noThemeChange && <DarkSwitch fixed />}
+        </GTDesign>
+      </GTProvider>
+
+      <div>lmao</div>
+      <GTCssInjectionScript />
+    </>
   );
 }
 
