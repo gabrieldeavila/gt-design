@@ -18,7 +18,7 @@ const NormalSwitchSlider = styled.div<INormalSwitchSlider>`
     inset-inline-start: 0;
     inset-inline-end: 0;
     border-radius: 1rem;
-    background: ${({ theme }) => transparentize(0.1, theme.switchSlider)};
+    background: ${transparentize(0.1, "var(--switchSlider)")};
     ${transitions.basic};
 
     ${shadows.basic}
@@ -29,10 +29,10 @@ const NormalSwitchSlider = styled.div<INormalSwitchSlider>`
 
 const NormalSwitchContainer = styled.button<INormalSwitchSlider>`
   padding: 0;
-  background: ${({ isChecked, theme }) =>
+  background: ${({ isChecked }) =>
     isChecked ?? false
-      ? theme.switchNormalActive
-      : transparentize(0.5, theme.switchNormalBackground)};
+      ? "var(--switchNormalActive)"
+      : transparentize(0.5, "var(--switchNormalBackground)")};
   overflow: hidden;
   display: flex;
   border: none;
@@ -47,10 +47,10 @@ const NormalSwitchContainer = styled.button<INormalSwitchSlider>`
   }
 
   &:hover {
-    background: ${({ isChecked, theme }) =>
+    background: ${({ isChecked }) =>
       isChecked ?? false
-        ? transparentize(0.25, theme.switchNormalActive)
-        : theme.switchNormalBackground};
+        ? transparentize(0.25, "var(--switchNormalActive)")
+        : "var(--switchNormalBackground)"};
   }
 
   ${transitions.basic};

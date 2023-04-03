@@ -68,7 +68,7 @@ const SpaceMain = styled(SpaceBase)`
 
 const SpaceDashed = styled(SpaceBase)<ISpaceModifiers>`
   margin: 1rem 0;
-  border: 1px dashed ${(props) => transparentize(0.6, props.theme.contrast)};
+  border: 1px dashed ${transparentize(0.6, "var(--contrast)")};
 
   ${({ addOns }) => addOnsCss(addOns)}
   ${defaultAddOns};

@@ -5,8 +5,8 @@ const Default = styled.div`
   ${color}
   background: linear-gradient(
     180deg,
-    ${(props) => props.theme.containerSecondary}, 55%, 
-    ${(props) => props.theme.containerMain} 
+    var(--containerSecondary), 55%, 
+    var(--containerMain) 
   );
 
   min-height: 100vh;

@@ -24,21 +24,21 @@ const SwitchSlider = styled.span`
   width: 1rem;
   z-index: 150;
   border-radius: 50%;
-  box-shadow: 41px 41px 56px ${(props) => props.theme.primary},
-    -41px -41px 56px ${(props) => props.theme.primary};
-  background: ${(props) => props.theme.primary};
+  box-shadow: 41px 41px 56px var(--primary),
+    -41px -41px 56px var(--primary);
+  background: var(--primary);
   width: 1rem;
   height: 1rem;
   ${flex.alignCenter}
   ${transitions.basic}
 
   & .sun {
-    stroke: ${(props) => props.theme.sunColor};
+    stroke: var(--sunColor);
     z-index: 200;
   }
 
   & .moon {
-    stroke: ${(props) => props.theme.moonColor};
+    stroke: var(--moonColor);
     z-index: 200;
   }
 `;
@@ -46,10 +46,10 @@ const SwitchSlider = styled.span`
 /* if the slider is checked, add custom background to the label */
 const activeLabel = css<ISwitch>`
   filter: contrast();
-  background: ${({ checked, theme }) =>
+  background: ${({ checked }) =>
     checked ?? false
-      ? transparentize(0.1, theme.contrast)
-      : transparentize(0.5, theme.contrast)};
+      ? transparentize(0.1, "var(--contrast)")
+      : transparentize(0.5, "var(--contrast)")};
 `;
 
 const SwitchLabel = styled.label<ISwitch>`
@@ -61,8 +61,8 @@ const SwitchLabel = styled.label<ISwitch>`
   border-radius: 1.75rem;
   background: linear-gradient(
     145deg,
-    ${(props) => props.theme.contrast},
-    ${(props) => transparentize(0.5, props.theme.contrast)}
+    var(--contrast),
+    ${transparentize(0.5, "var(--contrast)")}
   );
 
   position: relative;
@@ -86,10 +86,10 @@ const activeSlider = css`
   }
 
   &:checked ~ ${SwitchSlider} {
-    background: ${(props) => props.theme.switchOn};
+    background-color: var(--switchOn);
     filter: contrast(1);
-    box-shadow: 0px 0px 7px ${(props) => props.theme.switchOn},
-      -0px -0px 31px ${(props) => props.theme.switchOn};
+    box-shadow: 0px 0px 7px var(--switchOn),
+      -0px -0px 31px var(--switchOn);
   }
 
   & ~ ${SwitchSlider}:active, &:checked ~ ${SwitchSlider}:active {
@@ -118,7 +118,7 @@ const SwitchIconWrapper = styled.div`
   ${flex.justifyBetween}
 
   & > svg {
-    stroke: ${(props) => props.theme.primary};
+    stroke: var(--primary);
 
     &:active {
       animation: shake 0.5s linear infinite;

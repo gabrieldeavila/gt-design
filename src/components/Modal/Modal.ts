@@ -56,7 +56,7 @@ const orientationXOpts: x = {
 const ModalContent = styled.div<IModal>`
   position: fixed;
   z-index: 1101;
-  background: ${(props) => transparentize(0.7, props.theme.contrast)};
+  background: ${transparentize(0.7, "var(--contrast)")};
   padding: 3rem;
   top: 0;
   left: 0;
@@ -96,7 +96,7 @@ const ModalWrapper = styled.div<IModal>`
     isOpen ?? false
       ? "popup 0.2s ease-in-out forwards"
       : "popupReverse 0.2s ease-in-out forwards"};
-  background: ${(props) => props.theme.primary};
+  background: var(--primary);
   border-radius: 0.25rem;
   overflow: hidden;
 
@@ -143,7 +143,7 @@ const ModalMain = styled.main`
   padding-right: 0.75rem;
   padding-top: 1.5rem;
   margin: 1.5rem 0;
-  border-top: 1px solid ${(props) => transparentize(0.8, props.theme.contrast)};
+  border-top: 1px solid ${transparentize(0.8, "var(--contrast)")};
 
   /* when it's mobile, it height is 60% less the 4.5rem */
   @media (max-width: 768px) {
@@ -152,7 +152,7 @@ const ModalMain = styled.main`
 `;
 
 const ModalFooter = styled.footer`
-  border-top: 1px solid ${(props) => transparentize(0.8, props.theme.contrast)};
+  border-top: 1px solid ${transparentize(0.8, "var(--contrast)")};
   padding: 1.5rem;
 `;
 

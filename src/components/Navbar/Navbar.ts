@@ -16,7 +16,7 @@ const NavbarWrapper = styled.nav<INavbarWrapper>`
   position: fixed;
   width: -webkit-fill-available;
   z-index: 1100;
-  background: ${(props) => transparentize(0.5, props.theme.primary)};
+  background: ${transparentize(0.5, "var(--primary)")};
   padding: 0.5rem 1.5rem;
   ${shadows.simple}
   ${color}
@@ -65,7 +65,7 @@ const NavbarOption = styled.div`
   ${flex.alignCenterCol}
 
   &:hover {
-    background: ${(props) => props.theme.backgroundHover};
+    background-color: var(--backgroundHover)
   }
 
   ${({ isParent }: { isParent: boolean }) =>
@@ -98,7 +98,7 @@ const NavbarTitle = styled.h1`
   user-select: none;
   font-weight: 500;
   font-size: 1.5rem;
-  color: ${(props) => props.theme.contrast};
+  color: var(--contrast)
 `;
 
 const textCss = css`
@@ -122,7 +122,7 @@ const NavbarSubText = styled.h2`
   ${textCss}
   font-weight: 300;
   font-size: 0.8rem;
-  color: ${(props) => props.theme.contrast};
+  color: var(--contrast);
 `;
 
 const NavbarPopupWrapper = styled.div`
@@ -139,7 +139,7 @@ const NavbarPopup = styled.div`
   border-radius: 0.25rem;
   margin-top: 4.5rem;
   min-width: 15rem;
-  background-color: ${(props) => props.theme.primary};
+  background: var(--primary);
   gap: 0.5rem;
   flex-direction: column;
   z-index: 10;
@@ -153,12 +153,11 @@ const NavbarPopup = styled.div`
   ${animations.easeOpenClose}
 
   ${NavbarText}:hover, ${NavbarSubText}:hover {
-    background: ${(props) => props.theme.backgroundHover};
+    background: var(--backgroundHover)
   }
 
   ${NavbarText}, ${NavbarSubText} {
-    border-bottom: 1px solid
-      ${(props) => transparentize(0.5, props.theme.contrast)};
+      border-top: 1px solid ${transparentize(0.5, "var(--contrast)")};
   }
 
   ${NavbarText}:last-child, ${NavbarSubText}:last-child {

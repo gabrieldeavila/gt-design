@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import defaultConfigs from "./default.configs";
 import { useTriggerState } from "react-trigger-state";
+import "./global.css";
 
 const getCustomConfigs = async () => {
   try {
@@ -19,8 +20,6 @@ const GTCssInjectionScript = () => {
 
   useEffect(() => {
     (async () => {
-      alert("a");
-
       const configs =
         process.env.PROJECT_DEV_MODE === "TRUE"
           ? defaultConfigs

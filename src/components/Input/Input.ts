@@ -46,9 +46,9 @@ const InputIconWrapper = styled.div<IIconWrapper>`
 const wrongCss = css<IInputLabel>`
   background: -webkit-linear-gradient(
     300deg,
-    ${({ theme }) => theme.labelSecondary},
-    ${({ theme, isWrong }) =>
-        isWrong ?? false ? theme.errorColor : theme.labelPrimary}
+    var(--labelSecondary),
+    ${({ isWrong }) =>
+        isWrong ?? false ? "var(--errorColor)" : "var(--labelPrimary)"}
       90%
   );
 `;
@@ -56,16 +56,16 @@ const wrongCss = css<IInputLabel>`
 const requiredCss = css<IInputLabel>`
   background: -webkit-linear-gradient(
     300deg,
-    ${({ theme }) => theme.labelSecondary},
-    ${({ theme }) => theme.labelRequired} 70%
+    var(--labelSecondary),
+    var(--labelRequired) 70%
   );
 `;
 
 const correctCss = css`
   background: -webkit-linear-gradient(
     300deg,
-    ${({ theme }) => theme.labelSecondary},
-    ${({ theme }) => theme.labelPrimary} 70%
+    var(--labelSecondary),
+    var(--labelPrimary) 70%
   );
 `;
 
@@ -85,8 +85,8 @@ const InputLabel = styled.label<IInputLabel>`
   /* creates color with gradient */
   background: -webkit-linear-gradient(
     300deg,
-    ${({ theme }) => theme.labelSecondary},
-    ${({ theme }) => theme.labelPrimary} 70%
+    var(--labelSecondary),
+    var(--labelPrimary) 70%
   );
 
   ${(props) => handleRightCss(props)}
@@ -106,12 +106,12 @@ const InputField = styled.input<IInputField>`
   border-radius: 0.25rem;
   padding-top: 1rem;
   border: none;
-  color: ${(props) => props.theme.contrast};
+  color: var(--contrast);
   background-color: transparent;
 
   /* changes the placeholder color */
   &::placeholder {
-    color: ${(props) => props.theme.contrast};
+    color: var(--contrast);
   }
 
   ${defaultAddOns};
@@ -121,14 +121,14 @@ const disabledInput = css<IInputContainer>`
   ${({ disabled }) =>
     (disabled ?? false) &&
     css`
-      background: ${(props) => transparentize(0.8, props.theme.primary)};
+      background: ${transparentize(0.8, "var(--primary)")};
 
       ${InputLabel} {
         /* creates color with gradient */
         background: -webkit-linear-gradient(
           300deg,
-          ${({ theme }) => theme.primary},
-          ${({ theme }) => transparentize(0.1, theme.contrast)} 70%
+          var(--primary),
+          ${transparentize(0.1, "var(--contrast)")} 70%
         );
 
         -webkit-background-clip: text;
@@ -138,7 +138,7 @@ const disabledInput = css<IInputContainer>`
       }
 
       ${InputField}:disabled, ${InputField}::placeholder {
-        color: ${(props) => transparentize(0.5, props.theme.contrast)};
+        color: ${transparentize(0.5, "var(--contrast)")};
       }
 
       &,
@@ -157,25 +157,25 @@ const InputContainer = styled.div<IInputContainer>`
   outline: 2px solid transparent;
   outline-offset: 2px;
   border-radius: 0.25rem;
-  background: ${(props) => transparentize(0.2, props.theme.primary)};
+  background: ${transparentize(0.2, "var(--primary)")};
 
   ${disabledInput};
 
   &:focus-within {
     outline: 2px solid
-      ${({ theme, isWrong }) =>
-        isWrong ?? false ? theme.outlineError : theme.outline};
+      ${({ isWrong }) =>
+        isWrong ?? false ? "var(--outlineError)" : "var(--outline)"};
     outline-offset: 0.15rem;
     box-shadow: 0 0 0 0.25rem
-      ${({ theme, isWrong }) =>
+      ${({ isWrong }) =>
         transparentize(
           0.5,
-          isWrong ?? false ? theme.outlineError : theme.outline
+          isWrong ?? false ? "var(--outlineError)" : "var(--outline)"
         )};
   }
 
   border-radius: 0.25rem;
-  box-shadow: 0 0 0 0.15rem ${(props) => transparentize(1, props.theme.outline)};
+  box-shadow: 0 0 0 0.15rem ${transparentize(1, "var(--outline)")};
 
   &:hover ${InputIconWrapper} {
     opacity: 1;
@@ -266,7 +266,7 @@ const InputErrorWrapper = styled.div`
   right: 0;
   text-overflow: ellipsis;
   overflow: hidden;
-  color: ${(props) => props.theme.errorColor};
+  color: var(--errorColor);
   padding: 0 0.5rem;
   display: flex;
 `;
@@ -279,7 +279,7 @@ const InputError = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: ${(props) => props.theme.errorColor};
+  color: var(--errorColor);
   margin-top: 0.15rem;
 `;
 
@@ -307,12 +307,12 @@ const StyledDatePicker = styled(DatePicker)<IDefaultAddOns>`
   border-radius: 0.25rem;
   padding-top: 1rem;
   border: none;
-  color: ${(props) => props.theme.contrast};
+  color: var(--contrast)
   background-color: transparent;
 
   /* changes the placeholder color */
   &::placeholder {
-    color: ${(props) => props.theme.contrast};
+    color: var(--contrast)
   }
 
   ${defaultAddOns};
@@ -352,7 +352,7 @@ const SelectOptionsWrapper = styled.div<ISelectOptionWrapper>`
   left: 0;
   right: 0;
   z-index: 1;
-  background: ${(props) => props.theme.primary};
+  background: var(--primary);
   border-radius: 0.25rem;
   padding: 0.5rem;
   margin-top: 0.25rem;
@@ -376,7 +376,7 @@ const SelectValue = styled.div<ISelectValue>`
   max-height: fit-content;
   font-size: 0.75rem;
   padding: 1rem;
-  background: ${(props) => props.theme.secondary};
+  background: var(--secondary);
   text-align: justify;
   word-break: break-word;
   overflow: hidden;
@@ -390,12 +390,12 @@ const SelectValue = styled.div<ISelectValue>`
     transform: scale(0.98);
   }
 
-  ${({ isSelected, isPreSelected, theme }) => css`
+  ${({ isSelected, isPreSelected }) => css`
     background: ${isPreSelected
-      ? theme.preSelectColor
+      ? "var(--preSelectColor)"
       : isSelected
-      ? theme.secondary
-      : transparentize(0.7, theme.secondary)};
+      ? "var(--secondary)"
+      : transparentize(0.7, "var(--secondary)")};
   `}
 `;
 

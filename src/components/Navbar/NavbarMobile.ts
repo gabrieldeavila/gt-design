@@ -4,7 +4,7 @@ import flex from "../../utils/flex";
 import transitions from "../../utils/transitions";
 
 const NavbarMobileWrapper = styled.div`
-  background-color: ${(props) => transparentize(0.5, props.theme.primary)};
+  background-color: ${transparentize(0.5, "var(--primary)")};
   backdrop-filter: blur(10px);
   padding: 0.5rem;
   position: fixed;
@@ -28,7 +28,7 @@ const NavbarMobileLinkWrapper = styled.div`
   ${transitions.basic}
 
   &:hover {
-    background: ${(props) => transparentize(0.5, props.theme.secondary)};
+    background-color: ${transparentize(0.5, "var(--secondary)")};
     cursor: pointer;
   }
 `;

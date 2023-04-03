@@ -6,7 +6,7 @@ import { defaultAddOns } from "../Space/addOns/addOns";
 import { IText, ITextDividerWrapper } from "./interface";
 
 export const P = styled.p<IText>`
-  color: ${(props) => props.theme.contrast};
+  color: var(--contrast);
   font-weight: 300;
   text-align: justify;
 
@@ -21,8 +21,8 @@ const h1Css = css`
 
   background-image: linear-gradient(
     300deg,
-    ${(props) => props.theme.labelSecondary},
-    ${(props) => props.theme.labelPrimary} 70%
+    var(--labelSecondary),
+    var(--labelPrimary) 70%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -51,7 +51,7 @@ export const TextBtnStyled = styled.button`
   user-select: none;
   width: fit-content;
   height: fit-content;
-  color: ${(props) => props.theme.textBtn};
+  color: var(--textBtn);
   border-radius: 0.25rem;
   position: relative;
   font-size: 0.7rem;
@@ -62,7 +62,7 @@ export const TextBtnStyled = styled.button`
     position: absolute;
     top: 1rem;
     height: 2px;
-    background: ${(props) => props.theme.textBtn};
+    background-color: var(--textBtn);
     ${({ isFirstRender }: { isFirstRender: boolean }) =>
       !isFirstRender && "animation: underlineFill 0.5s ease-in-out forwards;"}
   }
@@ -81,7 +81,7 @@ export const TextBtnStyled = styled.button`
 `;
 
 export const Strong = styled.strong`
-  color: ${(props) => props.theme.contrast};
+  color: var(--contrast)
   font-weight: 500;
 
   ${defaultAddOns};
@@ -101,8 +101,7 @@ export const DividerWrapper = styled.div<ITextDividerWrapper>`
     position: relative;
     border-block-start-style: dashed;
     border-block-start: 1px solid transparent;
-    border-block-start-color: ${(props) =>
-      transparentize(0.9, props.theme.contrast)};
+    border-block-start-color: ${transparentize(0.9, "var(--contrast)")};
     border-block-end: 0;
     transform: translateY(50%);
     height: 1px;

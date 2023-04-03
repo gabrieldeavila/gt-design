@@ -25,16 +25,16 @@ const LoginBoxContrast = styled.div`
   bottom: 50%;
   background: linear-gradient(
     50deg,
-    ${(props) => props.theme.loginBackground1} 0%,
-    ${(props) => props.theme.loginBackground2} 50%,
-    ${(props) => props.theme.loginBackground3} 100%
+    var(--loginBackground1) 0%,
+    var(--loginBackground2) 50%,
+    var(--loginBackground3) 100%
   );
   left: 0;
   right: 0;
 `;
 
 const LoginBoxPrimary = styled.div<ILoginBoxPrimary>`
-  background: ${(props) => props.theme.pageBackground};
+  background-color: var(--pageBackground);
   position: absolute;
   top: 50%;
   bottom: 0%;
@@ -72,7 +72,7 @@ const LoginBoxMain = styled.main`
   left: 60%;
   padding: 1.5rem;
   width: 30vw;
-  background: ${(props) => transparentize(0.4, props.theme.primary)};
+  background: ${transparentize(0.4, "var(--primary)")};
   backdrop-filter: blur(1rem);
   border-radius: 0.25rem;
   ${flex.alignCenter}

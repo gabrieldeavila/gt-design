@@ -49,8 +49,7 @@ export const ResetBtn = styled.button<IButton>`
   width: ${({ fitContent }) =>
     fitContent ? "fit-content" : "-webkit-fill-available;"};
 
-  white-space: ${({ fitContent }) =>
-    fitContent ? "pre;" : "unset;"};
+  white-space: ${({ fitContent }) => (fitContent ? "pre;" : "unset;")};
 
   /* if it's disabled */
   ${({ disabled, isLoading }) =>
@@ -106,22 +105,22 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const ExtraNormal = styled(ResetBtn)`
-  background: ${(props) => transparentize(0.5, props.theme.primary)};
+  background: ${transparentize(0.5, "var(--primary)")};
 
   & .extra-title-children {
-    color: ${(props) => props.theme.contrast};
+    color: var(--contrast);
   }
 `;
 
 export const ExtraContrast = styled(ResetBtn)`
-  background: ${(props) => transparentize(0.1, props.theme.contrast)};
+  background-color: ${transparentize(0.1, "var(--contrast)")};
 
   & .extra-title-children {
-    color: ${(props) => props.theme.primary};
+    color: var(--primary);
   }
 
   & .extra-title svg {
-    stroke: ${(props) => props.theme.primary};
+    stroke: var(--primary);
   }
 `;
 
@@ -143,8 +142,8 @@ export const ExtraSuccess = styled(ResetBtn)`
     border-radius: inherit; /* !importanté */
     background: linear-gradient(
       40deg,
-      ${(props) => props.theme.buttonSuccess1} 0%,
-      ${(props) => props.theme.buttonSuccess2} 55%
+      var(--buttonSuccess1) 0%,
+      var(--buttonSuccess2) 55%
     );
     background-size: 1px 400px;
     background-position: 0px;
@@ -160,8 +159,8 @@ export const ExtraError = styled(ExtraSuccess)`
   &:before {
     background: linear-gradient(
       40deg,
-      ${(props) => props.theme.buttonError1} 0%,
-      ${(props) => props.theme.buttonError2} 55%
+      var(--labelPrimary) 0%,
+      var(--labelPrimary) 55%
     );
     background-size: 1px 400px;
     background-position: 0px;

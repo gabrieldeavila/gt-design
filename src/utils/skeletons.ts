@@ -13,10 +13,10 @@ const after = css`
     transform: translateX(-80%);
     background-image: linear-gradient(
       90deg,
-      ${({ theme }) => transparentize(1, theme.secondary)} 0,
-      ${({ theme }) => transparentize(0.2, theme.secondary)} 20%,
-      ${({ theme }) => transparentize(0.8, theme.secondary)} 60%,
-      ${({ theme }) => transparentize(1, theme.secondary)}
+      ${transparentize(1, "var(--secondary)")} 0,
+      ${transparentize(0.2, "var(--secondary)")} 20%,
+      ${transparentize(0.8, "var(--secondary)")} 60%,
+      ${transparentize(1, "var(--secondary)")}
     );
     animation: skeleton 1s linear infinite;
     ${animations.skeleton}

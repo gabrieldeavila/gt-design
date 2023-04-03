@@ -11,8 +11,8 @@ import { IPopupWrapper } from "./interface";
 const PopupWrapperStyled = styled.div`
   margin-top: 0.25rem;
   position: fixed;
-  background: ${(props) => props.theme.primary};
-  color: ${(props) => props.theme.contrast};
+  background: var(--primary);
+  color: var(--contrast);
   border-radius: 0.25rem;
   min-width: 10rem;
   min-height: 7rem;
@@ -32,8 +32,7 @@ const PopupWrapperStyled = styled.div`
 const PopupContainer = styled.div`
   position: relative;
   padding: 0.5rem 0rem;
-  border-bottom: 1px solid
-    ${(props) => transparentize(0.5, props.theme.contrast)};
+  border-top: 1px solid ${transparentize(0.5, "var(--contrast)")};
 
   &:last-child {
     border-bottom: none;
@@ -51,7 +50,7 @@ const PopupItem = styled.a`
   cursor: pointer;
 
   &:hover {
-    background: ${(props) => transparentize(0, props.theme.backgroundHover)};
+    background: ${transparentize(0, "var(--backgroundHover)")};
   }
 `;
 

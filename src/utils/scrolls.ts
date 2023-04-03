@@ -1,6 +1,5 @@
 import { transparentize } from "polished";
 import { css } from "styled-components";
-import { IGLobalStyle } from "../gt/Global/interface";
 
 const scrollDefault = css`
   /* width */
@@ -10,19 +9,18 @@ const scrollDefault = css`
 
   /* Track */
   &::-webkit-scrollbar-track {
-    background: ${({ theme }: IGLobalStyle) => theme.secondary};
+    background-color: var(--secondary)
   }
 
   /* Handle */
   &::-webkit-scrollbar-thumb {
-    background: ${({ theme }: IGLobalStyle) => theme.contrast};
+    background: var(--contrast)
     border-radius: 0.25rem;
   }
 
   /* Handle on hover */
   &::-webkit-scrollbar-thumb:hover {
-    background: ${({ theme }: IGLobalStyle) =>
-      transparentize(0.5, theme.contrast)};
+    background: ${transparentize(0.5, "var(--contrast)")};
   }
 `;
 

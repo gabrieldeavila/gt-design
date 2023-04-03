@@ -1,13 +1,12 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import { scrolls } from "../../utils";
-import { IGLobalStyle } from "./interface";
 
 const GlobalStyle = createGlobalStyle`
   ${reset} 
 
   * {
-    color: ${({ theme }: IGLobalStyle) => theme.contrast};
+    color: var(--contrast)
     line-height: 1.5 !important;
     font-family: 'Kanit', sans-serif !important;
   }
@@ -19,7 +18,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: ${({ theme }: IGLobalStyle) => theme.secondary};
+    background-color: var(--secondary);
+
     ${scrolls.default};
   }
 
@@ -28,8 +28,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ::selection {
-    background: ${({ theme }: IGLobalStyle) => theme.contrast};
-    color: ${({ theme }: IGLobalStyle) => theme.primary};
+    background: var(--contrast);
+    color: var(--primary);
   }
 
   input::-webkit-outer-spin-button,

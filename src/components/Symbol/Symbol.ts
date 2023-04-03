@@ -10,7 +10,7 @@ const SymbolContainer = styled.div`
   justify-content: center;
   overflow: hidden;
   align-items: center;
-  background: ${(props) => transparentize(0.2, props.theme.contrast)};
+  background: ${transparentize(0.2, "var(--contrast)")};
   width: 3rem;
   height: 3rem;
   border-radius: 1.5rem;
@@ -24,15 +24,15 @@ const SymbolContainer = styled.div`
 
   > *,
   svg {
-    color: ${(props) => props.theme.primary} !important;
-    stroke: ${(props) => props.theme.primary} !important;
+    color: var(--primary) !important;
+    stroke: var(--primary) !important;
   }
 `;
 
 const SymbolText = styled.p`
   font-size: 1.25rem;
   text-align: center;
-  color: ${(props) => props.theme.primary};
+  color: var(--primary);
 `;
 
 const SymbolImage = styled.img`
