@@ -34,6 +34,15 @@ const darkThemeStyle = {
   outlineError: "#e34234",
 };
 
+// add a cookie instead of localstorage
+const initialTheme = () => {
+  try {
+    return localStorage?.getItem("darkTheme") === "1";
+  } catch (e) {
+    return false;
+  }
+};
+
 function GTBasic({
   children,
   noThemeChange,
@@ -41,9 +50,7 @@ function GTBasic({
   children: React.ReactNode;
   noThemeChange?: boolean;
 }) {
-  const [darkTheme, setDarkTheme] = useState(
-    localStorage?.getItem("darkTheme") === "1"
-  );
+  const [darkTheme, setDarkTheme] = useState(initialTheme());
 
   const theme = useMemo(() => darkTheme && darkThemeStyle, [darkTheme]);
 

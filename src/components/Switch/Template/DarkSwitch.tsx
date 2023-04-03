@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 import PropTypes from "prop-types";
 import React, { memo, useCallback } from "react";
 import * as Icon from "react-feather";
@@ -16,17 +17,19 @@ function GTDarkSwitch({
   const { darkTheme, setDarkTheme } = useGTContext();
 
   const handleTheme = useCallback(() => {
-    setDarkTheme((prev: boolean) => {
-      if (!localStorage) return false;
+    try {
+      setDarkTheme((prev: boolean) => {
+        if (!prev) {
+          localStorage.setItem("darkTheme", "1");
+        } else {
+          localStorage.removeItem("darkTheme");
+        }
 
-      if (!prev) {
-        localStorage.setItem("darkTheme", "1");
-      } else {
-        localStorage.removeItem("darkTheme");
-      }
-
-      return !prev;
-    });
+        return !prev;
+      });
+    } catch (e) {
+      console.log(e, "error");
+    }
   }, [setDarkTheme]);
 
   return (
