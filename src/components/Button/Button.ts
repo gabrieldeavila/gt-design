@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable operator-linebreak */
-import { transparentize } from "polished";
 import styled, { css } from "styled-components";
 import { flexbox, space } from "styled-system";
 import { transforms } from "../../utils";
@@ -11,6 +10,7 @@ import shadows from "../../utils/shadows";
 import transitions from "../../utils/transitions";
 import { LoaderWrapper } from "../Loader/Loader";
 import { IButton } from "./interface";
+import { gtTransparentize } from "../../utils/colors";
 
 const sm = css`
   padding: 0.45rem;
@@ -105,7 +105,7 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const ExtraNormal = styled(ResetBtn)`
-  background: ${transparentize(0.5, "var(--primary)")};
+  background: ${gtTransparentize({ amount: 0.5, varName: "primary" })};
 
   & .extra-title-children {
     color: var(--contrast);
@@ -113,7 +113,7 @@ export const ExtraNormal = styled(ResetBtn)`
 `;
 
 export const ExtraContrast = styled(ResetBtn)`
-  background-color: ${transparentize(0.1, "var(--contrast)")};
+  background: ${gtTransparentize({ amount: 0.1, varName: "contrast" })};
 
   & .extra-title-children {
     color: var(--primary);

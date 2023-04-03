@@ -1,6 +1,5 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-confusing-arrow */
-import { transparentize } from "polished";
 import styled, { css } from "styled-components";
 import { hovers, scrolls, shadows, transitions } from "../../utils";
 import flex from "../../utils/flex";
@@ -17,6 +16,7 @@ import {
 } from "./interface";
 import DatePicker from "react-datepicker";
 import { IDefaultAddOns } from "../Space/interface";
+import { gtTransparentize } from "../../utils/colors";
 
 const getRowWidth = ({ row }: IInputContainer) => {
   let cssSrc = "";
@@ -30,7 +30,7 @@ const getRowWidth = ({ row }: IInputContainer) => {
 };
 
 const loadingInput = css`
-  background: ${({ theme }) => theme.primary};
+  background: var(--primary);
   overflow: hidden;
   min-height: 3.5rem;
   cursor: wait;
@@ -121,14 +121,14 @@ const disabledInput = css<IInputContainer>`
   ${({ disabled }) =>
     (disabled ?? false) &&
     css`
-      background: ${transparentize(0.8, "var(--primary)")};
+      background: ${gtTransparentize({ amount: 0.8, varName: "primary" })};
 
       ${InputLabel} {
         /* creates color with gradient */
         background: -webkit-linear-gradient(
           300deg,
           var(--primary),
-          ${transparentize(0.1, "var(--contrast)")} 70%
+          ${gtTransparentize({ amount: 0.1, varName: "contrast" })} 70%
         );
 
         -webkit-background-clip: text;
@@ -138,7 +138,7 @@ const disabledInput = css<IInputContainer>`
       }
 
       ${InputField}:disabled, ${InputField}::placeholder {
-        color: ${transparentize(0.5, "var(--contrast)")};
+        color: ${gtTransparentize({ amount: 0.5, varName: "contrast" })};
       }
 
       &,
@@ -157,7 +157,11 @@ const InputContainer = styled.div<IInputContainer>`
   outline: 2px solid transparent;
   outline-offset: 2px;
   border-radius: 0.25rem;
-  background: ${transparentize(0.2, "var(--primary)")};
+  background: ${gtTransparentize({
+    amount: 0.2,
+    varName: "primary",
+  })};
+  
 
   ${disabledInput};
 
@@ -168,14 +172,16 @@ const InputContainer = styled.div<IInputContainer>`
     outline-offset: 0.15rem;
     box-shadow: 0 0 0 0.25rem
       ${({ isWrong }) =>
-        transparentize(
-          0.5,
-          isWrong ?? false ? "var(--outlineError)" : "var(--outline)"
-        )};
-  }
+        gtTransparentize({
+          amount: 0.2,
+          varName: isWrong ?? false ? "outlineError" : "outline",
+        })};
 
   border-radius: 0.25rem;
-  box-shadow: 0 0 0 0.15rem ${transparentize(1, "var(--outline)")};
+  box-shadow: 0 0 0 0.15rem ${gtTransparentize({
+    amount: 1,
+    varName: "outline",
+  })};
 
   &:hover ${InputIconWrapper} {
     opacity: 1;
@@ -395,7 +401,10 @@ const SelectValue = styled.div<ISelectValue>`
       ? "var(--preSelectColor)"
       : isSelected
       ? "var(--secondary)"
-      : transparentize(0.7, "var(--secondary)")};
+      : gtTransparentize({
+          amount: 0.7,
+          varName: "secondary",
+        })};
   `}
 `;
 

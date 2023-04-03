@@ -1,4 +1,5 @@
-import { getLuminance, transparentize } from "polished";
+import { gtTransparentize } from "../../utils/colors";
+import { getLuminance } from "polished";
 import styled, { css } from "styled-components";
 import { color } from "styled-system";
 import flex from "../../utils/flex";
@@ -29,7 +30,7 @@ const BoxWrapper = styled.div<IBoxWrapper>`
 const handleColorContrast = ({
   bg,
 }: IHandleColorContrastReceive): IHandleColorContrastReturn => {
-  const luminance = bg != null && getLuminance(bg);
+  const luminance = bg != null ? getLuminance(bg) : 0;
 
   if (luminance > 0.5) {
     return "black !important";
@@ -46,8 +47,8 @@ const BoxContainer = styled.div<IBoxContainer>`
   ${flex.column};
   ${shadows.simple};
   ${color};
-  background-color: ${({ bg, theme }) =>
-    transparentize(0.45, bg ?? theme.primary)};
+  background: ${({ bg }) =>
+    gtTransparentize({ amount: 0.45, prefer: bg, varName: "primary" })};
   backdrop-filter: blur(15px);
   cursor: pointer;
   height: -webkit-fill-available;

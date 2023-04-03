@@ -1,28 +1,24 @@
-import { transparentize } from "polished";
 import { css } from "styled-components";
+import { gtTransparentize } from "./colors";
 
 const basic = css`
   backdrop-filter: blur(0.5rem);
   box-shadow: 0 0 0.5rem 0.1rem
-    ${transparentize(0.9, "var(--btnShadow)")};
+    ${gtTransparentize({ amount: 0.9, varName: "btnShadow" })};
 `;
 
 const glow = css`
   backdrop-filter: blur(0.5rem);
   box-shadow: 0 0 0.5rem 0.1rem
-    ${transparentize(0.9, "var(--glowShadow)")};
+    ${gtTransparentize({ amount: 0.9, varName: "glowShadow" })};
 `;
 
 const simple = css`
-  box-shadow: ${transparentize(0.98, "var(--btnShadow)")} 0px 1px
-      3px 0px,
-    ${transparentize(0.85, "var(--btnShadow)")} 0px 0px 0px 1px;
+  box-shadow: ${gtTransparentize({ amount: 0.98, varName: "btnShadow" })}0px 1px 3px 0px, ${gtTransparentize({ amount: 0.85, varName: "btnShadow" })} 0px 0px 0px 1px;
 `;
 
 const outline = css`
-  box-shadow: ${transparentize(0.98, "var(--btnShadow)")} 0px 1px
-      3px 0px,
-    ${transparentize(0.85, "var(--btnShadow)")} 0px 0px 0px 1px;
+  box-shadow: ${gtTransparentize({ amount: 0.98, varName: "btnShadow" })}0px 1px 3px 0px, ${gtTransparentize({ amount: 0.85, varName: "btnShadow" })} 0px 0px 0px 1px;
 `;
 
 const shadows = {
