@@ -46,7 +46,7 @@ const GTTooltip = forwardRef((props: IGTTooltip, ref?: Ref<IGTTooltipRef>) => {
   );
 
   const handleMouseOverParent = useCallback(() => {
-    if (!window) return;
+    if (typeof window === "undefined") return;
 
     if (parentRef.current) {
       // gets the position of the parent element

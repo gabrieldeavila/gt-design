@@ -1,4 +1,4 @@
-import { transparentize } from "polished";
+import { gtTransparentize } from "../../utils/colors";
 import styled from "styled-components";
 
 const SymbolWrapper = styled.div`
@@ -10,7 +10,7 @@ const SymbolContainer = styled.div`
   justify-content: center;
   overflow: hidden;
   align-items: center;
-  background: ${transparentize(0.2, "var(--contrast)")};
+  background: ${gtTransparentize({ amount: 0.2, varName: "contrast" })};
   width: 3rem;
   height: 3rem;
   border-radius: 1.5rem;

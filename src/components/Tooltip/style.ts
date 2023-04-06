@@ -11,7 +11,7 @@ const TooltipWrapper = styled.div<ITooltipWrapper>`
   min-width: 1rem;
   max-width: 7rem;
   height: fit-content;
-  background: ${({ theme }) => theme.primary};
+  background: var(--primary);
   padding: 0.5rem;
   ${shadows.simple}
   border-radius: 0.25rem;
@@ -35,8 +35,8 @@ const TooltipContainer = styled.div<ITooltipContainer>`
     left: 50%;
     top: ${({ isAboveParent }) => (isAboveParent ? "100%" : "0")};
     transform: translateX(-40%) translatey(-50%) rotate(45deg);
-    background: ${({ theme }) => theme.primary};
-    border: 5px solid ${({ theme }) => theme.primary};
+    background: var(--primary);
+    border: 5px solid  var(--primary);
     ${shadows.simple}
   }
 
@@ -47,8 +47,8 @@ const TooltipContainer = styled.div<ITooltipContainer>`
     right: 0;
     top: ${({ isAboveParent }) => (isAboveParent ? "100%" : "10px")};
     transform: translateX(-40%) translatey(-100%);
-    background: ${({ theme }) => theme.primary};
-    border: 5px solid ${({ theme }) => theme.primary};
+    background: var(--primary);
+    border: 5px solid  var(--primary);
   }
 `;
 

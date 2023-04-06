@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
   ${reset} 
 
   * {
-    color: var(--contrast)
+    color: var(--contrast);
     line-height: 1.5 !important;
     font-family: 'Kanit', sans-serif !important;
   }

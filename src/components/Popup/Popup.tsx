@@ -1,10 +1,10 @@
-import { transparentize } from "polished";
 import PropTypes from "prop-types";
 import React, { memo, useRef } from "react";
 import styled from "styled-components";
 import useEaseClose from "../../hooks/helpers/useEaseClose";
 import useOnClickOutside from "../../hooks/helpers/useOnClickOutside";
 import animations from "../../utils/animations";
+import { gtTransparentize } from "../../utils/colors";
 import shadows from "../../utils/shadows";
 import { IPopupWrapper } from "./interface";
 
@@ -32,7 +32,7 @@ const PopupWrapperStyled = styled.div`
 const PopupContainer = styled.div`
   position: relative;
   padding: 0.5rem 0rem;
-  border-top: 1px solid ${transparentize(0.5, "var(--contrast)")};
+  border-top: 1px solid ${gtTransparentize({ amount: 0.5, varName: "contrast" })};
 
   &:last-child {
     border-bottom: none;
@@ -50,7 +50,7 @@ const PopupItem = styled.a`
   cursor: pointer;
 
   &:hover {
-    background: ${transparentize(0, "var(--backgroundHover)")};
+    background: ${gtTransparentize({ amount: 0, varName: "backgroundHover" })}
   }
 `;
 

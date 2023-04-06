@@ -1,6 +1,6 @@
-import { transparentize } from "polished";
 import styled, { css } from "styled-components";
 import { animations, transforms } from "../../utils";
+import { gtTransparentize } from "../../utils/colors";
 import flex from "../../utils/flex";
 import transitions from "../../utils/transitions";
 import { ISwitch, ISwitchInput } from "./interface";
@@ -24,8 +24,7 @@ const SwitchSlider = styled.span`
   width: 1rem;
   z-index: 150;
   border-radius: 50%;
-  box-shadow: 41px 41px 56px var(--primary),
-    -41px -41px 56px var(--primary);
+  box-shadow: 41px 41px 56px var(--primary), -41px -41px 56px var(--primary);
   background: var(--primary);
   width: 1rem;
   height: 1rem;
@@ -48,8 +47,8 @@ const activeLabel = css<ISwitch>`
   filter: contrast();
   background: ${({ checked }) =>
     checked ?? false
-      ? transparentize(0.1, "var(--contrast)")
-      : transparentize(0.5, "var(--contrast)")};
+      ? gtTransparentize({ amount: 0.1, varName: "contrast" })
+      : gtTransparentize({ amount: 0.5, varName: "contrast" })};
 `;
 
 const SwitchLabel = styled.label<ISwitch>`
@@ -59,11 +58,7 @@ const SwitchLabel = styled.label<ISwitch>`
   z-index: 1;
   padding: 0.5rem;
   border-radius: 1.75rem;
-  background: linear-gradient(
-    145deg,
-    var(--contrast),
-    ${transparentize(0.5, "var(--contrast)")}
-  );
+  background: linear-gradient(145deg, var(--contrast), var(--contrast) ;);
 
   position: relative;
   user-select: none;
@@ -88,8 +83,7 @@ const activeSlider = css`
   &:checked ~ ${SwitchSlider} {
     background-color: var(--switchOn);
     filter: contrast(1);
-    box-shadow: 0px 0px 7px var(--switchOn),
-      -0px -0px 31px var(--switchOn);
+    box-shadow: 0px 0px 7px var(--switchOn), -0px -0px 31px var(--switchOn);
   }
 
   & ~ ${SwitchSlider}:active, &:checked ~ ${SwitchSlider}:active {

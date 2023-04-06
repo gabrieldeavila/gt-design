@@ -1,6 +1,6 @@
-import { transparentize } from "polished";
 import styled from "styled-components";
 import { color, layout, space } from "styled-system";
+import { gtTransparentize } from "../../utils/colors";
 import flex from "../../utils/flex";
 import addOnsCss, { defaultAddOns } from "./addOns/addOns";
 import { ISpace, ISpaceModifiers } from "./interface";
@@ -68,7 +68,7 @@ const SpaceMain = styled(SpaceBase)`
 
 const SpaceDashed = styled(SpaceBase)<ISpaceModifiers>`
   margin: 1rem 0;
-  border: 1px dashed ${transparentize(0.6, "var(--contrast)")};
+  border: 1px dashed ${gtTransparentize({ amount: 0.6, varName: "contrast" })};
 
   ${({ addOns }) => addOnsCss(addOns)}
   ${defaultAddOns};

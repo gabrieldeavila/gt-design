@@ -40,9 +40,6 @@ const GTCssInjectionScript = () => {
 
   const codeToRunOnClient = `
 (function() {
-  alert("a");
-
-  console.log("it works")
   const colorMode = localStorage.getItem("darkTheme") != null ? "darkTheme" : "theme";
   const root = document.documentElement;
   const defaultConfigs = ${JSON.stringify(defaultConfigs)};

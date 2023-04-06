@@ -1,5 +1,5 @@
-import { transparentize } from "polished";
 import { css } from "styled-components";
+import { gtTransparentize } from "./colors";
 
 const scrollDefault = css`
   /* width */
@@ -20,7 +20,7 @@ const scrollDefault = css`
 
   /* Handle on hover */
   &::-webkit-scrollbar-thumb:hover {
-    background: ${transparentize(0.5, "var(--contrast)")};
+    background: ${gtTransparentize({ amount: 0.5, varName: "contrast" })};
   }
 `;
 

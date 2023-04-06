@@ -1,10 +1,10 @@
-import { transparentize } from "polished";
 import styled from "styled-components";
+import { gtTransparentize } from "../../utils/colors";
 import flex from "../../utils/flex";
 import transitions from "../../utils/transitions";
 
 const NavbarMobileWrapper = styled.div`
-  background-color: ${transparentize(0.5, "var(--primary)")};
+  background-color: ${gtTransparentize({ amount: 0.5, varName: "primary" })};
   backdrop-filter: blur(10px);
   padding: 0.5rem;
   position: fixed;
@@ -28,7 +28,10 @@ const NavbarMobileLinkWrapper = styled.div`
   ${transitions.basic}
 
   &:hover {
-    background-color: ${transparentize(0.5, "var(--secondary)")};
+    background-color: ${gtTransparentize({
+      amount: 0.5,
+      varName: "secondary",
+    })};
     cursor: pointer;
   }
 `;

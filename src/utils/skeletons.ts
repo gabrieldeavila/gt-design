@@ -1,6 +1,6 @@
-import { transparentize } from "polished";
 import { css } from "styled-components";
 import animations from "./animations";
+import { gtTransparentize } from "./colors";
 
 const after = css`
   &::after {
@@ -13,11 +13,11 @@ const after = css`
     transform: translateX(-80%);
     background-image: linear-gradient(
       90deg,
-      ${transparentize(1, "var(--secondary)")} 0,
-      ${transparentize(0.2, "var(--secondary)")} 20%,
-      ${transparentize(0.8, "var(--secondary)")} 60%,
-      ${transparentize(1, "var(--secondary)")}
-    );
+      ${gtTransparentize({ amount: 1, varName: "secondary" })} 0,
+      ${gtTransparentize({ amount: 0.2, varName: "secondary" })} 20%,
+      ${gtTransparentize({ amount: 0.8, varName: "secondary" })} 60%,
+      ${gtTransparentize({ amount: 1, varName: "secondary" })}
+    )
     animation: skeleton 1s linear infinite;
     ${animations.skeleton}
   }

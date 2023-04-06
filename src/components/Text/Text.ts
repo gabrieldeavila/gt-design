@@ -1,9 +1,9 @@
 /* eslint-disable operator-linebreak */
-import { transparentize } from "polished";
 import styled, { css } from "styled-components";
 import { animations, transforms } from "../../utils";
 import { defaultAddOns } from "../Space/addOns/addOns";
 import { IText, ITextDividerWrapper } from "./interface";
+import { gtTransparentize } from "../../utils/colors";
 
 export const P = styled.p<IText>`
   color: var(--contrast);
@@ -101,7 +101,10 @@ export const DividerWrapper = styled.div<ITextDividerWrapper>`
     position: relative;
     border-block-start-style: dashed;
     border-block-start: 1px solid transparent;
-    border-block-start-color: ${transparentize(0.9, "var(--contrast)")};
+    border-block-start-color: ${gtTransparentize({
+      amount: 0.9,
+      varName: "contrast",
+    })};
     border-block-end: 0;
     transform: translateY(50%);
     height: 1px;

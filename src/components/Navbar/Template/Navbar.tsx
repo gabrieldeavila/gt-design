@@ -12,7 +12,7 @@ function GTNavbar({ children }: { children: React.ReactNode }) {
   // when scrolls down, hide the navbar, when scrolls up, show the navbar
   const [showNavbar, setShowNavbar] = useState(true);
   const handleScroll = useCallback(() => {
-    if(!window) return;
+    if (typeof window === "undefined") return;
 
     if (window.scrollY > oldScroll.current) {
       setShowNavbar(false);
@@ -24,6 +24,8 @@ function GTNavbar({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-confusing-arrow */
-import { transparentize } from "polished";
 import styled, { css } from "styled-components";
 import { color, flexbox, space } from "styled-system";
 import { transforms } from "../../utils";
@@ -10,13 +9,14 @@ import flex from "../../utils/flex";
 import shadows from "../../utils/shadows";
 import transitions from "../../utils/transitions";
 import { INavbarOptions, INavbarWrapper } from "./interface";
+import { gtTransparentize } from "../../utils/colors";
 
 const NavbarWrapper = styled.nav<INavbarWrapper>`
   min-height: 3rem;
   position: fixed;
   width: -webkit-fill-available;
   z-index: 1100;
-  background: ${transparentize(0.5, "var(--primary)")};
+  background: var(--primary);
   padding: 0.5rem 1.5rem;
   ${shadows.simple}
   ${color}
@@ -65,7 +65,7 @@ const NavbarOption = styled.div`
   ${flex.alignCenterCol}
 
   &:hover {
-    background-color: var(--backgroundHover)
+    background-color: var(--backgroundHover);
   }
 
   ${({ isParent }: { isParent: boolean }) =>
@@ -98,7 +98,7 @@ const NavbarTitle = styled.h1`
   user-select: none;
   font-weight: 500;
   font-size: 1.5rem;
-  color: var(--contrast)
+  color: var(--contrast);
 `;
 
 const textCss = css`
@@ -153,11 +153,12 @@ const NavbarPopup = styled.div`
   ${animations.easeOpenClose}
 
   ${NavbarText}:hover, ${NavbarSubText}:hover {
-    background: var(--backgroundHover)
+    background: var(--backgroundHover);
   }
 
   ${NavbarText}, ${NavbarSubText} {
-      border-top: 1px solid ${transparentize(0.5, "var(--contrast)")};
+    border-top: 1px solid
+      ${gtTransparentize({ amount: 0.5, varName: "contrast" })};
   }
 
   ${NavbarText}:last-child, ${NavbarSubText}:last-child {

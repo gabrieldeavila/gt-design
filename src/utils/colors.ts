@@ -1,10 +1,18 @@
+import defaultConfigs from "../gt/Global/default.configs";
 import { transparentize } from "polished";
+
+const starterTheme =
+  localStorage.getItem("darkTheme") != null ? "darkTheme" : "theme";
 
 export const findColorThroughVar = (name: string) => {
   // gets the value of the variable
-  const color = getComputedStyle(document.documentElement).getPropertyValue(
+  let color = getComputedStyle(document.documentElement).getPropertyValue(
     `--${name}`
   );
+
+  if (color === "") {
+    color = defaultConfigs.themeConfig.global[starterTheme]?.[name];
+  }
 
   return color;
 };
@@ -18,7 +26,12 @@ export const gtTransparentize = ({
   varName: string;
   prefer?: string;
 }) => {
-  const color = prefer ?? findColorThroughVar(varName);
+  try {
+    const color = prefer ?? findColorThroughVar(varName);
 
-  return transparentize(amount, color);
+    return transparentize(amount, color);
+  } catch (e) {
+    // console.log(e, varName);
+    return "transparent";
+  }
 };

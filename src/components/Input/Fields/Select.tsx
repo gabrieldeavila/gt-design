@@ -406,7 +406,7 @@ const SelectOptions = memo(function SelectOptions({ options }: ISelectOptions) {
   const selectRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!window) return;
+    if (typeof window === "undefined") return;
 
     // gets the pressed key
     const handleKey = (e: KeyboardEvent) => {

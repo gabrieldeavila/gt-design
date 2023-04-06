@@ -1,12 +1,12 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable implicit-arrow-linebreak */
-import { transparentize } from "polished";
 import styled, { css } from "styled-components";
 import { scrolls } from "../../utils";
 import flex from "../../utils/flex";
 import shadows from "../../utils/shadows";
 import Switch from "../Switch";
 import { ILoginBoxPrimary } from "./interface";
+import { gtTransparentize } from "../../utils/colors";
 
 const LoginWrapper = styled.div`
   position: relative;
@@ -72,7 +72,7 @@ const LoginBoxMain = styled.main`
   left: 60%;
   padding: 1.5rem;
   width: 30vw;
-  background: ${transparentize(0.4, "var(--primary)")};
+  background: ${gtTransparentize({ amount: 0.4, varName: "primary" })};
   backdrop-filter: blur(1rem);
   border-radius: 0.25rem;
   ${flex.alignCenter}
