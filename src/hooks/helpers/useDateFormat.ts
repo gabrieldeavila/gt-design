@@ -5,10 +5,11 @@ import userDateFormat from "../../utils/userDateFormat";
 userDateFormat();
 
 function useDateFormat() {
-  const userDefaultFormat = useMemo(
-    () => window?.["gt-design"]?.userDateFormat?.toString() ?? "MM/dd/yyyy",
-    []
-  );
+  const userDefaultFormat = useMemo(() => {
+    if (typeof window === "undefined") return;
+
+    return window?.["gt-design"]?.userDateFormat?.toString() ?? "MM/dd/yyyy";
+  }, []);
 
   return userDefaultFormat;
 }

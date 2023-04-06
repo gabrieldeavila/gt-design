@@ -1,5 +1,7 @@
 function userDateFormat() {
   try {
+    if (typeof window === "undefined") return;
+
     if (window["gt-design"] == null) {
       window["gt-design"] = {};
     }
