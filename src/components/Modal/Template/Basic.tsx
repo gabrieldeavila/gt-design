@@ -135,7 +135,7 @@ function GTModalBasic({ show, setShow, data }: IGTModal) {
 
         {(data.cancelText != null || data.confirmText != null) && (
           <Modal.Footer>
-            <Space.Modifiers alignItems="flex-end" gridGap="1rem">
+            <Space.Modifiers justifyContent="flex-end" gridGap="1rem">
               {data.cancelText != null && (
                 <Button.Error
                   isLoading={isLoadingCancel}

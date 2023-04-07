@@ -32,7 +32,7 @@ const NormalSwitchContainer = styled.button<INormalSwitchSlider>`
   background: ${({ isChecked }) =>
     isChecked ?? false
       ? "var(--switchNormalActive)"
-      : gtTransparentize({ amount: 0.5, varName: "switchNormalBackground" })};
+      : "var(--switchNormalBackground)"};
   overflow: hidden;
   display: flex;
   border: none;
@@ -50,7 +50,7 @@ const NormalSwitchContainer = styled.button<INormalSwitchSlider>`
     background: ${({ isChecked }) =>
       isChecked ?? false
         ? gtTransparentize({ amount: 0.25, varName: "switchNormalActive" })
-        : "var(--switchNormalBackground)"};
+        : gtTransparentize({ amount: 0.25, varName: "switchNormalBackground" })};
   }
 
   ${transitions.basic};

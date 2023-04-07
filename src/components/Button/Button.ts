@@ -159,8 +159,8 @@ export const ExtraError = styled(ExtraSuccess)`
   &:before {
     background: linear-gradient(
       40deg,
-      var(--labelPrimary) 0%,
-      var(--labelPrimary) 55%
+      var(--buttonError1) 0%,
+      var(--buttonError2) 55%
     );
     background-size: 1px 400px;
     background-position: 0px;

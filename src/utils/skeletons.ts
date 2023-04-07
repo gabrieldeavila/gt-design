@@ -17,7 +17,7 @@ const after = css`
       ${gtTransparentize({ amount: 0.2, varName: "secondary" })} 20%,
       ${gtTransparentize({ amount: 0.8, varName: "secondary" })} 60%,
       ${gtTransparentize({ amount: 1, varName: "secondary" })}
-    )
+    );
     animation: skeleton 1s linear infinite;
     ${animations.skeleton}
   }
