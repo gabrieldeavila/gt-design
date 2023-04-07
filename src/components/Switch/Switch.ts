@@ -58,7 +58,7 @@ const SwitchLabel = styled.label<ISwitch>`
   z-index: 1;
   padding: 0.5rem;
   border-radius: 1.75rem;
-  background: linear-gradient(145deg, var(--contrast), var(--contrast) ;);
+  background: linear-gradient(145deg, var(--contrast), var(--contrast));
 
   position: relative;
   user-select: none;

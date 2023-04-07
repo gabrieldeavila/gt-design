@@ -22,7 +22,12 @@ export const darkCodeTheme = {
   buttonError1: "#8b0000",
   buttonError2: "#7c4848",
   switchNormalBackground: "#808080",
+  loginBackground1: "#b0c4de",
+  loginBackground2: "#ace5ee",
+  loginBackground3: "#004242",
   switchNormalActive: "#2a52be",
+  switchSlider: "#ffffff",
+  outline: "#80daeb",
   outlineError: "#e34234",
 };
 
@@ -36,7 +41,6 @@ export const lightCodeTheme = {
   moonColor: "#009698",
   btnShadow: "#000000",
   errorColor: "#ba160c",
-  loginBoxPrimary: "#f0ffff",
   glowShadow: "#39ff14",
   preSelectColor: "#f5f5f5",
   pageBackground: "#f0f8ff",

@@ -161,7 +161,6 @@ const InputContainer = styled.div<IInputContainer>`
     amount: 0.2,
     varName: "primary",
   })};
-  
 
   ${disabledInput};
 
@@ -173,16 +172,17 @@ const InputContainer = styled.div<IInputContainer>`
     box-shadow: 0 0 0 0.25rem
       ${({ isWrong }) =>
         gtTransparentize({
-          amount: 0.2,
+          amount: 0.5,
           varName: isWrong ?? false ? "outlineError" : "outline",
         })};
+  }
 
   border-radius: 0.25rem;
-  box-shadow: 0 0 0 0.15rem ${gtTransparentize({
-    amount: 1,
-    varName: "outline",
-  })};
-
+  box-shadow: 0 0 0 0.15rem
+    ${gtTransparentize({
+      amount: 0.9,
+      varName: "outline",
+    })};
   &:hover ${InputIconWrapper} {
     opacity: 1;
   }
@@ -313,12 +313,12 @@ const StyledDatePicker = styled(DatePicker)<IDefaultAddOns>`
   border-radius: 0.25rem;
   padding-top: 1rem;
   border: none;
-  color: var(--contrast)
+  color: var(--contrast);
   background-color: transparent;
 
   /* changes the placeholder color */
   &::placeholder {
-    color: var(--contrast)
+    color: var(--contrast);
   }
 
   ${defaultAddOns};

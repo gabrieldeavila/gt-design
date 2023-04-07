@@ -8,7 +8,6 @@ export interface GTTheme {
   moonColor?: string;
   errorColor?: string;
   btnShadow?: string;
-  loginBoxPrimary?: string;
   glowShadow?: string;
   pageBackground: string;
   loginBackground1?: string;

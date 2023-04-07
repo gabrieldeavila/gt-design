@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable multiline-ternary */
 import PropTypes from "prop-types";
 import React, { memo, useCallback } from "react";
