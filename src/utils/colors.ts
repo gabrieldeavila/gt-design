@@ -128,6 +128,6 @@ export const gtTransparentize = ({
       document.documentElement.style.setProperty(`--${varName}`, newColor);
     }
   } catch (e) {
-    console.log(e, "hehe errito!!!");
+    console.log(e, "something went wrong");
   }
 };

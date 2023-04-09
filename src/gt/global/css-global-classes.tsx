@@ -65,7 +65,6 @@ const GTCssInjectionScript = () => {
     // Calculate new RGBA values
     const opacityy = 1 - opacity
     const rgba = "rgba("+r+","+g+","+b+","+opacityy+")";
-    console.log(rgba);
     return rgba;
   }
 
