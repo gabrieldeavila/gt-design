@@ -144,11 +144,6 @@ LoginCreate.propTypes = {
   loginRef: PropTypes.object.isRequired,
 };
 
-LoginCreate.defaultProps = {
-  canSave: false,
-  setIsCreate: () => {},
-};
-
 const signInFields = ["password", "nickname"];
 
 function LoginSignIn({
@@ -219,9 +214,4 @@ LoginSignIn.propTypes = {
   canSave: PropTypes.bool,
   setIsCreate: PropTypes.func,
   loginRef: PropTypes.object.isRequired,
-};
-
-LoginSignIn.defaultProps = {
-  canSave: false,
-  setIsCreate: () => {},
 };

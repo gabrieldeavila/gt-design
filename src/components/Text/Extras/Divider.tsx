@@ -22,11 +22,10 @@ const widths = {
   },
 };
 
-function TextDivider({ children, position, text, hasMarginTop }: ITextDivider) {
+function TextDivider({ children, position = "center", text, hasMarginTop }: ITextDivider) {
   const { t } = useTranslation();
 
   const width = useMemo(() => {
-    // @ts-expect-error
     return widths[position];
   }, [position]);
 
@@ -52,9 +51,4 @@ export default TextDivider;
 TextDivider.prototype = {
   children: PropTypes.node,
   position: PropTypes.oneOf(["left", "center", "right"]),
-};
-
-TextDivider.defaultProps = {
-  children: null,
-  position: "center",
 };

@@ -20,8 +20,8 @@ function GTDarkSwitch({
   placeY,
 }: {
   fixed: boolean;
-  placeX: string;
-  placeY: string;
+  placeX: "top" | "bottom";
+  placeY: "left" | "right";
 }) {
   const [isDarkTheme, setDarkTheme] = useTriggerState({ name: "changedTheme", initial: initialTheme() });
 

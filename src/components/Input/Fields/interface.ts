@@ -14,8 +14,8 @@ export type TChangeValidate = (
 export interface IGTInput {
   name: string;
   label: string;
-  validations: string[];
-  defaultValidation: boolean;
+  validations?: string[];
+  defaultValidation?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void | Promise<void>;
   onChangeValidate?: TChangeValidate;
   disableClearable?: boolean;

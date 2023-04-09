@@ -38,8 +38,8 @@ function GTInputPassword({
   disableClearable,
   name,
   label,
-  defaultValidation,
-  validations,
+  defaultValidation = true,
+  validations = defaultValidationObj,
   onChange,
   disabled,
   sameAs,
@@ -155,7 +155,7 @@ function GTInputPassword({
   const sameAsValue = useMemo(() => {
     if ((sameAs ?? "").length === 0 || !sameAs) return "";
 
-    return pageState[sameAs] || "";
+    return pageState[sameAs] ?? "";
   }, [pageState, sameAs]);
 
   useEffect(() => {

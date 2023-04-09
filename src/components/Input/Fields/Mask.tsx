@@ -31,9 +31,9 @@ function GTInputMask({
   disabled,
   name,
   label,
-  validations,
   disableClearable,
-  defaultValidation,
+  validations = defaultValidationObj,
+  defaultValidation = true,
   onChange,
   onChangeValidate,
   text,
@@ -212,6 +212,7 @@ function GTInputMask({
             </Input.IconWrapper>
           )}
 
+          {/* @ts-expect-error */}
           {(!_.isEmpty(value) || value > 0) &&
             !(disableClearable ?? false) &&
             !(disabled ?? false) &&
@@ -238,4 +239,3 @@ GTInputMask.propTypes = {
   validations: PropTypes.arrayOf(PropTypes.string),
   defaultValidation: PropTypes.bool,
 };
-

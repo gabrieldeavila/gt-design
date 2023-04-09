@@ -30,8 +30,8 @@ function GTInputNumber({
   disableClearable,
   name,
   label,
-  validations,
-  defaultValidation,
+  validations = defaultValidationObj,
+  defaultValidation = true,
   onChange,
   text,
   title,
@@ -169,6 +169,7 @@ function GTInputNumber({
             </Input.IconWrapper>
           )}
 
+          {/* @ts-expect-error */}
           {(!_.isEmpty(value) || value > 0) &&
             !(disableClearable ?? false) &&
             !(disabled ?? false) &&

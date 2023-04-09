@@ -17,8 +17,8 @@ const defaultValidationObj = ["required"];
 function GTInputSwitch({
   name,
   label,
-  validations,
-  defaultValidation,
+  validations = defaultValidationObj,
+  defaultValidation = true,
   flexJustify,
   text,
   title,

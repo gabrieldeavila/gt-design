@@ -42,8 +42,8 @@ const SelectContext = React.createContext<ISelectContext>({ preSelected: 0 });
 function GTInputSelect({
   name,
   label,
-  defaultValidation,
-  validations,
+  defaultValidation = true,
+  validations = defaultValidationObj,
   options,
   disabled,
   text,

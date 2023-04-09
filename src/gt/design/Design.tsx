@@ -13,5 +13,3 @@ GTDesign.propTypes = {
   theme: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   children: PropTypes.node.isRequired,
 };
-
-GTDesign.defaultProps = {};

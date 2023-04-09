@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable operator-linebreak */
 import _ from "lodash";
@@ -27,11 +28,11 @@ const defaultValidationObj = ["required", "email"];
 function GTInputEmail({
   name,
   label,
-  validations,
-  defaultValidation,
+  validations = defaultValidationObj,
+  defaultValidation = true,
   disabled,
   disableClearable,
-  onChange,
+  onChange = () => {},
   text,
   title,
   row,
@@ -158,11 +159,14 @@ function GTInputEmail({
             </Input.IconWrapper>
           )}
 
-          {!_.isEmpty(value) && showFeedback && !(disableClearable ?? false) && !(disabled ?? false) && (
-            <Input.IconWrapper onClick={handleInputClear}>
-              <Icon.X size={15} className="svg-no-active cursor" />
-            </Input.IconWrapper>
-          )}
+          {!_.isEmpty(value) &&
+            showFeedback &&
+            !(disableClearable ?? false) &&
+            !(disabled ?? false) && (
+              <Input.IconWrapper onClick={handleInputClear}>
+                <Icon.X size={15} className="svg-no-active cursor" />
+              </Input.IconWrapper>
+            )}
         </Input.FeedbackWrapper>
 
         {_.isEmpty(errorMessage) && (
