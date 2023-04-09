@@ -1,6 +1,6 @@
 import { useEffect, Suspense } from "react";
 import { I18nextProvider } from "react-i18next";
-import { themes } from "@storybook/theming";
+import "./styles.css";
 
 import i18n from "../src/translate/index";
 
@@ -93,7 +93,14 @@ export const parameters = {
         "Data Entry",
         [
           "Inputs",
-          ["All", "All With Prev Values", "Text", "Email", "Select", "NumericMask"],
+          [
+            "All",
+            "All With Prev Values",
+            "Text",
+            "Email",
+            "Select",
+            "NumericMask",
+          ],
           "Buttons",
           "Switch",
         ],

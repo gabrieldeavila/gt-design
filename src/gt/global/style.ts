@@ -8,7 +8,6 @@ const GlobalStyle = createGlobalStyle`
   * {
     color: var(--contrast);
     line-height: 1.5 !important;
-    font-family: 'Kanit', sans-serif !important;
   }
   
   input:-webkit-autofill { 
@@ -21,10 +20,6 @@ const GlobalStyle = createGlobalStyle`
     background-color: var(--secondary);
 
     ${scrolls.default};
-  }
-
-  body, input, button {
-    font-family: 'Kanit', sans-serif;
   }
 
   ::selection {
