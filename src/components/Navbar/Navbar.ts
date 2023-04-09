@@ -9,7 +9,6 @@ import flex from "../../utils/flex";
 import shadows from "../../utils/shadows";
 import transitions from "../../utils/transitions";
 import { INavbarOptions, INavbarWrapper } from "./interface";
-import { gtTransparentize } from "../../utils/colors";
 
 const NavbarWrapper = styled.nav<INavbarWrapper>`
   min-height: 3rem;
@@ -157,8 +156,7 @@ const NavbarPopup = styled.div`
   }
 
   ${NavbarText}, ${NavbarSubText} {
-    border-top: 1px solid
-      ${gtTransparentize({ amount: 0.5, varName: "contrast" })};
+    border-top: 1px solid var(--contrast-0_5);
   }
 
   ${NavbarText}:last-child, ${NavbarSubText}:last-child {

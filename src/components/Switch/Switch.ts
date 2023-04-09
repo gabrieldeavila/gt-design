@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 import { animations, transforms } from "../../utils";
-import { gtTransparentize } from "../../utils/colors";
 import flex from "../../utils/flex";
 import transitions from "../../utils/transitions";
 import { ISwitch, ISwitchInput } from "./interface";
@@ -46,9 +45,7 @@ const SwitchSlider = styled.span`
 const activeLabel = css<ISwitch>`
   filter: contrast();
   background: ${({ checked }) =>
-    checked ?? false
-      ? gtTransparentize({ amount: 0.1, varName: "contrast" })
-      : gtTransparentize({ amount: 0.5, varName: "contrast" })};
+    checked ?? false ? "var(--contrast-0_1)" : "var(--contrast-0_5)"};
 `;
 
 const SwitchLabel = styled.label<ISwitch>`

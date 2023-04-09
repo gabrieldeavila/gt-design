@@ -21,9 +21,6 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "outDir": "dist",
-    "paths": {
-      "@/*": ["src/*"]
-    }
   },
   "exclude": ["node_modules", "examples", "docs"]
 }

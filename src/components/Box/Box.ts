@@ -1,5 +1,4 @@
-import { gtTransparentize } from "../../utils/colors";
-import { getLuminance } from "polished";
+import { getLuminance, transparentize } from "polished";
 import styled, { css } from "styled-components";
 import { color } from "styled-system";
 import flex from "../../utils/flex";
@@ -48,7 +47,7 @@ const BoxContainer = styled.div<IBoxContainer>`
   ${shadows.simple};
   ${color};
   background: ${({ bg }) =>
-    gtTransparentize({ amount: 0.45, prefer: bg, varName: "primary" })};
+    bg != null ? transparentize(0.45, bg) : "var(--primary-0_5)"};
   backdrop-filter: blur(15px);
   cursor: pointer;
   height: -webkit-fill-available;

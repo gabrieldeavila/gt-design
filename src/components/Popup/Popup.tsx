@@ -4,7 +4,6 @@ import styled from "styled-components";
 import useEaseClose from "../../hooks/helpers/useEaseClose";
 import useOnClickOutside from "../../hooks/helpers/useOnClickOutside";
 import animations from "../../utils/animations";
-import { gtTransparentize } from "../../utils/colors";
 import shadows from "../../utils/shadows";
 import { IPopupWrapper } from "./interface";
 
@@ -32,7 +31,7 @@ const PopupWrapperStyled = styled.div`
 const PopupContainer = styled.div`
   position: relative;
   padding: 0.5rem 0rem;
-  border-top: 1px solid ${gtTransparentize({ amount: 0.5, varName: "contrast" })};
+  border-top: 1px solid var(--contrast-0_5);
 
   &:last-child {
     border-bottom: none;
@@ -50,7 +49,7 @@ const PopupItem = styled.a`
   cursor: pointer;
 
   &:hover {
-    background: ${gtTransparentize({ amount: 0, varName: "backgroundHover" })}
+    background: var(--backgroundHover-0_01);
   }
 `;
 
@@ -88,10 +87,4 @@ PopupWrapperComp.propTypes = {
   setOpen: PropTypes.func,
   avoidComponents: PropTypes.array,
   children: PropTypes.node.isRequired,
-};
-
-PopupWrapperComp.defaultProps = {
-  open: false,
-  setOpen: () => {},
-  avoidComponents: [],
 };

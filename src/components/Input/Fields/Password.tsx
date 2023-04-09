@@ -250,10 +250,3 @@ GTInputPassword.propTypes = {
   onChange: PropTypes.func,
   sameAs: PropTypes.string,
 };
-
-GTInputPassword.defaultProps = {
-  validations: defaultValidationObj,
-  defaultValidation: true,
-  onChange: () => {},
-  sameAs: "",
-};

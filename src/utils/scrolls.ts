@@ -1,5 +1,4 @@
 import { css } from "styled-components";
-import { gtTransparentize } from "./colors";
 
 const scrollDefault = css`
   /* width */
@@ -9,7 +8,7 @@ const scrollDefault = css`
 
   /* Track */
   &::-webkit-scrollbar-track {
-    background-color: var(--secondary)
+    background-color: var(--secondary);
   }
 
   /* Handle */
@@ -20,7 +19,7 @@ const scrollDefault = css`
 
   /* Handle on hover */
   &::-webkit-scrollbar-thumb:hover {
-    background: ${gtTransparentize({ amount: 0.5, varName: "contrast" })};
+    background: var(--contrast-0_5);
   }
 `;
 

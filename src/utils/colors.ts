@@ -1,67 +1,133 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { transparentize } from "polished";
 import defaultConfigs from "../gt/Global/default.configs";
 
-export const findColorThroughVar = (name: string) => {
-  const starterTheme =
-    localStorage.getItem("darkTheme") != null ? "darkTheme" : "theme";
+interface ServerColorsType {
+  varName: string;
+  amount: number;
+}
 
-  // gets the value of the variable
-  let color = "";
-
-  if (color === "") {
-    // @ts-expect-error
-    color = defaultConfigs.themeConfig.global[starterTheme]?.[name];
-  }
-
-  return color;
-};
-
-const root = document.documentElement;
+export const transparentizedColors: ServerColorsType[] = [
+  {
+    varName: "primary-0_1",
+    amount: 0.1,
+  },
+  {
+    varName: "primary-0_2",
+    amount: 0.2,
+  },
+  {
+    varName: "primary-0_5",
+    amount: 0.5,
+  },
+  {
+    varName: "primary-0_8",
+    amount: 0.8,
+  },
+  {
+    varName: "contrast-0_1",
+    amount: 0.1,
+  },
+  {
+    varName: "contrast-0_9",
+    amount: 0.9,
+  },
+  {
+    varName: "contrast-0_5",
+    amount: 0.5,
+  },
+  {
+    varName: "outlineError-0_5",
+    amount: 0.5,
+  },
+  {
+    varName: "outline-0_5",
+    amount: 0.5,
+  },
+  {
+    varName: "outline-0_9",
+    amount: 0.9,
+  },
+  {
+    varName: "secondary-0_7",
+    amount: 0.7,
+  },
+  {
+    varName: "secondary-0_5",
+    amount: 0.5,
+  },
+  {
+    varName: "secondary-0_2",
+    amount: 0.2,
+  },
+  {
+    varName: "secondary-0_8",
+    amount: 0.8,
+  },
+  {
+    varName: "secondary-0_99",
+    amount: 0.99,
+  },
+  {
+    varName: "contrast-0_7",
+    amount: 0.7,
+  },
+  {
+    varName: "backgroundHover-0_01",
+    amount: 0.01,
+  },
+  {
+    varName: "switchNormalActive-0_25",
+    amount: 0.25,
+  },
+  {
+    varName: "switchNormalBackground-0_25",
+    amount: 0.25,
+  },
+  {
+    varName: "btnShadow-0_9",
+    amount: 0.9,
+  },
+  {
+    varName: "btnShadow-0_98",
+    amount: 0.98,
+  },
+  {
+    varName: "btnShadow-0_85",
+    amount: 0.85,
+  },
+  {
+    varName: "glowShadow-0_9",
+    amount: 0.9,
+  },
+];
 
 export const gtTransparentize = ({
   amount,
   varName,
-  prefer,
 }: {
   amount: number;
   varName: string;
-  prefer?: string;
 }) => {
   try {
-    // removes all the dots
-    const normalizedAmount = amount.toString().replace(".", "_");
+    // find the color to transparentize
+    // ex.: varName = "primary-0_1"
+    // colorToTransparentize = "primary"
+    const colorToTransparentize = varName.split("-")[0];
 
-    const transparentizeName = `--${varName}-${normalizedAmount}`;
-    const color = transparentize(
-      amount,
-      prefer ?? findColorThroughVar(varName)
-    );
+    const starterTheme =
+      localStorage.getItem("darkTheme") != null ? "darkTheme" : "theme";
 
-    let initialValue = getComputedStyle(
-      document.documentElement
-    ).getPropertyValue(transparentizeName);
+    const color =
+      // @ts-expect-error
+      defaultConfigs.themeConfig.global[starterTheme]?.[colorToTransparentize];
 
-    const observer = new MutationObserver(() => {
-      const color = prefer ?? findColorThroughVar(varName);
-      const newValue = transparentize(amount, color);
+    if (typeof window !== "undefined") {
+      const newColor = transparentize(amount, color);
 
-      if (newValue !== initialValue) {
-        root.style.setProperty(transparentizeName, newValue);
-
-        initialValue = newValue;
-      }
-    });
-
-    root.style.setProperty(transparentizeName, color);
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["style"],
-    });
-
-    return `var(${transparentizeName})`;
+      document.documentElement.style.setProperty(`--${varName}`, newColor);
+    }
   } catch (e) {
-    console.log(e, varName);
-    return "transparent";
+    console.log(e, "hehe errito!!!");
   }
 };

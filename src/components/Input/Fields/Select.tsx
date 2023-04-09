@@ -382,12 +382,6 @@ GTInputSelect.propTypes = {
   onChange: PropTypes.func,
 };
 
-GTInputSelect.defaultProps = {
-  validations: defaultValidationObj,
-  defaultValidation: true,
-  onChange: () => {},
-};
-
 const SelectOptions = memo(function SelectOptions({ options }: ISelectOptions) {
   const {
     searchTerm,

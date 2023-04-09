@@ -30,7 +30,7 @@ const sizes: TSize = {
   lg: 32,
 };
 
-function LoaderSimple({ size }: ILoader) {
+function LoaderSimple({ size = "sm" }: ILoader) {
   const sizeValue = useMemo(() => {
     return sizes[size ?? "sm"];
   }, [size]);
@@ -44,10 +44,6 @@ function LoaderSimple({ size }: ILoader) {
 
 LoaderSimple.propTypes = {
   size: PropTypes.oneOf(["sm", "md", "lg"]),
-};
-
-LoaderSimple.defaultProps = {
-  size: "sm",
 };
 
 const Loader = {

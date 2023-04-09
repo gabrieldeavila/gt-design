@@ -128,8 +128,4 @@ GTNavbarOptionTemp.propTypes = {
   name: PropTypes.string.isRequired,
 };
 
-GTNavbarOptionTemp.defaultProps = {
-  icon: null,
-};
-
 export const GTNavbarOption = memo(GTNavbarOptionTemp);

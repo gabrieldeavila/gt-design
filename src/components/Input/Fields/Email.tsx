@@ -182,9 +182,3 @@ GTInputEmail.propTypes = {
   defaultValidation: PropTypes.bool,
   onChange: PropTypes.func,
 };
-
-GTInputEmail.defaultProps = {
-  validations: defaultValidationObj,
-  defaultValidation: true,
-  onChange: () => {},
-};

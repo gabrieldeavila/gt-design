@@ -10,7 +10,6 @@ import shadows from "../../utils/shadows";
 import transitions from "../../utils/transitions";
 import { LoaderWrapper } from "../Loader/Loader";
 import { IButton } from "./interface";
-import { gtTransparentize } from "../../utils/colors";
 
 const sm = css`
   padding: 0.45rem;
@@ -105,7 +104,7 @@ export const ButtonWrapper = styled.div`
 `;
 
 export const ExtraNormal = styled(ResetBtn)`
-  background: ${gtTransparentize({ amount: 0.5, varName: "primary" })};
+  background: var(--primary-0_5);
 
   & .extra-title-children {
     color: var(--contrast);
@@ -113,7 +112,7 @@ export const ExtraNormal = styled(ResetBtn)`
 `;
 
 export const ExtraContrast = styled(ResetBtn)`
-  background: ${gtTransparentize({ amount: 0.1, varName: "contrast" })};
+  background: var(--contrast-0_1);
 
   & .extra-title-children {
     color: var(--primary);

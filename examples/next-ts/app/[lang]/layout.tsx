@@ -1,7 +1,5 @@
 import { Kanit } from "next/font/google";
 import StyledComponentsRegistry from "./registry";
-import { cookies } from "next/headers";
-import { GetServerSideProps } from "next";
 
 const kanit = Kanit({
   weight: ["100", "200", "300", "400", "500", "700", "900"],
@@ -34,7 +32,7 @@ export default async function RootLayout({
       <html lang={params.lang} className={kanit.className}>
         <body>
           {children}
-        </body>
+          </body>
       </html>
     </StyledComponentsRegistry>
   );

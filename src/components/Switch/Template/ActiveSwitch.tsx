@@ -39,8 +39,3 @@ export default GTActiveSwitch;
 GTActiveSwitch.propTypes = {
   isInitialChecked: PropTypes.bool,
 };
-
-// add default props
-GTActiveSwitch.defaultProps = {
-  isInitialChecked: false,
-};

@@ -77,10 +77,3 @@ GTDarkSwitch.propTypes = {
   placeX: PropTypes.oneOf([null, "top", "bottom"]),
   placeY: PropTypes.oneOf([null, "left", "right"]),
 };
-
-// add default props
-GTDarkSwitch.defaultProps = {
-  fixed: false,
-  placeX: "bottom",
-  placeY: "right",
-};

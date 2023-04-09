@@ -14,7 +14,7 @@ const options = {
 
 function useValidateDate(min?: string | number, max?: string | number) {
   const { optionsValidation } = useInputValidation();
-  const dateFormat = useDateFormat();
+  const dateFormat = useDateFormat() ?? "";
 
   // use the user date format to format the error message
   const formatErrorData = useCallback(

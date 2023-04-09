@@ -196,9 +196,3 @@ GTInputNumber.propTypes = {
   validations: PropTypes.arrayOf(PropTypes.string),
   defaultValidation: PropTypes.bool,
 };
-
-GTInputNumber.defaultProps = {
-  onChange: () => {},
-  validations: defaultValidationObj,
-  defaultValidation: true,
-};

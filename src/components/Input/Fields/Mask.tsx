@@ -239,8 +239,3 @@ GTInputMask.propTypes = {
   defaultValidation: PropTypes.bool,
 };
 
-GTInputMask.defaultProps = {
-  onChange: () => {},
-  validations: defaultValidationObj,
-  defaultValidation: true,
-};

@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import { gtTransparentize } from "../../utils/colors";
 import flex from "../../utils/flex";
 import transitions from "../../utils/transitions";
 
 const NavbarMobileWrapper = styled.div`
-  background-color: ${gtTransparentize({ amount: 0.5, varName: "primary" })};
+  background-color: var(--primary-0_5);
   backdrop-filter: blur(10px);
   padding: 0.5rem;
   position: fixed;
@@ -28,10 +27,7 @@ const NavbarMobileLinkWrapper = styled.div`
   ${transitions.basic}
 
   &:hover {
-    background-color: ${gtTransparentize({
-      amount: 0.5,
-      varName: "secondary",
-    })};
+    background-color: var(--secondary-0_5);
     cursor: pointer;
   }
 `;

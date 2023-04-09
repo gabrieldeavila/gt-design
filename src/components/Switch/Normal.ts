@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { shadows, transitions } from "../../utils";
-import { gtTransparentize } from "../../utils/colors";
 import { INormalSwitchSlider } from "./interface";
 
 const NormalSwitchSlider = styled.div<INormalSwitchSlider>`
@@ -18,7 +17,7 @@ const NormalSwitchSlider = styled.div<INormalSwitchSlider>`
     inset-inline-start: 0;
     inset-inline-end: 0;
     border-radius: 1rem;
-    background: ${gtTransparentize({ amount: 0.1, varName: "contrast" })};
+    background: var(--contrast-0_1);
     ${transitions.basic};
 
     ${shadows.basic}
@@ -49,8 +48,8 @@ const NormalSwitchContainer = styled.button<INormalSwitchSlider>`
   &:hover {
     background: ${({ isChecked }) =>
       isChecked ?? false
-        ? gtTransparentize({ amount: 0.25, varName: "switchNormalActive" })
-        : gtTransparentize({ amount: 0.25, varName: "switchNormalBackground" })};
+        ? "var(--switchNormalActive-0_25)"
+        : "var(--switchNormalBackground-0_25)"};
   }
 
   ${transitions.basic};

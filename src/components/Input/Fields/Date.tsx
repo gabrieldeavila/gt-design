@@ -216,9 +216,3 @@ GTInputDate.propTypes = {
   validations: PropTypes.arrayOf(PropTypes.string),
   defaultValidation: PropTypes.bool,
 };
-
-GTInputDate.defaultProps = {
-  onChange: () => {},
-  validations: defaultValidationObj,
-  defaultValidation: true,
-};

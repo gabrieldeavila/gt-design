@@ -3,7 +3,6 @@ import styled, { css } from "styled-components";
 import { animations, transforms } from "../../utils";
 import { defaultAddOns } from "../Space/addOns/addOns";
 import { IText, ITextDividerWrapper } from "./interface";
-import { gtTransparentize } from "../../utils/colors";
 
 export const P = styled.p<IText>`
   color: var(--contrast);
@@ -81,7 +80,7 @@ export const TextBtnStyled = styled.button`
 `;
 
 export const Strong = styled.strong`
-  color: var(--contrast)
+  color: var(--contrast);
   font-weight: 500;
 
   ${defaultAddOns};
@@ -101,10 +100,7 @@ export const DividerWrapper = styled.div<ITextDividerWrapper>`
     position: relative;
     border-block-start-style: dashed;
     border-block-start: 1px solid transparent;
-    border-block-start-color: ${gtTransparentize({
-      amount: 0.9,
-      varName: "contrast",
-    })};
+    border-block-start-color: var(--contrast-0_9);
     border-block-end: 0;
     transform: translateY(50%);
     height: 1px;

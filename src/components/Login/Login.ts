@@ -6,7 +6,6 @@ import flex from "../../utils/flex";
 import shadows from "../../utils/shadows";
 import Switch from "../Switch";
 import { ILoginBoxPrimary } from "./interface";
-import { gtTransparentize } from "../../utils/colors";
 
 const LoginWrapper = styled.div`
   position: relative;
@@ -72,7 +71,7 @@ const LoginBoxMain = styled.main`
   left: 60%;
   padding: 1.5rem;
   width: 30vw;
-  background: ${gtTransparentize({ amount: 0.4, varName: "primary" })};
+  background: var(--primary-0_5);
   backdrop-filter: blur(1rem);
   border-radius: 0.25rem;
   ${flex.alignCenter}

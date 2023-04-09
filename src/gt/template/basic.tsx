@@ -24,7 +24,6 @@ function GTBasic({
         {!noThemeChange && <DarkSwitch fixed />}
       </GTDesign>
 
-      <div>lmao</div>
       <GTCssInjectionScript />
     </>
   );

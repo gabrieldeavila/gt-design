@@ -42,12 +42,4 @@ TextBtn.propTypes = {
   type: PropTypes.oneOf(["button", "submit", "reset"]),
 };
 
-TextBtn.defaultProps = {
-  onClick: () => {},
-  className: "",
-  style: {},
-  disabled: false,
-  type: "button",
-};
-
 export default TextBtn;

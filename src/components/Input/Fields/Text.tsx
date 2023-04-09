@@ -222,13 +222,3 @@ GTInputText.propTypes = {
   minChars: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   maxChars: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
-
-GTInputText.defaultProps = {
-  onChange: () => {},
-  validations: defaultValidationObj,
-  minWords: 0,
-  maxWords: 0,
-  defaultValidation: true,
-  minChars: 0,
-  maxChars: 0,
-};
