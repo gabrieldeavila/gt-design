@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import React, { useMemo } from "react";
-import { useTranslation } from "react-i18next";
 import Space from "../../Space";
 import { ITextDivider } from "../interface";
 import { DividerText, DividerWrapper } from "../Text";
+import useGTTranslate from "../../../gt/Global/translate";
 
 const widths = {
   left: {
@@ -23,7 +23,7 @@ const widths = {
 };
 
 function TextDivider({ children, position = "center", text, hasMarginTop }: ITextDivider) {
-  const { t } = useTranslation();
+  const { translateThis } = useGTTranslate();
 
   const width = useMemo(() => {
     return widths[position];
@@ -40,7 +40,7 @@ function TextDivider({ children, position = "center", text, hasMarginTop }: ITex
   return (
     <Space.Modifiers addOns={["full-space"]} mt={marginTop}>
       <DividerWrapper currWidth={width}>
-        <DividerText>{children ?? t(text ?? "")}</DividerText>
+        <DividerText>{children ?? translateThis(text ?? "")}</DividerText>
       </DividerWrapper>
     </Space.Modifiers>
   );

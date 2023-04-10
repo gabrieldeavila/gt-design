@@ -13,8 +13,8 @@ import React, {
   useState,
 } from "react";
 import * as Icon from "react-feather";
-import { useTranslation } from "react-i18next";
 import { useGTPageStateContext } from "../../../context/pageState";
+import useGTTranslate from "../../../gt/Global/translate";
 import useUniqueName from "../../../hooks/helpers/useUniqueName";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidatePassword from "../../../hooks/validation/useValidatePassword";
@@ -49,7 +49,7 @@ function GTInputPassword({
   onBlurValidate,
   onChangeValidate,
 }: IGTInputPassword) {
-  const { t } = useTranslation();
+  const { translateThis } = useGTTranslate();
   const uniqueName = useUniqueName({ name });
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -188,7 +188,7 @@ function GTInputPassword({
             up={isLabelUp}
             htmlFor={uniqueName}
           >
-            {t(label)}
+            {translateThis(label)}
           </Input.Label>
           <Input.Field
             ref={inpRef}

@@ -1,21 +1,29 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
-import { useTriggerState } from "react-trigger-state";
 import DarkSwitch from "../../components/Switch/Template/DarkSwitch";
 import GTDesign from "../Design/Design";
 import GTCssInjectionScript from "../Global/css-global-classes";
 import GlobalStyle from "../Global/style";
+import { stateStorage, useTriggerState } from "react-trigger-state";
 
 function GTBasic({
   children,
   noThemeChange = false,
+  customTranslator,
 }: {
   children: React.ReactNode;
   noThemeChange?: boolean;
+  customTranslator?: (key: string) => string;
 }) {
+  // alert("huhu");
   const [currTheme] = useTriggerState({ name: "currTheme" });
   const [showDarkSwitch, setShowDarkSwitch] = useState(false);
+
+  useEffect(() => {
+    // console.log(customTranslator);
+    stateStorage.set("custom_translator", customTranslator);
+  }, [customTranslator]);
 
   useEffect(() => {
     setShowDarkSwitch(true);

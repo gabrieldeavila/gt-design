@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable operator-linebreak */
-import { t } from "i18next";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import React, {
@@ -14,8 +13,8 @@ import React, {
   useState,
 } from "react";
 import * as Icon from "react-feather";
-import { useTranslation } from "react-i18next";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
+import useGTTranslate from "../../../gt/Global/translate";
 import useOnClickOutside from "../../../hooks/helpers/useOnClickOutside";
 import useUniqueName from "../../../hooks/helpers/useUniqueName";
 import useInputValues from "../../../hooks/pageState/useInputValues";
@@ -23,8 +22,8 @@ import useValidateSelect from "../../../hooks/validation/useValidateSelect";
 import useValidateState from "../../../hooks/validation/useValidateState";
 import wordFilter from "../../../utils/wordFilter";
 import Loader from "../../Loader";
-import { IGTTooltipRef } from "../../Tooltip/interface";
 import GTTooltip from "../../Tooltip/Tooltip";
+import { IGTTooltipRef } from "../../Tooltip/interface";
 import ErrorMessage from "../Extras/ErrorMessage";
 import Input, { Select } from "../Input";
 import {
@@ -55,7 +54,7 @@ function GTInputSelect({
   onChangeValidate,
   disableClearable,
 }: IGTInputSelect): JSX.Element {
-  const { t } = useTranslation();
+  const { translateThis } = useGTTranslate();
   const uniqueName = useUniqueName({ name });
 
   const { isLoading } = useGTPageStateContextSetters();
@@ -307,7 +306,7 @@ function GTInputSelect({
               htmlFor={uniqueName}
               isRequired={isRequired}
             >
-              {t(label)}
+              {translateThis(label)}
             </Input.Label>
             <Input.Field
               ref={inputRef}
@@ -391,6 +390,8 @@ const SelectOptions = memo(function SelectOptions({ options }: ISelectOptions) {
     containerRef,
     tooltipRef,
   } = useContext<ISelectContext>(SelectContext);
+
+  const { translateThis } = useGTTranslate();
 
   const filteredOptions = useMemo(
     () => wordFilter(options, searchTerm ?? ""),
@@ -505,7 +506,7 @@ const SelectOptions = memo(function SelectOptions({ options }: ISelectOptions) {
         ))}
 
         {filteredOptions.length === 0 && (
-          <Select.NotFound>{t("SELECT_NOT_FOUND")}</Select.NotFound>
+          <Select.NotFound>{translateThis("SELECT_NOT_FOUND")}</Select.NotFound>
         )}
       </Select.OptionsContainer>
     </Select.OptionsWrapper>

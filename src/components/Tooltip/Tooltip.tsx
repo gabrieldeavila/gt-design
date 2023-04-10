@@ -9,7 +9,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useTranslation } from "react-i18next";
+import useGTTranslate from "../../gt/Global/translate";
 import { IGTTooltip, IGTTooltipRef } from "./interface";
 import Tooltip from "./style";
 
@@ -22,7 +22,7 @@ const clearTimeOut = (timeOut: NodeJS.Timeout | null) => {
 const GTTooltip = forwardRef((props: IGTTooltip, ref?: Ref<IGTTooltipRef>) => {
   const { title, text, parentRef }: IGTTooltip = props;
   const timeOut = useRef<NodeJS.Timeout | null>(null);
-  const { t } = useTranslation();
+  const { translateThis } = useGTTranslate();
   const [show, setShow] = useState(false);
   const [isAboveParent, setIsAboveParent] = useState(false);
 
@@ -100,9 +100,9 @@ const GTTooltip = forwardRef((props: IGTTooltip, ref?: Ref<IGTTooltipRef>) => {
     >
       <Tooltip.Wrapper isAboveParent={isAboveParent} ref={tooltipRef}>
         <Tooltip.Container isAboveParent={isAboveParent}>
-          {title != null && <Tooltip.Title> {t(title)} </Tooltip.Title>}
+          {title != null && <Tooltip.Title> {translateThis(title)} </Tooltip.Title>}
 
-          {text != null && <Tooltip.Text>{t(text)}</Tooltip.Text>}
+          {text != null && <Tooltip.Text>{translateThis(text)}</Tooltip.Text>}
         </Tooltip.Container>
       </Tooltip.Wrapper>
     </Tooltip.Content>

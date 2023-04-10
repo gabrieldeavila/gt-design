@@ -4,7 +4,7 @@
 /* eslint-disable operator-linebreak */
 import PropTypes from "prop-types";
 import React, { useCallback, useMemo, useRef } from "react";
-import { useTranslation } from "react-i18next";
+import useGTTranslate from "../../../gt/Global/translate";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useUniqueName from "../../../hooks/helpers/useUniqueName";
 import useSwitchValues from "../../../hooks/pageState/useSwitchValues";
@@ -25,7 +25,7 @@ function GTInputSwitch({
   row,
   disabled,
 }: IGTInputSwitch) {
-  const { t } = useTranslation();
+  const { translateThis } = useGTTranslate();
   const uniqueName = useUniqueName({ name });
 
   const inputValidations = useMemo(() => {
@@ -78,7 +78,7 @@ function GTInputSwitch({
           up={false}
           htmlFor={uniqueName}
         >
-          {t(label)}
+          {translateThis(label)}
         </Input.NormalizedLabel>
 
         <GTTooltip parentRef={containerRef} title={title} text={text} />

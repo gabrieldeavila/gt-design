@@ -12,7 +12,7 @@ import React, {
   useState,
 } from "react";
 import * as Icon from "react-feather";
-import { useTranslation } from "react-i18next";
+import useGTTranslate from "../../../gt/Global/translate";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useUniqueName from "../../../hooks/helpers/useUniqueName";
 import useInputValues from "../../../hooks/pageState/useInputValues";
@@ -43,7 +43,8 @@ function GTInputText({
   onBlurValidate,
   onChangeValidate,
 }: IGTInputText) {
-  const { t } = useTranslation();
+  const { translateThis } = useGTTranslate();
+
   const uniqueName = useUniqueName({ name });
   const alterFieldRef = useRef<boolean>(true);
 
@@ -164,7 +165,7 @@ function GTInputText({
             up={isLabelUp}
             htmlFor={uniqueName}
           >
-            {t(label)}
+            {translateThis(label)}
           </Input.Label>
           <Input.Field
             type="text"

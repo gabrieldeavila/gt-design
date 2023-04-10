@@ -2,16 +2,16 @@
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import * as Icon from "react-feather";
-import { useTranslation } from "react-i18next";
 import useOnClickOutside from "../../../hooks/helpers/useOnClickOutside";
 import Button from "../../Button";
 import Space from "../../Space";
 import Text from "../../Text";
-import { IGTModal } from "../interface";
+import useGTTranslate from "../../../gt/Global/translate";
 import Modal from "../Modal";
+import { IGTModal } from "../interface";
 
 function GTModalBasic({ show, setShow, data }: IGTModal) {
-  const { t } = useTranslation();
+  const { translateThis } = useGTTranslate();
 
   const [isOpen, setIsOpen] = useState(true);
   const [isLoadingConfirm, setIsLoadingConfirm] = useState(false);
@@ -119,7 +119,7 @@ function GTModalBasic({ show, setShow, data }: IGTModal) {
     >
       <Modal.Wrapper ref={ref} isOpen={isOpen}>
         <Modal.Header>
-          <Text.H1>{t(data.title)}</Text.H1>
+          <Text.H1>{translateThis(data.title)}</Text.H1>
           {(data.closable ?? true) && (
             <Modal.Close onClick={() => handleClose()}>
               <Icon.X />
@@ -129,7 +129,7 @@ function GTModalBasic({ show, setShow, data }: IGTModal) {
 
         <Modal.Main>
           <Modal.MainWrapper>
-            <Text.P>{t(data.content)}</Text.P>
+            <Text.P>{translateThis(data.content)}</Text.P>
           </Modal.MainWrapper>
         </Modal.Main>
 
@@ -143,7 +143,7 @@ function GTModalBasic({ show, setShow, data }: IGTModal) {
                   size="sm"
                   onClick={handleCancel}
                 >
-                  {t(data.cancelText)}
+                  {translateThis(data.cancelText)}
                 </Button.Error>
               )}
 
@@ -154,7 +154,7 @@ function GTModalBasic({ show, setShow, data }: IGTModal) {
                   size="sm"
                   onClick={handleConfirm}
                 >
-                  {t(data.confirmText)}
+                  {translateThis(data.confirmText)}
                 </Button.Success>
               )}
             </Space.Modifiers>

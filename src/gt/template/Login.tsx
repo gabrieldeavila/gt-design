@@ -9,7 +9,6 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useTranslation } from "react-i18next";
 import { Button, Text } from "../../components";
 import GTInput from "../../components/Input/GTInput";
 import Input from "../../components/Input/Input";
@@ -18,6 +17,7 @@ import Space from "../../components/Space/Space";
 import GTPageStateProvider, {
   useGTPageStateContext,
 } from "../../context/pageState";
+import useGTTranslate from "../Global/translate";
 import { ILogin } from "./interface";
 
 const GTLogin = memo(function GTLogin({
@@ -80,14 +80,14 @@ function LoginCreate({
   loginRef,
   isFirstRender,
 }: ILogin) {
-  const { t } = useTranslation();
+  const { translateThis } = useGTTranslate();
 
   return (
     <Login.BoxMain ref={loginRef} isFirstRender={isFirstRender}>
       <Login.BoxWrapper>
         <Space.Flex>
-          <Text.H1>{t("TEMPLATE.LOGIN.CREATE_TITLE")}</Text.H1>
-          <Text.P>{t("TEMPLATE.LOGIN.CREATE_SUBTITLE")}</Text.P>
+          <Text.H1>{translateThis("TEMPLATE.LOGIN.CREATE_TITLE")}</Text.H1>
+          <Text.P>{translateThis("TEMPLATE.LOGIN.CREATE_SUBTITLE")}</Text.P>
         </Space.Flex>
         <Input.Group>
           <GTInput.Text
@@ -120,14 +120,16 @@ function LoginCreate({
           />
         </Input.Group>
         <Space.Flex>
-          <Text.P fontSize={0}>{t("TEMPLATE.LOGIN.DATA_POLICY")}</Text.P>
+          <Text.P fontSize={0}>
+            {translateThis("TEMPLATE.LOGIN.DATA_POLICY")}
+          </Text.P>
           <Button.Normal disabled={!canSave}>
-            {t("TEMPLATE.LOGIN.CREATE_BUTTON")}
+            {translateThis("TEMPLATE.LOGIN.CREATE_BUTTON")}
           </Button.Normal>
 
           <Space.Center>
             <Text.Btn onClick={() => setIsCreate(false)}>
-              {t("TEMPLATE.LOGIN.ALREADY_HAVE_ACCOUNT")}
+              {translateThis("TEMPLATE.LOGIN.ALREADY_HAVE_ACCOUNT")}
             </Text.Btn>
           </Space.Center>
         </Space.Flex>
@@ -152,7 +154,7 @@ function LoginSignIn({
   loginRef,
   onPasswordForgot,
 }: ILogin) {
-  const { t } = useTranslation();
+  const { translateThis } = useGTTranslate();
 
   const { setErrors, pageState } = useGTPageStateContext();
 
@@ -171,8 +173,8 @@ function LoginSignIn({
     <Login.BoxMain ref={loginRef}>
       <Login.BoxWrapper>
         <Space.Flex>
-          <Text.H1>{t("TEMPLATE.LOGIN.SIGN_IN_TITLE")}</Text.H1>
-          <Text.P>{t("TEMPLATE.LOGIN.SIGN_IN_SUBTITLE")}</Text.P>
+          <Text.H1>{translateThis("TEMPLATE.LOGIN.SIGN_IN_TITLE")}</Text.H1>
+          <Text.P>{translateThis("TEMPLATE.LOGIN.SIGN_IN_SUBTITLE")}</Text.P>
         </Space.Flex>
         <Space.Flex>
           <Input.Group>
@@ -191,15 +193,15 @@ function LoginSignIn({
         </Space.Flex>
         <Space.Flex>
           <Button.Normal onClick={handleSignIn} disabled={!canSave}>
-            {t("TEMPLATE.LOGIN.SIGN_IN_BUTTON")}
+            {translateThis("TEMPLATE.LOGIN.SIGN_IN_BUTTON")}
           </Button.Normal>
 
           <Space.Between>
             <Text.Btn onClick={() => setIsCreate(true)}>
-              {t("TEMPLATE.LOGIN.DONT_HAVE_ACCOUNT")}
+              {translateThis("TEMPLATE.LOGIN.DONT_HAVE_ACCOUNT")}
             </Text.Btn>
             <Text.Btn onClick={onPasswordForgot}>
-              {t("TEMPLATE.LOGIN.FORGOT_PASSWORD")}
+              {translateThis("TEMPLATE.LOGIN.FORGOT_PASSWORD")}
             </Text.Btn>
           </Space.Between>
         </Space.Flex>

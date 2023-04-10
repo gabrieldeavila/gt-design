@@ -13,8 +13,8 @@ import React, {
   useState,
 } from "react";
 import * as Icon from "react-feather";
-import { useTranslation } from "react-i18next";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
+import useGTTranslate from "../../../gt/Global/translate";
 import useUniqueName from "../../../hooks/helpers/useUniqueName";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useMask from "../../../hooks/pageState/useMask";
@@ -43,7 +43,7 @@ function GTInputMask({
   onBlurValidate,
   isGuided,
 }: IGTInputMask) {
-  const { t } = useTranslation();
+  const { translateThis } = useGTTranslate();
   const uniqueName = useUniqueName({ name });
 
   const { isLoading } = useGTPageStateContextSetters();
@@ -183,7 +183,7 @@ function GTInputMask({
             up={isLabelUp}
             htmlFor={uniqueName}
           >
-            {t(label)}
+            {translateThis(label)}
           </Input.Label>
           <Input.Field
             ref={inpRef}
@@ -222,6 +222,7 @@ function GTInputMask({
               </Input.IconWrapper>
             )}
         </Input.FeedbackWrapper>
+
         {_.isEmpty(errorMessage) && (
           <GTTooltip parentRef={containerRef} title={title} text={text} />
         )}

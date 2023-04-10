@@ -14,7 +14,7 @@ import React, {
 } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import * as Icon from "react-feather";
-import { useTranslation } from "react-i18next";
+import useGTTranslate from "../../../gt/Global/translate";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
 import useDateFormat from "../../../hooks/helpers/useDateFormat";
 import useUniqueName from "../../../hooks/helpers/useUniqueName";
@@ -43,7 +43,7 @@ function GTInputDate({
   onBlurValidate,
   onChangeValidate,
 }: IGTInputDate) {
-  const { t } = useTranslation();
+  const { translateThis } = useGTTranslate();
   const uniqueName = useUniqueName({ name });
   const alterFieldRef = useRef<boolean>(true);
 
@@ -162,7 +162,7 @@ function GTInputDate({
           up={!_.isEmpty(value)}
           htmlFor={uniqueName}
         >
-          {t(label)}
+          {translateThis(label)}
         </Input.Label>
 
         <Input.DatePicker

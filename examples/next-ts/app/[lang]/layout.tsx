@@ -1,5 +1,7 @@
 import { Kanit } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl/client";
 import StyledComponentsRegistry from "./registry";
+import { notFound } from "next/navigation";
 
 const kanit = Kanit({
   weight: ["100", "200", "300", "400", "500", "700", "900"],
@@ -27,12 +29,22 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { lang: string };
 }) {
+  let messages = {};
+
+  try {
+    messages = (await import(`../../dictionaries/${params.lang}.json`)).default;
+  } catch (error) {
+    notFound();
+  }
+
   return (
     <StyledComponentsRegistry>
       <html lang={params.lang} className={kanit.className}>
         <body>
-          {children}
-          </body>
+          <NextIntlClientProvider locale={params.lang} messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </body>
       </html>
     </StyledComponentsRegistry>
   );
