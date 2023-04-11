@@ -24,6 +24,15 @@ function useGTTranslate() {
           serverTranslationKey = serverTranslationKey?.[keyPart];
         }
 
+        if (params != null) {
+          Object.keys(params).forEach((key) => {
+            serverTranslationKey = serverTranslationKey?.replace(
+              `{{${key}}}`,
+              params[key]
+            );
+          });
+        }
+
         if (serverTranslationKey != null) {
           globalState.set("is_translated", {
             ...prevTranslations,
