@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
 import { SectionContainer } from "@geavila/gt-design";
 import React from "react";
 
-function d() {
-  return <SectionContainer title="Inputs" subtitle="STORIES.INPUTS.SUBTITLE" />;
+function Login() {
+  return <div> jesuis</div>;
 }
 
-export default d;
+export default Login;

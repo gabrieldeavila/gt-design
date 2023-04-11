@@ -1,7 +1,8 @@
 import { Kanit } from "next/font/google";
-import { NextIntlClientProvider } from "next-intl/client";
-import StyledComponentsRegistry from "./registry";
 import { notFound } from "next/navigation";
+import GTWrapper from "./gtWrapper";
+import StyledComponentsRegistry from "./registry";
+import { getDictionary } from "@/get-dictionary";
 
 const kanit = Kanit({
   weight: ["100", "200", "300", "400", "500", "700", "900"],
@@ -27,7 +28,7 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { lang: string };
+  params: { lang: "en" | "pt-BR" };
 }) {
   let messages = {};
 
@@ -37,13 +38,15 @@ export default async function RootLayout({
     notFound();
   }
 
+  const dict = await getDictionary(params.lang);
+
   return (
     <StyledComponentsRegistry>
       <html lang={params.lang} className={kanit.className}>
         <body>
-          <NextIntlClientProvider locale={params.lang} messages={messages}>
+          <GTWrapper serverTranslation={dict} lang={params.lang}>
             {children}
-          </NextIntlClientProvider>
+          </GTWrapper>
         </body>
       </html>
     </StyledComponentsRegistry>

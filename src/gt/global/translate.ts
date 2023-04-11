@@ -9,7 +9,9 @@ function useGTTranslate() {
     (key: string, params?: any) => {
       const serverTranslation = globalState.get("server_translation");
       const prevTranslations = globalState.get("is_translated");
-      const isTranslated = prevTranslations?.[key];
+      const lang = globalState.get("lang");
+      const isTranslated = prevTranslations?.[lang]?.[key];
+      console.log(lang);
 
       if (isTranslated != null) {
         return isTranslated;
@@ -36,7 +38,10 @@ function useGTTranslate() {
         if (serverTranslationKey != null) {
           globalState.set("is_translated", {
             ...prevTranslations,
-            [key]: serverTranslationKey,
+            [lang]: {
+              ...prevTranslations?.[lang],
+              [key]: serverTranslationKey,
+            },
           });
         }
 
