@@ -15,10 +15,5 @@ export default async function Home({
 }) {
   const dict = await getDictionary(lang);
 
-  return (
-    <>
-      <div className="test">{dict.NO_INITIAL_SPACE}</div>
-      <Dunno />
-    </>
-  );
+  return <Dunno serverTranslation={dict} />;
 }

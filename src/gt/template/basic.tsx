@@ -1,30 +1,33 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
+import {
+  globalState,
+  useTriggerState
+} from "react-trigger-state";
 import DarkSwitch from "../../components/Switch/Template/DarkSwitch";
 import GTDesign from "../Design/Design";
 import GTCssInjectionScript from "../Global/css-global-classes";
 import GlobalStyle from "../Global/style";
-import { stateStorage, useTriggerState } from "react-trigger-state";
 
 function GTBasic({
   children,
   noThemeChange = false,
-  customTranslator,
+  serverTranslation,
 }: {
   children: React.ReactNode;
   noThemeChange?: boolean;
-  customTranslator?: (key: string) => string;
+  serverTranslation?: any;
 }) {
-  // alert("huhu");
   const [currTheme] = useTriggerState({ name: "currTheme" });
   const [showDarkSwitch, setShowDarkSwitch] = useState(false);
 
-  useEffect(() => {
-    // console.log(customTranslator);
-    stateStorage.set("custom_translator", customTranslator);
-  }, [customTranslator]);
+  // adds here because when is ssr, the state is not set
+  // but it will not trigger any re-render, since we are using globalState
+  globalState.set("server_translation", serverTranslation);
 
+  // when is ssr, we don't know if the user has a preference
+  // otherwise, we'd get an hydration error
   useEffect(() => {
     setShowDarkSwitch(true);
   }, []);

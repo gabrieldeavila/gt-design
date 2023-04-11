@@ -1,13 +1,10 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { GTBasic, GTLogin } from "@geavila/gt-design";
 
-function Dunno() {
-  const t = useTranslations();
-
+function Dunno({ serverTranslation }: { serverTranslation: any }) {
   return (
-    <GTBasic customTranslator={t}>
+    <GTBasic serverTranslation={serverTranslation}>
       <GTLogin
         onPasswordForgot={() => {
           console.log("forgot");
