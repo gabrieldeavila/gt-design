@@ -11,7 +11,6 @@ function useGTTranslate() {
       const prevTranslations = globalState.get("is_translated");
       const lang = globalState.get("lang");
       const isTranslated = prevTranslations?.[lang]?.[key];
-      console.log(lang);
 
       if (isTranslated != null) {
         return isTranslated;
