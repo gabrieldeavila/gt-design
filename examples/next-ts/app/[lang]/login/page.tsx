@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import { SectionContainer } from "@geavila/gt-design";
+import { GTLogin, SectionContainer } from "@geavila/gt-design";
 import React from "react";
 
 function d() {
-  return <SectionContainer title="Inputs" subtitle="STORIES.INPUTS.SUBTITLE" />;
+  return <GTLogin onPasswordForgot={() => console.log("hehe")} />;
 }
 
 export default d;
