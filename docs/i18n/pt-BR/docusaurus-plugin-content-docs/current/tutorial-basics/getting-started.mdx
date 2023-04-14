@@ -1,1 +1,52 @@
-hghehe
+# Template básico
+
+Este template contém desde uma tela de login até uma tela de cadastro de usuário.
+
+Ele utiliza Next.js com Typescript.
+
+Além disso, já conta com internacionalização.
+
+É a melhor forma de iniciar um projeto.
+
+Para instalar:
+
+```bash
+ npm install
+```
+
+## Traduzindo meu projeto
+
+Por padrão, são utilizados os idiomas `pt-BR` e `en`.
+
+### Adicionando um novo idioma
+
+Você precisa acessar a pasta `dictionaries` e criar um arquivo com o nome do idioma que deseja.
+
+Exemplo: `es.json`
+
+Se você quiser deletar um idioma, basta deletar o arquivo.
+
+### Adicionando tradução para as rotas
+
+Você deve acessar o arquivo `get-dictionary.ts` e adicionar uma função para o servidor ter acesso ao idioma:
+
+```ts
+const dictionaries: Dictionary = {
+  en: () => import("./dictionaries/en.json").then((module) => module.default),
+  "pt-BR": () =>
+    import("./dictionaries/pt-BR.json").then((module) => module.default),
+};
+
+export const getDictionary = async (locale: Locale) => dictionaries[locale]();
+```
+
+### Adicionando no i18n
+
+Você também deve ir no arquivo `next.config.js` e adicionar o idioma no `i18n`:
+
+```js
+i18n: {
+  locales: ["en", "pt-BR"],
+  defaultLocale: "en",
+},
+```

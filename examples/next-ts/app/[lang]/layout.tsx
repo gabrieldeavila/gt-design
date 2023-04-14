@@ -30,13 +30,6 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { lang: "en" | "pt-BR" };
 }) {
-  let messages = {};
-
-  try {
-    messages = (await import(`../../dictionaries/${params.lang}.json`)).default;
-  } catch (error) {
-    notFound();
-  }
 
   const dict = await getDictionary(params.lang);
 

@@ -1,0 +1,50 @@
+# Basic Template
+
+This template includes a login screen and a user registration screen, and it uses Next.js with Typescript. 
+
+It also comes with internationalization (i18n) already implemented, making it the best way to start a new project.
+
+To install, run:
+
+
+```bash
+ npm install
+```
+
+## Translating Your Project
+
+By default, the template supports the `pt-BR` and `en` languages.
+
+### Adding a New Language
+
+To add a new language, create a new file with the language code in the `dictionaries` folder. For example, to add Spanish, create a file named es.json.
+
+
+Exemplo: `es.json`
+
+Se você quiser deletar um idioma, basta deletar o arquivo.
+
+### Adicionando tradução para as rotas
+
+Você deve acessar o arquivo `get-dictionary.ts` e adicionar uma função para o servidor ter acesso ao idioma:
+
+```ts
+const dictionaries: Dictionary = {
+  en: () => import("./dictionaries/en.json").then((module) => module.default),
+  "pt-BR": () =>
+    import("./dictionaries/pt-BR.json").then((module) => module.default),
+};
+
+export const getDictionary = async (locale: Locale) => dictionaries[locale]();
+```
+
+### Adicionando no i18n
+
+Você também deve ir no arquivo `next.config.js` e adicionar o idioma no `i18n`:
+
+```js
+i18n: {
+  locales: ["en", "pt-BR"],
+  defaultLocale: "en",
+},
+```
