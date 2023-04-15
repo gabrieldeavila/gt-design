@@ -1,8 +1,7 @@
+import { getDictionary } from "@/get-dictionary";
 import { Kanit } from "next/font/google";
-import { notFound } from "next/navigation";
 import GTWrapper from "./gtWrapper";
 import StyledComponentsRegistry from "./registry";
-import { getDictionary } from "@/get-dictionary";
 
 const kanit = Kanit({
   weight: ["100", "200", "300", "400", "500", "700", "900"],
@@ -26,12 +25,14 @@ export const dynamic = true;
 export default async function RootLayout({
   children,
   params,
+  session,
 }: {
   children: React.ReactNode;
   params: { lang: "en" | "pt-BR" };
+  session: any;
 }) {
-
   const dict = await getDictionary(params.lang);
+  console.log(params);
 
   return (
     <StyledComponentsRegistry>

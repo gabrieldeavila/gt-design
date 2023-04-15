@@ -5,6 +5,7 @@
 */
 
 import { GTBasic } from "@geavila/gt-design";
+import { SessionProvider, useSession } from "next-auth/react";
 
 function GTWrapper({
   serverTranslation,
@@ -16,9 +17,11 @@ function GTWrapper({
   children: React.ReactNode;
 }) {
   return (
-    <GTBasic serverTranslation={serverTranslation} lang={lang}>
-      {children}
-    </GTBasic>
+    <SessionProvider>
+      <GTBasic serverTranslation={serverTranslation} lang={lang}>
+        {children}
+      </GTBasic>
+    </SessionProvider>
   );
 }
 

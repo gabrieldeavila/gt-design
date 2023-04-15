@@ -20,6 +20,7 @@ function getLocale(request: NextRequest): string | undefined {
 }
 
 export function middleware(request: NextRequest) {
+  console.log("HELLO FRIENDSSS");
 }
 
 export const config = {
