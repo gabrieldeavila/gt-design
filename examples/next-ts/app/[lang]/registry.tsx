@@ -23,10 +23,8 @@ export default function StyledComponentsRegistry({
   if (typeof window !== "undefined") return <>{children}</>;
 
   return (
-    <SessionProvider session={session}>
-      <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
-        {children as React.ReactChild}
-      </StyleSheetManager>
-    </SessionProvider>
+    <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
+      {children as React.ReactChild}
+    </StyleSheetManager>
   );
 }
