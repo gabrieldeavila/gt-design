@@ -32,7 +32,6 @@ export default async function RootLayout({
   session: any;
 }) {
   const dict = await getDictionary(params.lang);
-  console.log(params);
 
   return (
     <StyledComponentsRegistry>
