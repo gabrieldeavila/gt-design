@@ -9,16 +9,16 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Button, Text } from "../../components";
-import GTInput from "../../components/Input/GTInput";
-import Input from "../../components/Input/Input";
-import Login from "../../components/Login/Login";
-import Space from "../../components/Space/Space";
+import { Button, Text } from "../../../components";
+import GTInput from "../../../components/Input/GTInput";
+import Input from "../../../components/Input/Input";
+import Login from "../../../components/Login/Login";
+import Space from "../../../components/Space/Space";
 import GTPageStateProvider, {
   useGTPageStateContext,
-} from "../../context/pageState";
-import useGTTranslate from "../Global/translate";
-import { ILogin } from "./interface";
+} from "../../../context/pageState";
+import useGTTranslate from "../../Global/translate";
+import { ILogin } from "../interface";
 
 const GTLogin = memo(function GTLogin({
   onPasswordForgot,

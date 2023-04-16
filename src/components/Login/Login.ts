@@ -4,8 +4,9 @@ import styled, { css } from "styled-components";
 import { scrolls } from "../../utils";
 import flex from "../../utils/flex";
 import shadows from "../../utils/shadows";
+import { defaultAddOns } from "../Space/addOns/addOns";
 import Switch from "../Switch";
-import { ILoginBoxPrimary } from "./interface";
+import { ILoginBoxMain, ILoginBoxPrimary } from "./interface";
 
 const LoginWrapper = styled.div`
   position: relative;
@@ -64,7 +65,7 @@ const mirrorWhenFirstRender = css`
   transform: rotateY(0deg);
 `;
 
-const LoginBoxMain = styled.main`
+const LoginBoxMain = styled.main<ILoginBoxMain>`
   position: absolute;
   height: 75%;
   top: 5%;
@@ -91,8 +92,10 @@ const LoginBoxMain = styled.main`
 
   transform: rotateY(180deg);
 
-  ${({ isFirstRender }: { isFirstRender?: boolean }) =>
-    isFirstRender ?? false ? mirrorWhenFirstRender : mirrorCss}
+  ${({ isFirstRender }) =>
+    isFirstRender ?? false ? mirrorWhenFirstRender : mirrorCss};
+
+  ${defaultAddOns}
 `;
 
 const LoginBoxWrapper = styled.div`

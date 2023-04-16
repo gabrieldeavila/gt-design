@@ -29,6 +29,8 @@ export const darkCodeTheme = {
   switchSlider: "#ffffff",
   outline: "#80daeb",
   outlineError: "#e34234",
+  githubBackground: "#242124",
+  googleBackground: "#ea4335",
 };
 
 export const lightCodeTheme = {
@@ -63,4 +65,6 @@ export const lightCodeTheme = {
   buttonSuccess2: "#98fb98",
   buttonError1: "#8b0000",
   buttonError2: "#e66771",
+  githubBackground: "#f0f8ff",
+  googleBackground: "#ea4336",
 };
