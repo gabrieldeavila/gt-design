@@ -19,7 +19,6 @@
     "emitDeclarationOnly": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "baseUrl": ".",
     "outDir": "dist",
   },
   "exclude": ["node_modules", "examples", "docs"]
