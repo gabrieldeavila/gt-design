@@ -1,5 +1,8 @@
+/* eslint-disable multiline-ternary */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React, { useMemo, useRef } from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
+import useGTTranslate from "../../../gt/Global/translate";
 import Loader from "../../Loader";
 import GTTooltip from "../../Tooltip/Tooltip";
 import { IResetButton } from "../interface";
@@ -12,9 +15,9 @@ function DefaultBtn({
   title,
   text,
   component,
+  symbol,
   ...props
 }: IResetButton) {
-  const { t } = useTranslation();
   const containerRef = useRef<HTMLButtonElement>(null);
 
   const verifyDisabled = useMemo(
@@ -33,9 +36,11 @@ function DefaultBtn({
     <>
       <span className="extra-title">
         {(isLoading ?? false) && <Loader.Simple />}
-        <span className="extra-title-children">
-          <Trans t={t}>{children ?? content ?? ""}</Trans>
-        </span>
+        {symbol ?? false ? (
+          <BtnWithSymbol {...{ symbol, name: props.name }} />
+        ) : (
+          <BtnWithoutSymbol {...{ children, content }} />
+        )}
       </span>
       <GTTooltip parentRef={containerRef} title={title} text={text} />
     </>
@@ -43,3 +48,28 @@ function DefaultBtn({
 }
 
 export default DefaultBtn;
+
+function BtnWithoutSymbol({
+  children,
+  content,
+}: {
+  children?: any;
+  content?: any;
+  name?: string;
+}) {
+  const { translateThis } = useGTTranslate();
+
+  return (
+    <span className="extra-title-children">
+      <Trans t={translateThis}>{children ?? content ?? ""}</Trans>
+    </span>
+  );
+}
+
+function BtnWithSymbol({ symbol, name }: { symbol: any; name?: string }) {
+  return (
+    <>
+      {symbol} {name}
+    </>
+  );
+}

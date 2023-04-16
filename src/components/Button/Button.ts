@@ -2,7 +2,13 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable operator-linebreak */
 import styled, { css } from "styled-components";
-import { flexbox, space } from "styled-system";
+import {
+  BackgroundColorProps,
+  background,
+  backgroundColor,
+  flexbox,
+  space
+} from "styled-system";
 import { transforms } from "../../utils";
 import flex from "../../utils/flex";
 import hovers from "../../utils/hovers";
@@ -164,4 +170,10 @@ export const ExtraError = styled(ExtraSuccess)`
     background-size: 1px 400px;
     background-position: 0px;
   }
+`;
+
+export const ExtraInitial = styled(ResetBtn)<BackgroundColorProps>`
+  ${backgroundColor};
+  ${background}
+  background-color: ${({ bg, background }) => bg ?? background};
 `;
