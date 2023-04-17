@@ -8,9 +8,15 @@ const linear = css`
   transition: all 0.2s linear;
 `;
 
+const smooth = css`
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+`;
+
 const transitions = {
   basic,
   linear,
+  smooth,
 };
 
 export default transitions;

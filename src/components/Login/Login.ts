@@ -1,7 +1,7 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable implicit-arrow-linebreak */
 import styled, { css } from "styled-components";
-import { scrolls } from "../../utils";
+import { scrolls, transitions } from "../../utils";
 import flex from "../../utils/flex";
 import shadows from "../../utils/shadows";
 import { defaultAddOns } from "../Space/addOns/addOns";
@@ -31,6 +31,7 @@ const LoginBoxContrast = styled.div`
   );
   left: 0;
   right: 0;
+  ${transitions.smooth};
 `;
 
 const LoginBoxPrimary = styled.div<ILoginBoxPrimary>`
@@ -40,6 +41,7 @@ const LoginBoxPrimary = styled.div<ILoginBoxPrimary>`
   bottom: 0%;
   left: 0;
   right: 0;
+  ${transitions.smooth};
 
   /* if is mobile, doesnt care about the height */
   @media (max-width: 1000px) {
@@ -73,9 +75,10 @@ const LoginBoxMain = styled.main<ILoginBoxMain>`
   padding: 1.5rem;
   width: 30vw;
   background: var(--primary-0_5);
-  backdrop-filter: blur(1rem);
+  backdrop-filter: blur(3px);
   border-radius: 0.25rem;
-  ${flex.alignCenter}
+  ${flex.alignCenter};
+  ${transitions.smooth};
 
   @media (max-width: 1000px) {
     width: calc(100% - 3rem);
