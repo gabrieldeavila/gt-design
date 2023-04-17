@@ -1,8 +1,13 @@
 import React, { useRef } from "react";
 import { Button, Login, Space, Text } from "../../../components";
 import useGTTranslate from "../../Global/translate";
+import { ILoginProvider } from "../interface";
 
-function LoginProviders() {
+function LoginProviders({
+  hide = [],
+  onGoogleClick = () => {},
+  onGitHubClick = () => {},
+}: ILoginProvider) {
   const heightRef = useRef<HTMLDivElement>(null);
   const { translateThis } = useGTTranslate();
 
@@ -26,8 +31,16 @@ function LoginProviders() {
             <Text.P>{translateThis("TEMPLATE.LOGIN.PROVIDER")}</Text.P>
           </Space.Center>
           <Space.Flex>
-            <Button.GitHub />
-            <Button.Google />
+            {!hide.includes("google") && (
+              // TODO: Fix this error
+              // @ts-expect-error
+              <Button.Google onClick={onGoogleClick} />
+            )}
+
+            {!hide.includes("github") && (
+              // @ts-expect-error
+              <Button.GitHub onClick={onGitHubClick} />
+            )}
           </Space.Flex>
         </Login.BoxWrapper>
       </Login.BoxMain>
