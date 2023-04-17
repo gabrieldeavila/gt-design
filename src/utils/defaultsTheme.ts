@@ -14,7 +14,7 @@ export const darkCodeTheme = {
   containerSecondary: "#242124",
   preSelectColor: "#414a4c",
   labelPrimary: "#00ced1",
-  labelSecondary: "#2a52be",
+  labelSecondary: "#06a3f7",
   labelRequired: "#00fa9a",
   glowShadow: "#44d7a8",
   buttonSuccess1: "#00ff00",

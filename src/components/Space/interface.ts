@@ -4,6 +4,7 @@ import {
   BackgroundProps,
   BorderProps,
   ColorProps,
+  FlexDirectionProps,
   FlexboxProps,
   FontSizeProps,
   GridProps,
@@ -110,7 +111,7 @@ export type TAddOns =
   | "py-4"
   | "py-5";
 
-export interface ISpace extends SpaceProps, ColorProps, LayoutProps {
+export interface ISpace extends SpaceProps, ColorProps, LayoutProps, FlexDirectionProps {
   addOns?: TMobileAddOnsOptions[];
 }
 

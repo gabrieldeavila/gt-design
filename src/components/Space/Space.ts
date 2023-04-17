@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { color, layout, space } from "styled-system";
+import { color, flexDirection, layout, space } from "styled-system";
 import flex from "../../utils/flex";
 import addOnsCss, { defaultAddOns } from "./addOns/addOns";
 import { ISpace, ISpaceModifiers } from "./interface";
@@ -7,6 +7,7 @@ import { ISpace, ISpaceModifiers } from "./interface";
 const SpaceBase = styled.div<ISpace>`
   display: flex;
 
+  ${flexDirection};
   ${space};
   ${color};
   ${layout};

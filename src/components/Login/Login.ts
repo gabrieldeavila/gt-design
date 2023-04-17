@@ -93,10 +93,14 @@ const LoginBoxMain = styled.main<ILoginBoxMain>`
     ${shadows.glow}
   }
 
-  transform: rotateY(180deg);
+  ${({ avoidMirror }) =>
+    !(avoidMirror ?? false) &&
+    css`
+      transform: rotateY(180deg);
 
-  ${({ isFirstRender }) =>
-    isFirstRender ?? false ? mirrorWhenFirstRender : mirrorCss};
+      ${({ isFirstRender }: { isFirstRender?: boolean }) =>
+        isFirstRender ?? false ? mirrorWhenFirstRender : mirrorCss};
+    `}
 
   ${defaultAddOns}
 `;

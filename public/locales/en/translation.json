@@ -27,6 +27,8 @@
   "SELECT_NOT_FOUND": "No results found 😪",
   "TEMPLATE": {
     "LOGIN": {
+      "WELCOME": "Welcome!",
+      "PROVIDER": "Choose how you want to login",
       "CREATE_TITLE": "Create an account",
       "CREATE_SUBTITLE": "It's free and always will be.",
       "NAME_LABEL": "Name",

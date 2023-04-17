@@ -1,56 +1,38 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Button, Login, Space, Text } from "../../../components";
-import { ILogin } from "../interface";
+import useGTTranslate from "../../Global/translate";
 
 function LoginProviders() {
   const heightRef = useRef<HTMLDivElement>(null);
-  const [isFirstRender, setIsFirstRender] = useState(true);
-  const [isCreate, setIsCreate] = useState(true);
-
-  useEffect(() => {
-    if (isFirstRender && !isCreate) {
-      setIsFirstRender(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isCreate]);
+  const { translateThis } = useGTTranslate();
 
   return (
     <Login.Wrapper>
       <Login.BoxContrast />
       <Login.BoxPrimary height={heightRef.current?.clientHeight ?? 0} />
-      <LoginCreate
-        loginRef={heightRef}
-        setIsCreate={setIsCreate}
-        // canSave={canSave}
-        canSave
-        isFirstRender={isFirstRender}
-      />
+      <Login.BoxMain
+        top="35%"
+        left="35%"
+        height="30%"
+        width="25vw"
+        ref={heightRef}
+        avoidMirror
+      >
+        <Login.BoxWrapper>
+          <Space.Center flexDirection="column">
+            <Text.H1 fontSize="2rem">
+              {translateThis("TEMPLATE.LOGIN.WELCOME")}
+            </Text.H1>
+            <Text.P>{translateThis("TEMPLATE.LOGIN.PROVIDER")}</Text.P>
+          </Space.Center>
+          <Space.Flex>
+            <Button.GitHub />
+            <Button.Google />
+          </Space.Flex>
+        </Login.BoxWrapper>
+      </Login.BoxMain>
     </Login.Wrapper>
   );
 }
 
 export default LoginProviders;
-
-function LoginCreate({
-  setIsCreate,
-  canSave,
-  loginRef,
-  isFirstRender,
-}: ILogin) {
-  return (
-    <Login.BoxMain
-      top="10%"
-      left="36%"
-      ref={loginRef}
-      isFirstRender={isFirstRender}
-    >
-      <Login.BoxWrapper>
-        <Text.H1 fontSize="2rem"></Text.H1>
-        <Space.Flex>
-          <Button.GitHub />
-          <Button.Google />
-        </Space.Flex>
-      </Login.BoxWrapper>
-    </Login.BoxMain>
-  );
-}

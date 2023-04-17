@@ -6,4 +6,5 @@ export interface ILoginBoxPrimary {
 
 export interface ILoginBoxMain extends IDefaultAddOns {
   isFirstRender?: boolean;
+  avoidMirror?: boolean;
 }
