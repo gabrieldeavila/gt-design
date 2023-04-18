@@ -35,6 +35,8 @@
   "SELECT_NOT_FOUND": "Nenhum item encontrado 😪",
   "TEMPLATE": {
     "LOGIN": {
+      "WELCOME": "Bem-vindo",
+      "PROVIDER": "Escolha como você deseja se conectar",
       "CREATE_TITLE": "Criar uma nova conta",
       "CREATE_SUBTITLE": "Junte-se a nós",
       "NAME_LABEL": "Nome",
