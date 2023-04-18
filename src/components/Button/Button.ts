@@ -2,13 +2,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable operator-linebreak */
 import styled, { css } from "styled-components";
-import {
-  BackgroundColorProps,
-  background,
-  backgroundColor,
-  flexbox,
-  space
-} from "styled-system";
+import { flexbox, space } from "styled-system";
 import { transforms } from "../../utils";
 import flex from "../../utils/flex";
 import hovers from "../../utils/hovers";
@@ -172,8 +166,15 @@ export const ExtraError = styled(ExtraSuccess)`
   }
 `;
 
-export const ExtraInitial = styled(ResetBtn)<BackgroundColorProps>`
-  ${backgroundColor};
-  ${background}
-  background-color: ${({ bg, background }) => bg ?? background};
+/* export const ExtraInitial = styled(ResetBtn)<BackgroundColorProps>` */
+/* TODO: why props are not being applied? */
+
+export const ExtraInitial = styled(ResetBtn)`
+  background-color: ${({
+    bg,
+    background,
+  }: {
+    bg?: string;
+    background?: string;
+  }) => bg ?? background};
 `;
