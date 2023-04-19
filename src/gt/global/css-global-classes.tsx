@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React, { useEffect } from "react";
 import { useTriggerState } from "react-trigger-state";
 import { gtTransparentize, transparentizedColors } from "../../utils/colors";
@@ -10,7 +11,28 @@ const getCustomConfigs = async () => {
     const path = "gt-design.config.js";
     const customConfigs = await import(path);
 
-    return customConfigs.default;
+    const userConfigs = customConfigs.default;
+
+    // merge the user configs with the default configs
+    const mergedConfigs = {
+      ...defaultConfigs,
+      ...userConfigs,
+    };
+
+    // also merge the themes (if any)
+    if (userConfigs.themeConfig?.global) {
+      mergedConfigs.themeConfig.global.theme = {
+        ...defaultConfigs.themeConfig.global.theme,
+        ...userConfigs.themeConfig.theme,
+      };
+
+      mergedConfigs.themeConfig.global.darkTheme = {
+        ...defaultConfigs.themeConfig.global.darkTheme,
+        ...userConfigs.themeConfig.darkTheme,
+      };
+    }
+
+    return mergedConfigs;
   } catch (e) {
     return defaultConfigs;
   }
