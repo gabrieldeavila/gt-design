@@ -23,12 +23,12 @@ const getCustomConfigs = async () => {
     if (userConfigs.themeConfig?.global) {
       mergedConfigs.themeConfig.global.theme = {
         ...defaultConfigs.themeConfig.global.theme,
-        ...userConfigs.themeConfig.theme,
+        ...userConfigs.themeConfig.global.theme,
       };
 
       mergedConfigs.themeConfig.global.darkTheme = {
         ...defaultConfigs.themeConfig.global.darkTheme,
-        ...userConfigs.themeConfig.darkTheme,
+        ...userConfigs.themeConfig.global.darkTheme,
       };
     }
 
@@ -66,10 +66,10 @@ const GTCssInjectionScript = () => {
   }, [changedTheme]);
 
   const codeToRunOnClient = `
-(function() {
+(async function() {
   const colorMode = localStorage.getItem("darkTheme") != null ? "darkTheme" : "theme";
   const root = document.documentElement;
-  const defaultConfigs = ${JSON.stringify(defaultConfigs)};
+  const defaultConfigs = await ${JSON.stringify(getCustomConfigs)};
   const opacities = ${JSON.stringify(transparentizedColors)}
 
   function transparentizeColor(color, opacity) {
