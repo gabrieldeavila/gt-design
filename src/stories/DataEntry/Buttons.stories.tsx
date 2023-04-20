@@ -76,9 +76,9 @@ const Template = () => {
 
         <Text.Divider position="left">Sizes</Text.Divider>
         <ButtonTemplate>
-          <Button.Normal size="sm">Small</Button.Normal>
-          <Button.Normal size="md">Medium</Button.Normal>
-          <Button.Normal size="lg">Large</Button.Normal>
+          <Button.Normal defaultSize="sm">Small</Button.Normal>
+          <Button.Normal defaultSize="md">Medium</Button.Normal>
+          <Button.Normal defaultSize="lg">Large</Button.Normal>
           <Button.Normal fitContent>Fit Content</Button.Normal>
         </ButtonTemplate>
       </Space.Horizontal>

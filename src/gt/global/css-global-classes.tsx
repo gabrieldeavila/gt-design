@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { useTriggerState } from "react-trigger-state";
 import { gtTransparentize, transparentizedColors } from "../../utils/colors";
 import defaultConfigs from "./default.configs";
-import "./global.css";
 
 const getCustomConfigs = async () => {
   try {

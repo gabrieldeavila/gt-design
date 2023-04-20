@@ -140,7 +140,7 @@ function GTModalBasic({ show, setShow, data }: IGTModal) {
                 <Button.Error
                   isLoading={isLoadingCancel}
                   fitContent
-                  size="sm"
+                  defaultSize="sm"
                   onClick={handleCancel}
                 >
                   {translateThis(data.cancelText)}
@@ -151,7 +151,7 @@ function GTModalBasic({ show, setShow, data }: IGTModal) {
                 <Button.Success
                   isLoading={isLoadingConfirm}
                   fitContent
-                  size="sm"
+                  defaultSize="sm"
                   onClick={handleConfirm}
                 >
                   {translateThis(data.confirmText)}

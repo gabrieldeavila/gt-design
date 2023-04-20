@@ -9,6 +9,7 @@ import hovers from "../../utils/hovers";
 import shadows from "../../utils/shadows";
 import transitions from "../../utils/transitions";
 import { LoaderWrapper } from "../Loader/Loader";
+import { defaultAddOns } from "../Space/addOns/addOns";
 import { IButton } from "./interface";
 
 const sm = css`
@@ -91,11 +92,13 @@ export const ResetBtn = styled.button<IButton>`
     display: flex;
   }
 
-  ${({ size }) => {
-    const val = size ?? "md";
+  ${({ defaultSize }) => {
+    const val = defaultSize ?? "md";
 
     return sizesOpts[val];
   }}
+
+  ${defaultAddOns}
 `;
 
 export const ButtonWrapper = styled.div`
