@@ -15,7 +15,7 @@ const NavbarWrapper = styled.nav<INavbarWrapper>`
   position: fixed;
   width: -webkit-fill-available;
   z-index: 1100;
-  background: var(--primary);
+  background: var(--primary-0_5);
   padding: 0.5rem 1.5rem;
   ${shadows.simple}
   ${color}
@@ -50,6 +50,8 @@ const NavbarContainer = styled.div`
 
 const NavbarOptions = styled.div<INavbarOptions>`
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 1rem;
   height: fit-content;
   top: ${(props) => props.top ?? 0}px;
