@@ -8,11 +8,14 @@ import Navbar from "../Navbar";
 function GTNavbar({ children }: { children: React.ReactNode }) {
   // if is showing modal, add padding to the wrapper
   const oldScroll = useRef(0);
+  const isInTop = useRef(true);
 
   // when scrolls down, hide the navbar, when scrolls up, show the navbar
   const [showNavbar, setShowNavbar] = useState(true);
   const handleScroll = useCallback(() => {
     if (typeof window === "undefined") return;
+
+    isInTop.current = window.scrollY === 0;
 
     if (window.scrollY > oldScroll.current) {
       setShowNavbar(false);
@@ -25,13 +28,14 @@ function GTNavbar({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    isInTop.current = window.scrollY === 0;
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
   return (
-    <Navbar.Wrapper show={showNavbar}>
+    <Navbar.Wrapper isInTop={isInTop.current} show={showNavbar}>
       <Navbar.Container>{children}</Navbar.Container>
     </Navbar.Wrapper>
   );

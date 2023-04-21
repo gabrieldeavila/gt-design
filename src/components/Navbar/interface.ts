@@ -2,6 +2,7 @@ import { ColorProps, FlexboxProps, SpaceProps } from "styled-system";
 
 export interface INavbarWrapper extends ColorProps, SpaceProps, FlexboxProps {
   show: boolean;
+  isInTop: boolean;
 }
 
 export interface INavbarOptions extends SpaceProps {
