@@ -22,9 +22,9 @@ function BasicNavbar() {
           <Navbar.Options>
             <Navbar.OptionWrapper>
               <Space.Modifiers gridGap="1rem">
-                <Text.P>Pricing</Text.P>
-                <Text.P>Docs</Text.P>
-                <Text.P>Contact sales</Text.P>
+                <Text.Action>Pricing</Text.Action>
+                <Text.Action>Docs</Text.Action>
+                <Text.Action>Contact sales</Text.Action>
               </Space.Modifiers>
             </Navbar.OptionWrapper>
 

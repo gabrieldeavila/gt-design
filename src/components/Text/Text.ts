@@ -1,6 +1,6 @@
 /* eslint-disable operator-linebreak */
 import styled, { css } from "styled-components";
-import { animations, transforms } from "../../utils";
+import { animations, transforms, transitions } from "../../utils";
 import { defaultAddOns } from "../Space/addOns/addOns";
 import { IText, ITextDividerWrapper } from "./interface";
 
@@ -122,4 +122,23 @@ export const DividerText = styled(H2)`
   white-space: pre;
 
   ${defaultAddOns};
+`;
+
+export const TextAction = styled.button`
+  background: none;
+  border: none;
+  margin: 0;
+  cursor: pointer;
+  user-select: none;
+  color: var(--contrast);
+
+  &:hover {
+    color: var(--contrast-0_5);
+  }
+
+  &:active {
+    ${transforms.press}
+  }
+
+  ${transitions.linear}
 `;
