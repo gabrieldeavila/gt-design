@@ -14,27 +14,39 @@ function BasicNavbar() {
   return (
     <>
       <GTNavbar>
-        <Navbar.Left>
-          <Navbar.Logo>GT Design</Navbar.Logo>
-        </Navbar.Left>
+        <Space.Center>
+          <Space.Modifiers width="1248px" justifyContent="space-between">
+            <Navbar.Left>
+              <Navbar.Logo>GT Design</Navbar.Logo>
+            </Navbar.Left>
 
-        <Navbar.Right>
-          <Navbar.Options>
-            <Navbar.OptionWrapper>
-              <Space.Modifiers gridGap="1rem">
-                <Text.Action>Pricing</Text.Action>
-                <Text.Action>Docs</Text.Action>
-                <Text.Action>Contact sales</Text.Action>
-              </Space.Modifiers>
-            </Navbar.OptionWrapper>
+            <Navbar.Right>
+              <Navbar.Options>
+                <Navbar.OptionWrapper>
+                  <Space.Modifiers gridGap="1rem">
+                    <Text.Action>Pricing</Text.Action>
+                    <Text.Action>Docs</Text.Action>
+                    <Text.Action>Contact sales</Text.Action>
+                  </Space.Modifiers>
+                </Navbar.OptionWrapper>
 
-            <Navbar.OptionWrapper>
-              <Space.Modifiers gridGap="1rem">
-                <Button.Contrast defaultSize="sm" fitContent px="1.25rem" py="0.5rem" borderRadius="2rem" >Log in</Button.Contrast>
-              </Space.Modifiers>
-            </Navbar.OptionWrapper>
-          </Navbar.Options>
-        </Navbar.Right>
+                <Navbar.OptionWrapper>
+                  <Space.Modifiers gridGap="1rem">
+                    <Button.Contrast
+                      defaultSize="sm"
+                      fitContent
+                      px="1.25rem"
+                      py="0.5rem"
+                      borderRadius="2rem"
+                    >
+                      Log in
+                    </Button.Contrast>
+                  </Space.Modifiers>
+                </Navbar.OptionWrapper>
+              </Navbar.Options>
+            </Navbar.Right>
+          </Space.Modifiers>
+        </Space.Center>
       </GTNavbar>
 
       <GTNavbarMobile>

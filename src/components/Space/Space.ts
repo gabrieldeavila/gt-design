@@ -11,6 +11,7 @@ const SpaceBase = styled.div<ISpace>`
   ${space};
   ${color};
   ${layout};
+  ${defaultAddOns};
 `;
 
 const Flex = styled(SpaceBase)<ISpace>`
@@ -25,7 +26,7 @@ const Center = styled(SpaceBase)`
   ${flex.alignCenter}
   width: -webkit-fill-available;
 
-  ${space}
+  ${defaultAddOns};
 `;
 
 const Between = styled(SpaceBase)`

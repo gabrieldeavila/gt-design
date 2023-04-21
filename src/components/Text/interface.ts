@@ -1,3 +1,4 @@
+import { FontWeightProps, TextAlignProps } from "styled-system";
 import { IDefaultAddOns } from "../Space/interface";
 
 export interface ITextBtn {
@@ -9,7 +10,7 @@ export interface ITextBtn {
   type?: "button" | "submit" | "reset";
 }
 
-export interface IText extends IDefaultAddOns {}
+export interface IText extends IDefaultAddOns, TextAlignProps, FontWeightProps {}
 
 export interface ISectionContainer {
   title: string;

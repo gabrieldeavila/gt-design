@@ -57,6 +57,10 @@ export const transparentizedColors: ServerColorsType[] = [
     amount: 0.5,
   },
   {
+    varName: "secondary-0_1",
+    amount: 0.1,
+  },
+  {
     varName: "secondary-0_2",
     amount: 0.2,
   },

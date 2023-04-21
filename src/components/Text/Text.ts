@@ -3,13 +3,16 @@ import styled, { css } from "styled-components";
 import { animations, transforms, transitions } from "../../utils";
 import { defaultAddOns } from "../Space/addOns/addOns";
 import { IText, ITextDividerWrapper } from "./interface";
+import { fontWeight, textAlign } from "styled-system";
 
 export const P = styled.p<IText>`
   color: var(--contrast);
   font-weight: 300;
   text-align: justify;
 
+  ${textAlign}
   ${defaultAddOns};
+  ${fontWeight}
 `;
 
 const h1Css = css`
@@ -26,19 +29,23 @@ const h1Css = css`
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-
-  ${defaultAddOns};
 `;
 
 export const H1 = styled.h1<IText>`
   ${h1Css}
+  ${defaultAddOns};
+  ${textAlign};
+  ${fontWeight}
 `;
 
 export const H2 = styled.h2<IText>`
-  ${h1Css}
-
   font-weight: 400;
   font-size: 1.2rem;
+
+  ${textAlign}
+  ${h1Css}
+  ${defaultAddOns};
+  ${fontWeight}
 `;
 
 // a simple btn that is used to call a function or navigate to a page
@@ -114,6 +121,7 @@ export const DividerWrapper = styled.div<ITextDividerWrapper>`
     width: ${(props) => props.currWidth.before};
   }
 
+  ${textAlign}
   ${defaultAddOns};
 `;
 
@@ -141,4 +149,25 @@ export const TextAction = styled.button`
   }
 
   ${transitions.linear}
+`;
+
+export const TextTitle = styled.h1`
+  background-image: linear-gradient(
+    180deg,
+    var(--primary-0_1),
+    var(--contrast) 70%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 500;
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 1rem;
+`;
+
+export const TextSubtitle = styled.h2`
+  color: var(--contrast);
+  font-weight: 400;
+  font-size: 1.2rem;
 `;

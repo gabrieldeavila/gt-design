@@ -1,6 +1,6 @@
 export const darkCodeTheme = {
   primary: "#080808",
-  secondary: "#242124",
+  secondary: "rgb(16 16 16)",
   contrast: "#fffafa",
   backgroundHover: "#80808061",
   backgroundMobileNav: "#555d50",
