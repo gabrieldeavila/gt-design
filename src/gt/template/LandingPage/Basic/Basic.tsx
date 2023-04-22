@@ -25,8 +25,8 @@ function GTBasicLandingPage() {
                 backgroundImage="none"
                 textAlign="center"
               >
-                A powerful tool for developers to streamline workflow,
-                save time, and enhance design outcomes.
+                A powerful tool for developers to streamline workflow, save
+                time, and enhance design outcomes.
               </Text.H2>
             </Space.Modifiers>
 
@@ -51,6 +51,12 @@ function GTBasicLandingPage() {
             </Space.Center>
           </LandingPage.Benefits.Content>
         </LandingPage.Benefits.Wrapper>
+        <LandingPage.Features.Wrapper>
+          <LandingPage.Features.Content>
+            <LandingPage.Features.Left>Left</LandingPage.Features.Left>
+            <LandingPage.Features.Right>Right</LandingPage.Features.Right>
+          </LandingPage.Features.Content>
+        </LandingPage.Features.Wrapper>
       </LandingPage.Wrapper>
     </>
   );
