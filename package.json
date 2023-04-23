@@ -14,7 +14,7 @@
     "rollup": "rollup -c",
     "test": "jest",
     "storybook": "start-storybook -p 6006 -s public",
-    "chromatic": "npx chromatic --project-token=080a8bbe9b98",
+    "chromatic": "npx chromatic --project-token=080a8bbe9b98 --auto-accept-changes",
     "build-storybook": "build-storybook -- --quiet --output-dir /tmp/chromatic--1691-Lp6u4Usenvcx",
     "serve-storybook": "serve storybook-static"
   },
