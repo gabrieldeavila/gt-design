@@ -106,13 +106,14 @@ const Template = () => {
   return (
     <GTBasic>
       <GTBasicLandingPage
+        logo="GT Design"
+        options={NavbarOptions}
         title="GT Design"
         description="Design smarter, not harder"
         benefitDescription="A powerful tool for developers to streamline workflow, save time, and enhance design outcomes."
         benefits={Benefits}
         features={Features}
-        logo="GT Design"
-        options={NavbarOptions}
+        footerDescription="Designed and built in sleepless nights by Gabriel Avila."
       />
     </GTBasic>
   );

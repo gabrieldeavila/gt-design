@@ -16,6 +16,7 @@ function GTBasicLandingPage({
   benefitDescription,
   benefits,
   features,
+  footerDescription,
   ...navbar
 }: IGTLandingPageBasic) {
   return (
@@ -59,9 +60,9 @@ function GTBasicLandingPage({
         <LandingPage.Footer.Wrapper>
           <LandingPage.Footer.Content>
             <Space.Modifiers flexDirection="column" width="15rem">
-              <Text.P fontSize="1.5rem">GT Design</Text.P>
+              <Text.P fontSize="1.5rem">{navbar.logo}</Text.P>
               <Text.P textAlign="left">
-                Designed and built in sleepless nights by Gabriel Avila.
+                {footerDescription}
               </Text.P>
             </Space.Modifiers>
           </LandingPage.Footer.Content>
