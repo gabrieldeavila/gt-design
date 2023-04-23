@@ -2,9 +2,10 @@ import { getDictionary } from "@/get-dictionary";
 import { Kanit } from "next/font/google";
 import GTWrapper from "./gtWrapper";
 import StyledComponentsRegistry from "./registry";
+import "./style.css"
 
 const kanit = Kanit({
-  weight: ["100", "200", "300", "400", "500", "700", "900"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "900"],
   style: ["italic", "normal"],
   subsets: ["latin-ext"],
   display: "swap",
