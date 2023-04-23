@@ -1,18 +1,30 @@
-import React from "react";
+import React, { memo, useMemo } from "react";
 import { Space, Text } from "../../../../components";
 import LandingPage from "../LandingPage";
+import {
+  IGTLandingBenefit,
+  IGTLandingFeature,
+  IGTLandingPageBasic,
+} from "../interface";
 import BasicNavbar from "./BasicNavbar";
-import { Clock, Edit3, Tool } from "react-feather";
 import Benefit from "./Benefit";
+import Feature from "./Feature";
 
-function GTBasicLandingPage() {
+function GTBasicLandingPage({
+  title,
+  description,
+  benefitDescription,
+  benefits,
+  features,
+}: IGTLandingPageBasic) {
   return (
     <>
       <BasicNavbar />
+
       <LandingPage.Wrapper>
         <LandingPage.Header>
-          <Text.Title>GT Design</Text.Title>
-          <Text.Subtitle>Design smarter, not harder</Text.Subtitle>
+          <Text.Title>{title}</Text.Title>
+          <Text.Subtitle>{description}</Text.Subtitle>
         </LandingPage.Header>
 
         <LandingPage.Benefits.Wrapper>
@@ -25,41 +37,56 @@ function GTBasicLandingPage() {
                 backgroundImage="none"
                 textAlign="center"
               >
-                A powerful tool for developers to streamline workflow, save
-                time, and enhance design outcomes.
+                {benefitDescription}
               </Text.H2>
             </Space.Modifiers>
 
             <Space.Center alignItems="flex-start" gridGap="2rem">
-              <Benefit
-                title="Save time"
-                description="By automating repetitive tasks, you can free up more time to focus on the creative aspects of your work"
-                icon={<Clock />}
-              />
-
-              <Benefit
-                title="Improve efficiency"
-                description="Streamline workflow and reduce manual labor for faster, more accurate project completion without sacrificing quality."
-                icon={<Tool />}
-              />
-
-              <Benefit
-                title="Enhance outcomes"
-                description="From phone masking to email validation, we ensure that your applications look and function exactly as intended."
-                icon={<Edit3 />}
-              />
+              {benefits.map((benefit, index) => (
+                <BenefitComponent key={index} {...benefit} />
+              ))}
             </Space.Center>
           </LandingPage.Benefits.Content>
         </LandingPage.Benefits.Wrapper>
+
         <LandingPage.Features.Wrapper>
-          <LandingPage.Features.Content>
-            <LandingPage.Features.Left>Left</LandingPage.Features.Left>
-            <LandingPage.Features.Right>Right</LandingPage.Features.Right>
-          </LandingPage.Features.Content>
+          {features.map((feature, index) => (
+            <FeatureComponent key={index} index={index} {...feature} />
+          ))}
         </LandingPage.Features.Wrapper>
+
+        <LandingPage.Footer.Wrapper>
+          <LandingPage.Footer.Content>
+            <Space.Modifiers flexDirection="column" width="15rem">
+              <Text.P fontSize="1.5rem">GT Design</Text.P>
+              <Text.P textAlign="left">
+                Designed and built in sleepless nights by Gabriel Avila.
+              </Text.P>
+            </Space.Modifiers>
+          </LandingPage.Footer.Content>
+        </LandingPage.Footer.Wrapper>
       </LandingPage.Wrapper>
     </>
   );
 }
 
 export default GTBasicLandingPage;
+
+const BenefitComponent = memo((props: IGTLandingBenefit) => {
+  return <Benefit {...props} />;
+});
+
+BenefitComponent.displayName = "BenefitComponent";
+
+const FeatureComponent = memo(
+  ({ index, ...props }: IGTLandingFeature & { index: number }) => {
+    const orientation = useMemo(
+      () => (index % 2 === 0 ? "left" : "right"),
+      [index]
+    );
+
+    return <Feature orientation={orientation} {...props} />;
+  }
+);
+
+FeatureComponent.displayName = "FeatureComponent";

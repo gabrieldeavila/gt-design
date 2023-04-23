@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { flex } from "../../../utils";
 
 const LandingPageWrapper = styled.div``;
 
@@ -42,6 +43,9 @@ const LandingPageFeaturesWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 2rem;
+  padding: 2rem 0;
+  background: var(--primary-0_2);
 `;
 
 const LandingPageFeaturesContent = styled.div`
@@ -54,13 +58,18 @@ const LandingPageFeaturesContent = styled.div`
 
 const LandingPageFeaturesRight = styled.div`
   width: 50%;
-  background: red
+  ${flex.alignCenter};
+  flex-direction: column;
 `;
 
-const LandingPageFeaturesLeft = styled.div`
-  width: 50%;
-  background: blue
+const LandingPageFeaturesLeft = styled(LandingPageFeaturesRight)``;
+
+const LandingPageFooterWrapper = styled(LandingPageFeaturesWrapper)`
+  padding-top: 3rem;
+  background: var(--secondary-0_5);
 `;
+
+const LandingPageFooterContent = styled(LandingPageFeaturesContent)``;
 
 const LandingPage = {
   Wrapper: LandingPageWrapper,
@@ -74,6 +83,10 @@ const LandingPage = {
     Content: LandingPageFeaturesContent,
     Left: LandingPageFeaturesLeft,
     Right: LandingPageFeaturesRight,
+  },
+  Footer: {
+    Wrapper: LandingPageFooterWrapper,
+    Content: LandingPageFooterContent,
   },
 };
 

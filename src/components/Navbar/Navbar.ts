@@ -17,11 +17,7 @@ const NavbarWrapper = styled.nav<INavbarWrapper>`
   z-index: 1100;
   background: ${({ isInTop }) =>
     isInTop ? "transparent" : "var(--primary-0_5)"};
-  ${({ isInTop }) => !isInTop && shadows.simple};
   padding: 0.5rem 1.5rem;
-  ${color}
-  ${space}
-  ${flexbox}
   backdrop-filter: blur(10px);
   animation: ${(props: { show: boolean }) =>
     props.show
@@ -32,6 +28,11 @@ const NavbarWrapper = styled.nav<INavbarWrapper>`
   p {
     margin: 0;
   }
+  ${transitions.linear}
+  ${({ isInTop }) => !isInTop && shadows.simple};
+  ${color}
+  ${space}
+  ${flexbox}
 `;
 
 const NavbarContainer = styled.div`

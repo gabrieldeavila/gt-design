@@ -17,7 +17,7 @@ const NormalSwitchSlider = styled.div<INormalSwitchSlider>`
     inset-inline-start: 0;
     inset-inline-end: 0;
     border-radius: 1rem;
-    background: var(--contrast-0_1);
+    background: var(--switchSlider);
     ${transitions.basic};
 
     ${shadows.basic}
