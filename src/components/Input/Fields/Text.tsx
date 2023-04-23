@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/space-before-function-paren */
@@ -43,6 +44,8 @@ function GTInputText({
   row,
   onBlurValidate,
   onChangeValidate,
+  customType = "text",
+  customField,
 }: IGTInputText) {
   const { translateThis } = useGTTranslate();
 
@@ -145,6 +148,62 @@ function GTInputText({
 
   const { isLoading } = useGTPageStateContextSetters();
 
+  const isShowingClearBtn = useMemo(
+    () =>
+      !_.isEmpty(value) &&
+      !(disableClearable ?? false) &&
+      showFeedback &&
+      !(disabled ?? false),
+    [disableClearable, disabled, showFeedback, value]
+  );
+
+  const isLoadingIcon = useMemo(
+    () => isValidatingOnBlur && showFeedback,
+    [isValidatingOnBlur, showFeedback]
+  );
+
+  const inputField = useMemo(
+    () =>
+      customField != null ? (
+        React.createElement(customField.type, {
+          ...customField.props,
+          value,
+          onChange: handleChange,
+          disabled,
+          onBlur: handleBlur,
+          onFocus: handleInputFocus,
+          isLabel: isLabelUp,
+          id: uniqueName,
+          name: uniqueName,
+          isShowingSomething: isLoadingIcon || isShowingClearBtn,
+        })
+      ) : (
+        <Input.Field
+          type={customType}
+          value={value}
+          onChange={handleChange}
+          disabled={disabled}
+          onBlur={handleBlur}
+          onFocus={handleInputFocus}
+          id={uniqueName}
+          name={uniqueName}
+        />
+      ),
+    [
+      customField,
+      customType,
+      disabled,
+      handleBlur,
+      handleChange,
+      handleInputFocus,
+      isLabelUp,
+      isLoadingIcon,
+      isShowingClearBtn,
+      uniqueName,
+      value,
+    ]
+  );
+
   if (isLoading ?? false) {
     return <Input.Container row={row} isLoading />;
   }
@@ -169,16 +228,8 @@ function GTInputText({
             {translateThis(label)}
             <RequiredMessage isRequired={isRequired} />
           </Input.Label>
-          <Input.Field
-            type="text"
-            value={value}
-            onChange={handleChange}
-            disabled={disabled}
-            onBlur={handleBlur}
-            onFocus={handleInputFocus}
-            id={uniqueName}
-            name={uniqueName}
-          />
+
+          {inputField}
         </Input.FieldWrapper>
 
         <ErrorMessage
@@ -188,20 +239,17 @@ function GTInputText({
         />
 
         <Input.FeedbackWrapper>
-          {isValidatingOnBlur && showFeedback && (
+          {isLoadingIcon && (
             <Input.IconWrapper showOpacity>
               <Loader.Simple size="sm" />
             </Input.IconWrapper>
           )}
 
-          {!_.isEmpty(value) &&
-            !(disableClearable ?? false) &&
-            showFeedback &&
-            !(disabled ?? false) && (
-              <Input.IconWrapper onClick={handleInputClear}>
-                <Icon.X size={15} className="svg-no-active cursor" />
-              </Input.IconWrapper>
-            )}
+          {isShowingClearBtn && (
+            <Input.IconWrapper onClick={handleInputClear}>
+              <Icon.X size={15} className="svg-no-active cursor" />
+            </Input.IconWrapper>
+          )}
 
           {_.isEmpty(errorMessage) && (
             <GTTooltip parentRef={containerRef} title={title} text={text} />

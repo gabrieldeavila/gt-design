@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { GTInput, Input, Space } from "../../../components";
 import {
   INonNumericMask,
-  INumericMask
+  INumericMask,
 } from "../../../components/Input/Fields/interface";
 import SectionContainer from "../../../components/Text/Template/SectionContainer";
 import { IPageStateValues } from "../../../context/interface";
@@ -136,6 +136,8 @@ const Template = () => {
               mask={phoneMask}
               isGuided
             />
+
+            <GTInput.Color row={5} name="color" label="EXAMPLE.COLOR" />
           </Input.Group>
         </Space.Horizontal>
       </GTPageStateProvider>

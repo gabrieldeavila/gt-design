@@ -116,6 +116,35 @@ const InputField = styled.input<IInputField>`
   ${defaultAddOns};
 `;
 
+const InputColor = styled.input<IInputField>`
+  ${({ isLabel }: { isLabel?: boolean }) =>
+    isLabel ?? false
+      ? css`
+          transform: scale(1);
+        `
+      : css`
+          transform: scale(0);
+        `};
+
+  position: absolute;
+  bottom: 0.25rem;
+  left: 0.25rem;
+  right: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  width: calc(100% - 0.5rem);
+
+  ${({ isShowingSomething }: { isShowingSomething?: boolean }) =>
+    isShowingSomething ?? false
+      ? css`
+          width: calc(100% - 2.5rem);
+        `
+      : css`
+          width: calc(100% - 0.5rem);
+        `};
+`;
+
 const disabledInput = css<IInputContainer>`
   ${({ disabled }) =>
     (disabled ?? false) &&
@@ -326,6 +355,7 @@ const Input = {
   FeedbackWrapper: InputFeedbackWrapper,
   IconWrapper: InputIconWrapper,
   DatePicker: StyledDatePicker,
+  Color: InputColor,
 };
 
 export default Input;

@@ -3,6 +3,7 @@ import { IDefaultAddOns } from "../Space/interface";
 
 export interface IInputField extends IDefaultAddOns {
   isLabel?: boolean;
+  isShowingSomething?: boolean;
 }
 
 export interface IInputContainer {

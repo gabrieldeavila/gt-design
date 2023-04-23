@@ -31,6 +31,8 @@ export interface IGTInputText extends IGTInput {
   maxWords?: number | string;
   minChars?: number | string;
   maxChars?: number | string;
+  customType?: string;
+  customField?: JSX.Element;
 }
 
 export interface IGTInputDate extends IGTInput {

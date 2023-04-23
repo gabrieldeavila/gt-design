@@ -7,6 +7,7 @@ import GTInputSelect from "./Fields/Select";
 import GTInputText from "./Fields/Text";
 import GTInputSwitch from "./Fields/Switch";
 import GTInputDate from "./Fields/Date";
+import GTInputColor from "./Fields/Color";
 
 const GTInput = {
   Text: memo(GTInputText),
@@ -17,6 +18,7 @@ const GTInput = {
   Mask: memo(GTInputMask),
   Switch: memo(GTInputSwitch),
   Date: memo(GTInputDate),
+  Color: memo(GTInputColor),
 };
 
 export default GTInput;
