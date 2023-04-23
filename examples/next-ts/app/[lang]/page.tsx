@@ -15,9 +15,10 @@ import {
   Navbar,
   Space,
   Text,
+  autoUpdateTheme,
 } from "@geavila/gt-design";
 import { Clock, Edit3, Tool } from "react-feather";
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 
 export default function Page() {
   const { data: session } = useSession();
@@ -196,22 +197,27 @@ function ExampleMasking() {
 }
 
 function ExampleTheming() {
-  const handleChange = useCallback((e: any) => {
-    const color = e.target.value;
-
-    document.documentElement.style.setProperty("--primary-0_5", color);
-    document.documentElement.style.setProperty("--primary-0_1", color);
-    document.documentElement.style.setProperty("--primary-0_2 ", color);
-    document.documentElement.style.setProperty("--primary", color);
-  }, []);
+  const handleChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>, name: string) => {
+      autoUpdateTheme({
+        keyToUpdate: name,
+        newColor: e.target.value,
+      });
+    },
+    []
+  );
 
   return (
-    <div>
-      <Text.P>
-        Try changing the primary color of the theme by clicking on the color
-        picker below.
-      </Text.P>
-      <input onChange={handleChange} type="color" id="color-picker" name="color-picker" />
-    </div>
+    <EasyState name="example-theming" initial={{ email: "" }}>
+      <Input.Group>
+        <GTInput.Color name="primary" label="Primary" onChange={handleChange} />
+
+        <GTInput.Color
+          name="secondary"
+          label="Secondary"
+          onChange={handleChange}
+        />
+      </Input.Group>
+    </EasyState>
   );
 }

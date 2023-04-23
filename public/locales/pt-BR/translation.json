@@ -29,7 +29,7 @@
   "TEMPLATE": {
     "LOGIN": {
       "CREATE_TITLE": "Criar uma nova conta",
-      "WELCOME": "Bem-vindo!",
+      "WELCOME": "Bem-vindo! ",
       "PROVIDER": "Escolha a sua forma de login",
       "CREATE_SUBTITLE": "Junte-se a nós",
       "NAME_LABEL": "Nome",

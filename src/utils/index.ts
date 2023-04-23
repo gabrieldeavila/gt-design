@@ -13,4 +13,5 @@ export { default as transitions } from "./transitions";
 export { default as scrolls } from "./scrolls";
 
 export { default as transforms } from "./transforms";
- 
+
+export * from "./colors";
