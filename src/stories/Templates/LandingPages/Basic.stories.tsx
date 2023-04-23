@@ -1,6 +1,14 @@
 import React from "react";
 import { Clock, Edit3, Tool } from "react-feather";
-import { EasyState, GTInput, Input } from "../../../components";
+import {
+  Button,
+  EasyState,
+  GTInput,
+  Input,
+  Navbar,
+  Space,
+  Text,
+} from "../../../components";
 import {
   INonNumericMask,
   INumericMask,
@@ -9,11 +17,41 @@ import { GTBasic } from "../../../gt";
 import { GTBasicLandingPage } from "../../../gt/Template/LandingPage";
 import {
   IGTLandingBenefit,
-  IGTLandingFeature
+  IGTLandingFeature,
 } from "../../../gt/Template/LandingPage/interface";
 
 export default {
   title: "Templates/LandingPage/Basic",
+};
+
+const NavbarOptions = () => {
+  return (
+    <>
+      <Navbar.Options>
+        <Navbar.OptionWrapper>
+          <Space.Modifiers gridGap="1rem">
+            <Text.Action>Docs</Text.Action>
+            <Text.Action>GitHub</Text.Action>
+            <Text.Action>npm</Text.Action>
+          </Space.Modifiers>
+        </Navbar.OptionWrapper>
+
+        <Navbar.OptionWrapper>
+          <Space.Modifiers gridGap="1rem">
+            <Button.Contrast
+              defaultSize="sm"
+              fitContent
+              px="1.25rem"
+              py="0.5rem"
+              borderRadius="2rem"
+            >
+              Log in
+            </Button.Contrast>
+          </Space.Modifiers>
+        </Navbar.OptionWrapper>
+      </Navbar.Options>
+    </>
+  );
 };
 
 const Benefits: IGTLandingBenefit[] = [
@@ -73,6 +111,8 @@ const Template = () => {
         benefitDescription="A powerful tool for developers to streamline workflow, save time, and enhance design outcomes."
         benefits={Benefits}
         features={Features}
+        logo="GT Design"
+        options={NavbarOptions}
       />
     </GTBasic>
   );

@@ -16,7 +16,12 @@ export interface IFeature extends IGTLandingFeature {
   orientation: "left" | "right";
 }
 
-export interface IGTLandingPageBasic {
+export interface IGTLandingNavbar {
+  logo: JSX.Element | string;
+  options: () => JSX.Element;
+}
+
+export interface IGTLandingPageBasic extends IGTLandingNavbar {
   title: string;
   description: string;
   benefitDescription: string;

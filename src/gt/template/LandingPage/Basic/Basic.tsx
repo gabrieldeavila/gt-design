@@ -16,10 +16,11 @@ function GTBasicLandingPage({
   benefitDescription,
   benefits,
   features,
+  ...navbar
 }: IGTLandingPageBasic) {
   return (
     <>
-      <BasicNavbar />
+      <BasicNavbar {...navbar} />
 
       <LandingPage.Wrapper>
         <LandingPage.Header>
