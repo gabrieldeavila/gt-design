@@ -33,6 +33,7 @@ import {
   ISelectOptions,
   SelectionOptions,
 } from "./interface";
+import RequiredMessage from "../Extras/RequiredMessage";
 
 const defaultValidationObj = ["required"];
 
@@ -307,6 +308,7 @@ function GTInputSelect({
               isRequired={isRequired}
             >
               {translateThis(label)}
+              <RequiredMessage isRequired={isRequired} />
             </Input.Label>
             <Input.Field
               ref={inputRef}

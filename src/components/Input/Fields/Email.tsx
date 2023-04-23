@@ -22,6 +22,7 @@ import GTTooltip from "../../Tooltip/Tooltip";
 import ErrorMessage from "../Extras/ErrorMessage";
 import Input from "../Input";
 import { IGTInput } from "./interface";
+import RequiredMessage from "../Extras/RequiredMessage";
 
 const defaultValidationObj = ["required", "email"];
 
@@ -133,6 +134,7 @@ function GTInputEmail({
             htmlFor={uniqueName}
           >
             {translateThis(label)}
+            <RequiredMessage isRequired={isRequired} />
           </Input.Label>
           <Input.Field
             type="email"

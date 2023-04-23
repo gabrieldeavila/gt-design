@@ -4,8 +4,8 @@
 /* eslint-disable operator-linebreak */
 import PropTypes from "prop-types";
 import React, { useCallback, useMemo, useRef } from "react";
-import useGTTranslate from "../../../gt/Global/translate";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
+import useGTTranslate from "../../../gt/Global/translate";
 import useUniqueName from "../../../hooks/helpers/useUniqueName";
 import useSwitchValues from "../../../hooks/pageState/useSwitchValues";
 import GTNormalSwitch from "../../Switch/Template/Normal";

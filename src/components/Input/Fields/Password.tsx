@@ -24,6 +24,7 @@ import GTTooltip from "../../Tooltip/Tooltip";
 import ErrorMessage from "../Extras/ErrorMessage";
 import Input from "../Input";
 import { IGTInputPassword } from "./interface";
+import RequiredMessage from "../Extras/RequiredMessage";
 
 const defaultValidationObj = [
   "required",
@@ -189,6 +190,7 @@ function GTInputPassword({
             htmlFor={uniqueName}
           >
             {translateThis(label)}
+            <RequiredMessage isRequired={isRequired} />
           </Input.Label>
           <Input.Field
             ref={inpRef}
