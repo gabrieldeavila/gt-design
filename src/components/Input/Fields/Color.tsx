@@ -23,8 +23,6 @@ function ColorComponent(props: any) {
     if (ref?.current == null) return;
 
     const parentRef = ref.current.parentElement;
-    const label = parentRef?.querySelector("label");
-    console.log(label);
 
     const handleClick = (e: MouseEvent) => {
       // is clicking on the input?

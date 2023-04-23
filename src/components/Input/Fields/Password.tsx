@@ -146,11 +146,18 @@ function GTInputPassword({
 
       handleInputChange(iVal, isValid, invalidMessage);
 
-      onChange?.(e)?.catch((err) => {
+      onChange?.(e, name)?.catch((err) => {
         console.error(err);
       });
     },
-    [handleInputChange, inputValidations, onChange, sameAs, validatePassword]
+    [
+      handleInputChange,
+      name,
+      inputValidations,
+      onChange,
+      sameAs,
+      validatePassword,
+    ]
   );
 
   const sameAsValue = useMemo(() => {

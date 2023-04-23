@@ -112,11 +112,11 @@ function GTInputNumber({
 
       handleInputChange(iVal, isValid, invalidMessage, errorsVar);
 
-      onChange?.(e)?.catch((err) => {
+      onChange?.(e, name)?.catch((err) => {
         console.error(err);
       });
     },
-    [validateNumber, inputValidations, handleInputChange, onChange]
+    [validateNumber, inputValidations, handleInputChange, onChange, name]
   );
 
   const containerRef = useRef<HTMLDivElement>(null);

@@ -121,12 +121,13 @@ function GTInputText({
 
       handleInputChange(iVal, isAllValid, invalidAllMessage, errorsVars);
 
-      onChange?.(e)?.catch((err) => {
+      onChange?.(e, name)?.catch((err) => {
         console.error(err);
       });
     },
     [
       onChange,
+      name,
       validateText,
       inputValidations,
       validateMinAndMax,

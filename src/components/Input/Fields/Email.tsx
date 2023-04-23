@@ -103,11 +103,11 @@ function GTInputEmail({
 
       handleInputChange(iVal, isValid, invalidMessage);
 
-      onChange?.(e)?.catch((err) => {
+      onChange?.(e, name)?.catch((err) => {
         console.error(err);
       });
     },
-    [validateEmail, inputValidations, handleInputChange, onChange]
+    [validateEmail, name, inputValidations, handleInputChange, onChange]
   );
 
   const containerRef = useRef<HTMLDivElement>(null);

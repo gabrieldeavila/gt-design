@@ -165,11 +165,11 @@ function GTInputSelect({
       setSearchTerm(iVal);
       handleInputChange(iVal, isValid);
 
-      onChange?.(e)?.catch((err) => {
+      onChange?.(e, name)?.catch((err) => {
         console.error(err);
       });
     },
-    [handleInputChange, isValid, onChange]
+    [handleInputChange, name, isValid, onChange]
   );
 
   const handleShowOptions = useCallback(() => {

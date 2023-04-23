@@ -148,11 +148,11 @@ function GTInputMask({
 
       handleInputChange(unMaskedVal, isValid, invalidMessage, errorsVar);
 
-      onChange?.(e)?.catch((err) => {
+      onChange?.(e, name)?.catch((err) => {
         console.error(err);
       });
     },
-    [unMask, validateMask, inputValidations, handleInputChange, onChange]
+    [unMask, validateMask, name, inputValidations, handleInputChange, onChange]
   );
 
   const handleMaskClear = useCallback(async () => {
