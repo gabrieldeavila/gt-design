@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React, { useEffect } from "react";
-import { useTriggerState } from "react-trigger-state";
+import { stateStorage, useTriggerState } from "react-trigger-state";
 import { gtTransparentize, transparentizedColors } from "../../utils/colors";
 import defaultConfigs from "./default.configs";
 
@@ -46,6 +46,8 @@ const GTCssInjectionScript = () => {
         process.env.PROJECT_DEV_MODE === "TRUE"
           ? defaultConfigs
           : await getCustomConfigs();
+
+      stateStorage.set("gtConfigs", configs);
 
       const root = document.documentElement;
 

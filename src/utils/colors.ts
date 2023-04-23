@@ -135,3 +135,26 @@ export const gtTransparentize = ({
     console.log(e, "something went wrong");
   }
 };
+
+/**
+ * Function that transparentize all colors when a input type color is changed
+ */
+export const autoUpdateTheme = ({
+  keyToUpdate,
+  newColor,
+}: {
+  keyToUpdate: string;
+  newColor: string;
+}) => {
+  const root = document.documentElement;
+  root.style.setProperty(`--${keyToUpdate}`, newColor);
+
+  const colorsToTransparentize = transparentizedColors.filter((item) =>
+    item.varName.includes(keyToUpdate)
+  );
+
+  for (const { amount, varName } of colorsToTransparentize) {
+    const newTransparentizedColor = transparentize(amount, newColor);
+    root.style.setProperty(`--${varName}`, newTransparentizedColor);
+  }
+};

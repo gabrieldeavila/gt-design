@@ -19,6 +19,7 @@ import {
   IGTLandingBenefit,
   IGTLandingFeature,
 } from "../../../gt/Template/LandingPage/interface";
+import { autoUpdateTheme } from "../../../utils/colors";
 
 export default {
   title: "Templates/LandingPage/Basic",
@@ -98,7 +99,7 @@ const Features: IGTLandingFeature[] = [
     title: "Easy-to-style theme",
     description:
       "You can customize the look and feel of your application to match your brand and user preferences.",
-    component: <Clock />,
+    component: <ExampleTheming />,
   },
 ];
 
@@ -179,6 +180,32 @@ function ExampleValidation() {
           maxWords="5"
           name="name"
           label="TEMPLATE.LOGIN.NAME_LABEL"
+        />
+      </Input.Group>
+    </EasyState>
+  );
+}
+
+function ExampleTheming() {
+  const handleChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>, name: string) => {
+      autoUpdateTheme({
+        keyToUpdate: name,
+        newColor: e.target.value,
+      });
+    },
+    []
+  );
+
+  return (
+    <EasyState name="example-theming" initial={{ email: "" }}>
+      <Input.Group>
+        <GTInput.Color name="primary" label="Primary" onChange={handleChange} />
+
+        <GTInput.Color
+          name="secondary"
+          label="Secondary"
+          onChange={handleChange}
         />
       </Input.Group>
     </EasyState>
