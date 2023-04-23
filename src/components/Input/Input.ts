@@ -120,29 +120,20 @@ const InputColor = styled.input<IInputField>`
   ${({ isLabel }: { isLabel?: boolean }) =>
     isLabel ?? false
       ? css`
-          transform: scale(1);
+          opacity: 1;
         `
       : css`
-          transform: scale(0);
+          opacity: 0;
         `};
 
-  position: absolute;
-  bottom: 0.25rem;
-  left: 0.25rem;
-  right: 0;
+  ${transitions.basic};
+  height: 2rem;
+  margin-top: 1.5rem;
+  margin-left: -0.2rem;
   background: transparent;
   border: none;
   outline: none;
-  width: calc(100% - 0.5rem);
-
-  ${({ isShowingSomething }: { isShowingSomething?: boolean }) =>
-    isShowingSomething ?? false
-      ? css`
-          width: calc(100% - 2.5rem);
-        `
-      : css`
-          width: calc(100% - 0.5rem);
-        `};
+  width: calc(102%);
 `;
 
 const disabledInput = css<IInputContainer>`
