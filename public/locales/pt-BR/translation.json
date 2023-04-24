@@ -45,6 +45,51 @@
       "SIGN_IN_BUTTON": "Entrar",
       "DONT_HAVE_ACCOUNT": "Não tem uma conta?",
       "FORGOT_PASSWORD": "Esqueceu sua senha?"
+    },
+    "LANDING_PAGE": {
+      "LOG_IN": "Entrar",
+      "DESCRIPTION": "Desenvolva mais esperto, não mais incerto",
+      "ACTION": {
+        "TITLE": "Desenvolver de forma mais inteligente está a apenas um clique de distância.",
+        "DESCRIPTION": "Comece a usar o GT Design agora e veja quanto tempo e esforço você pode economizar!",
+        "GET_STARTED": "Começar"
+      },
+      "BENEFITS": {
+        "DESCRIPTION": "Uma biblioteca para devs otimizarem fluxo de trabalho, economizarem tempo e aprimorarem o design.",
+        "SAVE_TIME": {
+          "TITLE": "Economize tempo",
+          "DESCRIPTION": "Automatizando tarefas repetitivas, você pode liberar mais tempo para se concentrar nos aspectos criativos do seu trabalho."
+        },
+        "IMPROVE_EFFICIENCY": {
+          "TITLE": "Melhore a eficiência",
+          "DESCRIPTION": "Otimize o fluxo de trabalho e reduza o trabalho manual para uma conclusão de projetos mais rápida e precisa sem sacrificar a qualidade."
+        },
+        "ENHANCE_OUTCOMES": {
+          "TITLE": "Melhore os resultados",
+          "DESCRIPTION": "Desde o mascaramento de telefone até a validação de e-mails, garantimos que suas aplicações tenham a aparência e a funcionalidade exatas que você pretende."
+        }
+      },
+      "FEATURES": {
+        "SAVE_TIME": {
+          "TITLE": "Economize tempo",
+          "DESCRIPTION": "Com validação fácil de usar para e-mails, números e muito mais, você pode garantir que seus dados sejam precisos e confiáveis."
+        },
+        "GLOBAL_REACH": {
+          "TITLE": "Alcance global com i18n",
+          "DESCRIPTION": "O GT Design inclui o i18n por padrão, garantindo que seu aplicativo esteja completamente localizado e pronto para ser usado em qualquer idioma."
+        },
+        "MASKING_BY_DEFAULT": {
+          "TITLE": "Mascaramento por padrão",
+          "DESCRIPTION": "O GT Design também inclui ferramentas poderosas de mascaramento de números para números de telefone e outros dados numéricos, facilitando a exibição de informações no formato que você desejar."
+        },
+        "EASY_TO_STYLE_THEME": {
+          "TITLE": "Tema fácil de estilizar",
+          "DESCRIPTION": "Você pode personalizar a aparência e a sensação do seu aplicativo para combinar com a sua marca e as preferências do usuário."
+        }
+      },
+      "FOOTER":{
+        "DESCRIPTION": "Desenvolvido em noites sem dormir por Gabriel Ávila."
+      }
     }
   },
   "EXAMPLE": {
@@ -63,7 +108,8 @@
     "MOUSE_OVER": "Passe o mouse em mim!",
     "DISABLED": "Desabilitado",
     "CAN_SAVE": "Pode salvar",
-    "CANNOT_SAVE": "Não pode salvar"
+    "CANNOT_SAVE": "Não pode salvar",
+    "EASY_AS_SHOULD": "Tão fácil quanto deveria ser!"
   },
   "TRANSLATE": {
     "LANGUAGE": "Linguagem"

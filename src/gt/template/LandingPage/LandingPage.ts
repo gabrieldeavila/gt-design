@@ -64,9 +64,19 @@ const LandingPageFeaturesRight = styled.div`
 
 const LandingPageFeaturesLeft = styled(LandingPageFeaturesRight)``;
 
+const LandingPageActionWrapper = styled(LandingPageFeaturesWrapper)`
+  background: linear-gradient(
+    150deg,
+    var(--secondary-0_1) 0%,
+    var(--secondary-0_5) 100%
+  );
+`;
+
+const LandingPageActionContent = styled(LandingPageFeaturesContent)``;
+
 const LandingPageFooterWrapper = styled(LandingPageFeaturesWrapper)`
   padding-top: 3rem;
-  background: var(--secondary-0_5);
+  background: var(--primary-0_5);
 `;
 
 const LandingPageFooterContent = styled(LandingPageFeaturesContent)``;
@@ -83,6 +93,10 @@ const LandingPage = {
     Content: LandingPageFeaturesContent,
     Left: LandingPageFeaturesLeft,
     Right: LandingPageFeaturesRight,
+  },
+  Action: {
+    Wrapper: LandingPageActionWrapper,
+    Content: LandingPageActionContent,
   },
   Footer: {
     Wrapper: LandingPageFooterWrapper,

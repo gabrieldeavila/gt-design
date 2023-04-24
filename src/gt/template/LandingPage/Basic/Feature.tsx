@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import LandingPage from "../LandingPage";
 import { Text } from "../../../../components";
 import { IFeature } from "../interface";
+import useGTTranslate from "../../../Global/translate";
 
 function Feature(props: IFeature) {
   const { right, left } = useMemo(() => {
@@ -29,12 +30,14 @@ function Feature(props: IFeature) {
 export default Feature;
 
 function FeatureBox({ title, description }: IFeature) {
+  const { translateThis } = useGTTranslate();
+
   return (
     <>
       <Text.P fontSize="1.5rem" fontWeight="400">
-        {title}
+        {translateThis(title)}
       </Text.P>
-      <Text.P>{description}</Text.P>
+      <Text.P>{translateThis(description)}</Text.P>
     </>
   );
 }

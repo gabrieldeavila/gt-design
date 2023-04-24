@@ -9,6 +9,8 @@ import {
 import BasicNavbar from "./BasicNavbar";
 import Benefit from "./Benefit";
 import Feature from "./Feature";
+import useGTTranslate from "../../../Global/translate";
+import { Trans } from "react-i18next";
 
 function GTBasicLandingPage({
   title,
@@ -16,9 +18,12 @@ function GTBasicLandingPage({
   benefitDescription,
   benefits,
   features,
+  callToAction,
   footerDescription,
   ...navbar
 }: IGTLandingPageBasic) {
+  const { translateThis } = useGTTranslate();
+
   return (
     <>
       <BasicNavbar {...navbar} />
@@ -26,7 +31,7 @@ function GTBasicLandingPage({
       <LandingPage.Wrapper>
         <LandingPage.Header>
           <Text.Title>{title}</Text.Title>
-          <Text.Subtitle>{description}</Text.Subtitle>
+          <Text.Subtitle>{translateThis(description)}</Text.Subtitle>
         </LandingPage.Header>
 
         <LandingPage.Benefits.Wrapper>
@@ -39,7 +44,7 @@ function GTBasicLandingPage({
                 backgroundImage="none"
                 textAlign="center"
               >
-                {benefitDescription}
+                {translateThis(benefitDescription)}
               </Text.H2>
             </Space.Modifiers>
 
@@ -56,13 +61,17 @@ function GTBasicLandingPage({
             <FeatureComponent key={index} index={index} {...feature} />
           ))}
         </LandingPage.Features.Wrapper>
-
+        <LandingPage.Action.Wrapper>
+          <LandingPage.Action.Content>
+            <Trans t={translateThis}>{callToAction}</Trans>
+          </LandingPage.Action.Content>
+        </LandingPage.Action.Wrapper>
         <LandingPage.Footer.Wrapper>
           <LandingPage.Footer.Content>
             <Space.Modifiers flexDirection="column" width="15rem">
               <Text.P fontSize="1.5rem">{navbar.logo}</Text.P>
               <Text.P textAlign="left">
-                {footerDescription}
+                <Trans t={translateThis}>{footerDescription}</Trans>
               </Text.P>
             </Space.Modifiers>
           </LandingPage.Footer.Content>

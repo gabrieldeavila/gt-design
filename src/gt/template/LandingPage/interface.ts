@@ -27,5 +27,6 @@ export interface IGTLandingPageBasic extends IGTLandingNavbar {
   benefitDescription: string;
   benefits: IBenefit[];
   features: IGTLandingFeature[];
-  footerDescription: string | JSX.Element;
+  callToAction: JSX.Element | JSX.Element[];
+  footerDescription: string | JSX.Element | JSX.Element[];
 }
