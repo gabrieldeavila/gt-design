@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from "react";
-import { Space, Text } from "../../../../components";
+import { Button, Space, Text } from "../../../../components";
 import LandingPage from "../LandingPage";
 import {
   IGTLandingBenefit,
@@ -20,13 +20,13 @@ function GTBasicLandingPage({
   features,
   callToAction,
   footerDescription,
-  ...navbar
+  navbarOptions
 }: IGTLandingPageBasic) {
   const { translateThis } = useGTTranslate();
 
   return (
     <>
-      <BasicNavbar {...navbar} />
+      <BasicNavbar {...navbarOptions} />
 
       <LandingPage.Wrapper>
         <LandingPage.Header>
@@ -63,13 +63,35 @@ function GTBasicLandingPage({
         </LandingPage.Features.Wrapper>
         <LandingPage.Action.Wrapper>
           <LandingPage.Action.Content>
-            <Trans t={translateThis}>{callToAction}</Trans>
+            <Space.Center flexDirection="column" gridGap="1rem">
+              <Text.H2
+                fontWeight="400"
+                fontSize="1.4rem"
+                color="var(--contrast)"
+                backgroundImage="none"
+                textAlign="center"
+              >
+                {translateThis(callToAction.title)}
+              </Text.H2>
+              <Text.P>
+                {translateThis(callToAction.description)}
+              </Text.P>
+              <Button.Contrast
+                fitContent
+                fontSize="1rem"
+                px="1.25rem"
+                py="0.75rem"
+                borderRadius="2rem"
+              >
+                {translateThis(callToAction.button)}
+              </Button.Contrast>
+            </Space.Center>
           </LandingPage.Action.Content>
         </LandingPage.Action.Wrapper>
         <LandingPage.Footer.Wrapper>
           <LandingPage.Footer.Content>
             <Space.Modifiers flexDirection="column" width="15rem">
-              <Text.P fontSize="1.5rem">{navbar.logo}</Text.P>
+              <Text.P fontSize="1.5rem">{navbarOptions.logo}</Text.P>
               <Text.P textAlign="left">
                 <Trans t={translateThis}>{footerDescription}</Trans>
               </Text.P>

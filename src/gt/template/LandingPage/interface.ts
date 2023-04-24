@@ -16,17 +16,30 @@ export interface IFeature extends IGTLandingFeature {
   orientation: "left" | "right";
 }
 
-export interface IGTLandingNavbar {
-  logo: JSX.Element | string;
-  options: () => JSX.Element;
+interface INavbarOptions {
+  description: string;
+  onClick: () => void;
 }
 
-export interface IGTLandingPageBasic extends IGTLandingNavbar {
+export interface IGTLandingNavbar {
+  logo: JSX.Element | string;
+  options: INavbarOptions[];
+  button: INavbarOptions;
+}
+
+interface ICallToAction {
+  title: string;
+  description: string;
+  button: string;
+}
+
+export interface IGTLandingPageBasic {
   title: string;
   description: string;
   benefitDescription: string;
   benefits: IBenefit[];
   features: IGTLandingFeature[];
-  callToAction: JSX.Element | JSX.Element[];
+  callToAction: ICallToAction;
   footerDescription: string | JSX.Element | JSX.Element[];
+  navbarOptions: IGTLandingNavbar;
 }

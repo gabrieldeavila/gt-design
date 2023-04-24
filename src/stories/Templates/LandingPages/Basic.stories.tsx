@@ -1,15 +1,6 @@
 import React from "react";
 import { Clock, Edit3, Tool } from "react-feather";
-import {
-  Button,
-  EasyState,
-  GTInput,
-  GTTranslate,
-  Input,
-  Navbar,
-  Space,
-  Text,
-} from "../../../components";
+import { EasyState, GTInput, GTTranslate, Input } from "../../../components";
 import {
   INonNumericMask,
   INumericMask,
@@ -19,43 +10,27 @@ import { GTBasicLandingPage } from "../../../gt/Template/LandingPage";
 import {
   IGTLandingBenefit,
   IGTLandingFeature,
+  IGTLandingNavbar,
 } from "../../../gt/Template/LandingPage/interface";
 import { autoUpdateTheme } from "../../../utils/colors";
-import useGTTranslate from "../../../gt/Global/translate";
 
 export default {
   title: "Templates/LandingPage/Basic",
 };
 
-const NavbarOptions = () => {
-  return (
-    <>
-      <Navbar.Options>
-        <Navbar.OptionWrapper>
-          <Space.Modifiers gridGap="1rem">
-            <Text.Action>Docs</Text.Action>
-            <Text.Action>GitHub</Text.Action>
-            <Text.Action>npm</Text.Action>
-          </Space.Modifiers>
-        </Navbar.OptionWrapper>
-
-        <Navbar.OptionWrapper>
-          <Space.Modifiers gridGap="1rem">
-            <Button.Contrast
-              defaultSize="sm"
-              fitContent
-              px="1.25rem"
-              py="0.5rem"
-              borderRadius="2rem"
-            >
-              TEMPLATE.LANDING_PAGE.LOG_IN
-            </Button.Contrast>
-          </Space.Modifiers>
-        </Navbar.OptionWrapper>
-      </Navbar.Options>
-    </>
-  );
+const navbarOptions: IGTLandingNavbar = {
+  logo: "GT",
+  button: {
+    description: "TEMPLATE.LANDING_PAGE.LOG_IN",
+    onClick: () => console.log("button"),
+  },
+  options: [
+    { description: "Docs", onClick: () => console.log("docs") },
+    { description: "GitHub", onClick: () => console.log("GitHub") },
+    { description: "npm", onClick: () => console.log("npm") },
+  ],
 };
+
 const Benefits: IGTLandingBenefit[] = [
   {
     title: "TEMPLATE.LANDING_PAGE.BENEFITS.SAVE_TIME.TITLE",
@@ -100,18 +75,23 @@ const Features: IGTLandingFeature[] = [
   },
 ];
 
+const callToAction = {
+  title: "TEMPLATE.LANDING_PAGE.ACTION.TITLE",
+  description: "TEMPLATE.LANDING_PAGE.ACTION.DESCRIPTION",
+  button: "TEMPLATE.LANDING_PAGE.ACTION.GET_STARTED",
+};
+
 const Template = () => {
   return (
     <GTBasic>
       <GTBasicLandingPage
-        logo="GT Design"
-        options={NavbarOptions}
+        navbarOptions={navbarOptions}
         title="GT Design"
         description="TEMPLATE.LANDING_PAGE.DESCRIPTION"
         benefitDescription="TEMPLATE.LANDING_PAGE.BENEFITS.DESCRIPTION"
         benefits={Benefits}
         features={Features}
-        callToAction={<CallToAction />}
+        callToAction={callToAction}
         footerDescription="TEMPLATE.LANDING_PAGE.FOOTER.DESCRIPTION"
       />
     </GTBasic>
@@ -223,35 +203,5 @@ function ExampleTheming() {
         />
       </Input.Group>
     </EasyState>
-  );
-}
-
-function CallToAction() {
-  const { translateThis } = useGTTranslate();
-
-  return (
-    <Space.Center flexDirection="column" gridGap="1rem">
-      <Text.H2
-        fontWeight="400"
-        fontSize="1.4rem"
-        color="var(--contrast)"
-        backgroundImage="none"
-        textAlign="center"
-      >
-        {translateThis("TEMPLATE.LANDING_PAGE.ACTION.TITLE")}
-      </Text.H2>
-      <Text.P>
-        {translateThis("TEMPLATE.LANDING_PAGE.ACTION.DESCRIPTION")}
-      </Text.P>
-      <Button.Contrast
-        fitContent
-        fontSize="1rem"
-        px="1.25rem"
-        py="0.75rem"
-        borderRadius="2rem"
-      >
-        {translateThis("TEMPLATE.LANDING_PAGE.ACTION.GET_STARTED")}
-      </Button.Contrast>
-    </Space.Center>
   );
 }
