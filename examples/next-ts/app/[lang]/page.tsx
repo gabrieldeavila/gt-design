@@ -18,8 +18,36 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { Clock, Edit3, Tool } from "react-feather";
 
-export default function Page() {
+export default function Page({
+  params: { lang },
+}: {
+  params: { lang: string };
+}) {
   const { data: session } = useSession();
+  const router = useRouter();
+
+  const navbarOptions: IGTLandingNavbar = {
+    logo: "GT",
+    button: {
+      description: "TEMPLATE.LANDING_PAGE.LOG_IN",
+      onClick: () => router.push(`${lang}/login`),
+    },
+    options: [
+      {
+        description: "Docs",
+        onClick: () => window.open("https://example.com", "_blank"),
+      },
+      {
+        description: "GitHub",
+        onClick: () =>
+          window.open("https://github.com/gabrieldeavila/gt-design", "_blank"),
+      },
+      {
+        description: "npm",
+        onClick: () => window.open("https://www.npmjs.com/package/@geavila/gt-design?activeTab=readme", "_blank"),
+      },
+    ],
+  };
 
   return (
     <GTBasicLandingPage
@@ -51,19 +79,6 @@ export default function Page() {
   // );
   // return <LoginBtn />;
 }
-
-const navbarOptions: IGTLandingNavbar = {
-  logo: "GT",
-  button: {
-    description: "TEMPLATE.LANDING_PAGE.LOG_IN",
-    onClick: () => console.log("button"),
-  },
-  options: [
-    { description: "Docs", onClick: () => console.log("docs") },
-    { description: "GitHub", onClick: () => console.log("GitHub") },
-    { description: "npm", onClick: () => console.log("npm") },
-  ],
-};
 
 const callToAction = {
   title: "TEMPLATE.LANDING_PAGE.ACTION.TITLE",
