@@ -51,9 +51,73 @@
       "SIGN_IN_BUTTON": "Let's go!",
       "DONT_HAVE_ACCOUNT": "Don't have an account?",
       "FORGOT_PASSWORD": "Forgot password?"
+    },
+    "LANDING_PAGE": {
+      "LOG_IN": "Log In",
+      "DESCRIPTION": "Design smarter, not harder",
+      "ACTION": {
+        "TITLE": "Designing smarter is just a click away.",
+        "DESCRIPTION": "Start using GT Design now and see how much time and effort you can save!",
+        "GET_STARTED": "Get Started"
+      },
+      "BENEFITS": {
+        "DESCRIPTION": "A powerful tool for developers to streamline workflow, save time, and enhance design outcomes.",
+        "SAVE_TIME": {
+          "TITLE": "Save time",
+          "DESCRIPTION": "By automating repetitive tasks, you can free up more time to focus on the creative aspects of your work"
+        },
+        "IMPROVE_EFFICIENCY": {
+          "TITLE": "Improve efficiency",
+          "DESCRIPTION": "Streamline workflow and reduce manual labor for faster, more accurate project completion without sacrificing quality."
+        },
+        "ENHANCE_OUTCOMES": {
+          "TITLE": "Enhance outcomes",
+          "DESCRIPTION": "From phone masking to email validation, we ensure that your applications look and function exactly as intended."
+        }
+      },
+      "FEATURES": {
+        "SAVE_TIME": {
+          "TITLE": "Save time",
+          "DESCRIPTION": "With easy-to-use validation for emails, numbers, and more, you can ensure that your data is accurate and reliable."
+        },
+        "GLOBAL_REACH": {
+          "TITLE": "Global Reach with i18n",
+          "DESCRIPTION": "GT Design includes i18n by default, ensuring that your application is fully localized and ready to use in any language."
+        },
+        "MASKING_BY_DEFAULT": {
+          "TITLE": "Masking by Default",
+          "DESCRIPTION": "GT Design also includes powerful number masking tools for phone numbers and other numeric data, making it easy to display information in the format you want."
+        },
+        "EASY_TO_STYLE_THEME": {
+          "TITLE": "Easy-to-style theme",
+          "DESCRIPTION": "You can customize the look and feel of your application to match your brand and user preferences."
+        }
+      },
+      "FOOTER": {
+        "DESCRIPTION": "Designed and built in sleepless nights by Gabriel Avila"
+      }
     }
   },
   "TRANSLATE": {
     "LANGUAGE": "Language"
+  },
+  "EXAMPLE": {
+    "TITLE": "Example",
+    "DATE": "Date",
+    "TEXT": "Text",
+    "PHONE": "Phone",
+    "DOC": "Document",
+    "PERCENT": "Percent",
+    "NUMBER": "Number",
+    "MONEY": "Money",
+    "SELECT": "Select",
+    "SWITCH": "Active",
+    "AWARD": "Award",
+    "AWARD_DESCRIPTION": "You are awesome!",
+    "MOUSE_OVER": "Hover me!",
+    "DISABLED": "Disabled",
+    "CAN_SAVE": "Can save",
+    "CANNOT_SAVE": "Cannot save",
+    "EASY_AS_SHOULD": "As easy as it should be."
   }
 }
