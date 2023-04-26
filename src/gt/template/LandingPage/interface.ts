@@ -27,10 +27,15 @@ export interface IGTLandingNavbar {
   button: INavbarOptions;
 }
 
+interface ICallButton {
+  title: string;
+  onClick: () => void;
+}
+
 interface ICallToAction {
   title: string;
   description: string;
-  button: string;
+  button: ICallButton;
 }
 
 export interface IGTLandingPageBasic {

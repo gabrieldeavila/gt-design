@@ -44,11 +44,23 @@ export default function Page({
       },
       {
         description: "npm",
-        onClick: () => window.open("https://www.npmjs.com/package/@geavila/gt-design?activeTab=readme", "_blank"),
+        onClick: () =>
+          window.open(
+            "https://www.npmjs.com/package/@geavila/gt-design?activeTab=readme",
+            "_blank"
+          ),
       },
     ],
   };
 
+  const callToAction = {
+    title: "TEMPLATE.LANDING_PAGE.ACTION.TITLE",
+    description: "TEMPLATE.LANDING_PAGE.ACTION.DESCRIPTION",
+    button: {
+      onClick: () => router.push(`${lang}/login`),
+      title: "TEMPLATE.LANDING_PAGE.ACTION.GET_STARTED",
+    },
+  };
   return (
     <GTBasicLandingPage
       navbarOptions={navbarOptions}
@@ -79,12 +91,6 @@ export default function Page({
   // );
   // return <LoginBtn />;
 }
-
-const callToAction = {
-  title: "TEMPLATE.LANDING_PAGE.ACTION.TITLE",
-  description: "TEMPLATE.LANDING_PAGE.ACTION.DESCRIPTION",
-  button: "TEMPLATE.LANDING_PAGE.ACTION.GET_STARTED",
-};
 
 const Benefits: IGTLandingBenefit[] = [
   {

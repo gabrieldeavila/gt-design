@@ -1,10 +1,17 @@
 "use client";
 
-import { GTLogin, SectionContainer } from "@geavila/gt-design";
-import React from "react";
+import {
+  GTLoginProviders
+} from "@geavila/gt-design";
+import { signIn } from "next-auth/react";
 
 function d() {
-  return <GTLogin onPasswordForgot={() => console.log("hehe")} />;
+  return (
+    <GTLoginProviders
+      onGoogleClick={() => signIn("google", { redirect: false })}
+      onGitHubClick={() => signIn("github", { redirect: false })}
+    />
+  );
 }
 
 export default d;

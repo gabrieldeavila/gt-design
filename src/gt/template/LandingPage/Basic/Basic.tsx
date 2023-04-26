@@ -82,8 +82,9 @@ function GTBasicLandingPage({
                 px="1.25rem"
                 py="0.75rem"
                 borderRadius="2rem"
+                onClick={callToAction.button.onClick}
               >
-                {translateThis(callToAction.button)}
+                {translateThis(callToAction.button.title)}
               </Button.Contrast>
             </Space.Center>
           </LandingPage.Action.Content>

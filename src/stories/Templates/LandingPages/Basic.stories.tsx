@@ -78,7 +78,12 @@ const Features: IGTLandingFeature[] = [
 const callToAction = {
   title: "TEMPLATE.LANDING_PAGE.ACTION.TITLE",
   description: "TEMPLATE.LANDING_PAGE.ACTION.DESCRIPTION",
-  button: "TEMPLATE.LANDING_PAGE.ACTION.GET_STARTED",
+  button: {
+    onClick() {
+      console.log("clicked");
+    },
+    title: "TEMPLATE.LANDING_PAGE.ACTION.GET_STARTED",
+  },
 };
 
 const Template = () => {
