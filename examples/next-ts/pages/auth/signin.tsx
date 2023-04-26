@@ -7,34 +7,25 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { GTLoginProviders, GTBasic } from "@geavila/gt-design";
 
+// probably there is a way to do this in the app folder, but I don't know how
 export default function SignIn({
   providers,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  return (
-    <GTBasic>
-      {Object.values(providers).map((provider) => (
-        <GTLoginProviders
-          onGoogleClick={() => signIn("google", { redirect: false })}
-          onGitHubClick={() => signIn("github", { redirect: false })}
-        />
-      ))}
-    </GTBasic>
-  );
+  return null;
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getServerSession(context.req, context.res, authOptions);
+  const lang = context.locale;
+
+  let route = `/${lang}/login`;
 
   // If the user is already logged in, redirect.
   // Note: Make sure not to redirect to the same page
   // To avoid an infinite loop!
   if (session) {
-    return { redirect: { destination: "/a" } };
+    route = `/${lang}/a`;
   }
 
-  const providers = await getProviders();
-
-  return {
-    props: { providers: providers ?? [] },
-  };
+  return { redirect: { destination: route } };
 }
