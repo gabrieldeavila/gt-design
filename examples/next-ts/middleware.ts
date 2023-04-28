@@ -10,9 +10,6 @@ export default withAuth(
       authorized: ({ token }) => {
         return token;
       },
-      unAuthorized: () => {
-        console.log("kkk");
-      },
     },
   }
 );

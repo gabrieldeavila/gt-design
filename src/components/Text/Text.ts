@@ -1,9 +1,9 @@
 /* eslint-disable operator-linebreak */
 import styled, { css } from "styled-components";
+import { fontWeight, textAlign } from "styled-system";
 import { animations, transforms, transitions } from "../../utils";
 import { defaultAddOns } from "../Space/addOns/addOns";
 import { IText, ITextDividerWrapper } from "./interface";
-import { fontWeight, textAlign } from "styled-system";
 
 export const P = styled.p<IText>`
   color: var(--contrast);
@@ -132,7 +132,7 @@ export const DividerText = styled(H2)`
   ${defaultAddOns};
 `;
 
-export const TextAction = styled.button`
+export const TextAction = styled.button<IText>`
   background: none;
   border: none;
   margin: 0;
@@ -148,10 +148,13 @@ export const TextAction = styled.button`
     ${transforms.press}
   }
 
+  ${defaultAddOns};
+  ${textAlign};
+  ${fontWeight};
   ${transitions.linear}
 `;
 
-export const TextTitle = styled.h1`
+export const TextTitle = styled.h1<IText>`
   background-image: linear-gradient(
     180deg,
     var(--primary-0_1),
@@ -164,10 +167,23 @@ export const TextTitle = styled.h1`
   font-size: 4rem;
   text-align: center;
   margin-bottom: 1rem;
+
+  ${defaultAddOns};
+
+  /* when it's mobile */
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
 `;
 
 export const TextSubtitle = styled.h2`
   color: var(--contrast);
   font-weight: 400;
   font-size: 1.2rem;
+  text-align: center;
+
+  /* when it's a mobile */
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;

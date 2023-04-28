@@ -1,11 +1,15 @@
 "use client";
 
-import {
-  GTLoginProviders
-} from "@geavila/gt-design";
-import { signIn } from "next-auth/react";
+import { GTLoginProviders } from "@geavila/gt-design";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-function d() {
+function Login({ params }: { params: { lang: "en" | "pt-BR" } }) {
+  const { data: session } = useSession();
+  const router = useRouter();
+  
+  if (session) return router.push(`/${params.lang}/a`);
+
   return (
     <GTLoginProviders
       onGoogleClick={() => signIn("google", { redirect: false })}
@@ -14,4 +18,4 @@ function d() {
   );
 }
 
-export default d;
+export default Login;

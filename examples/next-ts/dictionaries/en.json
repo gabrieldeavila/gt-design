@@ -82,11 +82,11 @@
         },
         "GLOBAL_REACH": {
           "TITLE": "Global Reach with i18n",
-          "DESCRIPTION": "GT Design includes i18n by default, ensuring that your application is fully localized and ready to use in any language."
+          "DESCRIPTION": "It includes i18n by default, ensuring that your application is fully localized and ready to use in any language."
         },
         "MASKING_BY_DEFAULT": {
           "TITLE": "Masking by Default",
-          "DESCRIPTION": "GT Design also includes powerful number masking tools for phone numbers and other numeric data, making it easy to display information in the format you want."
+          "DESCRIPTION": "With GT Design's powerful number masking tools, you can easily display phone numbers and other numerical data in the format that suits your needs."
         },
         "EASY_TO_STYLE_THEME": {
           "TITLE": "Easy-to-style theme",

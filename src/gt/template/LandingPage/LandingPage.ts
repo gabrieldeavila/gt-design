@@ -17,6 +17,13 @@ const LandingPageHeader = styled.div`
     var(--primary-0_1) 0%,
     var(--primary-0_5) 100%
   );
+
+  /* when it's a mobile */
+  @media (max-width: 768px) {
+    padding: 2rem 1.5rem;
+    padding-top: 4rem;
+    height: 100%;
+  }
 `;
 
 const LandingPageBenefitsWrapper = styled.div`
@@ -43,8 +50,9 @@ const LandingPageFeaturesWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-wrap: wrap;
   gap: 2rem;
-  padding: 2rem 0;
+  padding: 2rem 1.5rem;
   background: var(--primary-0_2);
 `;
 
@@ -54,12 +62,19 @@ const LandingPageFeaturesContent = styled.div`
   width: -webkit-fill-available;
   max-width: 1248px;
   gap: 2rem;
+  flex-wrap: wrap;
 `;
 
 const LandingPageFeaturesRight = styled.div`
-  width: 50%;
+  width: 1%;
+  flex-grow: 1;
   ${flex.alignCenter};
   flex-direction: column;
+
+  /* when it's a mobile */
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const LandingPageFeaturesLeft = styled(LandingPageFeaturesRight)``;

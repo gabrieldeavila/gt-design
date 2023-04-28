@@ -55,7 +55,7 @@
     },
     "LANDING_PAGE": {
       "LOG_IN": "Entrar",
-      "DESCRIPTION": "Desenvolva mais esperto, não mais incerto",
+      "DESCRIPTION": "Desenvolva com inteligência, evite a incerteza.",
       "ACTION": {
         "TITLE": "Desenvolver de forma mais inteligente está a apenas um clique de distância.",
         "DESCRIPTION": "Comece a usar o GT Design agora e veja quanto tempo e esforço você pode economizar!",
@@ -79,15 +79,15 @@
       "FEATURES": {
         "SAVE_TIME": {
           "TITLE": "Economize tempo",
-          "DESCRIPTION": "Com validação fácil de usar para e-mails, números e muito mais, você pode garantir que seus dados sejam precisos e confiáveis."
+          "DESCRIPTION": "Com validação fácil para e-mails, números e mais, seus dados ficam precisos e confiáveis."
         },
         "GLOBAL_REACH": {
           "TITLE": "Alcance global com i18n",
-          "DESCRIPTION": "O GT Design inclui o i18n por padrão, garantindo que seu aplicativo esteja completamente localizado e pronto para ser usado em qualquer idioma."
+          "DESCRIPTION": "Internacionalização por padrão, tornando seu aplicativo localizado e pronto para qualquer idioma."
         },
         "MASKING_BY_DEFAULT": {
           "TITLE": "Mascaramento por padrão",
-          "DESCRIPTION": "O GT Design também inclui ferramentas poderosas de mascaramento de números para números de telefone e outros dados numéricos, facilitando a exibição de informações no formato que você desejar."
+          "DESCRIPTION": "Poderosas ferramentas de mascaramento para números de telefone e dados numéricos, permitindo a personalização da exibição das informações."
         },
         "EASY_TO_STYLE_THEME": {
           "TITLE": "Tema fácil de estilizar",

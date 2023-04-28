@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-confusing-arrow */
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { color, flexbox, space } from "styled-system";
 import { transforms } from "../../utils";
 import animations from "../../utils/animations";
@@ -172,13 +172,67 @@ const NavbarOptionWrapper = styled.div`
   position: relative;
 `;
 
-const NavbarRight = styled.div``;
+const NavbarRight = styled.div`
+  .navbar-x {
+    cursor: pointer;
+    ${transitions.basic}
+  }
+
+  .navbar-x:active {
+    ${transforms.XLpress};
+  }
+`;
 
 const NavbarLogo = styled.div`
   & > * {
     ${flex.alignCenterCol};
     height: 3rem;
     width: 3rem;
+  }
+`;
+
+const NavbarMobileWrapper = styled.div`
+  background: var(--primary);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1101;
+  padding: 1rem 1.5rem;
+
+  animation: ${(props: { isOpen: boolean }) =>
+      props.isOpen ? animationOpenModal : animationCloseModal}
+    0.3s ease-in-out forwards;
+
+  ${transitions.basic};
+  ${shadows.simple};
+
+  .navbar-x {
+    cursor: pointer;
+    ${transitions.basic}
+  }
+
+  .navbar-x:active {
+    ${transforms.XLpress};
+  }
+`;
+
+const animationCloseModal = keyframes`
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+`;
+
+const animationOpenModal = keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
   }
 `;
 
@@ -196,4 +250,7 @@ export default {
   Popup: NavbarPopup,
   Right: NavbarRight,
   Logo: NavbarLogo,
+  Mobile: {
+    Wrapper: NavbarMobileWrapper,
+  },
 };

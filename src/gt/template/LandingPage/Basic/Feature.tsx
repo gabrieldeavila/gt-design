@@ -3,10 +3,13 @@ import LandingPage from "../LandingPage";
 import { Text } from "../../../../components";
 import { IFeature } from "../interface";
 import useGTTranslate from "../../../Global/translate";
+import useIsMobile from "../../../../hooks/helpers/useIsMobile";
 
 function Feature(props: IFeature) {
+  const isMobile = useIsMobile();
+
   const { right, left } = useMemo(() => {
-    if (props.orientation === "left") {
+    if (props.orientation === "left" && !isMobile) {
       return {
         left: <FeatureBox {...props} />,
         right: <FeatureComponent {...props} />,
@@ -17,7 +20,7 @@ function Feature(props: IFeature) {
         right: <FeatureBox {...props} />,
       };
     }
-  }, [props]);
+  }, [isMobile, props]);
 
   return (
     <LandingPage.Features.Content>
@@ -34,10 +37,10 @@ function FeatureBox({ title, description }: IFeature) {
 
   return (
     <>
-      <Text.P fontSize="1.5rem" fontWeight="400">
+      <Text.P textAlign="center" fontSize="1.5rem" fontWeight="400">
         {translateThis(title)}
       </Text.P>
-      <Text.P>{translateThis(description)}</Text.P>
+      <Text.P textAlign="center">{translateThis(description)}</Text.P>
     </>
   );
 }

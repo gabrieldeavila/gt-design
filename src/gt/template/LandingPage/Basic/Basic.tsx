@@ -48,7 +48,7 @@ function GTBasicLandingPage({
               </Text.H2>
             </Space.Modifiers>
 
-            <Space.Center alignItems="flex-start" gridGap="2rem">
+            <Space.Center flexWrap="wrap" alignItems="flex-start" gridGap="2rem">
               {benefits.map((benefit, index) => (
                 <BenefitComponent key={index} {...benefit} />
               ))}
@@ -73,7 +73,7 @@ function GTBasicLandingPage({
               >
                 {translateThis(callToAction.title)}
               </Text.H2>
-              <Text.P>
+              <Text.P textAlign="center">
                 {translateThis(callToAction.description)}
               </Text.P>
               <Button.Contrast
@@ -92,7 +92,7 @@ function GTBasicLandingPage({
         <LandingPage.Footer.Wrapper>
           <LandingPage.Footer.Content>
             <Space.Modifiers flexDirection="column" width="15rem">
-              <Text.P fontSize="1.5rem">{navbarOptions.logo}</Text.P>
+              <Text.P textAlign="left" fontSize="1.5rem">{navbarOptions.logo}</Text.P>
               <Text.P textAlign="left">
                 <Trans t={translateThis}>{footerDescription}</Trans>
               </Text.P>
