@@ -4,7 +4,7 @@ import { IGTLandingNavbar } from "../interface";
 import useGTTranslate from "../../../Global/translate";
 import useIsMobile from "../../../../hooks/helpers/useIsMobile";
 import { Button, GTNavbar, Navbar, Space, Text } from "../../../../components";
-import { X } from "react-feather";
+import { Menu, X } from "react-feather";
 
 function BasicNavbar({ logo, options, button }: IGTLandingNavbar) {
   const { translateThis } = useGTTranslate();
@@ -66,7 +66,7 @@ function BasicNavbar({ logo, options, button }: IGTLandingNavbar) {
               </Navbar.Right>
             ) : (
               <Navbar.Right>
-                <X onClick={handleOpenMobile} className="navbar-x" />
+                <Menu onClick={handleOpenMobile} className="navbar-menu" />
               </Navbar.Right>
             )}
           </Space.Modifiers>

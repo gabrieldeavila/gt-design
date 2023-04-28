@@ -173,12 +173,12 @@ const NavbarOptionWrapper = styled.div`
 `;
 
 const NavbarRight = styled.div`
-  .navbar-x {
+  .navbar-menu {
     cursor: pointer;
     ${transitions.basic}
   }
 
-  .navbar-x:active {
+  .navbar-menu:active {
     ${transforms.XLpress};
   }
 `;
