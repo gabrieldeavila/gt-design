@@ -8,7 +8,10 @@ import Switch from "../Switch";
 
 const initialTheme = () => {
   try {
-    return localStorage?.getItem("darkTheme") === "1";
+    return (
+      localStorage?.getItem("darkTheme") === "1" ||
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    );
   } catch (e) {
     return false;
   }
@@ -23,7 +26,10 @@ function GTDarkSwitch({
   placeX: "top" | "bottom";
   placeY: "left" | "right";
 }) {
-  const [isDarkTheme, setDarkTheme] = useTriggerState({ name: "changedTheme", initial: initialTheme() });
+  const [isDarkTheme, setDarkTheme] = useTriggerState({
+    name: "changedTheme",
+    initial: initialTheme(),
+  });
 
   const handleTheme = useCallback(() => {
     try {

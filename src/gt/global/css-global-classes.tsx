@@ -52,7 +52,10 @@ const GTCssInjectionScript = () => {
       const root = document.documentElement;
 
       const colorMode =
-        localStorage.getItem("darkTheme") != null ? "darkTheme" : "theme";
+        localStorage.getItem("darkTheme") != null ??
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "darkTheme"
+          : "theme";
 
       const colors = configs.themeConfig.global[colorMode];
 
