@@ -192,7 +192,8 @@ const NavbarLogo = styled.div`
 `;
 
 const NavbarMobileWrapper = styled.div`
-  background: var(--primary);
+  background: var(--primary-0_1);
+  backdrop-filter: blur(10px);
   position: fixed;
   top: 0;
   left: 0;
