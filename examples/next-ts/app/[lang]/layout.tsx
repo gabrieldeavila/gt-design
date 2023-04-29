@@ -30,7 +30,7 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { lang: "en" | "pt-BR" };
 }) {
-  const dict = await getDictionary(params.lang);
+  const dict = await getDictionary("en");
 
   return (
     <StyledComponentsRegistry>
