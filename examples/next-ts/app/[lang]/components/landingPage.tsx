@@ -21,7 +21,7 @@ import { Clock, Edit3, Tool } from "react-feather";
 export default function LandingPage({
   params: { lang },
 }: {
-  params: { lang: string };
+  params: { lang: string | null };
 }) {
   const router = useRouter();
 

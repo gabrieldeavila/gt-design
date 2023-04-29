@@ -25,7 +25,8 @@
     "react-dom": "18.2.0",
     "server-only": "^0.0.1",
     "styled-components": "^5.3.9",
-    "typescript": "5.0.3"
+    "typescript": "5.0.3",
+    "@geavila/gt-design": "1.0.20"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.3",
