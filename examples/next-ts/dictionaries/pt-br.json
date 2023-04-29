@@ -1,11 +1,7 @@
 {
-  "server-component": {
-    "welcome": "bem vindxs"
-  },
-  "counter": {
-    "increment": "Incrementar",
-    "decrement": "Decrementar"
-  },
+  "WELCOME": "Bem vindo",
+  "LOGGED_IN": "Você entrou!",
+  "LOG_OUT": "Quer sair?",
   "NO_INITIAL_SPACE": "Este campo não pode começar com um espaço.",
   "NO_TRAILING_SPACE": "Este campo não pode terminar com um espaço.",
   "NO_SPACES": "Este campo não pode conter espaços.",

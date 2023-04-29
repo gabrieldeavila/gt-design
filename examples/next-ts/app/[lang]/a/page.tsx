@@ -1,16 +1,15 @@
 "use client";
 
-import { SectionContainer, Space, Text } from "@geavila/gt-design";
+import { Button, SectionContainer, Space, Text } from "@geavila/gt-design";
+import { signOut } from "next-auth/react";
 import React from "react";
 
 function page() {
   return (
     <Space.Horizontal>
-      <SectionContainer title="Welcome" subtitle="You are logged" />
+      <SectionContainer title="WELCOME" subtitle="LOGGED_IN" />
 
-      <Text.H2>
-        Want to log out? 
-      </Text.H2>
+      <Button.Contrast onClick={() => signOut()} content="LOG_OUT" />
     </Space.Horizontal>
   );
 }

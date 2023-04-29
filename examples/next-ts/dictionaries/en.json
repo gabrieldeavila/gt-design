@@ -1,11 +1,7 @@
 {
-  "server-component": {
-    "welcome": "Welcome"
-  },
-  "counter": {
-    "increment": "Increment",
-    "decrement": "Decrement"
-  },
+  "WELCOME": "Welcome",
+  "LOGGED_IN": "You are logged in!",
+  "LOG_OUT": "Wanna log out?",
   "REQUIRED": "This field is required.",
   "NO_INITIAL_SPACE": "It cannot start with a space.",
   "NO_TRAILING_SPACE": "It cannot end with a space.",
