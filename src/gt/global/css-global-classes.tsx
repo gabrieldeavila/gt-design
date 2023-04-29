@@ -50,12 +50,15 @@ const GTCssInjectionScript = () => {
       stateStorage.set("gtConfigs", configs);
 
       const root = document.documentElement;
+      const firstTime = localStorage.getItem("firstTime") == null;
 
       const colorMode =
         localStorage.getItem("darkTheme") != null ??
-        window.matchMedia("(prefers-color-scheme: dark)").matches
+        (window.matchMedia("(prefers-color-scheme: dark)").matches && firstTime)
           ? "darkTheme"
           : "theme";
+
+      localStorage.setItem("firstTime", "false");
 
       const colors = configs.themeConfig.global[colorMode];
 

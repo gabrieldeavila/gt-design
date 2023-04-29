@@ -8,9 +8,11 @@ import Switch from "../Switch";
 
 const initialTheme = () => {
   try {
+    const firstTime = localStorage.getItem("firstTime") == null;
+
     return (
       localStorage?.getItem("darkTheme") === "1" ||
-      window.matchMedia("(prefers-color-scheme: dark)").matches
+      (window.matchMedia("(prefers-color-scheme: dark)").matches && firstTime)
     );
   } catch (e) {
     return false;
