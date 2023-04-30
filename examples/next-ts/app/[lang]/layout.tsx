@@ -34,9 +34,9 @@ export default async function RootLayout({
  
   return (
     <StyledComponentsRegistry>
-      <html lang="en" className={kanit.className}>
+      <html lang={params.lang} className={kanit.className}>
         <body>
-          <GTWrapper serverTranslation={dict} lang="en">
+          <GTWrapper serverTranslation={dict} lang={params.lang}>
             {children}
           </GTWrapper>
         </body>

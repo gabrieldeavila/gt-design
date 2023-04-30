@@ -4,10 +4,11 @@ const nextConfig = {
     appDir: true,
   },
   i18n: {
-    locales: ["en", "pt-BR"],
+    locales: ["en", "fr"],
     defaultLocale: "en",
     localeDetection: true,
   },
+  trailingSlash: true,
 };
 
 module.exports = nextConfig;
