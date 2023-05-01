@@ -3,6 +3,19 @@ import React, { useEffect } from "react";
 import { stateStorage, useTriggerState } from "react-trigger-state";
 import { gtTransparentize, transparentizedColors } from "../../utils/colors";
 import defaultConfigs from "./default.configs";
+import { minify } from "uglify-js";
+
+let idk: any = {};
+
+(() => {
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  setTimeout(async () => {
+    const path = "gt-design.config.js";
+
+    idk = await import(path);
+    console.log(idk.default.themeConfig.global.theme, "server first?");
+  });
+})();
 
 const getCustomConfigs = async () => {
   try {
@@ -74,10 +87,48 @@ const GTCssInjectionScript = () => {
 
   const codeToRunOnClient = `
 (async function() {
+  setTimeout(async ()=>{
+
+  const defaultConfigs = ${JSON.stringify(defaultConfigs)}
+  const getCustomConfigs = async () => {
+    try {
+      // get the path to the babel.config.js file
+      const customConfigs = ${JSON.stringify(idk)};
+
+      const userConfigs = customConfigs.default;
+  
+      // merge the user configs with the default configs
+      const mergedConfigs = {
+        ...defaultConfigs,
+        ...userConfigs,
+      };
+  
+      // also merge the themes (if any)
+      if (userConfigs.themeConfig?.global) {
+        mergedConfigs.themeConfig.global.theme = {
+          ...defaultConfigs.themeConfig.global.theme,
+          ...userConfigs.themeConfig.global.theme,
+        };
+  
+        mergedConfigs.themeConfig.global.darkTheme = {
+          ...defaultConfigs.themeConfig.global.darkTheme,
+          ...userConfigs.themeConfig.global.darkTheme,
+        };
+      }
+  
+      return mergedConfigs;
+    } catch (e) {
+      console.log(e, "ops");
+      return defaultConfigs;
+    }
+  };
+
   const colorMode = localStorage.getItem("darkTheme") != null ? "darkTheme" : "theme";
   const root = document.documentElement;
-  const defaultConfigs = await ${JSON.stringify(getCustomConfigs)};
+  const themeConfigs = await getCustomConfigs();
   const opacities = ${JSON.stringify(transparentizedColors)}
+  console.log(themeConfigs, "aqui?");
+  // console.log(themeConfigs());
 
   function transparentizeColor(color, opacity) {
     // Convert hex color to RGB format
@@ -97,7 +148,7 @@ const GTCssInjectionScript = () => {
     return rgba;
   }
 
-  const colors = defaultConfigs.themeConfig.global[colorMode];
+  const colors = themeConfigs.themeConfig.global[colorMode];
   Object.keys(colors).forEach((key) => {
     root.style.setProperty("--"+key, colors[key]);
   });
@@ -106,11 +157,16 @@ const GTCssInjectionScript = () => {
 
   for (const {amount, varName} of opacities) {
     const colorToTransparentize = varName.split("-")[0];
-    const color = defaultConfigs.themeConfig.global[starterTheme]?.[colorToTransparentize];
+    const color = themeConfigs.themeConfig.global[starterTheme]?.[colorToTransparentize];
     const newColor = transparentizeColor(color, amount);
     document.documentElement.style.setProperty("--"+varName, newColor);
   }
+}, 2)
+
 })()`;
+
+  const a = minify(codeToRunOnClient).code;
+  console.log(a);
 
   return <script dangerouslySetInnerHTML={{ __html: codeToRunOnClient }} />;
 };

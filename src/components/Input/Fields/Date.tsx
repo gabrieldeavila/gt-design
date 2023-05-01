@@ -2,21 +2,18 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable operator-linebreak */
-import { format, parseISO } from "date-fns";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import React, {
-  useCallback,
   useEffect,
   useMemo,
   useRef,
-  useState,
+  useState
 } from "react";
 // import "react-datepicker/dist/react-datepicker.css";
 import * as Icon from "react-feather";
-import useGTTranslate from "../../../gt/Global/translate";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
-import useDateFormat from "../../../hooks/helpers/useDateFormat";
+import useGTTranslate from "../../../gt/Global/translate";
 import useUniqueName from "../../../hooks/helpers/useUniqueName";
 import useInputValues from "../../../hooks/pageState/useInputValues";
 import useValidateDate from "../../../hooks/validation/useValidateDate";
@@ -24,9 +21,9 @@ import useValidateState from "../../../hooks/validation/useValidateState";
 import Loader from "../../Loader";
 import GTTooltip from "../../Tooltip/Tooltip";
 import ErrorMessage from "../Extras/ErrorMessage";
+import RequiredMessage from "../Extras/RequiredMessage";
 import Input from "../Input";
 import { IGTInputDate } from "./interface";
-import RequiredMessage from "../Extras/RequiredMessage";
 
 const defaultValidationObj = ["required"];
 function GTInputDate({
@@ -46,7 +43,7 @@ function GTInputDate({
 }: IGTInputDate) {
   const { translateThis } = useGTTranslate();
   const uniqueName = useUniqueName({ name });
-  const alterFieldRef = useRef<boolean>(true);
+  // const alterFieldRef = useRef<boolean>(true);
 
   const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -62,17 +59,17 @@ function GTInputDate({
 
   const { validateState } = useValidateState(name, inputValidations);
 
-  const userDefaultFormat = useDateFormat();
+  // const userDefaultFormat = useDateFormat();
 
   const {
     isRequired,
     value,
     isValidatingOnBlur,
     showFeedback,
-    handleInputChange,
-    handleInputBlur,
-    handleInputBlurErrors,
-    handleInputFocus,
+    // handleInputChange,
+    // handleInputBlur,
+    // handleInputBlurErrors,
+    // handleInputFocus,
     handleInputClear,
     handleMouseEnter,
     handleMouseLeave,
@@ -88,11 +85,11 @@ function GTInputDate({
     disabled
   );
 
-  const currDate = useMemo(
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    () => (value ?? false ? parseISO(value.toString()) : new Date()),
-    [value]
-  );
+  // const currDate = useMemo(
+  //   // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+  //   () => (value ?? false ? parseISO(value.toString()) : new Date()),
+  //   [value]
+  // );
 
   const { validateDate } = useValidateDate(min, max);
 
@@ -107,37 +104,37 @@ function GTInputDate({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleChange = useCallback(
-    (date: Date) => {
-      // gets the value from Date to yyyy-mm-dd, using date-fns
-      const newDate = format(date, "yyyy-MM-dd");
+  // const handleChange = useCallback(
+  //   (date: Date) => {
+  //     // gets the value from Date to yyyy-mm-dd, using date-fns
+  //     const newDate = format(date, "yyyy-MM-dd");
 
-      const { isValid, invalidMessage, errorsVars } = validateDate(
-        newDate,
-        inputValidations
-      );
+  //     const { isValid, invalidMessage, errorsVars } = validateDate(
+  //       newDate,
+  //       inputValidations
+  //     );
 
-      handleInputChange(newDate, isValid, invalidMessage, errorsVars);
-    },
-    [validateDate, inputValidations, handleInputChange]
-  );
+  //     handleInputChange(newDate, isValid, invalidMessage, errorsVars);
+  //   },
+  //   [validateDate, inputValidations, handleInputChange]
+  // );
 
-  const handleBlur = useCallback(() => {
-    handleInputBlur();
+  // const handleBlur = useCallback(() => {
+  //   handleInputBlur();
 
-    if (alterFieldRef.current) {
-      handleInputBlurErrors().catch((e) => console.error(e));
-    }
+  //   if (alterFieldRef.current) {
+  //     handleInputBlurErrors().catch((e) => console.error(e));
+  //   }
 
-    alterFieldRef.current = false;
-  }, [handleInputBlur, handleInputBlurErrors]);
+  //   alterFieldRef.current = false;
+  // }, [handleInputBlur, handleInputBlurErrors]);
 
-  const handleFocus = useCallback(
-    (e: React.FocusEvent<HTMLInputElement>) => {
-      handleInputFocus(e, true);
-    },
-    [handleInputFocus]
-  );
+  // const handleFocus = useCallback(
+  //   (e: React.FocusEvent<HTMLInputElement>) => {
+  //     handleInputFocus(e, true);
+  //   },
+  //   [handleInputFocus]
+  // );
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -171,12 +168,12 @@ function GTInputDate({
         <Input.DatePicker
           name={uniqueName}
           id={uniqueName}
-          selected={currDate}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          dateFormat={userDefaultFormat}
-          onFocus={handleFocus}
-          color={_.isEmpty(value) ? "transparent" : ""}
+          // selected={currDate}
+          // onChange={handleChange}
+          // onBlur={handleBlur}
+          // dateFormat={userDefaultFormat}
+          // onFocus={handleFocus}
+          // color={_.isEmpty(value) ? "transparent" : ""}
         />
       </Input.FieldWrapper>
 

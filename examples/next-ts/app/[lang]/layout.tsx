@@ -31,7 +31,7 @@ export default async function RootLayout({
   params: { lang: "en" | "pt-BR" };
 }) {
   const dict = await getDictionary(params.lang);
- 
+
   return (
     <StyledComponentsRegistry>
       <html lang={params.lang} className={kanit.className}>

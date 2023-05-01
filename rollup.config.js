@@ -3,9 +3,9 @@ import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import postcss from "rollup-plugin-postcss";
 import terser from "@rollup/plugin-terser";
-import { uglify } from "rollup-plugin-uglify";
 import babel from "rollup-plugin-babel";
 import dts from "rollup-plugin-dts";
+import terser from '@rollup/plugin-terser';
 
 const packageJson = require("./package.json");
 
@@ -35,7 +35,6 @@ export default [
       "prop-types",
       "lodash",
       "react-trigger-state",
-      "@popperjs",
       "date-fns",
     ],
     plugins: [
@@ -43,7 +42,6 @@ export default [
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
       postcss(),
-      uglify(),
       terser(),
       babel({
         extensions: [".js", ".ts", ".tsx"],
