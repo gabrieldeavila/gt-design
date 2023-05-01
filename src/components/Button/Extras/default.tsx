@@ -1,7 +1,6 @@
 /* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React, { useMemo, useRef } from "react";
-import { Trans } from "react-i18next";
 import useGTTranslate from "../../../gt/Global/translate";
 import Loader from "../../Loader";
 import GTTooltip from "../../Tooltip/Tooltip";
@@ -61,7 +60,7 @@ function BtnWithoutSymbol({
 
   return (
     <span className="extra-title-children">
-      <Trans t={translateThis}>{children ?? content ?? ""}</Trans>
+      {translateThis(children ?? content ?? "")}
     </span>
   );
 }
