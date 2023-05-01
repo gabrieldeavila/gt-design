@@ -12,7 +12,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
 import * as Icon from "react-feather";
 import useGTTranslate from "../../../gt/Global/translate";
 import { useGTPageStateContextSetters } from "../../../context/pageState";
