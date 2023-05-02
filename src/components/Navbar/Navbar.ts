@@ -14,6 +14,7 @@ const NavbarWrapper = styled.nav<INavbarWrapper>`
   min-height: 3rem;
   position: fixed;
   width: -webkit-fill-available;
+  width: -moz-available;
   z-index: 1100;
   background: ${({ isInTop }) =>
     isInTop ? "transparent" : "var(--primary-0_5)"};

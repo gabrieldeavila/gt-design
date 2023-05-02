@@ -38,10 +38,15 @@ const mobile100 = css`
 
 const fullSpace = css`
   width: -webkit-fill-available;
+  width: -moz-available;
+
   height: -webkit-fill-available;
+  height: -moz-available;
 
   * {
     width: -webkit-fill-available;
+    width: -moz-available;
+
   }
 `;
 

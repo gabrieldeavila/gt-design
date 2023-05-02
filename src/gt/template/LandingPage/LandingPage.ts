@@ -60,6 +60,8 @@ const LandingPageFeaturesContent = styled.div`
   display: flex;
   flex-direction: row;
   width: -webkit-fill-available;
+  width: -moz-available;
+
   max-width: 1248px;
   gap: 2rem;
   flex-wrap: wrap;

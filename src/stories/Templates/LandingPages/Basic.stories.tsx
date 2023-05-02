@@ -13,6 +13,7 @@ import {
   IGTLandingNavbar,
 } from "../../../gt/Template/LandingPage/interface";
 import { autoUpdateTheme } from "../../../utils/colors";
+import Grid from "../../../components/Grid/Grid";
 
 export default {
   title: "Templates/LandingPage/Basic",
@@ -126,21 +127,25 @@ function ExampleMasking() {
 
   return (
     <EasyState name="example-masking" initial={{ price: 1 }}>
-      <Input.Group>
-        <GTInput.Mask
-          title="EXAMPLE.EASY_AS_SHOULD"
-          name="phone"
-          label="EXAMPLE.PHONE"
-          mask={phoneMask}
-        />
+      <Grid.Form>
+        <Grid.Item col={12}>
+          <GTInput.Mask
+            title="EXAMPLE.EASY_AS_SHOULD"
+            name="phone"
+            label="EXAMPLE.PHONE"
+            mask={phoneMask}
+          />
+        </Grid.Item>
 
-        <GTInput.Mask
-          title="EXAMPLE.EASY_AS_SHOULD"
-          name="price"
-          label="EXAMPLE.MONEY"
-          mask={moneyMask}
-        />
-      </Input.Group>
+        <Grid.Item col={12}>
+          <GTInput.Mask
+            title="EXAMPLE.EASY_AS_SHOULD"
+            name="price"
+            label="EXAMPLE.MONEY"
+            mask={moneyMask}
+          />
+        </Grid.Item>
+      </Grid.Form>
     </EasyState>
   );
 }
@@ -166,12 +171,14 @@ function ExampleValidation() {
     <EasyState name="example-validation" initial={{ email: "" }}>
       <Input.Group>
         <GTInput.Email
+          row={12}
           title="EXAMPLE.EASY_AS_SHOULD"
           name="email"
           label="Email"
         />
 
         <GTInput.Text
+          row={12}
           title="EXAMPLE.EASY_AS_SHOULD"
           minChars="10"
           maxChars="20"
@@ -199,9 +206,15 @@ function ExampleTheming() {
   return (
     <EasyState name="example-theming" initial={{ email: "" }}>
       <Input.Group>
-        <GTInput.Color name="primary" label="Primary" onChange={handleChange} />
+        <GTInput.Color
+          row={12}
+          name="primary"
+          label="Primary"
+          onChange={handleChange}
+        />
 
         <GTInput.Color
+          row={12}
           name="secondary"
           label="Secondary"
           onChange={handleChange}

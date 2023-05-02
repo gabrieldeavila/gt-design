@@ -9,12 +9,18 @@ import Switch from "../Switch";
 const initialTheme = () => {
   try {
     const firstTime = localStorage.getItem("firstTime") == null;
+    console.log(
+      "aa",
+      window.matchMedia("(prefers-color-scheme: dark)").matches && firstTime
+    );
 
     return (
       localStorage?.getItem("darkTheme") === "1" ||
       (window.matchMedia("(prefers-color-scheme: dark)").matches && firstTime)
     );
   } catch (e) {
+    console.log(e, "error");
+
     return false;
   }
 };

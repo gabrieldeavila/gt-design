@@ -20,11 +20,14 @@ const Flex = styled(SpaceBase)<ISpace>`
   flex-wrap: wrap;
   flex-direction: column;
   width: -webkit-fill-available;
+  width: -moz-available;
+
 `;
 
 const Center = styled(SpaceBase)`
   ${flex.alignCenter}
   width: -webkit-fill-available;
+  width: -moz-available;
 
   ${defaultAddOns};
 `;
@@ -38,6 +41,7 @@ const Between = styled(SpaceBase)`
 const Horizontal = styled.div<ISpace>`
   padding: 2rem;
   width: -webkit-fill-available;
+  width: -moz-available;
 
   ${space};
   ${color};
@@ -64,6 +68,8 @@ const SpaceMain = styled(SpaceBase)`
   padding-top: 5rem;
 
   width: -webkit-fill-available;
+  width: -moz-available;
+
   ${defaultAddOns};
 `;
 

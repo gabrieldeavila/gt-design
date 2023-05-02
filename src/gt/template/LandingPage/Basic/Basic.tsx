@@ -1,5 +1,6 @@
 import React, { memo, useMemo } from "react";
 import { Button, Space, Text } from "../../../../components";
+import useGTTranslate from "../../../Global/translate";
 import LandingPage from "../LandingPage";
 import {
   IGTLandingBenefit,
@@ -9,8 +10,6 @@ import {
 import BasicNavbar from "./BasicNavbar";
 import Benefit from "./Benefit";
 import Feature from "./Feature";
-import useGTTranslate from "../../../Global/translate";
-import { Trans } from "react-i18next";
 
 function GTBasicLandingPage({
   title,
@@ -20,7 +19,7 @@ function GTBasicLandingPage({
   features,
   callToAction,
   footerDescription,
-  navbarOptions
+  navbarOptions,
 }: IGTLandingPageBasic) {
   const { translateThis } = useGTTranslate();
 
@@ -48,7 +47,11 @@ function GTBasicLandingPage({
               </Text.H2>
             </Space.Modifiers>
 
-            <Space.Center flexWrap="wrap" alignItems="flex-start" gridGap="2rem">
+            <Space.Center
+              flexWrap="wrap"
+              alignItems="flex-start"
+              gridGap="2rem"
+            >
               {benefits.map((benefit, index) => (
                 <BenefitComponent key={index} {...benefit} />
               ))}
@@ -92,9 +95,13 @@ function GTBasicLandingPage({
         <LandingPage.Footer.Wrapper>
           <LandingPage.Footer.Content>
             <Space.Modifiers flexDirection="column" width="15rem">
-              <Text.P textAlign="left" fontSize="1.5rem">{navbarOptions.logo}</Text.P>
+              <Text.P textAlign="left" fontSize="1.5rem">
+                {navbarOptions.logo}
+              </Text.P>
               <Text.P textAlign="left">
-                <Trans t={translateThis}>{footerDescription}</Trans>
+                {typeof footerDescription === "string"
+                  ? translateThis(footerDescription)
+                  : footerDescription}
               </Text.P>
             </Space.Modifiers>
           </LandingPage.Footer.Content>

@@ -50,7 +50,9 @@ const BoxContainer = styled.div<IBoxContainer>`
     bg != null ? transparentize(0.45, bg) : "var(--primary-0_5)"};
   backdrop-filter: blur(15px);
   cursor: pointer;
+  height: calc(100% - 6.2rem);
   height: -webkit-fill-available;
+
   ${hovers.scaleTransYOpacity}
 
   /* add contrast to children */
