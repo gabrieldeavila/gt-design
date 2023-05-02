@@ -34,6 +34,20 @@ const sizesOpts: sizes = {
   lg,
 };
 
+const browsersAvailable = ({ fitContent }: { fitContent?: boolean }) => {
+  if (fitContent) {
+    return css`
+      width: fit-content;
+      height: fit-content;
+    `;
+  }
+
+  return css`
+    width: -webkit-fill-available;
+    width: -moz-available;
+  `;
+};
+
 export const ResetBtn = styled.button<IButton>`
   position: relative;
   background: none;
@@ -46,8 +60,8 @@ export const ResetBtn = styled.button<IButton>`
   height: fit-content;
   padding: 0.75rem;
   border-radius: 0.25rem;
-  width: ${({ fitContent }) =>
-    fitContent ? "fit-content" : "-webkit-fill-available;"};
+
+  ${({ fitContent }) => browsersAvailable({ fitContent })};
 
   white-space: ${({ fitContent }) => (fitContent ? "pre;" : "unset;")};
 

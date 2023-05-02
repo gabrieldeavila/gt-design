@@ -60,7 +60,8 @@ function BtnWithoutSymbol({
 
   return (
     <span className="extra-title-children">
-      {translateThis(children ?? content ?? "")}
+      {children}
+      {content && translateThis(content)}
     </span>
   );
 }

@@ -110,6 +110,7 @@ const LoginBoxWrapper = styled.div`
   justify-content: space-evenly;
   flex-direction: row;
   height: -webkit-fill-available;
+  height: -moz-available;
   padding: 0.5rem;
 
   ${flex.column}

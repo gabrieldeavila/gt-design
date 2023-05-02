@@ -24,6 +24,7 @@ const handleCol = (col: number | string | undefined, isMobile?: boolean) => {
 
 const GridForm = styled.form`
   width: -webkit-fill-available;
+  width: -moz-available;
 
   /* create a grid display with max 12 cols */
   display: grid;
