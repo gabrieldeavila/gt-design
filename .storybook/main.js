@@ -9,8 +9,4 @@ module.exports = {
   core: {
     builder: "webpack5",
   },
-  framework: {
-    name: "@storybook/react-vite",
-    options: {},
-  },
 };
