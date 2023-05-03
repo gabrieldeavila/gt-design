@@ -7,19 +7,6 @@ import {
 } from "react-trigger-state";
 import { gtTransparentize, transparentizedColors } from "../../utils/colors";
 import defaultConfigs from "./default.configs";
-import { minify } from "uglify-js";
-
-let idk: any = {};
-
-(() => {
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  setTimeout(async () => {
-    const path = "gt-design.config.js";
-
-    idk = await import(path);
-    console.log(idk.default.themeConfig.global.theme, "server first?");
-  });
-})();
 
 const getCustomConfigs = () => {
   try {
@@ -163,9 +150,6 @@ const GTCssInjectionScript = () => {
 }, 2)
 
 })()`;
-
-  const a = minify(codeToRunOnClient).code;
-  console.log(a);
 
   return <script dangerouslySetInnerHTML={{ __html: codeToRunOnClient }} />;
 };
