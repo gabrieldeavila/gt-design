@@ -1,29 +1,18 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React, { useEffect } from "react";
-import { stateStorage, useTriggerState } from "react-trigger-state";
+import {
+  globalState,
+  stateStorage,
+  useTriggerState,
+} from "react-trigger-state";
 import { gtTransparentize, transparentizedColors } from "../../utils/colors";
 import defaultConfigs from "./default.configs";
-import { minify } from "uglify-js";
 
-let idk: any = {};
-
-(() => {
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  setTimeout(async () => {
-    const path = "gt-design.config.js";
-
-    idk = await import(path);
-    console.log(idk.default.themeConfig.global.theme, "server first?");
-  });
-})();
-
-const getCustomConfigs = async () => {
+const getCustomConfigs = () => {
   try {
     // get the path to the babel.config.js file
-    const path = "gt-design.config.js";
-    const customConfigs = await import(path);
-
-    const userConfigs = customConfigs.default;
+    const userConfigs = { themeConfig: globalState.get("theme_config") };
+    console.log(userConfigs);
 
     // merge the user configs with the default configs
     const mergedConfigs = {
@@ -87,15 +76,12 @@ const GTCssInjectionScript = () => {
 
   const codeToRunOnClient = `
 (async function() {
-  setTimeout(async ()=>{
-
-  const defaultConfigs = ${JSON.stringify(defaultConfigs)}
-  const getCustomConfigs = async () => {
+  const getCustomConfigsBeforeMount = () => {
     try {
-      // get the path to the babel.config.js file
-      const customConfigs = ${JSON.stringify(idk)};
+      const defaultConfigs = ${JSON.stringify(defaultConfigs)};
 
-      const userConfigs = customConfigs.default;
+      // get the path to the babel.config.js file
+      const userConfigs = { themeConfig: ${JSON.stringify(globalState.get("theme_config"))} };
   
       // merge the user configs with the default configs
       const mergedConfigs = {
@@ -118,14 +104,14 @@ const GTCssInjectionScript = () => {
   
       return mergedConfigs;
     } catch (e) {
-      console.log(e, "ops");
       return defaultConfigs;
     }
   };
 
   const colorMode = localStorage.getItem("darkTheme") != null ? "darkTheme" : "theme";
   const root = document.documentElement;
-  const themeConfigs = await getCustomConfigs();
+  const defaultConfigs = getCustomConfigsBeforeMount();
+  console.log(defaultConfigs);
   const opacities = ${JSON.stringify(transparentizedColors)}
   console.log(themeConfigs, "aqui?");
   // console.log(themeConfigs());
@@ -164,9 +150,6 @@ const GTCssInjectionScript = () => {
 }, 2)
 
 })()`;
-
-  const a = minify(codeToRunOnClient).code;
-  console.log(a);
 
   return <script dangerouslySetInnerHTML={{ __html: codeToRunOnClient }} />;
 };

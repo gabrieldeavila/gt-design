@@ -19,7 +19,22 @@ function GTWrapper({
 
   return (
     <SessionProvider>
-      <GTBasic serverTranslation={serverTranslation} lang={lang}>
+      <GTBasic
+        serverTranslation={serverTranslation}
+        themeConfig={{
+          global: {
+            theme: {
+              loginBackground1: "red",
+              loginBackground2: "pink",
+              loginBackground3: "red",
+            },
+            darkTheme: {
+              primary: "#080808",
+            },
+          },
+        }}
+        lang={lang}
+      >
         {children}
       </GTBasic>
     </SessionProvider>
