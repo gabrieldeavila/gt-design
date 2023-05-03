@@ -1,8 +1,7 @@
 import { useEffect, Suspense } from "react";
-import { I18nextProvider } from "react-i18next";
+// import { I18nextProvider } from "react-i18next";
 import "./styles.css";
-
-import i18n from "../src/translate/index";
+// import i18n from "./i18n";
 
 // Create a global variable called locale in storybook
 // and add a dropdown in the toolbar to change your locale
@@ -21,11 +20,11 @@ export const globalTypes = {
   },
 };
 
-// When The language changes, set the document direction
-i18n.on("languageChanged", (locale) => {
-  const direction = i18n.dir(locale);
-  document.dir = direction;
-});
+// // When The language changes, set the document direction
+// i18n.on("languageChanged", (locale) => {
+//   const direction = i18n.dir(locale);
+//   document.dir = direction;
+// });
 
 // Wrap your stories in the I18nextProvider component
 const i18nextStoryDecorator = (Story, context) => {
@@ -34,7 +33,7 @@ const i18nextStoryDecorator = (Story, context) => {
   // When the locale global changes
   // Set the new locale in i18n
   useEffect(() => {
-    i18n.changeLanguage(locale);
+    // i18n.changeLanguage(locale);
   }, [locale]);
 
   return (
@@ -65,7 +64,7 @@ const i18nextStoryDecorator = (Story, context) => {
       i18next.options.react when initializing i18next */}
       <Suspense fallback={<div>loading translations...</div>}>
         <Story />
-        <I18nextProvider i18n={i18n} />
+        {/* <I18nextProvider i18n={i18n} /> */}
       </Suspense>
     </>
   );

@@ -7,6 +7,19 @@ import {
 } from "react-trigger-state";
 import { gtTransparentize, transparentizedColors } from "../../utils/colors";
 import defaultConfigs from "./default.configs";
+import { minify } from "uglify-js";
+
+let idk: any = {};
+
+(() => {
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  setTimeout(async () => {
+    const path = "gt-design.config.js";
+
+    idk = await import(path);
+    console.log(idk.default.themeConfig.global.theme, "server first?");
+  });
+})();
 
 const getCustomConfigs = () => {
   try {
@@ -113,6 +126,8 @@ const GTCssInjectionScript = () => {
   const defaultConfigs = getCustomConfigsBeforeMount();
   console.log(defaultConfigs);
   const opacities = ${JSON.stringify(transparentizedColors)}
+  console.log(themeConfigs, "aqui?");
+  // console.log(themeConfigs());
 
   function transparentizeColor(color, opacity) {
     // Convert hex color to RGB format
@@ -132,7 +147,7 @@ const GTCssInjectionScript = () => {
     return rgba;
   }
 
-  const colors = defaultConfigs.themeConfig.global[colorMode];
+  const colors = themeConfigs.themeConfig.global[colorMode];
   Object.keys(colors).forEach((key) => {
     root.style.setProperty("--"+key, colors[key]);
   });
@@ -141,11 +156,16 @@ const GTCssInjectionScript = () => {
 
   for (const {amount, varName} of opacities) {
     const colorToTransparentize = varName.split("-")[0];
-    const color = defaultConfigs.themeConfig.global[starterTheme]?.[colorToTransparentize];
+    const color = themeConfigs.themeConfig.global[starterTheme]?.[colorToTransparentize];
     const newColor = transparentizeColor(color, amount);
     document.documentElement.style.setProperty("--"+varName, newColor);
   }
+}, 2)
+
 })()`;
+
+  const a = minify(codeToRunOnClient).code;
+  console.log(a);
 
   return <script dangerouslySetInnerHTML={{ __html: codeToRunOnClient }} />;
 };

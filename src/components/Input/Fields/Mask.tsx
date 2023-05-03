@@ -214,8 +214,7 @@ function GTInputMask({
             </Input.IconWrapper>
           )}
 
-          {/* @ts-expect-error */}
-          {(!_.isEmpty(value) || value > 0) &&
+          {!_.isEmpty(value.toString()) &&
             !(disableClearable ?? false) &&
             !(disabled ?? false) &&
             showFeedback && (

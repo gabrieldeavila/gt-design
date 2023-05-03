@@ -8,7 +8,7 @@ export const darkCodeTheme = {
   moonColor: "#00b7eb",
   btnShadow: "#ffff",
   errorColor: "#cd853f",
-  pageBackground: "#242124",
+  pageBackground: "#0f0e0f",
   textBtn: "#77b5fe",
   containerMain: "#0A0A0A",
   containerSecondary: "#1C1C1C",

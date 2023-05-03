@@ -1,6 +1,6 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-confusing-arrow */
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import styled, { css } from "styled-components";
 import { hovers, scrolls, shadows, transitions } from "../../utils";
 import flex from "../../utils/flex";
@@ -314,7 +314,7 @@ const InputFeedbackWrapper = styled.div`
   gap: 0.5rem;
 `;
 
-const StyledDatePicker = styled(DatePicker)<IDefaultAddOns>`
+const StyledDatePicker = styled.input<IDefaultAddOns>`
   background: transparent;
   border: none;
 
