@@ -1,16 +1,18 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import React, { useEffect } from "react";
-import { stateStorage, useTriggerState } from "react-trigger-state";
+import {
+  globalState,
+  stateStorage,
+  useTriggerState,
+} from "react-trigger-state";
 import { gtTransparentize, transparentizedColors } from "../../utils/colors";
 import defaultConfigs from "./default.configs";
 
-const getCustomConfigs = async () => {
+const getCustomConfigs = () => {
   try {
     // get the path to the babel.config.js file
-    const path = "gt-design.config.js";
-    const customConfigs = await import(path);
-
-    const userConfigs = customConfigs.default;
+    const userConfigs = { themeConfig: globalState.get("theme_config") };
+    console.log(userConfigs);
 
     // merge the user configs with the default configs
     const mergedConfigs = {
@@ -74,9 +76,42 @@ const GTCssInjectionScript = () => {
 
   const codeToRunOnClient = `
 (async function() {
+  const getCustomConfigsBeforeMount = () => {
+    try {
+      const defaultConfigs = ${JSON.stringify(defaultConfigs)};
+
+      // get the path to the babel.config.js file
+      const userConfigs = { themeConfig: ${JSON.stringify(globalState.get("theme_config"))} };
+  
+      // merge the user configs with the default configs
+      const mergedConfigs = {
+        ...defaultConfigs,
+        ...userConfigs,
+      };
+  
+      // also merge the themes (if any)
+      if (userConfigs.themeConfig?.global) {
+        mergedConfigs.themeConfig.global.theme = {
+          ...defaultConfigs.themeConfig.global.theme,
+          ...userConfigs.themeConfig.global.theme,
+        };
+  
+        mergedConfigs.themeConfig.global.darkTheme = {
+          ...defaultConfigs.themeConfig.global.darkTheme,
+          ...userConfigs.themeConfig.global.darkTheme,
+        };
+      }
+  
+      return mergedConfigs;
+    } catch (e) {
+      return defaultConfigs;
+    }
+  };
+
   const colorMode = localStorage.getItem("darkTheme") != null ? "darkTheme" : "theme";
   const root = document.documentElement;
-  const defaultConfigs = await ${JSON.stringify(getCustomConfigs)};
+  const defaultConfigs = getCustomConfigsBeforeMount();
+  console.log(defaultConfigs);
   const opacities = ${JSON.stringify(transparentizedColors)}
 
   function transparentizeColor(color, opacity) {
