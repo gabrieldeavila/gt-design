@@ -5,7 +5,6 @@ import postcss from "rollup-plugin-postcss";
 import terser from "@rollup/plugin-terser";
 import babel from "rollup-plugin-babel";
 import dts from "rollup-plugin-dts";
-import terser from '@rollup/plugin-terser';
 
 const packageJson = require("./package.json");
 
@@ -32,9 +31,15 @@ export default [
       "styled-components",
       "polished",
       "react-feather",
+      "framer-motion",
       "prop-types",
       "lodash",
+      "i18next-browser-languagedetector",
+      "i18next",
+      "i18next-http-backend",
+      "react-i18next",
       "react-trigger-state",
+      "react-datepicker",
       "date-fns",
     ],
     plugins: [

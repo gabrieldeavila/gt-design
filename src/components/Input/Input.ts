@@ -170,7 +170,7 @@ const disabledInput = css<IInputContainer>`
 const InputContainer = styled.div<IInputContainer>`
   ${getRowWidth}
   display: flex;
-  min-width: fit-content;
+
   flex-grow: 1;
   position: relative;
   outline: 2px solid transparent;
@@ -254,7 +254,6 @@ const InputNormalizedContainer = styled.label<IInputContainer>`
 
 const InputGroup = styled.form`
   width: -webkit-fill-available;
-  width: -moz-available;
 
   ${flex.wrapGap};
   gap: 1.75rem;
@@ -301,7 +300,6 @@ const InputError = styled.span`
 
 const InputFieldWrapper = styled.div`
   width: -webkit-fill-available;
-  width: -moz-available;
   padding: 0 0.5rem;
 `;
 
@@ -390,7 +388,6 @@ const SelectOptionsContainer = styled.div`
 
 const SelectValue = styled.div<ISelectValue>`
   width: -webkit-fill-available;
-  width: -moz-available;
   max-width: 100%;
   max-height: fit-content;
   font-size: 0.75rem;
@@ -420,7 +417,6 @@ const SelectValue = styled.div<ISelectValue>`
 
 const SelectNotFound = styled.div`
   width: -webkit-fill-available;
-  width: -moz-available;
   max-width: 100%;
   font-size: 0.75rem;
   padding: 1rem 0;
