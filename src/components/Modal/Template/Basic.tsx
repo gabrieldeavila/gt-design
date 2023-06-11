@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 /* eslint-disable object-curly-newline */
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useRef, useState } from "react";
@@ -10,7 +11,7 @@ import useGTTranslate from "../../../gt/Global/translate";
 import Modal from "../Modal";
 import { IGTModal } from "../interface";
 
-function GTModalBasic({ show, setShow, data }: IGTModal) {
+function GTModalBasic({ show, setShow, data, children }: IGTModal) {
   const { translateThis } = useGTTranslate();
 
   const [isOpen, setIsOpen] = useState(true);
@@ -129,7 +130,11 @@ function GTModalBasic({ show, setShow, data }: IGTModal) {
 
         <Modal.Main>
           <Modal.MainWrapper>
-            <Text.P>{translateThis(data.content)}</Text.P>
+            {data.content == null ? (
+              children
+            ) : (
+              <Text.P>{translateThis(data.content)}</Text.P>
+            )}
           </Modal.MainWrapper>
         </Modal.Main>
 

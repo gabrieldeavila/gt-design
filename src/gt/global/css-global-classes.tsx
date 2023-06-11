@@ -11,8 +11,7 @@ import defaultConfigs from "./default.configs";
 const getCustomConfigs = () => {
   try {
     // get the path to the babel.config.js file
-    const userConfigs = { themeConfig: globalState.get("theme_config") };
-    console.log(userConfigs);
+    const userConfigs = { themeConfig: globalState.get("theme_config") ?? {} };
 
     // merge the user configs with the default configs
     const mergedConfigs = {
@@ -31,6 +30,8 @@ const getCustomConfigs = () => {
         ...defaultConfigs.themeConfig.global.darkTheme,
         ...userConfigs.themeConfig.global.darkTheme,
       };
+    } else {
+      return defaultConfigs;
     }
 
     return mergedConfigs;
@@ -81,7 +82,9 @@ const GTCssInjectionScript = () => {
       const defaultConfigs = ${JSON.stringify(defaultConfigs)};
 
       // get the path to the babel.config.js file
-      const userConfigs = { themeConfig: ${JSON.stringify(globalState.get("theme_config"))} };
+      const userConfigs = { themeConfig: ${JSON.stringify(
+        globalState.get("theme_config")
+      )} };
   
       // merge the user configs with the default configs
       const mergedConfigs = {

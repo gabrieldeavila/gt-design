@@ -9,7 +9,7 @@ export interface IModal {
 
 export interface IModalData {
   title: string;
-  content: string;
+  content?: string;
   orientationX?: orientationX;
   orientationY?: orientationY;
   confirmText?: string;
@@ -26,4 +26,5 @@ export interface IGTModal {
   show: boolean;
   setShow: (show: boolean) => void;
   data: IModalData;
+  children?: React.ReactNode | React.ReactNode[];
 }
