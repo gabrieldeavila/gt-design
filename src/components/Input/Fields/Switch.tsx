@@ -24,6 +24,7 @@ function GTInputSwitch({
   title,
   row,
   disabled,
+  onChange
 }: IGTInputSwitch) {
   const { translateThis } = useGTTranslate();
   const uniqueName = useUniqueName({ name });
@@ -45,9 +46,11 @@ function GTInputSwitch({
 
   const handleChange = useCallback(
     (val: boolean) => {
+      // @ts-expect-error FIXME: this is a bug
+      void onChange?.(val);
       handleInputChange(val);
     },
-    [handleInputChange]
+    [handleInputChange, onChange]
   );
 
   const containerRef = useRef<HTMLLabelElement>(null);
