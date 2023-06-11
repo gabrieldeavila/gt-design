@@ -18,7 +18,7 @@ function GTBasic({
   noThemeChange?: boolean;
   serverTranslation?: any;
   lang?: any;
-  themeConfig?: any
+  themeConfig?: any;
 }) {
   const [currTheme] = useTriggerState({ name: "currTheme" });
   const [showDarkSwitch, setShowDarkSwitch] = useState(false);
@@ -27,7 +27,7 @@ function GTBasic({
   // but it will not trigger any re-render, since we are using globalState
   globalState.set("server_translation", serverTranslation);
   globalState.set("lang", lang);
-  globalState.set("theme_config", themeConfig);
+  globalState.set("theme_config", themeConfig ?? {});
 
   // when is ssr, we don't know if the user has a preference
   // otherwise, we'd get an hydration error

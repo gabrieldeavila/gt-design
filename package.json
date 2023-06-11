@@ -92,15 +92,10 @@
     "dist"
   ],
   "dependencies": {
-    "@syncedstore/core": "^0.4.3",
-    "@syncedstore/react": "^0.4.3",
     "date-fns": "^2.29.3",
     "react": "^18.2.0",
     "react-datepicker": "^4.10.0",
     "react-trigger-state": "^1.1.1",
-    "y-webrtc": "^10.2.5"
-  },
-  "peerDependencies": {
     "@types/feather-icons": "^4.29.0",
     "framer-motion": "^7.6.6",
     "i18next": "^22.0.6",
