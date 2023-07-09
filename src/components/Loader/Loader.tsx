@@ -30,14 +30,14 @@ const sizes: TSize = {
   lg: 32,
 };
 
-function LoaderSimple({ size = "sm" }: ILoader) {
+function LoaderSimple({ size = "sm", color }: ILoader) {
   const sizeValue = useMemo(() => {
     return sizes[size ?? "sm"];
   }, [size]);
 
   return (
     <LoaderWrapper>
-      <FLoader size={sizeValue} className="svg-no-active" />
+      <FLoader size={sizeValue} color={color} className="svg-no-active" />
     </LoaderWrapper>
   );
 }
