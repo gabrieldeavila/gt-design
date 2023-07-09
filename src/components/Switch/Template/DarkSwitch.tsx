@@ -13,7 +13,6 @@ const initialTheme = () => {
       (window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "darkTheme"
         : "theme");
-    console.log(theme);
 
     return theme;
   } catch (e) {
@@ -33,7 +32,7 @@ function GTDarkSwitch({
   placeY: "left" | "right";
 }) {
   const [theme, setTheme] = useTriggerState({
-    name: "changedTheme",
+    name: "curr_theme",
     initial: initialTheme(),
   });
 

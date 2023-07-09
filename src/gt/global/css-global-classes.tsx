@@ -41,7 +41,7 @@ const getCustomConfigs = () => {
 };
 
 const GTCssInjectionScript = () => {
-  const [theme] = useTriggerState({ name: "changedTheme" });
+  const [theme] = useTriggerState({ name: "curr_theme" });
 
   useEffect(() => {
     (async () => {
@@ -61,7 +61,7 @@ const GTCssInjectionScript = () => {
 
       const colors = configs.themeConfig.global[colorMode];
 
-      stateStorage.set("gt-theme-colors", colors);
+      stateStorage.set("gt_theme_colors", colors);
       Object.keys(colors).forEach((key) => {
         root.style.setProperty(`--${key}`, colors[key]);
       });
@@ -108,13 +108,13 @@ const GTCssInjectionScript = () => {
     }
   };
 
-  const colorMode = localStorage.getItem("darkTheme") != null ? "darkTheme" : "theme";
+  const colorMode = localStorage.getItem("theme") ?? (window.matchMedia("(prefers-color-scheme: dark)").matches
+  ? "darkTheme"
+  : "theme");
   const root = document.documentElement;
   const defaultConfigs = getCustomConfigsBeforeMount();
-  console.log(defaultConfigs);
+
   const opacities = ${JSON.stringify(transparentizedColors)}
-  console.log(themeConfigs, "aqui?");
-  // console.log(themeConfigs());
 
   function transparentizeColor(color, opacity) {
     // Convert hex color to RGB format

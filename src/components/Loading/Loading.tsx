@@ -1,20 +1,27 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
-import React, { useEffect, useRef, useState } from "react";
-import Matter from "matter-js";
-import "./style.css";
-import { useTranslation } from "react-i18next";
-import { Loader } from "react-feather";
-import { globalState, useTriggerState } from "react-trigger-state";
 import clsx from "clsx";
-import Text from "../Text";
+import Matter from "matter-js";
+import React, { useEffect, useRef, useState } from "react";
+import { Loader } from "react-feather";
+import { useTranslation } from "react-i18next";
+import { useTriggerState } from "react-trigger-state";
 import Space from "../Space/Space";
+import Text from "../Text";
+import "./style.css";
 
 const Loading = ({ avoidClose }: { avoidClose?: boolean }) => {
   const canvasRef = useRef(null);
+  const [colors] = useTriggerState({ name: "gt_theme_colors" });
+  const [theme] = useTriggerState({ name: "curr_theme" });
+  const alreadyLoaded = useRef(false);
 
   useEffect(() => {
-    if (canvasRef.current == null) return;
+    if (theme == null || canvasRef.current == null || colors == null) {
+      return;
+    }
+
+    alreadyLoaded.current = true;
 
     const Engine = Matter.Engine;
     const Render = Matter.Render;
@@ -58,7 +65,7 @@ const Loading = ({ avoidClose }: { avoidClose?: boolean }) => {
       length: number
     ) => {
       const newtonsCradle = Composite.create({ label: "Newtons Cradle" });
-      const colors = globalState.get("gt-theme-colors");
+      // const colors = globalState.get("gt_theme_colors");
 
       for (let i = 0; i < number; i++) {
         const separation = 1.9;
@@ -73,8 +80,8 @@ const Loading = ({ avoidClose }: { avoidClose?: boolean }) => {
             frictionAir: 0,
             slop: size * 0.02,
             render: {
-              fillStyle: colors.contrast,
-              strokeStyle: colors.contrast,
+              fillStyle: colors?.contrast,
+              strokeStyle: colors?.contrast,
             },
           }
         );
@@ -82,7 +89,7 @@ const Loading = ({ avoidClose }: { avoidClose?: boolean }) => {
           pointA: { x: xx + i * (size * separation), y: yy },
           bodyB: circle,
           render: {
-            strokeStyle: colors.contrast,
+            strokeStyle: colors?.contrast,
           },
         });
 
@@ -133,7 +140,7 @@ const Loading = ({ avoidClose }: { avoidClose?: boolean }) => {
       Render.stop(render);
       Runner.stop(runner);
     };
-  }, []);
+  }, [colors, theme]);
 
   const { t } = useTranslation();
 
