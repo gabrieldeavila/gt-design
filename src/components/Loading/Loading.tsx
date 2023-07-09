@@ -4,8 +4,8 @@ import clsx from "clsx";
 import Matter from "matter-js";
 import React, { useEffect, useRef, useState } from "react";
 import { Loader } from "react-feather";
-import { useTranslation } from "react-i18next";
 import { useTriggerState } from "react-trigger-state";
+import useGTTranslate from "../../gt/Global/translate";
 import Space from "../Space/Space";
 import Text from "../Text";
 import "./style.css";
@@ -148,7 +148,7 @@ const Loading = ({
     };
   }, [colors, theme]);
 
-  const { t } = useTranslation();
+  const { translateThis } = useGTTranslate();
 
   const [hideAfterUnloaded, setHideAfterUnloaded] = useState(false);
 
@@ -157,6 +157,8 @@ const Loading = ({
       setTimeout(() => {
         setHideAfterUnloaded(true);
       }, 500);
+    } else {
+      setHideAfterUnloaded(false);
     }
   }, [show]);
 
@@ -183,7 +185,7 @@ const Loading = ({
           <Loader />
         </div>
         <Text.P fontWeight="200" textAlign="center" fontSize="20px">
-          {t("LOADING")}
+          {translateThis("LOADING")}
         </Text.P>
       </Space.Modifiers>
       <div ref={canvasRef}></div>
