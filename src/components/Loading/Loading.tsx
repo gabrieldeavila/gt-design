@@ -20,14 +20,14 @@ const Loading = ({
   const canvasRef = useRef(null);
   const [colors] = useTriggerState({ name: "gt_theme_colors" });
   const [theme] = useTriggerState({ name: "curr_theme" });
-  const alreadyLoaded = useRef(false);
+  const { translateThis } = useGTTranslate();
+
+  const [hideAfterUnloaded, setHideAfterUnloaded] = useState(false);
 
   useEffect(() => {
     if (theme == null || canvasRef.current == null || colors == null) {
       return;
     }
-
-    alreadyLoaded.current = true;
 
     const Engine = Matter.Engine;
     const Render = Matter.Render;
@@ -146,11 +146,7 @@ const Loading = ({
       Render.stop(render);
       Runner.stop(runner);
     };
-  }, [colors, theme]);
-
-  const { translateThis } = useGTTranslate();
-
-  const [hideAfterUnloaded, setHideAfterUnloaded] = useState(false);
+  }, [colors, theme, show, hideAfterUnloaded]);
 
   useEffect(() => {
     if (!show) {
@@ -158,7 +154,9 @@ const Loading = ({
         setHideAfterUnloaded(true);
       }, 500);
     } else {
-      setHideAfterUnloaded(false);
+      setTimeout(() => {
+        setHideAfterUnloaded(false);
+      });
     }
   }, [show]);
 

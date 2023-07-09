@@ -5,12 +5,18 @@ import Loading from "../../components/Loading/Loading";
 
 export default {
   title: "Layout/Loading Story",
+  argTypes: {
+    show: {
+      defaultValue: true,
+      control: { type: "boolean" },
+    },
+  },
 };
 
-const Template = () => {
+const Template = ({ show }: { show: boolean }) => {
   return (
     <GTBasic>
-      <Loading show />
+      <Loading show={show} />
     </GTBasic>
   );
 };
