@@ -25,6 +25,7 @@
   "INVALID_NICKNAME": "Este apelido é inválido, tente digitar: \"{{NICKNAME}}\".",
   "INVALID_EMAIL": "Este e-mail é inválido, tente digitar: \"{{EMAIL}}\".",
   "PASSWORDS_NOT_MATCH": "As senhas não coincidem.",
+  "LOADING": "Carregando sua experiência...",
   "SELECT_NOT_FOUND": "Nenhum item encontrado 😪",
   "TEMPLATE": {
     "LOGIN": {

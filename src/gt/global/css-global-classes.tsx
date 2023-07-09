@@ -64,7 +64,7 @@ const GTCssInjectionScript = () => {
       localStorage.setItem("firstTime", "false");
 
       const colors = configs.themeConfig.global[colorMode];
-
+      stateStorage.set("gt-theme-colors", colors);
       Object.keys(colors).forEach((key) => {
         root.style.setProperty(`--${key}`, colors[key]);
       });
