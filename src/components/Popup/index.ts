@@ -1,3 +1,3 @@
 export { default } from "./Popup";
 
-export { default as BasicPopup } from "./Template/BasicPopup";
+export { default as GTSymbolPopup } from "./Template/BasicPopup";

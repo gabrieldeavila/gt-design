@@ -10,7 +10,7 @@ export default {
 const Template = () => {
   return (
     <GTBasic>
-      <Loading />
+      <Loading show />
     </GTBasic>
   );
 };

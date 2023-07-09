@@ -5,6 +5,7 @@ import postcss from "rollup-plugin-postcss";
 import terser from "@rollup/plugin-terser";
 import babel from "rollup-plugin-babel";
 import dts from "rollup-plugin-dts";
+import sourcemaps from "rollup-plugin-sourcemaps";
 
 const packageJson = require("./package.json");
 
@@ -46,6 +47,7 @@ export default [
     plugins: [
       resolve(),
       commonjs(),
+      sourcemaps(),
       typescript({ tsconfig: "./tsconfig.json" }),
       postcss(),
       terser(),

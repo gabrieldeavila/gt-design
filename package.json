@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/gabrieldeavila/gt-design.git"
   },
-  "version": "1.0.26",
+  "version": "1.0.28",
   "description": "A minimalistic design system for React",
   "homepage": "https://github.com/gabrieldeavila/gt-design",
   "scripts": {
@@ -78,6 +78,7 @@
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-dts": "^4.0.1",
     "rollup-plugin-postcss": "^4.0.1",
+    "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-uglify": "^6.0.4",
     "sass": "^1.43.5",
     "sass-loader": "^12.3.0",

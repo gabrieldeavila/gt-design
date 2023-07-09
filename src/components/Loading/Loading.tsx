@@ -10,7 +10,13 @@ import Space from "../Space/Space";
 import Text from "../Text";
 import "./style.css";
 
-const Loading = ({ avoidClose }: { avoidClose?: boolean }) => {
+const Loading = ({
+  avoidClose,
+  show,
+}: {
+  avoidClose?: boolean;
+  show: boolean;
+}) => {
   const canvasRef = useRef(null);
   const [colors] = useTriggerState({ name: "gt_theme_colors" });
   const [theme] = useTriggerState({ name: "curr_theme" });
@@ -144,20 +150,15 @@ const Loading = ({ avoidClose }: { avoidClose?: boolean }) => {
 
   const { t } = useTranslation();
 
-  const [everyThingIsLoaded] = useTriggerState({
-    initial: false,
-    name: "every_thing_is_loaded",
-  });
-
   const [hideAfterUnloaded, setHideAfterUnloaded] = useState(false);
 
   useEffect(() => {
-    if (everyThingIsLoaded) {
+    if (!show) {
       setTimeout(() => {
         setHideAfterUnloaded(true);
       }, 500);
     }
-  }, [everyThingIsLoaded]);
+  }, [show]);
 
   if (hideAfterUnloaded) return null;
 
@@ -165,7 +166,7 @@ const Loading = ({ avoidClose }: { avoidClose?: boolean }) => {
     <div
       className={clsx(
         "loading-content",
-        !avoidClose && everyThingIsLoaded && "loading-is-done"
+        !avoidClose && !show && "loading-is-done"
       )}
     >
       <Space.Modifiers

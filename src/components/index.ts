@@ -34,4 +34,6 @@ export { default as Space } from "./Space";
 
 export * from "./Switch";
 
+export * from "./Loading";
+
 export { default as Symbol } from "./Symbol";
