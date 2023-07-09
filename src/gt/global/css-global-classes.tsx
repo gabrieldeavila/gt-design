@@ -41,7 +41,7 @@ const getCustomConfigs = () => {
 };
 
 const GTCssInjectionScript = () => {
-  const [changedTheme] = useTriggerState({ name: "changedTheme" });
+  const [theme] = useTriggerState({ name: "changedTheme" });
 
   useEffect(() => {
     (async () => {
@@ -53,17 +53,14 @@ const GTCssInjectionScript = () => {
       stateStorage.set("gtConfigs", configs);
 
       const root = document.documentElement;
-      const firstTime = localStorage.getItem("firstTime") == null;
-
       const colorMode =
-        localStorage.getItem("darkTheme") != null ??
-        (window.matchMedia("(prefers-color-scheme: dark)").matches && firstTime)
+        theme ??
+        (window.matchMedia("(prefers-color-scheme: dark)").matches
           ? "darkTheme"
-          : "theme";
-
-      localStorage.setItem("firstTime", "false");
+          : "theme");
 
       const colors = configs.themeConfig.global[colorMode];
+
       stateStorage.set("gt-theme-colors", colors);
       Object.keys(colors).forEach((key) => {
         root.style.setProperty(`--${key}`, colors[key]);
@@ -73,7 +70,7 @@ const GTCssInjectionScript = () => {
         gtTransparentize(color);
       }
     })().catch((e) => console.log(e));
-  }, [changedTheme]);
+  }, [theme]);
 
   const codeToRunOnClient = `
 (async function() {

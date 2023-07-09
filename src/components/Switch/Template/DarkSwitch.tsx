@@ -1,19 +1,21 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable multiline-ternary */
 import PropTypes from "prop-types";
-import React, { memo, useCallback } from "react";
+import React, { memo, useCallback, useMemo } from "react";
 import * as Icon from "react-feather";
 import { useTriggerState } from "react-trigger-state";
 import Switch from "../Switch";
 
 const initialTheme = () => {
   try {
-    const firstTime = localStorage.getItem("firstTime") == null;
+    const theme =
+      localStorage.getItem("theme") ??
+      (window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "darkTheme"
+        : "theme");
+    console.log(theme);
 
-    return (
-      localStorage?.getItem("darkTheme") === "1" ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches && firstTime)
-    );
+    return theme;
   } catch (e) {
     console.log(e, "error");
 
@@ -30,25 +32,25 @@ function GTDarkSwitch({
   placeX: "top" | "bottom";
   placeY: "left" | "right";
 }) {
-  const [isDarkTheme, setDarkTheme] = useTriggerState({
+  const [theme, setTheme] = useTriggerState({
     name: "changedTheme",
     initial: initialTheme(),
   });
 
   const handleTheme = useCallback(() => {
     try {
-      setDarkTheme((prev: boolean) => {
-        if (!prev) {
-          localStorage.setItem("darkTheme", "1");
-        } else {
-          localStorage.removeItem("darkTheme");
-        }
-        return !prev;
+      setTheme((prev: string) => {
+        const newTheme = prev === "theme" ? "darkTheme" : "theme";
+        localStorage.setItem("theme", newTheme);
+
+        return newTheme;
       });
     } catch (e) {
       console.log(e, "error");
     }
-  }, [setDarkTheme]);
+  }, [setTheme]);
+
+  const isDarkTheme = useMemo(() => theme === "darkTheme", [theme]);
 
   return (
     <Switch.Label

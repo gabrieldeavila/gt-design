@@ -120,7 +120,10 @@ export const gtTransparentize = ({
     const colorToTransparentize = varName.split("-")[0];
 
     const starterTheme =
-      localStorage.getItem("darkTheme") != null ? "darkTheme" : "theme";
+      localStorage.getItem("theme") ??
+      (window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "darkTheme"
+        : "theme");
 
     const color =
       // @ts-expect-error
