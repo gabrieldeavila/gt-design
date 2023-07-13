@@ -44,11 +44,15 @@ const BoxContainer = styled.div<IBoxContainer>`
   border-radius: 0.25rem;
   ${flex.wrapGap};
   ${flex.column};
-  ${shadows.simple};
   ${color};
-  background: ${({ bg }) =>
-    bg != null ? transparentize(0.45, bg) : "var(--primary-0_5)"};
-  backdrop-filter: blur(15px);
+  ${({ bg }) =>
+    bg != null &&
+    css`
+      background: ${transparentize(0.45, bg)};
+      ${shadows.simple};
+      backdrop-filter: blur(15px);
+    `}
+
   cursor: pointer;
   height: calc(100% - 6.2rem);
   height: -webkit-fill-available;
