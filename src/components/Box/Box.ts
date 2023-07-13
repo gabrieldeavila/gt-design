@@ -39,8 +39,8 @@ const handleColorContrast = ({
 };
 
 const BoxContainer = styled.div<IBoxContainer>`
-  margin: 1rem;
-  padding: 3rem;
+  /* margin: 1rem; */
+  /* padding: 3rem; */
   border-radius: 0.25rem;
   ${flex.wrapGap};
   ${flex.column};

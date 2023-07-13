@@ -20,6 +20,8 @@ const ZincWrapper = styled.button<ISpace>`
   ${color};
   ${layout};
   ${defaultAddOns};
+  width: 100%;
+  height: 100%;
 
   &:active {
     background-color: var(--secondary) !important;

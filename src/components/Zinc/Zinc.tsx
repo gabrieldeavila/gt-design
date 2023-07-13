@@ -6,22 +6,28 @@ import { GTTooltip } from "../Tooltip";
 function Zinc({ text, title, children }: IZinc) {
   const ref = React.useRef<HTMLButtonElement>(null);
   const isPressed = React.useRef(false);
+  const lastInteraction = React.useRef(0);
 
   const handleMouseMove = useCallback(
     (event: React.MouseEvent<Element, MouseEvent>) => {
       if (ref.current == null) return;
 
+      // if last interaction was less than 100ms ago, do nothing
+      if (Date.now() - lastInteraction.current < 100) return;
+      lastInteraction.current = Date.now();
+
+      const perspective = (event.clientX / ref.current.clientWidth) * 1000;
+
       // rotate
       const x =
         ((event.clientX - ref.current.offsetLeft) / ref.current.clientWidth) *
-        2;
+        0.5;
       const y =
         ((event.clientY - ref.current.offsetTop) / ref.current.clientHeight) *
-        2;
+        0.5;
 
       const scale = isPressed.current ? 0.9 : 1;
-
-      ref.current.style.transform = `perspective(1000px) rotateX(${
+      ref.current.style.transform = `perspective(${perspective}px) rotateX(${
         y * 15
       }deg) rotateY(${-x * 15}deg) scale(${scale})`;
 
@@ -45,9 +51,11 @@ function Zinc({ text, title, children }: IZinc) {
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      onMouseDown={() => (isPressed.current = true)}
+      onMouseDown={() => {
+        isPressed.current = true;
+        lastInteraction.current = 0;
+      }}
       onMouseUp={() => (isPressed.current = false)}
-      width={100}
     >
       {children}
       <GTTooltip parentRef={ref} title={title} text={text} />
