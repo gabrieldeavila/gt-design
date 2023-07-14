@@ -1,9 +1,9 @@
-export interface IMotionBox {
+import { IZinc } from "../Zinc/interface";
+
+export interface IMotionBox extends IZinc {
   bg?: string;
-  children?: React.ReactNode | React.ReactNode[];
+  children: React.ReactNode | React.ReactNode[];
   isLoading?: boolean;
-  title?: string;
-  text?: string;
 }
 
 export interface IMotionWrapper {

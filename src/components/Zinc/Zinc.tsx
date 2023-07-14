@@ -3,7 +3,7 @@ import ZincStyle from "./style";
 import { IZinc } from "./interface";
 import { GTTooltip } from "../Tooltip";
 
-function Zinc({ text, title, children }: IZinc) {
+function Zinc({ text, title, children, onClick }: IZinc) {
   const ref = React.useRef<HTMLButtonElement>(null);
   const isPressed = React.useRef(false);
   const lastInteraction = React.useRef(0);
@@ -50,6 +50,7 @@ function Zinc({ text, title, children }: IZinc) {
   return (
     <ZincStyle.Wrapper
       ref={ref}
+      onClick={onClick}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onMouseDown={() => {

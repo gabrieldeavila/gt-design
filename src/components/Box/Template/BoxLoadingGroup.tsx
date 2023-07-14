@@ -9,7 +9,9 @@ function BoxLoadingGroup({ boxes }: IBoxLoadingGroup) {
   return (
     <Box.Column>
       {boxesArray.map((box) => (
-        <MotionBox key={box} isLoading />
+        <MotionBox key={box} isLoading>
+          ---
+        </MotionBox>
       ))}
     </Box.Column>
   );
