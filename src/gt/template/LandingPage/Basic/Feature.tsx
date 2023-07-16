@@ -7,8 +7,16 @@ import useIsMobile from "../../../../hooks/helpers/useIsMobile";
 
 function Feature(props: IFeature) {
   const isMobile = useIsMobile();
+  const { title } = props;
 
   const { right, left } = useMemo(() => {
+    if (title == null) {
+      return {
+        left: <FeatureComponent {...props} />,
+        right: <FeatureBox {...props} />,
+      };
+    }
+
     if (props.orientation === "left" && !isMobile) {
       return {
         left: <FeatureBox {...props} />,
@@ -20,11 +28,13 @@ function Feature(props: IFeature) {
         right: <FeatureBox {...props} />,
       };
     }
-  }, [isMobile, props]);
+  }, [isMobile, props, title]);
 
   return (
     <LandingPage.Features.Content>
-      <LandingPage.Features.Left>{right}</LandingPage.Features.Left>
+      {title != null && (
+        <LandingPage.Features.Left>{right}</LandingPage.Features.Left>
+      )}
       <LandingPage.Features.Right>{left}</LandingPage.Features.Right>
     </LandingPage.Features.Content>
   );
@@ -38,9 +48,9 @@ function FeatureBox({ title, description }: IFeature) {
   return (
     <>
       <Text.P textAlign="center" fontSize="1.5rem" fontWeight="400">
-        {translateThis(title)}
+        {translateThis(title ?? "")}
       </Text.P>
-      <Text.P textAlign="center">{translateThis(description)}</Text.P>
+      <Text.P textAlign="center">{translateThis(description ?? "")}</Text.P>
     </>
   );
 }

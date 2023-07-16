@@ -7,8 +7,8 @@ export interface IGTLandingBenefit {
 export interface IBenefit extends IGTLandingBenefit {}
 
 export interface IGTLandingFeature {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   component: JSX.Element;
 }
 
