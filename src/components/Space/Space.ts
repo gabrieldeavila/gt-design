@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { color, flexDirection, layout, space } from "styled-system";
 import flex from "../../utils/flex";
 import addOnsCss, { defaultAddOns } from "./addOns/addOns";
-import { ISpace, ISpaceModifiers } from "./interface";
+import { ISpace, ISpaceModifiers, ISpaceStyle } from "./interface";
 
 const SpaceBase = styled.div<ISpace>`
   display: flex;
@@ -21,7 +21,6 @@ const Flex = styled(SpaceBase)<ISpace>`
   flex-direction: column;
   width: -webkit-fill-available;
   width: -moz-available;
-
 `;
 
 const Center = styled(SpaceBase)`
@@ -88,7 +87,7 @@ const SpaceModifiers = styled(SpaceBase)<ISpaceModifiers>`
   ${defaultAddOns};
 `;
 
-export default {
+const Space: ISpaceStyle = {
   Flex,
   Center,
   Between,
@@ -98,3 +97,5 @@ export default {
   Modifiers: SpaceModifiers,
   Dashed: SpaceDashed,
 };
+
+export default Space;

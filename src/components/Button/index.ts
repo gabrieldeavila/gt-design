@@ -7,8 +7,9 @@ import ButtonInitial from "./Extras/Initial";
 import ButtonNormal from "./Extras/Normal";
 import ButtonSuccess from "./Extras/Success";
 import ButtonTransparent from "./Extras/Transparent";
+import { IGTButtonStyle } from "./interface";
 
-const Button = {
+const Button: IGTButtonStyle = {
   Wrapper: ButtonWrapper,
   Normal: ButtonNormal,
   Contrast: ButtonContrast,

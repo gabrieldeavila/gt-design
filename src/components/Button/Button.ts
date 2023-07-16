@@ -118,6 +118,7 @@ export const ResetBtn = styled.button<IButton>`
 export const ButtonWrapper = styled.div`
   ${flex.wrapGap};
   ${flexbox}
+  ${defaultAddOns}
 `;
 
 export const ExtraNormal = styled(ResetBtn)`

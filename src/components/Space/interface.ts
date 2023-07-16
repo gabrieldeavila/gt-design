@@ -1,17 +1,27 @@
 /* eslint-disable @typescript-eslint/indent */
-import { FlattenSimpleInterpolation } from "styled-components";
+import { FlattenSimpleInterpolation, StyledComponent } from "styled-components";
 import {
+  AlignItemsProps,
   BackgroundProps,
   BorderProps,
+  BottomProps,
   ColorProps,
   FlexDirectionProps,
+  FlexGrowProps,
+  FlexProps,
+  FlexWrapProps,
   FlexboxProps,
   FontSizeProps,
+  GridGapProps,
   GridProps,
+  JustifyContentProps,
   LayoutProps,
+  LeftProps,
   PositionProps,
+  RightProps,
   ShadowProps,
   SpaceProps,
+  TopProps,
 } from "styled-system";
 
 export type TAddOns =
@@ -111,7 +121,23 @@ export type TAddOns =
   | "py-4"
   | "py-5";
 
-export interface ISpace extends SpaceProps, ColorProps, LayoutProps, FlexDirectionProps {
+export interface ISpace
+  extends SpaceProps,
+    ColorProps,
+    LayoutProps,
+    AlignItemsProps,
+    JustifyContentProps,
+    TopProps,
+    RightProps,
+    LeftProps,
+    BottomProps,
+    PositionProps,
+    FlexWrapProps,
+    FlexGrowProps,
+    FlexProps,
+    GridGapProps,
+    GridProps,
+    FlexDirectionProps {
   addOns?: TMobileAddOnsOptions[];
 }
 
@@ -140,3 +166,14 @@ export type TMobileAddOnsOptions = "mobile-100" | "full-space";
 export type IMobileAddOns = {
   [key in TMobileAddOnsOptions]: FlattenSimpleInterpolation;
 };
+
+export interface ISpaceStyle {
+  Flex: StyledComponent<"div", any, ISpace, never>;
+  Center: StyledComponent<"div", any, ISpace, never>;
+  Between: StyledComponent<"div", any, ISpace, never>;
+  Horizontal: StyledComponent<"div", any, ISpace, never>;
+  MiddleCenter: StyledComponent<"div", any, ISpace, never>;
+  Main: StyledComponent<"div", any, ISpace, never>;
+  Modifiers: StyledComponent<"div", any, ISpace, never>;
+  Dashed: StyledComponent<"div", any, ISpace, never>;
+}
