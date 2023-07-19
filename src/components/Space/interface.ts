@@ -151,6 +151,21 @@ export interface IDefaultAddOns
     PositionProps,
     GridProps,
     FontSizeProps,
+    ColorProps,
+    LayoutProps,
+    AlignItemsProps,
+    JustifyContentProps,
+    TopProps,
+    RightProps,
+    LeftProps,
+    BottomProps,
+    PositionProps,
+    FlexWrapProps,
+    FlexGrowProps,
+    FlexProps,
+    GridGapProps,
+    GridProps,
+    FlexDirectionProps,
     ShadowProps {}
 
 export interface ISpaceModifiers extends ISpace, IDefaultAddOns {

@@ -74,20 +74,25 @@ const GTCssInjectionScript = () => {
 
   const codeToRunOnClient = `
 (async function() {
+  console.log("next --- debugger");
+  debugger;
   const getCustomConfigsBeforeMount = () => {
     try {
       const defaultConfigs = ${JSON.stringify(defaultConfigs)};
+      debugger;
 
       // get the path to the babel.config.js file
       const userConfigs = { themeConfig: ${JSON.stringify(
         globalState.get("theme_config")
       )} };
+      debugger;
   
       // merge the user configs with the default configs
       const mergedConfigs = {
         ...defaultConfigs,
         ...userConfigs,
       };
+      debugger;
   
       // also merge the themes (if any)
       if (userConfigs.themeConfig?.global) {
@@ -95,12 +100,14 @@ const GTCssInjectionScript = () => {
           ...defaultConfigs.themeConfig.global.theme,
           ...userConfigs.themeConfig.global.theme,
         };
+        debugger;
   
         mergedConfigs.themeConfig.global.darkTheme = {
           ...defaultConfigs.themeConfig.global.darkTheme,
           ...userConfigs.themeConfig.global.darkTheme,
         };
       }
+      debugger;
   
       return mergedConfigs;
     } catch (e) {

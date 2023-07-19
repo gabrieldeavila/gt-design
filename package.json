@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/gabrieldeavila/gt-design.git"
   },
-  "version": "1.0.40",
+  "version": "1.0.41",
   "description": "A minimalistic design system for React",
   "homepage": "https://github.com/gabrieldeavila/gt-design",
   "scripts": {

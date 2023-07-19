@@ -13,7 +13,7 @@ const Template = () => {
     <GTBasic>
       <Space.Horizontal>
         <SectionContainer title="Text" subtitle="STORIES.TEXT.SUBTITLE" />
-        <Space.Modifiers mt="-1.75rem" type="column">
+        <Space.Modifiers mt="1rem" display="grid">
           <div>
             <Text.Divider position="left">P</Text.Divider>
             <Text.P>

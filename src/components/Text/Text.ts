@@ -86,11 +86,14 @@ export const TextBtnStyled = styled.button`
   ${defaultAddOns};
 `;
 
-export const Strong = styled.strong`
+export const Strong = styled.strong<IText>`
   color: var(--contrast);
   font-weight: 500;
 
+  ${textAlign}
+  ${h1Css}
   ${defaultAddOns};
+  ${fontWeight}
 `;
 
 export const DividerStyled = styled.div``;
