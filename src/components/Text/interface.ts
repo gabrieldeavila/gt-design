@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/indent */
 import { FontWeightProps, TextAlignProps } from "styled-system";
 import { IDefaultAddOns } from "../Space/interface";
-import { StyledComponent } from "styled-components";
+// import { StyledComponent } from "styled-components";
 
 export interface ITextBtn {
   children: React.ReactNode;
