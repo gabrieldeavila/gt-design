@@ -109,6 +109,7 @@
     "AWARD": "Award",
     "AWARD_DESCRIPTION": "You are awesome!",
     "MOUSE_OVER": "Hover me!",
+    "CLICK_ME": "Click me!",
     "DISABLED": "Disabled",
     "CAN_SAVE": "Can save",
     "CANNOT_SAVE": "Cannot save",
@@ -132,6 +133,9 @@
       "BOXES": {
         "SUBTITLE": "The 'isLoading' prop allows for dynamic loading of content within the component."
       }
+    },
+    "TOAST": {
+      "SUBTITLE": "The toast is a non-intrusive notification to show the user that something has happened or will happen."
     },
     "SWITCH": {
       "SUBTITLE": "This feature allows you to toggle between two states: on and off."

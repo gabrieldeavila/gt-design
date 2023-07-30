@@ -31,6 +31,10 @@ export const darkCodeTheme = {
   outlineError: "#e34234",
   githubBackground: "#242124",
   googleBackground: "#ea4335",
+  warning: "#f0ad4e",
+  success: "#27ae60",
+  error: "#d9534f",
+  info: "#29abe2",
 };
 
 export const lightCodeTheme = {
@@ -67,4 +71,8 @@ export const lightCodeTheme = {
   buttonError2: "#e66771",
   githubBackground: "#f0f8ff",
   googleBackground: "#ea4336",
+  warning: "#ffcc00",
+  success: "#00cc66",
+  error: "#ff4d4d",
+  info: "#3399ff",
 };

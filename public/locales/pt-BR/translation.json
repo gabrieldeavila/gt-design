@@ -107,6 +107,7 @@
     "AWARD": "Prêmio",
     "AWARD_DESCRIPTION": "Você é incrível!",
     "MOUSE_OVER": "Passe o mouse em mim!",
+    "CLICK": "Clique em mim!",
     "DISABLED": "Desabilitado",
     "CAN_SAVE": "Pode salvar",
     "CANNOT_SAVE": "Não pode salvar",
@@ -119,6 +120,9 @@
     "EASY_STATE": {
       "TITLE": "Easy State",
       "SUBTITLE": "O Easy State é um componente que permite gerenciar o estado de forma fácil e rápida."
+    },
+    "TOAST": {
+      "SUBTITLE": "O Toast permite que você mostre mensagens de sucesso, erro, alerta e informações para o usuário."
     },
     "TRANSLATE": {
       "TITLE": "Tradução",

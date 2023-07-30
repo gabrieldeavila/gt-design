@@ -6,6 +6,7 @@ import DarkSwitch from "../../components/Switch/Template/DarkSwitch";
 import GTDesign from "../Design/Design";
 import GTCssInjectionScript from "../Global/css-global-classes";
 import GlobalStyle from "../Global/style";
+import GTToastProvider from "../../context/Toast/Toast";
 
 function GTBasic({
   children,
@@ -39,7 +40,7 @@ function GTBasic({
     <>
       <GTDesign theme={currTheme}>
         <GlobalStyle />
-        {children}
+        <GTToastProvider>{children}</GTToastProvider>
         {!noThemeChange && showDarkSwitch && (
           <DarkSwitch fixed placeX="bottom" placeY="right" />
         )}

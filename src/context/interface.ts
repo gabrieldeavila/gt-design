@@ -23,3 +23,34 @@ export interface IGTPageStateSetters {
   isLoading?: boolean;
   pageStateRef: React.RefObject<IPageStateValues>;
 }
+
+export type TToastTypes = "success" | "error" | "warning" | "info";
+
+interface IToastOptions {
+  duration?: number;
+  type?: TToastTypes;
+}
+
+export interface IGTToast {
+  message: string | JSX.Element;
+  options: IToastOptions;
+  id: number;
+}
+
+export interface IGTToastItem extends IGTToast {
+  removeToast: (id: number) => void;
+}
+
+export type TToast = (
+  message: string | JSX.Element,
+  options: IToastOptions
+) => number;
+
+export interface IGTToastContext {
+  toast: TToast;
+  children?: React.ReactNode;
+}
+
+export interface IGTToastProvider {
+  children?: React.ReactNode;
+}
