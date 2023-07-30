@@ -24,23 +24,26 @@ function DefaultBtn({
     [disabled, isLoading]
   );
 
-  return React.createElement(
-    component.type,
-    {
-      ...props,
-      disabled: verifyDisabled,
-      isLoading,
-      ref: containerRef,
-    },
+  return (
     <>
-      <span className="extra-title">
-        {(isLoading ?? false) && <Loader.Simple />}
-        {symbol ?? false ? (
-          <BtnWithSymbol {...{ symbol, name: props.name }} />
-        ) : (
-          <BtnWithoutSymbol {...{ children, content }} />
-        )}
-      </span>
+      {React.createElement(
+        component.type,
+        {
+          ...props,
+          disabled: verifyDisabled,
+          isLoading,
+          ref: containerRef,
+        },
+        <span className="extra-title">
+          {(isLoading ?? false) && <Loader.Simple />}
+          {symbol ?? false ? (
+            <BtnWithSymbol {...{ symbol, name: props.name }} />
+          ) : (
+            <BtnWithoutSymbol {...{ children, content }} />
+          )}
+        </span>
+      )}
+
       <GTTooltip parentRef={containerRef} title={title} text={text} />
     </>
   );
