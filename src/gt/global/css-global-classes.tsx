@@ -48,7 +48,7 @@ const GTCssInjectionScript = () => {
       const configs =
         process.env.PROJECT_DEV_MODE === "TRUE"
           ? defaultConfigs
-          : await getCustomConfigs();
+          : getCustomConfigs();
 
       stateStorage.set("gtConfigs", configs);
 
@@ -73,90 +73,84 @@ const GTCssInjectionScript = () => {
   }, [theme]);
 
   const codeToRunOnClient = `
-(async function() {
-  console.log("next --- debugger");
-  debugger;
-  const getCustomConfigsBeforeMount = () => {
-    try {
-      const defaultConfigs = ${JSON.stringify(defaultConfigs)};
-      debugger;
-
-      // get the path to the babel.config.js file
-      const userConfigs = { themeConfig: ${JSON.stringify(
-        globalState.get("theme_config")
-      )} };
-      debugger;
-  
-      // merge the user configs with the default configs
-      const mergedConfigs = {
-        ...defaultConfigs,
-        ...userConfigs,
-      };
-      debugger;
-  
-      // also merge the themes (if any)
-      if (userConfigs.themeConfig?.global) {
-        mergedConfigs.themeConfig.global.theme = {
-          ...defaultConfigs.themeConfig.global.theme,
-          ...userConfigs.themeConfig.global.theme,
+  (async function() {
+    const getCustomConfigsBeforeMount = () => {
+      console.log("yuuup");
+      const defaultConfigs = ${JSON.stringify(getCustomConfigs())};
+      try {
+        console.log(defaultConfigs);
+        // get the path to the babel.config.js file
+        const userConfigs = { themeConfig: ${JSON.stringify(
+          globalState.get("theme_config")
+        )} };
+    
+        // merge the user configs with the default configs
+        const mergedConfigs = {
+          ...defaultConfigs
         };
-        debugger;
-  
-        mergedConfigs.themeConfig.global.darkTheme = {
-          ...defaultConfigs.themeConfig.global.darkTheme,
-          ...userConfigs.themeConfig.global.darkTheme,
-        };
+    
+        // also merge the themes (if any)
+        if (userConfigs.themeConfig?.global) {
+          mergedConfigs.themeConfig.global.theme = {
+            ...defaultConfigs.themeConfig.global.theme,
+            ...userConfigs.themeConfig.global.theme,
+          };
+    
+          mergedConfigs.themeConfig.global.darkTheme = {
+            ...defaultConfigs.themeConfig.global.darkTheme,
+            ...userConfigs.themeConfig.global.darkTheme,
+          };
+        }
+    
+        return mergedConfigs;
+      } catch (e) {
+        return defaultConfigs;
       }
-      debugger;
+    };
   
-      return mergedConfigs;
-    } catch (e) {
-      return defaultConfigs;
-    }
-  };
+    const colorMode = (localStorage.getItem("theme") === "darkTheme" ?? (window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ? "darkTheme"
+    : "theme");
+    const root = document.documentElement;
+    const themeConfigs = getCustomConfigsBeforeMount();
 
-  const colorMode = localStorage.getItem("theme") ?? (window.matchMedia("(prefers-color-scheme: dark)").matches
-  ? "darkTheme"
-  : "theme");
-  const root = document.documentElement;
-  const defaultConfigs = getCustomConfigsBeforeMount();
-
-  const opacities = ${JSON.stringify(transparentizedColors)}
-
-  function transparentizeColor(color, opacity) {
-    // Convert hex color to RGB format
-    if (color.startsWith("#")) {
-      color = color.substring(1);
-    }
-    if (color.length === 3) {
-      color = color + color;
-    }
-    const r = parseInt(color.substring(0, 2), 16);
-    const g = parseInt(color.substring(2, 4), 16);
-    const b = parseInt(color.substring(4, 6), 16);
+    console.log("uuu");
   
-    // Calculate new RGBA values
-    const opacityy = 1 - opacity
-    const rgba = "rgba("+r+","+g+","+b+","+opacityy+")";
-    return rgba;
-  }
-
-  const colors = themeConfigs.themeConfig.global[colorMode];
-  Object.keys(colors).forEach((key) => {
-    root.style.setProperty("--"+key, colors[key]);
-  });
-
-  const starterTheme = localStorage.getItem("darkTheme") != null ? "darkTheme" : "theme";
-
-  for (const {amount, varName} of opacities) {
-    const colorToTransparentize = varName.split("-")[0];
-    const color = themeConfigs.themeConfig.global[starterTheme]?.[colorToTransparentize];
-    const newColor = transparentizeColor(color, amount);
-    document.documentElement.style.setProperty("--"+varName, newColor);
-  }
-}, 2)
-
-})()`;
+    const opacities = ${JSON.stringify(transparentizedColors)}
+  
+    function transparentizeColor(color, opacity) {
+      // Convert hex color to RGB format
+      if (color.startsWith("#")) {
+        color = color.substring(1);
+      }
+      if (color.length === 3) {
+        color = color + color;
+      }
+      const r = parseInt(color.substring(0, 2), 16);
+      const g = parseInt(color.substring(2, 4), 16);
+      const b = parseInt(color.substring(4, 6), 16);
+    
+      // Calculate new RGBA values
+      const opacityy = 1 - opacity
+      const rgba = "rgba("+r+","+g+","+b+","+opacityy+")";
+      return rgba;
+    }
+  
+    const colors = themeConfigs.themeConfig.global[colorMode];
+    Object.keys(colors).forEach((key) => {
+      root.style.setProperty("--"+key, colors[key]);
+    });
+  
+    const starterTheme = localStorage.getItem("darkTheme") != null ? "darkTheme" : "theme";
+  
+    for (const {amount, varName} of opacities) {
+      const colorToTransparentize = varName.split("-")[0];
+      const color = themeConfigs.themeConfig.global[starterTheme]?.[colorToTransparentize];
+      const newColor = transparentizeColor(color, amount);
+      document.documentElement.style.setProperty("--"+varName, newColor);
+    }
+  })()
+  `;
 
   return <script dangerouslySetInnerHTML={{ __html: codeToRunOnClient }} />;
 };
