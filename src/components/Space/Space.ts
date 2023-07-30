@@ -52,6 +52,19 @@ const Horizontal = styled.div<ISpace>`
   }
 `;
 
+const Content = styled.div<ISpace>`
+  max-width: 1248px;
+
+  ${space};
+  ${color};
+  ${layout};
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    padding-bottom: 5rem;
+  }
+`;
+
 const MiddleCenter = styled(SpaceBase)`
   ${flex.alignCenterCol}
   height: -webkit-fill-available;
@@ -91,6 +104,7 @@ const Space: ISpaceStyle = {
   Flex,
   Center,
   Between,
+  Content,
   Horizontal,
   MiddleCenter,
   Main: SpaceMain,

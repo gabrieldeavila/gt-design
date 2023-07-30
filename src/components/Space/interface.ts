@@ -185,6 +185,7 @@ export type IMobileAddOns = {
 export interface ISpaceStyle {
   Flex: StyledComponent<"div", any, ISpace, never>;
   Center: StyledComponent<"div", any, ISpace, never>;
+  Content: StyledComponent<"div", any, ISpace, never>;
   Between: StyledComponent<"div", any, ISpace, never>;
   Horizontal: StyledComponent<"div", any, ISpace, never>;
   MiddleCenter: StyledComponent<"div", any, ISpace, never>;
