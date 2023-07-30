@@ -111,8 +111,8 @@ const GTTooltip = forwardRef((props: IGTTooltip, ref?: Ref<IGTTooltipRef>) => {
       isAboveParent={isAboveParent}
       show={show}
       style={{
-        top: isAboveParent ? info.top - (tooltipRef.current?.getBoundingClientRect()?.height ?? 15) : info.bottom,
-        left: info.left + info.width / 2 - info.width * 0.05,
+        top: isAboveParent ? info.top - (tooltipRef.current?.getBoundingClientRect()?.height ?? 15) - 10 : info.bottom + 10,
+        left: info.left + info.width / 2 - (tooltipRef.current?.getBoundingClientRect()?.width ?? 15) * 0.5,
       }}
       onMouseOver={handleMouseOverTooltip}
     >
