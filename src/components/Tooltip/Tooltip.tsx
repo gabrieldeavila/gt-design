@@ -45,13 +45,28 @@ const GTTooltip = forwardRef((props: IGTTooltip, ref?: Ref<IGTTooltipRef>) => {
     [setShow]
   );
 
+  const [info, setInfo] = useState({
+    top: 0,
+    bottom: 0,
+    left: 0,
+    width: 0,
+  });
+
+  useEffect(() => {
+    if (parentRef.current) {
+      setInfo(parentRef.current.getBoundingClientRect());
+    }
+  }, [parentRef]);
+
   const handleMouseOverParent = useCallback(() => {
     if (typeof window === "undefined") return;
 
     if (parentRef.current) {
+      setInfo(parentRef.current.getBoundingClientRect());
+
       // gets the position of the parent element
       const pos = parentRef.current.getBoundingClientRect();
-      const isAtTheBottom = pos.top + 100 > window.innerHeight;
+      const isAtTheBottom = pos.bottom + 100 > window.innerHeight;
 
       setIsAboveParent(isAtTheBottom);
       timeOut.current = setTimeout(() => {
@@ -65,6 +80,10 @@ const GTTooltip = forwardRef((props: IGTTooltip, ref?: Ref<IGTTooltipRef>) => {
     setShow(false);
   }, []);
 
+  const handleMouseOverTooltip = useCallback(() => {
+    setShow(false);
+  }, []);
+
   useEffect(() => {
     // gets when the mouse is over the parent element for more than 0.5 seconds
     // add event listener to the parent element
@@ -72,19 +91,14 @@ const GTTooltip = forwardRef((props: IGTTooltip, ref?: Ref<IGTTooltipRef>) => {
 
     if (!parentElement) return;
 
-    parentElement.addEventListener("mouseover", handleMouseOverParent);
-
-    parentElement.addEventListener("mouseout", handleMouseOutParent);
+    parentElement.addEventListener("mouseenter", handleMouseOverParent);
+    parentElement.addEventListener("mouseleave", handleMouseOutParent);
 
     return () => {
-      parentElement.removeEventListener("mouseover", handleMouseOverParent);
-      parentElement.removeEventListener("mouseout", handleMouseOutParent);
+      parentElement.removeEventListener("mouseenter", handleMouseOverParent);
+      parentElement.removeEventListener("mouseleave", handleMouseOutParent);
     };
   }, [handleMouseOutParent, handleMouseOverParent, parentRef]);
-
-  const handleMouseOverTooltip = useCallback(() => {
-    setShow(false);
-  }, []);
 
   // ref to the tooltip element
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -96,11 +110,17 @@ const GTTooltip = forwardRef((props: IGTTooltip, ref?: Ref<IGTTooltipRef>) => {
     <Tooltip.Content
       isAboveParent={isAboveParent}
       show={show}
+      style={{
+        top: isAboveParent ? info.top - (tooltipRef.current?.getBoundingClientRect()?.height ?? 15) : info.bottom,
+        left: info.left + info.width / 2 - info.width * 0.05,
+      }}
       onMouseOver={handleMouseOverTooltip}
     >
       <Tooltip.Wrapper isAboveParent={isAboveParent} ref={tooltipRef}>
         <Tooltip.Container isAboveParent={isAboveParent}>
-          {title != null && <Tooltip.Title> {translateThis(title)} </Tooltip.Title>}
+          {title != null && (
+            <Tooltip.Title> {translateThis(title)} </Tooltip.Title>
+          )}
 
           {text != null && <Tooltip.Text>{translateThis(text)}</Tooltip.Text>}
         </Tooltip.Container>

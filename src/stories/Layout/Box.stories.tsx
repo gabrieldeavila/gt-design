@@ -63,7 +63,7 @@ const Template = () => {
             "#00ffff",
             "#ff00ff",
           ].map((bg) => (
-            <MotionBox bg={bg} key={bg}>
+            <MotionBox title="hehe" bg={bg} key={bg}>
               <Space.MiddleCenter>
                 <Text.P>{emojis[randomNumber(0, emojis.length - 1)]}</Text.P>
                 <Text.P>{words[randomNumber(0, words.length - 1)]}</Text.P>

@@ -72,10 +72,11 @@ const TooltipText = styled.p`
 `;
 
 const TooltipContent = styled.div<ITooltipContent>`
-  position: absolute;
+  position: fixed;
   transition: 0.25s ease;
   transform: ${({ show }) =>
-    show ? "translateY(0px) scale(1)" : "translateY(-1.5rem) scale(0)"};
+    show ? "translateY(0px) scale(1)" : "translateY(0.1rem) scale(0.9)"};
+  opacity: ${({ show }) => (show ? "1" : "0")};
   z-index: 12;
 
   /* if is above parent do something diff */
@@ -90,7 +91,7 @@ const TooltipContent = styled.div<ITooltipContent>`
   right: 0;
   left: 0;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 `;
 
 const Tooltip = {

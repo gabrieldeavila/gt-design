@@ -48,20 +48,22 @@ function Zinc({ text, title, children, onClick }: IZinc) {
   }, []);
 
   return (
-    <ZincStyle.Wrapper
-      ref={ref}
-      onClick={onClick}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onMouseDown={() => {
-        isPressed.current = true;
-        lastInteraction.current = 0;
-      }}
-      onMouseUp={() => (isPressed.current = false)}
-    >
-      {children}
+    <>
+      <ZincStyle.Wrapper
+        ref={ref}
+        onClick={onClick}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        onMouseDown={() => {
+          isPressed.current = true;
+          lastInteraction.current = 0;
+        }}
+        onMouseUp={() => (isPressed.current = false)}
+      >
+        {children}
+      </ZincStyle.Wrapper>
       <GTTooltip parentRef={ref} title={title} text={text} />
-    </ZincStyle.Wrapper>
+    </>
   );
 }
 
