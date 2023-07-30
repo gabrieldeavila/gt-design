@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { useMemo } from "react";
 import randomNumber from "../../utils/randomNumber";
@@ -20,7 +21,7 @@ function MotionBox({
     <Motion.Wrapper span={spanHeight}>
       <Zinc {...{ title, text, onClick }}>
         <Box.Container bg={bg} isLoading={isLoading}>
-          {children}
+          {!isLoading && children}
         </Box.Container>
       </Zinc>
     </Motion.Wrapper>

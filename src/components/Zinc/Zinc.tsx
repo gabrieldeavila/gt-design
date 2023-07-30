@@ -39,7 +39,7 @@ function Zinc({ text, title, children, onClick }: IZinc) {
       // also adds a background linear according to the mouse position
       ref.current.style.background = `linear-gradient(${
         x * 15
-      }deg, var(--contrast-0_9), var(--secondary-0_8))`;
+      }deg, var(--contrast-0_9), var(--primary-0_5))`;
     },
     []
   );
@@ -48,7 +48,7 @@ function Zinc({ text, title, children, onClick }: IZinc) {
     if (ref.current == null) return;
 
     ref.current.style.transform = "rotateX(0deg) rotateY(0deg)";
-    ref.current.style.background = "var(--secondary-0_8)";
+    ref.current.style.background = "var(--containerSecondary)";
     info.current.isDown = false;
   }, []);
 
