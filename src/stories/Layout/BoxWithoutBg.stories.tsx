@@ -19,6 +19,12 @@ const Template = () => {
               <Text.P>👨‍💻</Text.P>
             </Space.MiddleCenter>
           </MotionBox>
+
+          <MotionBox>
+            <Space.MiddleCenter>
+              <Text.P>👨‍💻</Text.P>
+            </Space.MiddleCenter>
+          </MotionBox>
         </Box.Column>
       </Space.Horizontal>
     </GTBasic>

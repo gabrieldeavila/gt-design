@@ -48,7 +48,7 @@ function Zinc({ text, title, children, onClick }: IZinc) {
     if (ref.current == null) return;
 
     ref.current.style.transform = "rotateX(0deg) rotateY(0deg)";
-    ref.current.style.background = "var(--containerSecondary)";
+    ref.current.style.background = "var(--secondary-0_8)";
     info.current.isDown = false;
   }, []);
 

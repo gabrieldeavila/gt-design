@@ -25,21 +25,25 @@ const ToastContent = () => {
       <SectionContainer title="Toast" subtitle="STORIES.TOAST.SUBTITLE" />
       <Button.Wrapper>
         <Button.Contrast
+          // @ts-expect-error
           onClick={() => toast("Hello World", { type: "warning" })}
           content="Warning"
           title="EXAMPLE.CLICK_ME"
         />
         <Button.Error
+          // @ts-expect-error
           onClick={() => toast("Hello World", { type: "error" })}
           content="Error"
           title="EXAMPLE.CLICK_ME"
         />
         <Button.Normal
+          // @ts-expect-error
           onClick={() => toast("Hello World", { type: "info" })}
           content="Info"
           title="EXAMPLE.CLICK_ME"
         />
         <Button.Success
+          // @ts-expect-error
           onClick={() => toast("Hello World", { type: "success" })}
           content="Success"
           title="EXAMPLE.CLICK_ME"
