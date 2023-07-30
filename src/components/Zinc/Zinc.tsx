@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import ZincStyle from "./style";
 import { IZinc } from "./interface";
 import { GTTooltip } from "../Tooltip";
@@ -7,6 +7,7 @@ function Zinc({ text, title, children, onClick }: IZinc) {
   const ref = React.useRef<HTMLButtonElement>(null);
   const isPressed = React.useRef(false);
   const lastInteraction = React.useRef(0);
+  const info = useRef({ transform: "", isDown: false });
 
   const handleMouseMove = useCallback(
     (event: React.MouseEvent<Element, MouseEvent>) => {
@@ -28,9 +29,12 @@ function Zinc({ text, title, children, onClick }: IZinc) {
       const rotateX = Math.min(Math.max(x, 0), 5);
       const rotateY = Math.min(Math.max(y, 0), 5);
 
-      const scale = isPressed.current ? 0.9 : 1;
+      info.current.transform = `perspective(${perspective}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      const transform = `${info.current.transform} ${
+        info.current.isDown ? "scale(0.95)" : "scale(1)"
+      }`;
 
-      ref.current.style.transform = `perspective(${perspective}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
+      ref.current.style.transform = transform;
 
       // also adds a background linear according to the mouse position
       ref.current.style.background = `linear-gradient(${
@@ -45,6 +49,23 @@ function Zinc({ text, title, children, onClick }: IZinc) {
 
     ref.current.style.transform = "rotateX(0deg) rotateY(0deg)";
     ref.current.style.background = "var(--secondary-0_8)";
+    info.current.isDown = false;
+  }, []);
+
+  const handleMouseDown = useCallback(() => {
+    if (ref.current == null) return;
+
+    lastInteraction.current = 0;
+    info.current.isDown = true;
+    ref.current.style.transform = `${info.current.transform} scale(0.95)`;
+  }, []);
+
+  const handleMouseUp = useCallback(() => {
+    if (ref.current == null) return;
+
+    isPressed.current = false;
+    info.current.isDown = false;
+    ref.current.style.transform = `${info.current.transform} scale(1)`;
   }, []);
 
   return (
@@ -54,11 +75,8 @@ function Zinc({ text, title, children, onClick }: IZinc) {
         onClick={onClick}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        onMouseDown={() => {
-          isPressed.current = true;
-          lastInteraction.current = 0;
-        }}
-        onMouseUp={() => (isPressed.current = false)}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
       >
         {children}
       </ZincStyle.Wrapper>
