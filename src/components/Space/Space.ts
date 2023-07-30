@@ -54,6 +54,8 @@ const Horizontal = styled.div<ISpace>`
 
 const Content = styled.div<ISpace>`
   max-width: 1248px;
+  width: -webkit-fill-available;
+  width: -moz-available;
 
   ${space};
   ${color};

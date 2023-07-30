@@ -75,7 +75,7 @@ const TooltipContent = styled.div<ITooltipContent>`
   position: fixed;
   transition: 0.25s ease;
   transform: ${({ show }) =>
-    show ? "translateY(0px) scale(1)" : "translateY(0.1rem) scale(0.9)"};
+    show ? "translateY(0px) scale(1)" : "translateY(-0.5rem) scale(0.9)"};
   opacity: ${({ show }) => (show ? "1" : "0")};
   z-index: 12;
 
