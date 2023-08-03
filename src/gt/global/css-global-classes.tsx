@@ -75,10 +75,8 @@ const GTCssInjectionScript = () => {
   const codeToRunOnClient = `
   (async function() {
     const getCustomConfigsBeforeMount = () => {
-      console.log("yuuup");
       const defaultConfigs = ${JSON.stringify(getCustomConfigs())};
       try {
-        console.log(defaultConfigs);
         // get the path to the babel.config.js file
         const userConfigs = { themeConfig: ${JSON.stringify(
           globalState.get("theme_config")
@@ -108,32 +106,40 @@ const GTCssInjectionScript = () => {
       }
     };
   
-    const colorMode = (localStorage.getItem("theme") === "darkTheme" ?? (window.matchMedia("(prefers-color-scheme: dark)").matches)
+    const colorMode = (localStorage.getItem("theme") != null ? localStorage.getItem("theme") === "darkTheme" : (window.matchMedia("(prefers-color-scheme: dark)").matches)
     ? "darkTheme"
     : "theme");
     const root = document.documentElement;
     const themeConfigs = getCustomConfigsBeforeMount();
 
-    console.log("uuu");
-  
     const opacities = ${JSON.stringify(transparentizedColors)}
   
-    function transparentizeColor(color, opacity) {
-      // Convert hex color to RGB format
-      if (color.startsWith("#")) {
-        color = color.substring(1);
-      }
-      if (color.length === 3) {
-        color = color + color;
-      }
-      const r = parseInt(color.substring(0, 2), 16);
-      const g = parseInt(color.substring(2, 4), 16);
-      const b = parseInt(color.substring(4, 6), 16);
+    function transparentizeColor(hexCode, alpha) {
+      // Remove the '#' symbol if present
+      hexCode = hexCode.replace(/^#/, '');
     
-      // Calculate new RGBA values
-      const opacityy = 1 - opacity
-      const rgba = "rgba("+r+","+g+","+b+","+opacityy+")";
-      return rgba;
+      // Check if the input is a valid hexadecimal color code
+      if (!/^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hexCode)) {
+        throw new Error('Invalid hexadecimal color code');
+      }
+    
+      // If the input is a shorthand 3-digit hexadecimal, expand it to 6-digit
+      if (hexCode.length === 3) {
+        hexCode = hexCode
+          .split('')
+          .map(c => c + c)
+          .join('');
+      }
+    
+      // Extract the Red, Green, and Blue components from the hexadecimal code
+      const red = parseInt(hexCode.substring(0, 2), 16);
+      const green = parseInt(hexCode.substring(2, 4), 16);
+      const blue = parseInt(hexCode.substring(4, 6), 16);
+    
+      // Ensure the alpha value is within the valid range [0, 1]
+      alpha = Math.min(Math.max(alpha || 1, 0), 1);
+    
+      return \`rgba(\${red}, \${green}, \${blue}, \${alpha})\`;
     }
   
     const colors = themeConfigs.themeConfig.global[colorMode];
