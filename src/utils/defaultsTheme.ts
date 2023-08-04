@@ -6,7 +6,7 @@ export const darkCodeTheme = {
   backgroundMobileNav: "#555d50",
   sunColor: "#b8860b",
   moonColor: "#00b7eb",
-  btnShadow: "#ffff",
+  btnShadow: "#ffffff",
   errorColor: "#cd853f",
   pageBackground: "#0f0e0f",
   textBtn: "#77b5fe",

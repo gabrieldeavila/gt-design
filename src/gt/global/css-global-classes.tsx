@@ -138,7 +138,7 @@ const GTCssInjectionScript = () => {
       const blue = parseInt(hexCode.substring(4, 6), 16);
     
       // Ensure the alpha value is within the valid range [0, 1]
-      alpha = Math.min(Math.max(alpha || 1, 0), 1);
+      alpha = 1 - Math.min(Math.max(alpha || 1, 0), 1);
     
       return \`rgba(\${red}, \${green}, \${blue}, \${alpha.toFixed(1)})\`;
     }
