@@ -81,7 +81,7 @@ const GTCssInjectionScript = () => {
         const userConfigs = { themeConfig: ${JSON.stringify(
           globalState.get("theme_config")
         )} };
-    
+
         // merge the user configs with the default configs
         const mergedConfigs = {
           ...defaultConfigs
@@ -106,9 +106,9 @@ const GTCssInjectionScript = () => {
       }
     };
   
-    const colorMode = (localStorage.getItem("theme") != null ? localStorage.getItem("theme") === "darkTheme" : (window.matchMedia("(prefers-color-scheme: dark)").matches)
+    const colorMode = (localStorage.getItem("theme") != null ? localStorage.getItem("theme") === "darkTheme" : (window.matchMedia("(prefers-color-scheme: dark)").matches))
     ? "darkTheme"
-    : "theme");
+    : "theme";
     const root = document.documentElement;
     const themeConfigs = getCustomConfigsBeforeMount();
 
@@ -120,6 +120,7 @@ const GTCssInjectionScript = () => {
     
       // Check if the input is a valid hexadecimal color code
       if (!/^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hexCode)) {
+          console.log(hexCode)
         throw new Error('Invalid hexadecimal color code');
       }
     
@@ -139,7 +140,7 @@ const GTCssInjectionScript = () => {
       // Ensure the alpha value is within the valid range [0, 1]
       alpha = Math.min(Math.max(alpha || 1, 0), 1);
     
-      return \`rgba(\${red}, \${green}, \${blue}, \${alpha})\`;
+      return \`rgba(\${red}, \${green}, \${blue}, \${alpha.toFixed(1)})\`;
     }
   
     const colors = themeConfigs.themeConfig.global[colorMode];
@@ -147,11 +148,9 @@ const GTCssInjectionScript = () => {
       root.style.setProperty("--"+key, colors[key]);
     });
   
-    const starterTheme = localStorage.getItem("darkTheme") != null ? "darkTheme" : "theme";
-  
     for (const {amount, varName} of opacities) {
       const colorToTransparentize = varName.split("-")[0];
-      const color = themeConfigs.themeConfig.global[starterTheme]?.[colorToTransparentize];
+      const color = themeConfigs.themeConfig.global[colorMode]?.[colorToTransparentize];
       const newColor = transparentizeColor(color, amount);
       document.documentElement.style.setProperty("--"+varName, newColor);
     }
