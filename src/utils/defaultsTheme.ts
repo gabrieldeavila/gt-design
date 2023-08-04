@@ -2,7 +2,7 @@ export const darkCodeTheme = {
   primary: "#080808",
   secondary: "#101010",
   contrast: "#fffafa",
-  backgroundHover: "#80808061",
+  backgroundHover: "#808080",
   backgroundMobileNav: "#555d50",
   sunColor: "#b8860b",
   moonColor: "#00b7eb",
