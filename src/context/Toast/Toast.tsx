@@ -17,6 +17,8 @@ import Toast from "./style";
 import { AlertCircle, CheckCircle, Info, X, XOctagon } from "react-feather";
 import { Text } from "../../components";
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
+import _ from "lodash";
 
 const GTToastContext = createContext<IGTToastContext>({
   toast: () => {
@@ -72,6 +74,7 @@ const ICONS_MAP = {
 
 const ToastItem = ({ message, options, removeToast, id }: IGTToastItem) => {
   const { type = "success", duration = 5000 } = options;
+  const { t } = useTranslation();
 
   // 300ms
   // width goes from 100% to 0%
@@ -126,7 +129,7 @@ const ToastItem = ({ message, options, removeToast, id }: IGTToastItem) => {
         <X size={15} />
       </div>
       {ICONS_MAP[type]}
-      <Text.P>{message}</Text.P>
+      <Text.P>{_.isString(message) ? t(message) : message}</Text.P>
       <Toast.Timer
         style={{
           width: `${timer}%`,
