@@ -26,6 +26,8 @@ export { default as Loader } from "./Loader";
 
 export { default as Login } from "./Login";
 
+export * from "./Skeleton";
+
 export * from "./Navbar";
 
 export { default as Popup } from "./Popup";
