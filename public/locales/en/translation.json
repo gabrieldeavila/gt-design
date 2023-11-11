@@ -132,6 +132,11 @@
       },
       "BOXES": {
         "SUBTITLE": "The 'isLoading' prop allows for dynamic loading of content within the component."
+      },
+      "SCREENS" : {
+        "CANARY": {
+          "SUBTITLE": "A loader screen to be used while the application is loading."
+        }
       }
     },
     "TOAST": {
