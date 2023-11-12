@@ -4,9 +4,8 @@ import skeletons from "../../../../utils/skeletons";
 const Wrapper = styled.div`
   display: flex;
   gap: 1.5rem;
-  margin: 1.5rem;
-  width: calc(100vw - 3rem);
-  height: calc(100vh - 3rem);
+  padding: 1.5rem;
+  width: calc(100vw - 4rem);
   flex-direction: column;
 `;
 
