@@ -4,6 +4,9 @@ import skeletons from "../../../../utils/skeletons";
 const Wrapper = styled.div`
   display: flex;
   gap: 1.5rem;
+  margin: 1.5rem;
+  width: calc(100vw - 3rem);
+  height: calc(100vh - 3rem);
   flex-direction: column;
 `;
 
@@ -13,7 +16,7 @@ const Header = styled.div`
   height: 100px;
   overflow: hidden;
 
-  ${skeletons.after};
+  ${skeletons.highContrast};
   cursor: wait;
 `;
 
@@ -32,7 +35,7 @@ const Block = styled.div`
   margin-bottom: 1rem;
   position: relative;
 
-  ${skeletons.after};
+  ${skeletons.highContrast};
   cursor: wait;
 `;
 

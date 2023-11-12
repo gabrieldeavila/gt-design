@@ -16,8 +16,8 @@ const Template = () => {
           title="Canary"
           subtitle="STORIES.SKELETONS.SCREENS.CANARY.SUBTITLE"
         />
-        <Canary />
       </Space.Horizontal>
+      <Canary />
     </GTBasic>
   );
 };
