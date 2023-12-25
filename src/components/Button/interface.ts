@@ -34,10 +34,17 @@ export interface IGTButtonInitial
   name?: string;
 }
 
+export interface IGTButtonRef {
+  ref?: React.RefObject<HTMLButtonElement>;
+}
+
 export interface IGTButtonStyle {
   Wrapper: StyledComponent<"div", any, ISpace, never>;
   Normal: (props: IGTButton) => JSX.Element;
-  Contrast: (props: IGTButton) => JSX.Element;
+  // using forwardRef
+  Contrast: React.ForwardRefExoticComponent<
+    React.PropsWithoutRef<IGTButton> & React.RefAttributes<HTMLButtonElement>
+  >;
   Transparent: (props: IGTButton) => JSX.Element;
   Success: (props: IGTButton) => JSX.Element;
   Error: (props: IGTButton) => JSX.Element;

@@ -14,7 +14,7 @@ const scrollDefault = css`
   /* Handle */
   &::-webkit-scrollbar-thumb {
     background: var(--contrast);
-    border-radius: 0.25rem;
+    border-radius: 5px;
   }
 
   /* Handle on hover */

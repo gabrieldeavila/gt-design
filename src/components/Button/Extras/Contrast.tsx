@@ -1,10 +1,12 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { ExtraContrast } from "../Button";
-import { IGTButton } from "../interface";
+import { IGTButton, IGTButtonStyle } from "../interface";
 import DefaultBtn from "./default";
 
-function ButtonContrast(props: IGTButton) {
+const ButtonContrast = forwardRef<IGTButtonStyle["Contrast"]>((props: IGTButton, ref) => {
   return <DefaultBtn component={<ExtraContrast />} {...props} />;
-}
+});
+
+ButtonContrast.displayName = "Button.Contrast";
 
 export default ButtonContrast;

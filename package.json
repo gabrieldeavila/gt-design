@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/gabrieldeavila/gt-design.git"
   },
-  "version": "1.0.66",
+  "version": "1.0.67",
   "description": "A minimalistic design system for React",
   "homepage": "https://github.com/gabrieldeavila/gt-design",
   "scripts": {
@@ -43,7 +43,6 @@
     "@storybook/react": "^6.5.9",
     "@testing-library/react": "^13.3.0",
     "@types/jest": "^28.1.6",
-    "@types/matter-js": "^0.18.5",
     "@types/react": "^18.0.15",
     "@types/react-datepicker": "^4.10.0",
     "@types/styled-components": "^5.1.26",
@@ -101,7 +100,6 @@
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.0.1",
     "lodash": "^4.17.21",
-    "matter-js": "^0.19.0",
     "polished": "^4.2.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",

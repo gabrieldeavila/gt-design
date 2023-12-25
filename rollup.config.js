@@ -33,7 +33,6 @@ export default [
       "polished",
       "react-feather",
       "prop-types",
-      "matter-js",
       "clsx",
       "lodash",
       "i18next-browser-languagedetector",

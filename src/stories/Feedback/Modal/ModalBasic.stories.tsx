@@ -7,6 +7,7 @@ import SectionContainer from "../../../components/Text/Template/SectionContainer
 import { GTBasic } from "../../../gt";
 import { randomNumber } from "../../../utils";
 import { useTranslation } from "react-i18next";
+import { createPortal } from "react-dom";
 
 export default {
   title: "Feedback/Modals/Basic",
@@ -232,11 +233,14 @@ const Template = () => {
         </Space.Modifiers>
       </Space.Horizontal>
 
-      <GTModalBasic
-        data={modalData.current}
-        show={showModalBasic}
-        setShow={setShowModalBasic}
-      />
+      {createPortal(
+        <GTModalBasic
+          data={modalData.current}
+          show={showModalBasic}
+          setShow={setShowModalBasic}
+        />,
+        document.body
+      )}
     </GTBasic>
   );
 };
